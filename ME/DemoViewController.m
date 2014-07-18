@@ -28,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake(100, 100, 200, 200);
+    button.frame = CGRectMake(60, 100, 200, 200);
     [button setTitle:@"touch" forState:UIControlStateNormal];
     [self.view addSubview:button];
     [button addTarget:self action:@selector(touche) forControlEvents:UIControlEventTouchUpInside];
@@ -42,7 +42,7 @@
 
 - (void)touche
 {
-    [self.tabBarController setSelectedIndex:0];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

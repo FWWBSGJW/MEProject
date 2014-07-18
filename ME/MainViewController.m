@@ -37,35 +37,60 @@
     CCourseViewController *couseViewController = [[CCourseViewController alloc] initWithStyle:UITableViewStyleGrouped];
     UINavigationController *couseNav = [[UINavigationController alloc] initWithRootViewController:couseViewController];
     //[couseNav.navigationBar setBarTintColor:[UIColor greenColor]];
-    UITabBarItem *couseItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemContacts tag:1];
+    //UITabBarItem *couseItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemContacts tag:1];
+    UIImage *image = [UIImage imageNamed:@"course"];
+    UITabBarItem *couseItem = [[UITabBarItem alloc] initWithTitle:@"课程" image:[UIImage imageNamed:@"course"] tag:1];
     couseNav.tabBarItem = couseItem;
     
     JJTestViewController *testVC = [[JJTestViewController alloc] init];
     
     UINavigationController *testNav = [[UINavigationController alloc] initWithRootViewController:testVC];
-    UITabBarItem *testItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:2];
+    //UITabBarItem *testItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:2];
+    UITabBarItem *testItem = [[UITabBarItem alloc] initWithTitle:@"测试" image:[UIImage imageNamed:@"Test"] tag:2];
     testNav.tabBarItem = testItem;
     
     UserViewController *userVC = [[UserViewController alloc] init];
-    UITabBarItem *userItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFeatured tag:3];
+    //UITabBarItem *userItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFeatured tag:3];
+    UITabBarItem *userItem = [[UITabBarItem alloc]initWithTitle:@"我" image:[UIImage imageNamed:@"User"] tag:5];
     userVC.tabBarItem = userItem;
     
     
     
     DemoViewController *demoVC2 = [[DemoViewController alloc] init];
     UINavigationController *demoNav2 = [[UINavigationController alloc] initWithRootViewController:demoVC2];
-    UITabBarItem *demoItem2 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:4];
-    demoNav2.tabBarItem = demoItem2;
+    //UITabBarItem *demoItem2 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:3];
+    UITabBarItem *addItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"Clear"] tag:3];
+    demoNav2.tabBarItem = addItem;
+    
+    
     
     DemoViewController *demoVC3 = [[DemoViewController alloc] init];
     UINavigationController *demoNav3 = [[UINavigationController alloc] initWithRootViewController:demoVC3];
-    UITabBarItem *demoItem3 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:5];
-    demoNav3.tabBarItem = demoItem3;
+    //UITabBarItem *demoItem3 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:4];
+    UITabBarItem *qaItem = [[UITabBarItem alloc] initWithTitle:@"问答" image:[UIImage imageNamed:@"Q&A"] tag:4];
+    demoNav3.tabBarItem = qaItem;
     
-    self.tabBar.tintColor = [UIColor greenColor];
+    self.tabBar.barTintColor = [UIColor whiteColor];
+    self.tabBar.tintColor = [UIColor colorWithRed:88/255.0 green:246/255.0 blue:76/255.0 alpha:1.0];
     
     NSArray *array = @[couseNav,testNav,demoNav2,demoNav3,userVC];
+    
+    
+    
     [self setViewControllers:array animated:YES];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setFrame:CGRectMake(SCREEN_WIDTH*2/5.0+10,5,SCREEN_WIDTH/5.0-20,40)];
+    [button setBackgroundImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
+    [self.tabBar addSubview:button];
+    [button addTarget:self action:@selector(modalAddView) forControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma mark - 模态工具试图
+- (void)modalAddView
+{
+    DemoViewController *demoVC = [[DemoViewController alloc] init];
+    demoVC.view.backgroundColor = [UIColor colorWithRed:88/255.0 green:246/255.0 blue:76/255.0 alpha:1.0];    [self presentViewController:demoVC animated:YES completion:nil];
 }
 
 - (BOOL)shouldAutorotate {
