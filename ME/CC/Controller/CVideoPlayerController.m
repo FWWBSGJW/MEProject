@@ -169,10 +169,9 @@
                 [danmakuView setFrame:CGRectMake(0.0-danmakuView.frame.size.width, danmakuView.frame.origin.y, danmakuView.frame.size.width, danmakuView.frame.size.height)];
                 //danmakuView setCenter:CGPointMake(danmakuView.center.x-SCREEN_HEIGHT-size, <#CGFloat y#>)
             } completion:^(BOOL finished) {
-                //NSLog(@"danmaku %@",danmakuView);
-                //NSLog(@"---完成,%@",danmakuView);
-                [self.danmakuModel addNoUseDanmaku:danmakuView WithDanmakuType:moveDanmaku];
-                
+                if (danmakuView.frame.origin.x < (-danmakuView.frame.size.width)) {
+                    [self.danmakuModel addNoUseDanmaku:danmakuView WithDanmakuType:moveDanmaku];
+                }
                 
             }];
             danmukuY += 40;
