@@ -673,14 +673,6 @@
 				5B7180DF197905D600F1359C /* ZHZ */,
 				5B717FE5197905C800F1359C /* CC */,
 				5B717F65197905BA00F1359C /* CZX */,
-				5B717F621979054D00F1359C /* UINavigationController+autoRotate.h */,
-				5B717F631979054D00F1359C /* UINavigationController+autoRotate.m */,
-				5B717EA51978FD9600F1359C /* AppDelegate.h */,
-				5B717EA61978FD9600F1359C /* AppDelegate.m */,
-				5B718121197905FD00F1359C /* MainViewController.h */,
-				5B718122197905FD00F1359C /* MainViewController.m */,
-				5B7181241979069500F1359C /* DemoViewController.h */,
-				5B7181251979069500F1359C /* DemoViewController.m */,
 				5B717EAE1978FD9600F1359C /* Images.xcassets */,
 				5B717E9D1978FD9600F1359C /* Supporting Files */,
 			);
@@ -690,6 +682,14 @@
 		5B717E9D1978FD9600F1359C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B717F621979054D00F1359C /* UINavigationController+autoRotate.h */,
+				5B717F631979054D00F1359C /* UINavigationController+autoRotate.m */,
+				5B717EA51978FD9600F1359C /* AppDelegate.h */,
+				5B717EA61978FD9600F1359C /* AppDelegate.m */,
+				5B718121197905FD00F1359C /* MainViewController.h */,
+				5B718122197905FD00F1359C /* MainViewController.m */,
+				5B7181241979069500F1359C /* DemoViewController.h */,
+				5B7181251979069500F1359C /* DemoViewController.m */,
 				5B717E9E1978FD9600F1359C /* ME-Info.plist */,
 				5B717E9F1978FD9600F1359C /* InfoPlist.strings */,
 				5B717EA21978FD9600F1359C /* main.m */,
@@ -1822,6 +1822,7 @@
 				5B717EC71978FD9600F1359C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5B717EC81978FD9600F1359C /* Build configuration list for PBXNativeTarget "METests" */ = {
 			isa = XCConfigurationList;
@@ -1830,6 +1831,7 @@
 				5B717ECA1978FD9600F1359C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
