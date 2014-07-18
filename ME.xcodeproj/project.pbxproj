@@ -258,6 +258,7 @@
 		5B718123197905FD00F1359C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B718122197905FD00F1359C /* MainViewController.m */; };
 		5B7181261979069500F1359C /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7181251979069500F1359C /* DemoViewController.m */; };
 		5B7181281979099800F1359C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7181271979099800F1359C /* MediaPlayer.framework */; };
+		ABC2246C19793742008BD18C /* TestModelManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC2246B19793742008BD18C /* TestModelManage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -608,6 +609,8 @@
 		5B7181241979069500F1359C /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		5B7181251979069500F1359C /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
 		5B7181271979099800F1359C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		ABC2246A19793742008BD18C /* TestModelManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestModelManage.h; path = Manage/TestModelManage.h; sourceTree = "<group>"; };
+		ABC2246B19793742008BD18C /* TestModelManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestModelManage.m; path = Manage/TestModelManage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -918,31 +921,11 @@
 		5B717F65197905BA00F1359C /* CZX */ = {
 			isa = PBXGroup;
 			children = (
-				5B717F66197905BA00F1359C /* answer.plist */,
-				5B717F67197905BA00F1359C /* comment.plist */,
-				5B717F6A197905BA00F1359C /* JJBaseViewController.h */,
-				5B717F6B197905BA00F1359C /* JJBaseViewController.m */,
-				5B717F6C197905BA00F1359C /* JJBaseViewController.xib */,
-				5B717F6D197905BA00F1359C /* JJFinishViewController.h */,
-				5B717F6E197905BA00F1359C /* JJFinishViewController.m */,
-				5B717F6F197905BA00F1359C /* JJFinishViewController.xib */,
-				5B717F70197905BA00F1359C /* JJMeasurementViewController.h */,
-				5B717F71197905BA00F1359C /* JJMeasurementViewController.m */,
-				5B717F72197905BA00F1359C /* JJMeasurementViewController.xib */,
-				5B717F75197905BA00F1359C /* JJTestDetailViewController.h */,
-				5B717F76197905BA00F1359C /* JJTestDetailViewController.m */,
-				5B717F77197905BA00F1359C /* JJTestDetailViewController.xib */,
-				5B717F78197905BA00F1359C /* JJTestModel.h */,
-				5B717F79197905BA00F1359C /* JJTestModel.m */,
-				5B717F7A197905BA00F1359C /* JJTestTableViewCell.h */,
-				5B717F7B197905BA00F1359C /* JJTestTableViewCell.m */,
-				5B717F7C197905BA00F1359C /* JJTestTableViewCell.xib */,
-				5B717F7D197905BA00F1359C /* JJTestViewController.h */,
-				5B717F7E197905BA00F1359C /* JJTestViewController.m */,
-				5B717F7F197905BA00F1359C /* JJTestViewController.xib */,
-				5B717F80197905BA00F1359C /* questions.plist */,
-				5B717F81197905BA00F1359C /* testDetail.plist */,
-				5B717F82197905BA00F1359C /* testName.plist */,
+				ABC2246919793705008BD18C /* Manage */,
+				ABC22467197935F7008BD18C /* Plist */,
+				ABC22466197935E3008BD18C /* Model */,
+				ABC224651979359F008BD18C /* VC */,
+				ABC2246419793599008BD18C /* View */,
 				5B717F83197905BA00F1359C /* tu */,
 				5B717F93197905BA00F1359C /* 素材 */,
 			);
@@ -1290,6 +1273,68 @@
 			path = mycell;
 			sourceTree = "<group>";
 		};
+		ABC2246419793599008BD18C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5B717F7A197905BA00F1359C /* JJTestTableViewCell.h */,
+				5B717F7B197905BA00F1359C /* JJTestTableViewCell.m */,
+				5B717F7C197905BA00F1359C /* JJTestTableViewCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		ABC224651979359F008BD18C /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				5B717F7D197905BA00F1359C /* JJTestViewController.h */,
+				5B717F7E197905BA00F1359C /* JJTestViewController.m */,
+				5B717F7F197905BA00F1359C /* JJTestViewController.xib */,
+				5B717F6A197905BA00F1359C /* JJBaseViewController.h */,
+				5B717F6B197905BA00F1359C /* JJBaseViewController.m */,
+				5B717F6C197905BA00F1359C /* JJBaseViewController.xib */,
+				5B717F6D197905BA00F1359C /* JJFinishViewController.h */,
+				5B717F6E197905BA00F1359C /* JJFinishViewController.m */,
+				5B717F6F197905BA00F1359C /* JJFinishViewController.xib */,
+				5B717F70197905BA00F1359C /* JJMeasurementViewController.h */,
+				5B717F71197905BA00F1359C /* JJMeasurementViewController.m */,
+				5B717F72197905BA00F1359C /* JJMeasurementViewController.xib */,
+				5B717F75197905BA00F1359C /* JJTestDetailViewController.h */,
+				5B717F76197905BA00F1359C /* JJTestDetailViewController.m */,
+				5B717F77197905BA00F1359C /* JJTestDetailViewController.xib */,
+			);
+			name = VC;
+			sourceTree = "<group>";
+		};
+		ABC22466197935E3008BD18C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5B717F78197905BA00F1359C /* JJTestModel.h */,
+				5B717F79197905BA00F1359C /* JJTestModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		ABC22467197935F7008BD18C /* Plist */ = {
+			isa = PBXGroup;
+			children = (
+				5B717F66197905BA00F1359C /* answer.plist */,
+				5B717F67197905BA00F1359C /* comment.plist */,
+				5B717F80197905BA00F1359C /* questions.plist */,
+				5B717F81197905BA00F1359C /* testDetail.plist */,
+				5B717F82197905BA00F1359C /* testName.plist */,
+			);
+			name = Plist;
+			sourceTree = "<group>";
+		};
+		ABC2246919793705008BD18C /* Manage */ = {
+			isa = PBXGroup;
+			children = (
+				ABC2246A19793742008BD18C /* TestModelManage.h */,
+				ABC2246B19793742008BD18C /* TestModelManage.m */,
+			);
+			name = Manage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1610,6 +1655,7 @@
 				5B717F2E1978FE4E00F1359C /* AFJSONRequestOperation.m in Sources */,
 				5B717F361978FE4E00F1359C /* JSONModel.m in Sources */,
 				5B717F4F1978FE4E00F1359C /* XLCycleScrollView.m in Sources */,
+				ABC2246C19793742008BD18C /* TestModelManage.m in Sources */,
 				5B717F391978FE4E00F1359C /* JSONModelError.m in Sources */,
 				5B717F2F1978FE4E00F1359C /* AFNetworkActivityIndicatorManager.m in Sources */,
 				5B717F441978FE4E00F1359C /* SDWebImageDecoder.m in Sources */,

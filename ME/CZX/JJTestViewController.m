@@ -105,7 +105,7 @@
 {
     UIImageView *newsImage = [[UIImageView alloc]
                               initWithFrame:CGRectMake(0, 0, 320, ScrollViewHeight)];
-    newsImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%ld", (long)index]];
+    newsImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"00%ld", (long)index]];
     return newsImage;
 }
 
