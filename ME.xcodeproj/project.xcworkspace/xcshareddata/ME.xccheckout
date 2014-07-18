@@ -5,19 +5,31 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
+<<<<<<< HEAD
 	<string>D9DDB2A9-7FDC-407C-A641-FDB4BC0CC524</string>
+=======
+	<string>D5A4E09D-12AF-4B8A-8697-B1ED4442D832</string>
+>>>>>>> FETCH_HEAD
 	<key>IDESourceControlProjectName</key>
 	<string>ME</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+<<<<<<< HEAD
 		<key>2D1DD707-3206-47D4-8C94-DFF5B76ACE8B</key>
+=======
+		<key>59225691-D886-4810-9913-2E81177366F1</key>
+>>>>>>> FETCH_HEAD
 		<string>https://github.com/FWWBSGJW/MEProject.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ME.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+<<<<<<< HEAD
 		<key>2D1DD707-3206-47D4-8C94-DFF5B76ACE8B</key>
+=======
+		<key>59225691-D886-4810-9913-2E81177366F1</key>
+>>>>>>> FETCH_HEAD
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +37,22 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
+<<<<<<< HEAD
 	<string>2D1DD707-3206-47D4-8C94-DFF5B76ACE8B</string>
+=======
+	<string>59225691-D886-4810-9913-2E81177366F1</string>
+>>>>>>> FETCH_HEAD
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
+<<<<<<< HEAD
 			<string>2D1DD707-3206-47D4-8C94-DFF5B76ACE8B</string>
+=======
+			<string>59225691-D886-4810-9913-2E81177366F1</string>
+>>>>>>> FETCH_HEAD
 			<key>IDESourceControlWCCName</key>
 			<string>MEProject</string>
 		</dict>
