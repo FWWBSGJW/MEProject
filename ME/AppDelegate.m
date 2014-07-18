@@ -6,6 +6,8 @@
 //  Copyright (c) 2014年 yatokami. All rights reserved.
 //
 
+///tettte
+
 #import "AppDelegate.h"
 #import "MainViewController.h"
 
