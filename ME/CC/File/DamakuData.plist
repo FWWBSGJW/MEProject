@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>Dcomponent</key>
+		<string>1真有趣！2</string>
+		<key>videoID</key>
+		<integer>0</integer>
+		<key>Dtype</key>
+		<integer>0</integer>
+		<key>Dtime</key>
+		<integer>2</integer>
+		<key>Ddate</key>
+		<string>2014-01-01 11:11:12</string>
+	</dict>
+	<dict>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>Dcomponent</key>
+		<string>2hahahahahaah4</string>
+		<key>videoID</key>
+		<integer>0</integer>
+		<key>Dtype</key>
+		<integer>0</integer>
+		<key>Dtime</key>
+		<integer>4</integer>
+		<key>Ddate</key>
+		<string>2014-01-01 11:11:12</string>
+	</dict>
+	<dict>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>Dcomponent</key>
+		<string>3wwwwwwwwww4</string>
+		<key>videoID</key>
+		<integer>0</integer>
+		<key>Dtype</key>
+		<integer>0</integer>
+		<key>Dtime</key>
+		<integer>4</integer>
+		<key>Ddate</key>
+		<string>2014-01-01 11:11:12</string>
+	</dict>
+	<dict>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>Dcomponent</key>
+		<string>4qqqqqqqqqqq4</string>
+		<key>videoID</key>
+		<integer>0</integer>
+		<key>Dtype</key>
+		<integer>0</integer>
+		<key>Dtime</key>
+		<integer>4</integer>
+		<key>Ddate</key>
+		<string>2014-01-01 11:11:12</string>
+	</dict>
+	<dict>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>Dcomponent</key>
+		<string>5真有趣4</string>
+		<key>videoID</key>
+		<integer>0</integer>
+		<key>Dtype</key>
+		<integer>0</integer>
+		<key>Dtime</key>
+		<integer>4</integer>
+		<key>Ddate</key>
+		<string>2014-01-01 11:11:12</string>
+	</dict>
+	<dict>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>Dcomponent</key>
+		<string>6真有趣5</string>
+		<key>videoID</key>
+		<integer>0</integer>
+		<key>Dtype</key>
+		<integer>0</integer>
+		<key>Dtime</key>
+		<integer>5</integer>
+		<key>Ddate</key>
+		<string>2014-01-01 11:11:12</string>
+	</dict>
+	<dict>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>Dcomponent</key>
+		<string>7真有趣13</string>
+		<key>videoID</key>
+		<integer>0</integer>
+		<key>Dtype</key>
+		<integer>0</integer>
+		<key>Dtime</key>
+		<integer>13</integer>
+		<key>Ddate</key>
+		<string>2014-01-01 11:11:12</string>
+	</dict>
+	<dict>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>Dcomponent</key>
+		<string>8真有趣！15</string>
+		<key>videoID</key>
+		<integer>0</integer>
+		<key>Dtype</key>
+		<integer>0</integer>
+		<key>Dtime</key>
+		<integer>15</integer>
+		<key>Ddate</key>
+		<string>2014-01-01 11:11:12</string>
+	</dict>
+	<dict>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>Dcomponent</key>
+		<string>9真有趣！17</string>
+		<key>videoID</key>
+		<integer>0</integer>
+		<key>Dtype</key>
+		<integer>0</integer>
+		<key>Dtime</key>
+		<integer>17</integer>
+		<key>Ddate</key>
+		<string>2014-01-01 11:11:12</string>
+	</dict>
+	<dict>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>Dcomponent</key>
+		<string>10真有趣！18</string>
+		<key>videoID</key>
+		<integer>0</integer>
+		<key>Dtype</key>
+		<integer>0</integer>
+		<key>Dtime</key>
+		<integer>18</integer>
+		<key>Ddate</key>
+		<string>2014-01-01 11:11:12</string>
+	</dict>
+	<dict>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>Dcomponent</key>
+		<string>11真有趣！20</string>
+		<key>videoID</key>
+		<integer>0</integer>
+		<key>Dtype</key>
+		<integer>0</integer>
+		<key>Dtime</key>
+		<integer>20</integer>
+		<key>Ddate</key>
+		<string>2014-01-01 11:11:12</string>
+	</dict>
+</array>
+</plist>

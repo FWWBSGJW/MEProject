@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>CNid</key>
+		<integer>0</integer>
+		<key>CNcomment</key>
+		<string>下载jdk，安装要配置环境</string>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>CVid</key>
+		<integer>0</integer>
+		<key>CVname</key>
+		<string>java环境搭建</string>
+		<key>CVnum</key>
+		<string>2.3</string>
+		<key>CNdate</key>
+		<string>2014-01-02 12：00</string>
+		<key>CVNtime</key>
+		<string>07：02</string>
+	</dict>
+	<dict>
+		<key>CNid</key>
+		<integer>1</integer>
+		<key>CNcomment</key>
+		<string>java是面向对象的语言。</string>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>CVid</key>
+		<integer>2</integer>
+		<key>CVname</key>
+		<string>java特点</string>
+		<key>CVnum</key>
+		<string>2.2</string>
+		<key>CNdate</key>
+		<string>2014-6-02 12：00</string>
+		<key>CVNtime</key>
+		<string>02:03</string>
+	</dict>
+</array>
+</plist>

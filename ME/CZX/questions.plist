@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>1．使用Java语言编写的源程序保存时的文件扩展名是（   ）</string>
+	<string>2．设int a=-2，则表达式a&gt;&gt;&gt;3的值为（   ）。</string>
+	<string>3．设有数组的定义int[] a = new int[3]，则下面对数组元素的引用错误的是（   ）。</string>
+	<string>4．在类的定义中可以有两个同名函数，这种现象称为函数（   ）</string>
+	<string>5．在类的定义中构造函数的作用是（   ）。</string>
+	<string>6．下面关键字中，哪一个不是用于异常处理语句（   ）。</string>
+	<string>7．类与对象的关系是（   ）。 </string>
+	<string>8．下面哪一个是Java中不合法的标识符（   ）。</string>
+	<string>9．为AB类的一个无形式参数无返回值的方法method书写方法头，使得使用类名AB作为前缀就可以调用它，该方法头的形式为(      )。</string>
+	<string>10．欲构造ArrayList类的一个实例，此类继承了List接口，下列哪个方法是正确的（   ）。</string>
+</array>
+</plist>

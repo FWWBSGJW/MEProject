@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>userName</key>
+		<string>刘帅</string>
+		<key>userConment</key>
+		<string>杨老师讲的真好，声音也很有魅力啊。 求老师讲课用的 信用卡程序啊 这视频老是切换 看不清啊</string>
+		<key>userConmentDate</key>
+		<string>2014-01-01 19:18</string>
+		<key>userImageUrl</key>
+		<string>CuserPhoto</string>
+	</dict>
+	<dict>
+		<key>userID</key>
+		<integer>1</integer>
+		<key>userName</key>
+		<string>sx_0758</string>
+		<key>userConment</key>
+		<string>这个网速，看不了啊</string>
+		<key>userConmentDate</key>
+		<string>2014-01-11 19:18</string>
+		<key>userImageUrl</key>
+		<string>CuserPhoto</string>
+	</dict>
+	<dict>
+		<key>userID</key>
+		<string>2</string>
+		<key>userName</key>
+		<string>帅</string>
+		<key>userConment</key>
+		<string>求老师讲课用的 信用卡程序啊 这视频老是切换 看不清啊</string>
+		<key>userConmentDate</key>
+		<string>2014-01-12 19:18</string>
+		<key>userImageUrl</key>
+		<string>CuserPhoto</string>
+	</dict>
+</array>
+</plist>
