@@ -159,7 +159,7 @@
     
     if (!cd.cacheImage) {
         cell.courseImageView.image = [UIImage imageNamed:@"directionDefault"];
-        [self loadImageAsyncWithIndexPath:indexPath];
+        //[self loadImageAsyncWithIndexPath:indexPath];
     }else {
         cell.courseImageView.image = cd.cacheImage;
     }
