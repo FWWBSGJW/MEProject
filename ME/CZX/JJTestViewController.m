@@ -10,6 +10,7 @@
 #import "JJTestDetailViewController.h"
 #import "JJTestTableViewCell.h"
 #import "UILabel+dynamicSizeMe.h"
+#import "SVPullToRefresh.h"
 #define ScrollViewHeight 120
 #define pages 3
 
@@ -89,6 +90,8 @@
     self.testTableView.tableHeaderView = self.newsBG;
     [self.view addSubview:self.testTableView];
     
+    [self addTableViewTrag];
+    
     NSString *path = [[NSBundle mainBundle] pathForResource:@"testName" ofType:@"plist"];
     nameArray = [NSArray arrayWithContentsOfFile:path];
     
@@ -97,6 +100,30 @@
 - (NSInteger)numberOfPages
 {
     return pages;
+}
+
+- (void)addTableViewTrag
+{
+    __weak JJTestViewController *weakself = self;
+    [weakself.testTableView addPullToRefreshWithActionHandler:^{
+        int64_t delayInSeconds = 2.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^{
+            [weakself.testTableView.pullToRefreshView stopAnimating];
+            [self.testTableView reloadData];
+        });
+    }];
+    
+    [weakself.testTableView addInfiniteScrollingWithActionHandler:^{
+        int64_t delayInSeconds = 2.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^{
+            
+            [self.testTableView reloadData];
+            [weakself.testTableView.infiniteScrollingView stopAnimating];
+        });
+    }];
+    
 }
 
 
