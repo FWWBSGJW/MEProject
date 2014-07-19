@@ -71,6 +71,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //    self.navigationController.navigationBarHidden = YES;
     self.navigationItem.title = @"测试";
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -82,19 +83,33 @@
     self.newsBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, ScrollViewHeight)];
     [self.newsBG addSubview:self.newsView];
     
-    
     self.testTableView = [[UITableView alloc]
-                          initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
+                          initWithFrame:CGRectMake(0, 0, 320, 440)
+                          style:UITableViewStylePlain];
     self.testTableView.delegate = self;
     self.testTableView.dataSource = self;
+    [self adjustTableViewInsert];
     self.testTableView.tableHeaderView = self.newsBG;
     [self.view addSubview:self.testTableView];
-    
-    [self addTableViewTrag];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"testName" ofType:@"plist"];
     nameArray = [NSArray arrayWithContentsOfFile:path];
     
+    //防止下拉位子异常
+    if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+        [self adjustTableViewInsert];
+    }
+    [self addTableViewTrag];
+}
+
+- (void)adjustTableViewInsert
+{
+    UIEdgeInsets insets = self.testTableView.contentInset;
+    insets.top = self.navigationController.navigationBar.frame.size.height +
+    [UIApplication sharedApplication].statusBarFrame.size.height;
+    self.testTableView.contentInset = insets;
+    self.testTableView.scrollIndicatorInsets = insets;
 }
 
 - (NSInteger)numberOfPages
