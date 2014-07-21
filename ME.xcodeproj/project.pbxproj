@@ -988,8 +988,8 @@
 			isa = PBXGroup;
 			children = (
 				5B717FE6197905C800F1359C /* Controller */,
-				5B717FEF197905C800F1359C /* File */,
 				5B718056197905C900F1359C /* Model */,
+				5B717FEF197905C800F1359C /* File */,
 				5B71805D197905C900F1359C /* View */,
 			);
 			path = CC;
@@ -1190,11 +1190,11 @@
 		5B7180E5197905D600F1359C /* 个人中心 */ = {
 			isa = PBXGroup;
 			children = (
-				5B7180E6197905D600F1359C /* login */,
 				5B7180F4197905D600F1359C /* UserViewController.h */,
 				5B7180F5197905D600F1359C /* UserViewController.m */,
 				5B7180F6197905D600F1359C /* ZDProgressView.h */,
 				5B7180F7197905D600F1359C /* ZDProgressView.m */,
+				5B7180E6197905D600F1359C /* login */,
 				5B7180F8197905D600F1359C /* 个人信息 */,
 			);
 			path = "个人中心";

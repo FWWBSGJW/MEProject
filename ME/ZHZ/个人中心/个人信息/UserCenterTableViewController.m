@@ -29,6 +29,15 @@
 //	[_infoCell loadData];
 }
 
+//- (void)waitData{
+//	while (!_user.info.account) {
+//		_user = [User sharedUser];
+//	}
+//	[self performSelector:@selector(reloadUserData) withObject:nil afterDelay:0.2];
+//}
+//- (void)reloadUserData{
+//	[self.tableView reloadData];
+//}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -72,7 +81,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	switch (section) {
-		case 2: return 3; break;
+		case 2: return MIN([_user.info.lcourses count], 3); break;
 		case 3: return 3; break;
 		case 4: return 2; break;
 		default:

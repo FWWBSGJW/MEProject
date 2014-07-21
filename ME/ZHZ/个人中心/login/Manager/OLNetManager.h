@@ -8,15 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "JSONKit.h"
-#import "AFNetworking.h"
 #define SUCCESSBLOCK      void(^)(NSDictionary* successDict)
 #define FAILUREBLOCK      void(^)(NSDictionary *failDict, NSError *error)
-@interface OLNetManager : NSObject
-
-+ (void)requestWith:(NSDictionary *)aDict
-				url:(NSString *)aUrl
-			 method:(NSString *)aMethod
-	 parameEncoding:(AFHTTPClientParameterEncoding)aEncoding
-			   succ:(SUCCESSBLOCK)success
-			failure:(FAILUREBLOCK)failure;
+@interface OLNetManager : NSObject <NSURLConnectionDataDelegate>
+- (NSDictionary *)loginWith:(NSString *)username
+	  andPassword:(NSString *)password
+			 succ:(SUCCESSBLOCK)success;
 @end

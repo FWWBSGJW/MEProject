@@ -8,7 +8,6 @@
 
 #import "UserInfo.h"
 #import "OLNetManager.h"
-#define kURL_login
 @interface UserInfo ()
 @property (nonatomic,strong) NSString *imageUrl;
 @property (nonatomic,strong) NSDictionary *data;
@@ -44,7 +43,8 @@
 		_account	= [_data objectForKey:@"account"];
 		_name		= [_data objectForKey:@"name"];
 		_sex		= [_data objectForKey:@"sex"];
-		_imageUrl	= [_data objectForKey:@"imageUrl"];
+		_imageUrl	= [_data objectForKey:@"image"];
+#warning image的获取方式需要更改
 		_image		= [UIImage imageNamed:_imageUrl];
 		_describe	= [_data objectForKey:@"describe"];
 		[_lcourses	addObjectsFromArray:[_data objectForKey:@"lcourses"]];
@@ -85,7 +85,7 @@
 - (BOOL)userLoginWith:(NSString *)userName andPassword:(NSString *)passWord{
 	/*test*/
 
-#define Test 1
+#define Test 0
 #if Test
 	if ([userName isEqualToString:@"admin"] && [passWord isEqualToString:@"123456"]) {
 		NSBundle *bundle = [NSBundle mainBundle];
@@ -98,13 +98,15 @@
 		return YES;
 	}
 #else
-	NSDictionary *dic = @{@"username":userName,@"password":passWord};
-	[OLNetManager requestWith:dic url:kURL_login method:@"POST" parameEncoding:AFJSONParameterEncoding succ:^(NSDictionary *successDict) {
-		_data = successDict;
-	} failure:^(NSDictionary *failDict, NSError *error) {
-//		_data = failDict;
-		NSLog(@"net request fail");
+	OLNetManager *manager =[[OLNetManager alloc] init];
+	_data = [manager loginWith:userName andPassword:passWord succ:^(NSDictionary *successDict) {
 	}];
+	if (_data) {
+		[self setAllData];
+		_isLogin = YES;
+		[self saveInfoToDocument];
+		return YES;
+	}
 #endif
 	return NO;
 }

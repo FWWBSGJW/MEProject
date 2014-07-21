@@ -9,64 +9,51 @@
 #import "OLNetManager.h"
 
 #define NetworkTimeout 30
+#define kURL_login @"http://121.197.10.159:8080/MobileEducation/userAction?userId=1"
+
+@interface OLNetManager(){
+//	void(^succ)(NSDictionary *dic);
+}
+
+//@property (nonatomic,strong) NSMutableData *data;
+@end
+
 @implementation OLNetManager
 
-+ (void)requestWith:(NSDictionary *)aDict
-				url:(NSString *)aUrl
-			 method:(NSString *)aMethod
-	 parameEncoding:(AFHTTPClientParameterEncoding)aEncoding
-			   succ:(SUCCESSBLOCK)success
-			failure:(FAILUREBLOCK)failure{
-	
-    AFHTTPClient *httpClient = [OLNetManager shareClient];
-	
-    httpClient.parameterEncoding = aEncoding;
-    
-    NSMutableURLRequest *request = [httpClient requestWithMethod:aMethod path:aUrl parameters:aDict];
-    [request setTimeoutInterval:NetworkTimeout];
-	
-//    NSMutableDictionary *headDict = [NSMutableDictionary dictionaryWithCapacity:0];
 
-//    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
-//    NSString *strVersion = [infoDict objectForKey:@"CFBundleVersion"];
-//    [headDict setObject:strVersion forKey:@"clinetVersion"];
-
-//    NSString *strHeadInfo = [headDict JSONString];
-//    [request addValue:strHeadInfo forHTTPHeaderField:@"Client-Info"];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject){
-        //请求成功
-        /////先做一个result的判断
-        NSDictionary *Dict = [operation.responseString objectFromJSONString];
-        if(Dict)
-			{
-            BOOL isSuccess = [[Dict objectForKey:@"success"] boolValue];
-            if(isSuccess)
-				{
-                success(Dict);
-                return ;
-				}
-			}
-        success(nil);
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-		//        //请求失败
-        if(error.code == -1009)
-			{
-            //MBTipWindow *tipWindow = [MBTipWindow GetInstance];
-            //[tipWindow showNetMessage:@"当前网络有问题" type:EVENT_FAIL];
-			}
-        failure(nil, error);
-    }];
-    [operation start];
+- (NSDictionary *)loginWith:(NSString *)username
+				andPassword:(NSString *)password
+					   succ:(SUCCESSBLOCK)success{
+//	NSString *urlStr = [NSString stringWithFormat:@"%@?account=%@&password=%@",kURL_login,username,password];
+	NSURL *url = [NSURL URLWithString:kURL_login];
+	NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//	[NSURLConnection connectionWithRequest:request delegate:self];
+	NSURLResponse *response = nil;
+	NSError *error = nil;
+	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+#warning 编码方式
+	NSString *str = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+	NSDictionary *dic = [str objectFromJSONString];
+	return [dic objectForKey:@"result"];
 }
+#pragma mark - url connection data delegate
 
-+ (AFHTTPClient *)shareClient{
-	static AFHTTPClient *httpClient;
-	if (!httpClient) {
-		httpClient = [[AFHTTPClient alloc] initWithBaseURL:nil];
+//- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+//	[self.data appendData:data];
+//}
+
+//- (void)connectionDidFinishLoading:(NSURLConnection *)connection{
+//	NSString *str = [[NSString alloc] initWithData:_data encoding:NSASCIIStringEncoding];
+//	NSDictionary *dic = [str objectFromJSONString];
+//	succ(dic);
+//}
+
+- (id)init{
+	if (self = [super init]) {
+		
 	}
-	return httpClient;
+	return self;
 }
+
 
 @end

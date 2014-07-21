@@ -42,9 +42,11 @@
 		return;
 	}
 	if ([user loginWith:[_usernameText text] Password:[_userpwdText text]] && !user.currentVC){
+		
 		UserCenterTableViewController *utc = [[UserCenterTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
 		self.navigationController.viewControllers = @[utc];
 	}
+	
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

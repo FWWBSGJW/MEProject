@@ -39,7 +39,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(User);
 	[_info userLogout];	//用户登出
 }
 
-- (BOOL)loginWith:(NSString *)username Password:(NSString *)pwd{
+- (BOOL)loginWith:(NSString *)username Password:(NSString *)pwd {
 
 	if (!_info.isLogin) {
 		BOOL result = [_info userLoginWith:username andPassword:pwd];

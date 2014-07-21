@@ -53,9 +53,9 @@
 	  focusedNum:(NSUInteger)num3{
 	_portrait.image = image;
 	_nameLabel.text = name;
-	_courseNumLabel.text = [NSString stringWithFormat:@"%d",num1];
-	_focusNumLabel.text = [NSString stringWithFormat:@"%d",num2];
-	_focusedNumLabel.text = [NSString stringWithFormat:@"%d",num3];
+	_courseNumLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num1];
+	_focusNumLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num2];
+	_focusedNumLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num3];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
