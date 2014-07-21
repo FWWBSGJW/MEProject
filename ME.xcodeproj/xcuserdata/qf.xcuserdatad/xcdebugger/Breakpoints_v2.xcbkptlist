@@ -9,59 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ME/ZHZ/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/login/Model/UserInfo.m"
-            timestampString = "427628064.607995"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "-userLoginWith:andPassword:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[UserInfo userLoginWith:andPassword:with:]"
-                  moduleName = "ME"
-                  urlString = "file:///Users/qf/Developer/MEProject/ME/ZHZ/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83/login/Model/UserInfo.m"
-                  timestampString = "427627340.962277"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "104"
-                  endingLineNumber = "104"
-                  offsetFromSymbolStart = "153">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__43-[UserInfo userLoginWith:andPassword:with:]_block_invoke"
-                  moduleName = "ME"
-                  urlString = "file:///Users/qf/Developer/MEProject/ME/ZHZ/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83/login/Model/UserInfo.m"
-                  timestampString = "427627340.962546"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "104"
-                  endingLineNumber = "104"
-                  offsetFromSymbolStart = "50">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "ME/ZHZ/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/login/Manager/OLNetManager.m"
-            timestampString = "427628064.607995"
+            timestampString = "427642154.220799"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "-loginWith:andPassword:succ:"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "+loginWith:andPassword:succ:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -72,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ME/ZHZ/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/login/Model/UserInfo.m"
-            timestampString = "427628064.607995"
+            timestampString = "427643900.11648"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "-setAllData"
             landmarkType = "5">
          </BreakpointContent>
@@ -88,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ME/ZHZ/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/&#x4e2a;&#x4eba;&#x4fe1;&#x606f;/UserCenterTableViewController.m"
-            timestampString = "427626667.003288"
+            timestampString = "427642154.220799"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -104,12 +58,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ME/ZHZ/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/login/Model/UserInfo.m"
-            timestampString = "427628064.607995"
+            timestampString = "427643900.11648"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "-lastUserInfo"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ME/ZHZ/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/login/Model/UserInfo.m"
+            timestampString = "427643900.11648"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "-userLoginWith:andPassword:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ME/ZHZ/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/login/Manager/OLNetManager.m"
+            timestampString = "427642240.763628"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "+userDataWithId:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ME/ZHZ/&#x4e2a;&#x4eba;&#x4e2d;&#x5fc3;/&#x4e2a;&#x4eba;&#x4fe1;&#x606f;/DetailViewController.m"
+            timestampString = "427644384.503694"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "-setUI"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

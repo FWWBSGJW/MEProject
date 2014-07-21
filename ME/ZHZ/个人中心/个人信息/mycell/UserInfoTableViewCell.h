@@ -20,7 +20,7 @@
 @property (nonatomic,weak) IBOutlet UILabel *focusNumLabel; //关注
 @property (nonatomic,weak) IBOutlet UILabel *focusedNumLabel;//被关注
 @property (nonatomic,weak) id<UserInfoTableViewCellDelegate> delegate;
-- (void)setAImage:(UIImage *)image
+- (void)setAImage:(NSString *)imageUrl
 		 andName:(NSString *)name
 	   courseNum:(NSUInteger)num1
 		focusNum:(NSUInteger)num2

@@ -14,6 +14,17 @@
 #import "LoginViewController.h"
 #import "DetailViewController.h"
 
+typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
+    UserCenterSectionStyelInfo = 0,
+    UserCenterSectionStyelDetail,
+	UserCenterSectionStyelLcourse,
+	UserCenterSectionStyelQandA,
+	UserCenterSectionStyelBCcourse,
+	UserCenterSectionStyelLink,
+	UserCenterSectionStyelLogout,
+};
+
+
 @interface UserCenterTableViewController ()
 @property (nonatomic,strong) User *user;
 @property (nonatomic,strong) UserInfoTableViewCell *uiCell;
@@ -81,9 +92,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	switch (section) {
-		case 2: return MIN([_user.info.lcourses count], 3); break;
-		case 3: return 3; break;
-		case 4: return 2; break;
+		case UserCenterSectionStyelLcourse: return MIN([_user.info.lcourses count], 3); break;
+		case UserCenterSectionStyelQandA:	return 3; break;
+		case UserCenterSectionStyelBCcourse: return 2; break;
 		default:
 			break;
 	}
@@ -93,25 +104,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = nil;
-	if (indexPath.section == 0) {
+	if (indexPath.section == UserCenterSectionStyelInfo) {
 		_uiCell = [[UserInfoTableViewCell alloc] initWithFrame:CGRectNull];
 		[_uiCell setSelectionStyle:UITableViewCellSelectionStyleNone];	//设置cell被选中时的StyleNone 没有高亮效果
 //		_uiCell.userInteractionEnabled = NO;	//将cell设置为不可选中 ps:会使触摸事件失效
 		_uiCell.delegate = self;
 		if (_user.info.isLogin) {
-			[_uiCell setAImage:_user.info.image
+			[_uiCell setAImage:_user.info.imageUrl
 					andName:_user.info.name
 				  courseNum:[_user.info.lcourses count]
 				   focusNum:[_user.info.focus count]
 				 focusedNum:[_user.info.focused count]];
 		}
 		cell = _uiCell;
-	}else if (indexPath.section == 1){
+	}else if (indexPath.section == UserCenterSectionStyelDetail){
 		//详情
 		cell = [[UITableViewCell alloc] init];
 		cell.textLabel.text = @"详细信息";
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	}else if (indexPath.section == 2){
+	}else if (indexPath.section == UserCenterSectionStyelLcourse){
 		//加载三门最近浏览的课程
 		ProgressTableViewCell * cell1 = [[ProgressTableViewCell alloc] initWithFrame:CGRectNull];
 		if (_user.info.isLogin) {
@@ -124,7 +135,7 @@
 			cell1.progressView.text = [NSString stringWithFormat:@"%.2lf%%",[[course objectForKey:@"progress"] doubleValue]*100];
 		}
 		cell = cell1;
-	}else if (indexPath.section == 3){
+	}else if (indexPath.section == UserCenterSectionStyelQandA){
 		//最近的提问和回答
 		if (indexPath.row == 0) {
 			cell = [[UITableViewCell alloc] init];
@@ -144,7 +155,7 @@
 			numCell.numLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)[_user.info.answers count]];
 			cell = numCell;
 		}
-	}else if(indexPath.section == 4){
+	}else if(indexPath.section == UserCenterSectionStyelBCcourse){
 		if (indexPath.row == 0) {
 			//含 num 的自定义cell
 			NumTableViewCell *numCell = [[NumTableViewCell alloc] initWithFrame:CGRectNull];
@@ -159,10 +170,10 @@
 			numCell.numLabel.text = [NSString stringWithFormat:@"%lu",[_user.info.ccourses count]];
 			cell = numCell;
 		}
-	}else if(indexPath.section == 5){
+	}else if(indexPath.section == UserCenterSectionStyelLink){
 		cell = [[UITableViewCell alloc] init];
 		cell.textLabel.text = @"新浪微博 微信 qq等绑定链接";
-	}else if(indexPath.section == 6){
+	}else if(indexPath.section == UserCenterSectionStyelLogout){
 		cell = [[UITableViewCell alloc] init];
 		cell.textLabel.text = @"退出登陆";
 		cell.textLabel.textColor = [UIColor redColor];
@@ -173,7 +184,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-	if (section == 2) {
+	if (section == UserCenterSectionStyelLcourse) {
 		return @"最近课程";
 	}
 	return nil;
@@ -223,15 +234,29 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if (indexPath.section == 6) {
+	if (indexPath.section == UserCenterSectionStyelLogout) {
+		//推出登陆
 		[_user logout];
 		LoginViewController *login = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
 		self.navigationController.viewControllers = @[login];
+	}else if (indexPath.section == UserCenterSectionStyelDetail){
+		//用户详情
+		DetailViewController *detail = [[DetailViewController alloc] init];
+		detail.userData = _user.info;
+		detail.title = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
+		[self.navigationController pushViewController:detail animated:YES];
+		
+	}else if (indexPath.section == UserCenterSectionStyelBCcourse){
+		//
+	}else if (indexPath.section == UserCenterSectionStyelLcourse){
+		
+	}else if (indexPath.section == UserCenterSectionStyelLink){
+		
+	}else if (indexPath.section == UserCenterSectionStyelQandA){
+			
 	}
-	if(indexPath.section != 0){
-	DetailViewController *detail = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:[NSBundle mainBundle]];
-	detail.title = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
-	[self.navigationController pushViewController:detail animated:YES];
+	else{
+		
 	}
 }
 

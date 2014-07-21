@@ -11,7 +11,8 @@
 #define SUCCESSBLOCK      void(^)(NSDictionary* successDict)
 #define FAILUREBLOCK      void(^)(NSDictionary *failDict, NSError *error)
 @interface OLNetManager : NSObject <NSURLConnectionDataDelegate>
-- (NSDictionary *)loginWith:(NSString *)username
++ (NSDictionary *)loginWith:(NSString *)username
 	  andPassword:(NSString *)password
 			 succ:(SUCCESSBLOCK)success;
++ (NSDictionary *)userDataWithId:(NSInteger)userId;
 @end

@@ -9,7 +9,7 @@
 #import "OLNetManager.h"
 
 #define NetworkTimeout 30
-#define kURL_login @"http://121.197.10.159:8080/MobileEducation/userAction?userId=1"
+#define kURL_login @"http://121.197.10.159:8080/MobileEducation/userAction"
 
 @interface OLNetManager(){
 //	void(^succ)(NSDictionary *dic);
@@ -20,12 +20,25 @@
 
 @implementation OLNetManager
 
++ (NSDictionary *)userDataWithId:(NSInteger)userId{
+	NSString *urlStr = [NSString stringWithFormat:@"%@?userId=%ld",kURL_login,userId];
+	NSURL *url = [NSURL URLWithString:urlStr];
+	NSURLRequest *request = [NSURLRequest requestWithURL:url];
+	//	[NSURLConnection connectionWithRequest:request delegate:self];
+	NSURLResponse *response = nil;
+	NSError *error = nil;
+	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+#warning 编码方式
+	NSString *str = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+	NSDictionary *dic = [str objectFromJSONString];
+	return dic;
+}
 
-- (NSDictionary *)loginWith:(NSString *)username
++ (NSDictionary *)loginWith:(NSString *)username
 				andPassword:(NSString *)password
 					   succ:(SUCCESSBLOCK)success{
-//	NSString *urlStr = [NSString stringWithFormat:@"%@?account=%@&password=%@",kURL_login,username,password];
-	NSURL *url = [NSURL URLWithString:kURL_login];
+	NSString *urlStr = [NSString stringWithFormat:@"%@?account=%@&password=%@",kURL_login,username,password];
+	NSURL *url = [NSURL URLWithString:urlStr];
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
 //	[NSURLConnection connectionWithRequest:request delegate:self];
 	NSURLResponse *response = nil;
@@ -34,9 +47,9 @@
 #warning 编码方式
 	NSString *str = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 	NSDictionary *dic = [str objectFromJSONString];
-	return [dic objectForKey:@"result"];
+	return dic;
 }
-#pragma mark - url connection data delegate
+//#pragma mark - url connection data delegate
 
 //- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
 //	[self.data appendData:data];

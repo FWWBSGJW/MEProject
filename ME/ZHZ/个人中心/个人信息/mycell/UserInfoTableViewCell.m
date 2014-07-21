@@ -8,7 +8,7 @@
 
 #import "UserInfoTableViewCell.h"
 #import "FocusTableViewController.h"
-
+#import "UIImageView+WebCache.h"
 @implementation UserInfoTableViewCell
 
 - (void)awakeFromNib
@@ -46,12 +46,12 @@
 }
 
 
-- (void)setAImage:(UIImage *)image
+- (void)setAImage:(NSString *)imageUrl
 		 andName:(NSString *)name
 	   courseNum:(NSUInteger)num1
 		focusNum:(NSUInteger)num2
 	  focusedNum:(NSUInteger)num3{
-	_portrait.image = image;
+	[_portrait setImageWithURL:[NSURL URLWithString:imageUrl]];
 	_nameLabel.text = name;
 	_courseNumLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num1];
 	_focusNumLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num2];

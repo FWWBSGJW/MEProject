@@ -8,12 +8,13 @@
 
 #import "UserInfo.h"
 #import "OLNetManager.h"
+
 @interface UserInfo ()
-@property (nonatomic,strong) NSString *imageUrl;
-@property (nonatomic,strong) NSDictionary *data;
 @end
 
 @implementation UserInfo
+
+
 
 - (id)init{
 	if (self = [super init]) {
@@ -23,7 +24,7 @@
 		_account	= nil;
 		_name		= nil;
 		_sex		= nil;
-		_image		= nil;
+//		_image		= nil;
 		_imageUrl	= nil;
 		_describe	= nil;
 		_lcourses	= [[NSMutableArray alloc] initWithCapacity:42];
@@ -38,14 +39,32 @@
 	return self;
 }
 
+- (id)initWithUserId:(NSInteger)userId{
+	if (self = [super init]) {
+		_data		= [[OLNetManager userDataWithId:userId] objectForKey:@"result"];
+		_account	= nil;
+		_name		= nil;
+		_sex		= nil;
+		_imageUrl	= nil;
+		_describe	= nil;
+		_lcourses	= [[NSMutableArray alloc] initWithCapacity:42];
+		_ccourses	= [[NSMutableArray alloc] initWithCapacity:42];
+		_bcourses	= [[NSMutableArray alloc] initWithCapacity:42];
+		_focus		= [[NSMutableArray alloc] initWithCapacity:42];
+		_focused	= [[NSMutableArray alloc] initWithCapacity:42];
+		_questions	= [[NSMutableArray alloc] initWithCapacity:42];
+		_answers	= [[NSMutableArray alloc] initWithCapacity:42];
+		[self setAllData];
+	}
+	return self;
+}
+
 - (void)setAllData{
 	if (_data) {
 		_account	= [_data objectForKey:@"account"];
 		_name		= [_data objectForKey:@"name"];
 		_sex		= [_data objectForKey:@"sex"];
 		_imageUrl	= [_data objectForKey:@"image"];
-#warning image的获取方式需要更改
-		_image		= [UIImage imageNamed:_imageUrl];
 		_describe	= [_data objectForKey:@"describe"];
 		[_lcourses	addObjectsFromArray:[_data objectForKey:@"lcourses"]];
 		[_ccourses  addObjectsFromArray:[_data objectForKey:@"ccourses"]];
@@ -65,7 +84,7 @@
 		_account	= nil;
 		_name		= nil;
 		_sex		= nil;
-		_image		= nil;
+//		_image		= nil;
 		_imageUrl	= nil;
 		_describe	= nil;
 		[_lcourses removeAllObjects];
@@ -98,9 +117,12 @@
 		return YES;
 	}
 #else
-	OLNetManager *manager =[[OLNetManager alloc] init];
-	_data = [manager loginWith:userName andPassword:passWord succ:^(NSDictionary *successDict) {
-	}];
+
+//	NSDictionary *dic = [OLNetManager loginWith:userName andPassword:passWord succ:^(NSDictionary *successDict) {
+//	}];
+	NSDictionary *dic = [OLNetManager userDataWithId:1];
+	_data = [dic objectForKey:@"result"];
+#warning 判断登陆是否成功
 	if (_data) {
 		[self setAllData];
 		_isLogin = YES;
