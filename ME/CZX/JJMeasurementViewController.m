@@ -114,7 +114,6 @@
     [self.view addSubview:self.downBtn];
     [self.view addSubview:timeLabel];
     [self createSubjectBtn];
-    self.upBtn.userInteractionEnabled = NO;
     
     leaveAlertView = [[UIAlertView alloc] initWithTitle:@"正在测试中" message:@"你确定要退出吗？" delegate:self cancelButtonTitle:@"继续测试" otherButtonTitles:@"我要退出",nil];
     
