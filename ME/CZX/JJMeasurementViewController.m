@@ -10,13 +10,16 @@
 #import "UILabel+dynamicSizeMe.h"
 #import "JJFinishViewController.h"
 
+//#define KColor RGBCOLOR(80, 240, 180)
+#define KColor [UIColor orangeColor];
+
+
 @interface JJMeasurementViewController ()
 {
     NSArray *queArray;
     NSArray *anArray;
-    NSArray *nowAnArray;
-    int i;
-    int j;
+    NSArray *currentAnArray;
+    int page;
     UILabel *textView;
     UITableView *measureTableView;
     NSMutableArray *personAnswerArray;
@@ -26,8 +29,8 @@
     int timeCount;
     NSTimer *timer;
     int mins;
-//    NSIndexPath *lastIndexPath;
-//    NSMutableArray *personAnswerIndexPathArray;
+    NSMutableArray *voidArray;
+    UIViewController *modalVC;
 }
 @end
 
@@ -37,14 +40,12 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-//    [JJTabBarViewController share].tabBar.hidden = YES;
     self.tabBarController.tabBar.hidden = YES;
     self.navigationController.navigationBarHidden = NO;
 }
@@ -54,75 +55,164 @@
     [super viewDidLoad];
     timeCount = 1;
     mins = 0;
-    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
-    [backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-    [backBtn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-    self.navigationItem.leftBarButtonItem = backBarButton;
+    page = 0;
     
-    i=0;
-    self.upBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 440, 120, 40)];
-    self.downBtn = [[UIButton alloc] initWithFrame:CGRectMake(200, 440, 120, 40)];
-    [self.upBtn setImage:[UIImage imageNamed:@"up"] forState:UIControlStateNormal];
-    [self.downBtn setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
-    [self.upBtn setImage:[UIImage imageNamed:@"upUp"] forState:UIControlStateHighlighted];
-    [self.downBtn setImage:[UIImage imageNamed:@"downUp"] forState:UIControlStateHighlighted];
-    [self.upBtn setTitle:@"上一题" forState:UIControlStateNormal];
-    [self.downBtn setTitle:@"下一题" forState:UIControlStateNormal];
-    self.upBtn.backgroundColor = RGBCOLOR(80, 240, 180);
-    self.downBtn.backgroundColor = RGBCOLOR(80, 240, 180);
-    [self.upBtn addTarget:self action:@selector(upPage) forControlEvents:UIControlEventTouchUpInside];
-    [self.downBtn addTarget:self action:@selector(downPage) forControlEvents:UIControlEventTouchUpInside];
+    //    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
+    //    topView.backgroundColor = KColor;
+    
+    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    backBtn.titleLabel.textAlignment= NSTextAlignmentLeft;
+    backBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    //    [backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [backBtn setTitle:@"退出" forState:UIControlStateNormal];
+    [backBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backBarItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.leftBarButtonItem = backBarItem;
+    //    [topView addSubview:backBtn];
+    //
+    //    UILabel *testTitle = [[UILabel alloc] initWithFrame:CGRectMake(80, 22, 160, 40)];
+    //    testTitle.text = @"Oracle PL实战测试";
+    //    testTitle.textAlignment = NSTextAlignmentCenter;
+    //    [topView addSubview:testTitle];
+    
+    [self createPagingBtn];
     
     timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 440, 80, 40)];
-    timeLabel.backgroundColor = RGBCOLOR(80, 240, 180);
+    timeLabel.backgroundColor = KColor;
     timeLabel.textAlignment = NSTextAlignmentCenter;
     timeLabel.textColor = [UIColor whiteColor];
+    timeLabel.text = [NSString stringWithFormat:@"%d:59", mins];
     timeLabel.font = [UIFont systemFontOfSize:20];
     
     measureTableView = [[UITableView alloc]
-                                     initWithFrame:self.view.bounds style:UITableViewStylePlain];
+                        initWithFrame:self.view.bounds
+                        style:UITableViewStylePlain];
     measureTableView.delegate = self;
     measureTableView.dataSource = self;
     measureTableView.scrollEnabled = NO;
     
     NSString *quePath = [[NSBundle mainBundle] pathForResource:@"questions" ofType:@"plist"];
     queArray = [NSArray arrayWithContentsOfFile:quePath];
-    nowAnArray = [[NSArray alloc] init];
+    currentAnArray = [[NSArray alloc] init];
     
     textView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
-//    textView.backgroundColor = RGBCOLOR(175, 245, 220);
     textView.text = [queArray objectAtIndex:0];
     textView.font = [UIFont systemFontOfSize:18.0];
     [textView resizeToFit];
-//    [self.view addSubview:textView];
     
     NSString *anPath = [[NSBundle mainBundle] pathForResource:@"answer" ofType:@"plist"];
     anArray = [NSArray arrayWithContentsOfFile:anPath];
-
-    nowAnArray = [anArray objectAtIndex:0];
+    
+    currentAnArray = [anArray objectAtIndex:0];
     measureTableView.tableHeaderView = textView;
     measureTableView.tableFooterView = [[UIView alloc] init];
     
+    //    [self.view addSubview:topView];
     [self.view addSubview:measureTableView];
     [self.view addSubview:self.upBtn];
     [self.view addSubview:self.downBtn];
     [self.view addSubview:timeLabel];
+    [self createSubjectBtn];
     self.upBtn.userInteractionEnabled = NO;
     
     leaveAlertView = [[UIAlertView alloc] initWithTitle:@"正在测试中" message:@"你确定要退出吗？" delegate:self cancelButtonTitle:@"继续测试" otherButtonTitles:@"我要退出",nil];
     
-//    personAnswerArray = [NSMutableArray arrayWithCapacity:queArray.count];
     personAnswerArray = [[NSMutableArray alloc] init];
     personRealArray = [[NSMutableArray alloc] init];
     for (int count=0; count<queArray.count; count++) {
-        [personAnswerArray addObject:@"-1"];
-        [personRealArray addObject:@"-1"];
+        [personAnswerArray addObject:@"4"];
+        [personRealArray addObject:@"4"];
     }
     
     [self startTimer];
 }
 
+- (void)createPagingBtn
+{
+    self.upBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 440, 60, 40)];
+    self.downBtn = [[UIButton alloc] initWithFrame:CGRectMake(260, 440, 60, 40)];
+    //    [self.upBtn setImage:[UIImage imageNamed:@"up"] forState:UIControlStateNormal];
+    //    [self.downBtn setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
+    //    [self.upBtn setImage:[UIImage imageNamed:@"upUp"] forState:UIControlStateHighlighted];
+    //    [self.downBtn setImage:[UIImage imageNamed:@"downUp"] forState:UIControlStateHighlighted];
+    [self.upBtn setTitle:@"上一题" forState:UIControlStateNormal];
+    [self.downBtn setTitle:@"下一题" forState:UIControlStateNormal];
+    self.upBtn.backgroundColor = KColor;
+    self.downBtn.backgroundColor = KColor;
+    [self.upBtn addTarget:self action:@selector(upPage) forControlEvents:UIControlEventTouchUpInside];
+    [self.downBtn addTarget:self action:@selector(downPage) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)createSubjectBtn
+{
+    self.handInBtn = [[UIButton alloc] initWithFrame:CGRectMake(60, 440, 60, 40)];
+    self.reviewBtn = [[UIButton alloc] initWithFrame:CGRectMake(200, 440, 60, 40)];
+    self.handInBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.reviewBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.handInBtn setTitle:@"交卷" forState:UIControlStateNormal];
+    [self.reviewBtn setTitle:@"查看" forState:UIControlStateNormal];
+    self.handInBtn.backgroundColor = KColor;
+    self.reviewBtn.backgroundColor = KColor;
+    [self.handInBtn addTarget:self action:@selector(verifyHangIn)
+             forControlEvents:UIControlEventTouchUpInside];
+    [self.reviewBtn addTarget:self action:@selector(review:)
+             forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.handInBtn];
+    [self.view addSubview:self.reviewBtn];
+}
+
+#pragma mark 空题
+- (void)searchVoidSubject
+{
+    voidArray = [[NSMutableArray alloc] init];
+    for (int i=0; i<queArray.count; i++)
+    {
+        if ([[personAnswerArray objectAtIndex:i]  isEqual: @"4"])
+        {
+            [voidArray addObject:[NSString stringWithFormat:@"%d", i]];
+        }
+    }
+}
+
+
+#pragma mark 交卷
+- (void)verifyHangIn
+{
+    [self searchVoidSubject];
+    if (voidArray.count>0)
+    {
+        NSString *message = [NSString stringWithFormat:@"你还有%d题还没做", voidArray.count];
+        UIAlertView *handInAlert = [[UIAlertView alloc] initWithTitle:@"确认交卷吗" message:message delegate:self cancelButtonTitle:@"继续答题" otherButtonTitles:@"确认交卷", nil];
+        [handInAlert show];
+    }
+    else
+    {
+        UIAlertView *handInAlert = [[UIAlertView alloc] initWithTitle:@"全部完成了！" message:@"交卷还是检查一下" delegate:self cancelButtonTitle:@"检查" otherButtonTitles:@"交卷", nil];
+        [handInAlert show];
+    }
+}
+
+- (void)handIn
+{
+    [self.navigationController pushViewController:[[JJFinishViewController alloc] init]
+                                         animated:YES];
+    NSArray *abc = @[@"A", @"B", @"C", @"D", @"E"];
+    for (int count=0; count<queArray.count; count++)
+    {
+        int a = [[personAnswerArray objectAtIndex:count] intValue];
+        [personRealArray replaceObjectAtIndex:count withObject:[abc objectAtIndex:a]];
+    }
+    NSLog(@"%@", personRealArray);
+}
+
+#pragma mark 回顾
+- (void)review:(id)sender
+{
+    [self createModalVC];
+}
+
+#pragma mark 计时
 - (void)startTimer
 {
     timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeUp:) userInfo:nil repeats:YES];
@@ -151,11 +241,13 @@
     }
 }
 
+#pragma mark 离开按钮
 - (void)pop
 {
     [leaveAlertView show];
 }
 
+#pragma mark tableview
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 4;
@@ -164,97 +256,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.textLabel.text = [nowAnArray objectAtIndex:[indexPath row]];
+    cell.textLabel.text = [currentAnArray objectAtIndex:[indexPath row]];
     [cell.textLabel resizeToFit];
     cell.textLabel.font = [UIFont systemFontOfSize:16.0];
-    if (indexPath.row == [[personAnswerArray objectAtIndex:i] intValue])
+    if (indexPath.row == [[personAnswerArray objectAtIndex:page] intValue])
     {
         cell.backgroundColor = [UIColor orangeColor];
     }
     return cell;
-}
-
-- (void)upPage
-{
-    i--;
-    if (i != 9) {
-        [[self.view viewWithTag:100] removeFromSuperview];
-    }
-    [self reloadMyTable];
-}
-
-- (void)downPage
-{
-    if (i<queArray.count-1)
-    {
-        if ([[personAnswerArray objectAtIndex:i] intValue] == -1) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"wrong" message:@"你还没有选择选项" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-            [alert show];
-        }else{
-            i++;
-            [self reloadMyTable];
-        }
-    }
-}
-
-- (void)reloadMyTable
-{
-    nowAnArray = [anArray objectAtIndex:i];
-    textView.text = [queArray objectAtIndex:i];
-    [textView resizeToFit];
-    measureTableView.tableHeaderView = textView;
-    [measureTableView reloadData];
-    if (i == 0)
-    {
-        self.upBtn.userInteractionEnabled = NO;
-    }else{
-        self.upBtn.userInteractionEnabled = YES;
-    }
-    if (i == [queArray count]-1) {
-        self.downBtn.userInteractionEnabled = NO;
-        UIButton *finishBtn = [[UIButton alloc] initWithFrame:CGRectMake(200, 440, 120, 40)];
-        finishBtn.backgroundColor = RGBCOLOR(80, 240, 180);
-        [finishBtn setTitle:@"完成" forState:UIControlStateNormal];
-        [finishBtn addTarget:self action:@selector(finishBtn:) forControlEvents:UIControlEventTouchUpInside];
-        finishBtn.tag = 100;
-        [self.view addSubview:finishBtn];
-    }else{
-        self.downBtn.userInteractionEnabled = YES;
-    }
-}
-
-- (void)finishBtn:(id)sender
-{
-    if ([[personAnswerArray objectAtIndex:i] intValue] == -1) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"wrong" message:@"你还没有选择选项" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-        [alert show];
-    }else{
-        NSArray *abc = @[@"A", @"B", @"C", @"D"];
-        for (int count=0; count<=i; count++)
-        {
-            int a = [[personAnswerArray objectAtIndex:count] intValue];
-            [personRealArray replaceObjectAtIndex:count withObject:[abc objectAtIndex:a]];
-        }
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"确定交卷？" message:@"" delegate:self cancelButtonTitle:@"取消，再检查一下" otherButtonTitles:@"确定", nil];
-    alertView.delegate = (id<UIAlertViewDelegate>)self;
-    [alertView show];
-    }
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1)
-    {
-        if (alertView == leaveAlertView)
-        {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        else
-        {
-            [self.navigationController pushViewController:[[JJFinishViewController alloc] init] animated:YES];
-            NSLog(@"%@", personRealArray);
-        }
-    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -273,9 +282,142 @@
     [tableView cellForRowAtIndexPath:indexPath].backgroundColor = [UIColor orangeColor];
     [UIView commitAnimations];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    [personAnswerArray replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%d", newRow]];
-    [self performSelector:@selector(downPage) withObject:self afterDelay:1];
+    [personAnswerArray replaceObjectAtIndex:page withObject:[NSString stringWithFormat:@"%d", newRow]];
+    [self performSelector:@selector(downPage) withObject:self afterDelay:0.8];
 }
+
+
+#pragma mark 翻页
+- (void)upPage
+{
+    if (page == 0)
+    {
+        
+    }
+    else
+    {
+        page--;
+        [self reloadMyTable];
+    }
+}
+
+- (void)downPage
+{
+    if (page<queArray.count-1)
+    {
+        page++;
+        [self reloadMyTable];
+    }
+    else
+    {
+        [self searchVoidSubject];
+        if (voidArray.count>0)
+        {
+            NSString *message = [NSString stringWithFormat:@"已经到最后一题，但你还有%d题还没做，要交卷吗？", voidArray.count];
+            UIAlertView *handInAlert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@"继续答题" otherButtonTitles:@"确认交卷", nil];
+            [handInAlert show];
+        }
+        else
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"已经到最后一题,要交卷吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"交卷", nil];
+            [alertView show];
+        }
+    }
+}
+
+- (void)reloadMyTable
+{
+    currentAnArray = [anArray objectAtIndex:page];
+    textView.text = [queArray objectAtIndex:page];
+    [textView resizeToFit];
+    measureTableView.tableHeaderView = textView;
+    [measureTableView reloadData];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        if (alertView == leaveAlertView)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            [self handIn];
+        }
+    }
+}
+
+
+#pragma mark 模态界面
+- (void)createModalVC
+{
+    modalVC = [[UIViewController alloc] init];
+    modalVC.view.backgroundColor = [UIColor whiteColor];
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
+    UILabel *titleLa = [[UILabel alloc] initWithFrame:CGRectMake(120, 20, 80, 44)];
+    titleLa.text = @"查看题目";
+    titleLa.textAlignment = NSTextAlignmentCenter;
+    [titleView addSubview:titleLa];
+    titleView.userInteractionEnabled = YES;
+    UIButton *dismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 20, 50, 44)];
+    [dismissBtn setTitle:@"返回" forState:UIControlStateNormal];
+    dismissBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+    [dismissBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [dismissBtn addTarget:self action:@selector(dismissViewController) forControlEvents:UIControlEventTouchUpInside];
+    [titleView addSubview:dismissBtn];
+    [modalVC.view addSubview:titleView];
+    
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, 320, 416)];
+    [self searchVoidSubject];
+    int voidCount = 0;
+    int line = 0;
+    for (int i=0; i<queArray.count; i++)
+    {
+        int row = i%4;
+        line = i/4;
+        UIButton *subjectBtn = [[UIButton alloc]
+                                initWithFrame:CGRectMake(80*row, 80*line, 80, 80)];
+        subjectBtn.tag = 100+i;
+        [subjectBtn setTitle:[NSString stringWithFormat:@"%d", i+1]
+                    forState:UIControlStateNormal];
+        [subjectBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [subjectBtn addTarget:self action:@selector(selectSubject:)
+             forControlEvents:UIControlEventTouchUpInside];
+        subjectBtn.backgroundColor = [UIColor orangeColor];
+        [subjectBtn.layer setBorderWidth:0.3];
+        [subjectBtn.layer setBorderColor:[UIColor blackColor].CGColor];
+        if (voidArray.count>0 && voidCount<voidArray.count && i==[[voidArray objectAtIndex:voidCount] intValue])
+        {
+            voidCount++;
+            subjectBtn.backgroundColor = [UIColor whiteColor];
+        }
+        [scrollView addSubview:subjectBtn];
+    }
+    scrollView.contentSize = CGSizeMake(320, 80*(line+1));
+    [modalVC.view addSubview:scrollView];
+    [self presentViewController:modalVC animated:YES completion:^{
+        
+    }];
+}
+
+- (void)selectSubject:(UIButton *)subjectBtn
+{
+    [modalVC dismissViewControllerAnimated:YES completion:^{
+        page = subjectBtn.tag - 100;
+        [self reloadMyTable];
+    }];
+}
+
+- (void)dismissViewController
+{
+    [modalVC dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+
 
 
 - (void)didReceiveMemoryWarning
