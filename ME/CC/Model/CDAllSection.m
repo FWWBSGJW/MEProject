@@ -43,15 +43,16 @@
     //反序列化
     NSArray *array = [NSJSONSerialization JSONObjectWithData:datda options:NSJSONReadingAllowFragments error:nil];
     
-    //保存至沙箱，持久化
-    NSArray *docs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [docs[0] stringByAppendingPathComponent:@"CourseSectionData.plist"];
-    [array writeToFile:path atomically:YES];
+//    //保存至沙箱，持久化
+//    NSArray *docs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *path = [docs[0] stringByAppendingPathComponent:@"CourseSectionData.plist"];
+//    [array writeToFile:path atomically:YES];
     
     NSMutableArray *cdAllSectionArray = [NSMutableArray array];
     for (NSDictionary *dic in array) {
         
         CDSection *cdSection = [CDSection courseSectionWithDictionary:dic];
+        NSLog(@"%@",cdSection);
         [cdAllSectionArray addObject:cdSection];
         
     }

@@ -179,12 +179,15 @@
 {
     CourseDirection *cd = self.courseDirectionArray[indexPath.row];
     NSURL *url = [NSURL URLWithString:cd.CDimageUrlString];
-    
+    //NSURL *url = [NSURL URLWithString:@"http://121.197.10.159:8080/images/couse0.jpg"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (data && (connectionError == nil)) {
+        if (data && (connectionError == nil) && response) {
             cd.cacheImage = [UIImage imageWithData:data];
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            if (cd.cacheImage) {
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+            
         }
     }];
 }
@@ -237,7 +240,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-#warning 待补完，建立后台请求获取课程详细数据
     CourseDirection *CD = self.courseDirectionArray[indexPath.row];
  
     CDetailCourseViewController *detailCourseVC = [CDetailCourseViewController detailCourseVCwithCourseDirection:CD];

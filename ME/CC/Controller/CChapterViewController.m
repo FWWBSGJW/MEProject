@@ -9,6 +9,7 @@
 #import "CChapterHead.h"
 #import "CChapterViewController.h"
 #import "CCommentCell.h"
+#import "CourseChapter.h"
 
 #import "CVideoPlayerController.h"
 #define headHeight 160
@@ -35,7 +36,9 @@ enum Button_Tag
     //UITextView *_textView; //课程介绍textview
 }
 
+@property (strong, nonatomic) CourseChapter *courseChapter;//课程模型
 
+@property (assign, nonatomic) NSInteger courseID;//课程id
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSDictionary *courseInfoDic;//课程信息字典
@@ -61,7 +64,11 @@ enum Button_Tag
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.title = self.courseInfoDic[@"courseName"];
+    _courseChapter = [[CourseChapter alloc] init];
+    
+   
+    self.title = self.courseInfoDic[@"cName"];
+
     UIView *tabBarView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-30, SCREEN_WIDTH, 30.0f)];
     tabBarView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:tabBarView];
@@ -70,11 +77,11 @@ enum Button_Tag
     for (NSInteger i =0; i<5; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [button setBackgroundColor:[UIColor whiteColor]];
-        //[button setTitle:array[i] forState:UIControlStateNormal];
+        
         [button setBackgroundImage:[UIImage imageNamed:array[i]] forState:UIControlStateNormal];
-        //[button.imageView setContentMode:UIViewContentModeScaleToFill];
+        
         CGFloat blackWidth = (SCREEN_WIDTH - 30*5.0) / (array.count+1.0);
-        //[button setBackgroundColor:[UIColor grayColor]];
+        
         button.frame = CGRectMake(blackWidth+(blackWidth+30) * i, 0, 30, 30);
         button.tag = 400+i;
         [button addTarget:self action:@selector(touchButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -82,7 +89,7 @@ enum Button_Tag
     }
     
     //注册cell
-    //[self.tableView registerClass:[CCommentCell class] forCellReuseIdentifier:@"commentCell"];
+    
     UINib *nib = [UINib nibWithNibName:@"CCommentCell" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"commentCell"];
     
@@ -98,6 +105,9 @@ enum Button_Tag
 {
     CChapterViewController *VC = [[CChapterViewController alloc] init];
     VC.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-30-64) style:UITableViewStylePlain];
+    
+    VC.courseID = courseID;
+    
     [VC.view addSubview:VC.tableView];
     return VC;
     
@@ -138,9 +148,10 @@ enum Button_Tag
 - (NSDictionary *)courseInfoDic
 {
     if (!_courseInfoDic) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"CourseInfoData" ofType:@"plist"];
-        NSLog(@"%@",path);
-        _courseInfoDic = [NSDictionary dictionaryWithContentsOfFile:path];
+        [self.courseChapter loadCourseInfoWithCourseID:self.courseID];
+        _courseInfoDic = self.courseChapter.courseInfoDic;
+        //NSLog(@"%@",_courseInfoDic);
+        
     }
     return _courseInfoDic;
 }
@@ -231,13 +242,15 @@ enum Button_Tag
             _segmentControl = _headView.segmentControl;
             [self.segmentControl addTarget:self action:@selector(selectSegemnt) forControlEvents:UIControlEventValueChanged];
             
-            //NSLog(@"%@",self.courseInfoDic[@"courseImageUrl"]);
-            UIImage *image = [UIImage imageNamed:self.courseInfoDic[@"courseImageUrl"]];
-            [_headView.CCImageView setImage:image];
-            _headView.CCtypeLabel.text = self.courseInfoDic[@"courseType"];
-            _headView.CCpriceLaebl.text = [NSString stringWithFormat:@"%d元",[self.courseInfoDic[@"coursePrice"] integerValue]];
-            _headView.CCteacherLabel.text = self.courseInfoDic[@"courseTeacher"];
-            _headView.CCtimeLabel.text = [NSString stringWithFormat:@"%d分钟",[self.courseInfoDic[@"courseTime"] integerValue]];
+            //NSLog(@"%@",self.courseInfoDic);
+            
+            //UIImage *image = [UIImage imageNamed:self.courseInfoDic[@"courseImageUrl"]];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kBaseURL,self.courseInfoDic[@"cPic"]]];
+            [_headView.CCImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"directionDefault"]];
+            _headView.CCtypeLabel.text = self.courseInfoDic[@"type"];
+            _headView.CCpriceLaebl.text = [NSString stringWithFormat:@"%d元",[self.courseInfoDic[@"cPrice"] integerValue]];
+            _headView.CCteacherLabel.text = self.courseInfoDic[@"cTeacher"];
+            _headView.CCtimeLabel.text = [NSString stringWithFormat:@"%d分钟",[self.courseInfoDic[@"cTime"] integerValue]];
         }
         return _headView;
     } else {
@@ -299,7 +312,8 @@ enum Button_Tag
                 [textView setFont:[UIFont systemFontOfSize:16.0f]];
                 [cell.contentView addSubview:textView];
                 //_textView = textView;
-                [textView setText:self.courseInfoDic[@"courseDescription"]];
+                
+                [textView setText:self.courseInfoDic[@"cDetail"]];
             }
             return cell;
         }
@@ -390,7 +404,7 @@ enum Button_Tag
                 //获取对应视频id
                 NSDictionary *dic = (self.courseChapterArray[indexPath.section-1][@"CCvideo"])[indexPath.row];
                 NSInteger CVid = [dic[@"CVid"] integerValue];
-                NSLog(@"%d",CVid);
+                //NSLog(@"%d",CVid);
             
                 CVideoPlayerController *player = [[CVideoPlayerController alloc] init];
                 [player playVideoWithVideoID:CVid andVideoTitle:[NSString stringWithFormat:@"%@ %@",dic[@"CVnum"],dic[@"CVname"]]];
@@ -415,7 +429,7 @@ enum Button_Tag
 #pragma mark  segement Changed 方法
 - (void)selectSegemnt
 {
-    NSLog(@"%d",self.segmentControl.selectedSegmentIndex);
+    //NSLog(@"%d",self.segmentControl.selectedSegmentIndex);
     switch (self.segmentControl.selectedSegmentIndex) {
         case SegementDiscription:
             [self.tableView reloadData];
@@ -430,7 +444,7 @@ enum Button_Tag
 - (void)clickHeader : (UIButton *)button
 {
     NSInteger section = button.tag;
-    NSLog(@"%d-touched",section);
+    //NSLog(@"%d-touched",section);
     NSInteger isOpen = [self.chapterOpenArray[section-1] integerValue];
     [self.chapterOpenArray replaceObjectAtIndex:section-1 withObject:(isOpen ? @0 : @1)];
     NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:section];

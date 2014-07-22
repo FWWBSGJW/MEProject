@@ -13,7 +13,6 @@
 
 @interface CDetailCourseViewController ()
 
-//@property (strong, nonatomic) NSArray *courseSectionArray; // 课程数组，分阶段
 @property (strong, nonatomic) CDAllSection *cdAllSection;//课程数组阶段模型
 
 @end
@@ -33,16 +32,7 @@
     return _cdAllSection;
 }
 
-//- (NSArray *)courseSectionArray
-//{
-//    if (!_courseSectionArray) {
-//#warning 待补完连接后台取数据，目前沙盒数据测试
-//        NSString *path = [[NSBundle mainBundle] pathForResource:@"CourseSectionData" ofType:@"plist"];
-//        _courseSectionArray = [NSArray arrayWithContentsOfFile:path];
-//        //NSLog(@"%@",_courseSectionArray);
-//    }
-//    return _courseSectionArray;
-//}
+
 
 #pragma mark - 类构造方法
 + (instancetype)detailCourseVCwithCourseDirection:(CourseDirection *)courseDirection
@@ -88,16 +78,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    //return self.courseSectionArray.count + 1;
     return self.cdAllSection.cdAllSectionArray.count+1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section != 0 ) {
-//        NSArray *CScontent = [self.courseSectionArray[section-1] objectForKey:@"CScontent"];
-//        return CScontent.count;
+
         CDSection *cdSection = self.cdAllSection.cdAllSectionArray[section-1];//.csContent;
+    
         return cdSection.csContent.count;
     } else
         return 0;
@@ -114,21 +103,21 @@
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         cell.textLabel.font = [UIFont boldSystemFontOfSize:15.0];
     }
-    //NSArray *CScontent = [self.courseSectionArray[indexPath.section-1] objectForKey:@"CScontent"];
+    
     CDSection *cdSection = self.cdAllSection.cdAllSectionArray[indexPath.section-1];
-    NSArray *CScontent = cdSection.csContent;
-    cell.textLabel.text = [CScontent[indexPath.row] objectForKey:@"courseName"];
-    if (!cdSection.csCacheImageArray[indexPath.row]) {
+    
+    CDsectionContent *content = cdSection.csContent[indexPath.row];
+    cell.textLabel.text = content.courseName;
+    
+    if (!content.cacheImage) {
         cell.imageView.image = [UIImage imageNamed:@"directionDefault"];
         [self loadImageAsyncWithIndexPath:indexPath];
+        //NSLog(@"%d",cell.imageView.frame);
     } else
     {
-        cell.imageView.image = cdSection.csCacheImageArray[indexPath.row];
+        cell.imageView.image = content.cacheImage;
     }
-    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@",kBaseURL,[CScontent[indexPath.row] objectForKey:@"courseImageUrl"]]];
-    NSLog(@"%@%@",kBaseURL,[CScontent[indexPath.row] objectForKey:@"courseImageUrl"]);
 
-    
     return cell;
 }
 
@@ -155,7 +144,7 @@
         CDSection *cdSection = self.cdAllSection.cdAllSectionArray[section-1];
         label.text = [NSString stringWithFormat:@"学习阶段%d:%@",section,cdSection.csName];
 
-//        label.text = [NSString stringWithFormat:@"学习阶段%d:%@",section,[self.courseSectionArray[section - 1] objectForKey:@"CSname"]];
+
         return view;
     }
     
@@ -184,10 +173,11 @@
 {
     if (indexPath.section) {
         CDSection *cdSection = self.cdAllSection.cdAllSectionArray[indexPath.section-1];
-        NSArray *stageArray = cdSection.csContent;
-        //NSArray *stageArray = self.courseSectionArray[indexPath.section-1][@"CScontent"];
-        NSInteger courseID = [stageArray[indexPath.row][@"courseID"] integerValue];
-        CChapterViewController *headVC = [CChapterViewController chapterVCwithCourseID:courseID];
+        
+        CDsectionContent *content = cdSection.csContent[indexPath.row];
+        NSLog(@"%d",content.courseID);
+        CChapterViewController *headVC = [CChapterViewController chapterVCwithCourseID:content.courseID];
+        
         [self.navigationController pushViewController:headVC animated:YES];
         
     }
@@ -196,12 +186,19 @@
 #pragma mark - 异步加载图片
 - (void)loadImageAsyncWithIndexPath:(NSIndexPath *)indexPath
 {
+    
     CDSection *cdSection = self.cdAllSection.cdAllSectionArray[indexPath.section-1];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kBaseURL,[cdSection.csContent[indexPath.row] objectForKey:@"courseImageUrl"]]];
+    CDsectionContent *content = cdSection.csContent[indexPath.row];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kBaseURL,content.courseImageUrl]];
+    //NSLog(@"%@",url);
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (data && (connectionError == nil)) {
-            cdSection.csCacheImageArray[indexPath.row] = [UIImage imageWithData:data];
+        if (data && (connectionError == nil)&&response) {
+            content.cacheImage = [UIImage imageWithData:data];
+            if (content.cacheImage) {
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
         }
     }];
 }
