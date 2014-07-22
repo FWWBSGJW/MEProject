@@ -12,6 +12,7 @@
 #import "DanmakuModel.h"
 
 
+
 @interface CVideoPlayerController ()
 {
    // NSTimer *_playTimer;
@@ -62,7 +63,7 @@
 //发表笔记按钮-静止弹幕
 @property (strong, nonatomic) UIButton *sendNoteButton;
 //弹幕开关
-@property (strong, nonatomic) UIButton *controlDMButton;
+@property (strong, nonatomic) UISwitch *dmSwitch;
 //弹幕计时器
 @property (strong, nonatomic) NSTimer *danmakuTimer;
 
@@ -70,7 +71,7 @@
 @property (assign, nonatomic) NSTimeInterval startTime;
 @property (strong, nonatomic) NSURL *url;
 
-@property (strong, nonatomic) UIView *myControlView; //自定义按钮存放试图
+//@property (strong, nonatomic) UIView *myControlView; //自定义按钮存放试图
 
 @end
 
@@ -110,9 +111,12 @@
 {
     [super viewDidLoad];
     
+    [self.moviePlayer prepareToPlay];
+    
     _lastArrayNum = 0;
-    self.title = @"愤怒地小鸟";
+    //self.title = @"愤怒地小鸟";
     self.gestureStatus = -1;
+    
     //监听视频文件预加载完成时
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(movieStart) name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
     //监听播放状态
@@ -125,8 +129,8 @@
     
     
     
-    self.myControlView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH - 44, SCREEN_HEIGHT, 44)];
-    [self.moviePlayer.view addSubview:self.myControlView];
+    
+    
     [self setUI];
     
     
@@ -199,12 +203,14 @@
     [self.moviePlayer setControlStyle:MPMovieControlStyleNone];
     //设置播放器背景颜色
     [self.moviePlayer.backgroundView setBackgroundColor:[UIColor blackColor]];
-    [self.moviePlayer prepareToPlay];
+    
     
     //添加弹幕视图
     UIView *danmakuView = [[UIView alloc] initWithFrame:self.view.frame];
     self.danmakuView = danmakuView;
     [self.moviePlayer.view addSubview:self.danmakuView];
+    
+    
     
     /*
     //添加背景按钮
@@ -225,6 +231,34 @@
     [self.controlBar setBackgroundColor:[UIColor blackColor]];
     [self.controlBar setAlpha:0.7f];
     [self.moviePlayer.view addSubview:self.controlBar];
+    
+    //发送弹幕按钮
+    
+    UIButton *sendCommentButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //[sendCommentButton setTitle:@"发送弹幕" forState:UIControlStateNormal];
+    sendCommentButton.frame = CGRectMake(50, 10, 30, 30);
+    [sendCommentButton setBackgroundImage:[UIImage imageNamed:@"评论"] forState:UIControlStateNormal];
+    [sendCommentButton addTarget:self action:@selector(sendDanmaku:) forControlEvents:UIControlEventTouchUpInside];
+    [self.controlBar addSubview:sendCommentButton];
+    
+    UIButton *sendNoteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    sendNoteButton.frame = CGRectMake(100, 10, 30, 30);
+    [sendNoteButton setBackgroundImage:[UIImage imageNamed:@"笔记"] forState:UIControlStateNormal];
+    [sendNoteButton addTarget:self action:@selector(sendDanmaku:) forControlEvents:UIControlEventTouchUpInside];
+    [self.controlBar addSubview:sendNoteButton];
+    
+    //弹幕开关
+    UILabel *dmLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_HEIGHT - 167, 10, 40, 30)];
+    dmLabel.text = @"弹幕";
+    dmLabel.textColor = [UIColor whiteColor];
+    dmLabel.font = [UIFont systemFontOfSize:12.0];
+    //dmLabel.backgroundColor = [UIColor whiteColor];
+    [self.controlBar addSubview:dmLabel];
+    
+    UISwitch *dmSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(SCREEN_HEIGHT - 137, 10, 20, 15)];
+    self.dmSwitch = dmSwitch;
+    [dmSwitch addTarget:self action:@selector(showOrHidDM:) forControlEvents:UIControlEventValueChanged];
+    [self.controlBar addSubview:dmSwitch];
     
     //开始/暂停按钮
     UIButton *playButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -264,15 +298,17 @@
     
     //进度条
     UISlider *sliderBar = [[UISlider alloc] initWithFrame:CGRectMake(0, -12, SCREEN_HEIGHT, 25)];
-    self.sliderBar = sliderBar;
+    _sliderBar = sliderBar;
     [self.sliderBar setMinimumValue:0];
     [self.sliderBar setMaximumValue:self.moviePlayer.duration];
+    //NSLog(@"%f",self.moviePlayer.duration);
     
     [self.sliderBar setMinimumTrackImage:[UIImage imageNamed:@"details_progress_select"] forState:UIControlStateNormal];
     [self.sliderBar setMaximumTrackImage:[UIImage imageNamed:@"details_progress"] forState:UIControlStateNormal];
     [self.sliderBar setThumbImage:[UIImage imageNamed:@"details_Progress of the point"] forState:UIControlStateNormal];
     [self.sliderBar setThumbImage:[UIImage imageNamed:@"details_Progress of the point"] forState:UIControlStateHighlighted];
     
+    //self.sliderBar.value = 50;
     [self.sliderBar addTarget:self action:@selector(sliderBarTouchUpClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.sliderBar addTarget:self action:@selector(sliderBarTouchDown:) forControlEvents:UIControlEventTouchDown];
     //[self.sliderBar addTarget:self action:@selector(sliderBarTouchDown:) forControlEvents:UIControlEventValueChanged];
@@ -298,10 +334,12 @@
     [self.endTimeLabel setAlpha:0.6f];
     [self.controlBar addSubview:self.endTimeLabel];
     
+    
+    
     /*
     //top bar
     */
-    UIView *topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_HEIGHT, 30)];
+    UIView *topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_HEIGHT, 30)];
     self.topBar = topBar;
     [self.topBar setBackgroundColor:[UIColor blackColor]];
     [self.topBar setAlpha:0.5f];
@@ -419,22 +457,22 @@
         self.hiddenBgTimer = nil;
     }
 }
-//UIView *controlBar = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH-50, SCREEN_HEIGHT, 50.0)];
-// UIView *controlBar = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH-50, SCREEN_HEIGHT, 50.0)];
- //UIView *topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_HEIGHT, 30)];
+
+
 #pragma mark - Actions
+//
+
 //显示和隐藏控制器
 - (void)bgButtonTouched:(UIButton *)sender
 {
-    //NSLog(@"%hhd",sender.isSelected);
-    //sender.selected = sender.isSelected ? 0 : 1;
+   
     if (![sender isSelected]) {
         [self hiddenControlView];
     } else {
         [UIView animateWithDuration:0.3 animations:^{
             [UIView animateWithDuration:0.3f animations:^{
                 [self.controlBar setFrame:CGRectMake(0, SCREEN_WIDTH-55, SCREEN_HEIGHT, 55.0)];
-                [self.topBar setFrame:CGRectMake(0, 20, SCREEN_HEIGHT, 30)];
+                [self.topBar setFrame:CGRectMake(0, 0, SCREEN_HEIGHT, 30)];
             }];
             [self.controlBar setAlpha:0.6f];
             //[self.chooseView setAlpha:0.6f];
@@ -488,9 +526,12 @@
     
     //设置开始时间
     //NSLog(@"%f",self.moviePlayer.currentPlaybackTime);
+    NSLog(@"%f",self.sliderBar.maximumValue);
     [self.startTimeLabel setText:[self secondTimeChange:[NSString stringWithFormat:@"%f",self.moviePlayer.currentPlaybackTime]]];
-    //[self.sliderBar setMaximumValue:self.moviePlayer.duration];
+    [self.sliderBar setMaximumValue:self.moviePlayer.duration];
     [self.sliderBar setValue:self.moviePlayer.currentPlaybackTime];
+    //self.sliderBar.value = self.moviePlayer.currentPlaybackTime;
+    NSLog(@"%f",self.sliderBar.value);
     [self.endTimeLabel setText:[self secondTimeChange:[NSString stringWithFormat:@"%f",self.moviePlayer.duration]]];
     [self selectDanmuku];
 }
@@ -568,6 +609,7 @@
     //NSLog(@"播放完成,%f",self.moviePlayer.initialPlaybackTime);
     //[self dismissMoviePlayerViewControllerAnimated];
     //NSLog(@"%f",self.moviePlayer.duration);
+    [self.danmakuView setHidden:YES];
     if ([self.danmakuTimer isValid]) {
         [self.danmakuTimer invalidate];
         if (_danmakuTimer) {
@@ -582,7 +624,10 @@
     }
     
     [self dismissMoviePlayerViewControllerAnimated];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.moviePlayer.currentPlaybackTime < self.moviePlayer.duration) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
 }
 
 

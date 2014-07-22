@@ -252,6 +252,8 @@
 		5B718123197905FD00F1359C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B718122197905FD00F1359C /* MainViewController.m */; };
 		5B7181261979069500F1359C /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7181251979069500F1359C /* DemoViewController.m */; };
 		5B7181281979099800F1359C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7181271979099800F1359C /* MediaPlayer.framework */; };
+		5BACA1CC197D6D7D00E4A387 /* CDSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BACA1CB197D6D7D00E4A387 /* CDSection.m */; };
+		5BACA1CF197D6F3F00E4A387 /* CDAllSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BACA1CE197D6F3F00E4A387 /* CDAllSection.m */; };
 		ABC2246C19793742008BD18C /* TestModelManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC2246B19793742008BD18C /* TestModelManage.m */; };
 		B0B0AD18197D327900B29458 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD15197D327900B29458 /* Default-568h@2x.png */; };
 		B0B0AD19197D327900B29458 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD16197D327900B29458 /* Default.png */; };
@@ -601,6 +603,10 @@
 		5B7181241979069500F1359C /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		5B7181251979069500F1359C /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
 		5B7181271979099800F1359C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		5BACA1CA197D6D7D00E4A387 /* CDSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSection.h; sourceTree = "<group>"; };
+		5BACA1CB197D6D7D00E4A387 /* CDSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDSection.m; sourceTree = "<group>"; };
+		5BACA1CD197D6F3F00E4A387 /* CDAllSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDAllSection.h; sourceTree = "<group>"; };
+		5BACA1CE197D6F3F00E4A387 /* CDAllSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDAllSection.m; sourceTree = "<group>"; };
 		ABC2246A19793742008BD18C /* TestModelManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestModelManage.h; path = Manage/TestModelManage.h; sourceTree = "<group>"; };
 		ABC2246B19793742008BD18C /* TestModelManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestModelManage.m; path = Manage/TestModelManage.m; sourceTree = "<group>"; };
 		B0B0AD15197D327900B29458 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -1150,6 +1156,10 @@
 				5B71805A197905C900F1359C /* CouseAllDirection.m */,
 				5B71805B197905C900F1359C /* DanmakuModel.h */,
 				5B71805C197905C900F1359C /* DanmakuModel.m */,
+				5BACA1CA197D6D7D00E4A387 /* CDSection.h */,
+				5BACA1CB197D6D7D00E4A387 /* CDSection.m */,
+				5BACA1CD197D6F3F00E4A387 /* CDAllSection.h */,
+				5BACA1CE197D6F3F00E4A387 /* CDAllSection.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1659,6 +1669,7 @@
 				5B717F4F1978FE4E00F1359C /* XLCycleScrollView.m in Sources */,
 				ABC2246C19793742008BD18C /* TestModelManage.m in Sources */,
 				5B717F391978FE4E00F1359C /* JSONModelError.m in Sources */,
+				5BACA1CC197D6D7D00E4A387 /* CDSection.m in Sources */,
 				5B717F2F1978FE4E00F1359C /* AFNetworkActivityIndicatorManager.m in Sources */,
 				5B717F441978FE4E00F1359C /* SDWebImageDecoder.m in Sources */,
 				5B718112197905D600F1359C /* OLNetManager.m in Sources */,
@@ -1673,6 +1684,7 @@
 				5B717F401978FE4E00F1359C /* MKAnnotationView+WebCache.m in Sources */,
 				5B717F4A1978FE4E00F1359C /* UIImage+GIF.m in Sources */,
 				5B71811F197905D600F1359C /* UserInfoTableViewCell.m in Sources */,
+				5BACA1CF197D6F3F00E4A387 /* CDAllSection.m in Sources */,
 				5B717F2B1978FE4E00F1359C /* AFHTTPClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -38,7 +38,7 @@
     UINavigationController *couseNav = [[UINavigationController alloc] initWithRootViewController:couseViewController];
     //[couseNav.navigationBar setBarTintColor:[UIColor greenColor]];
     //UITabBarItem *couseItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemContacts tag:1];
-    UIImage *image = [UIImage imageNamed:@"course"];
+    //UIImage *image = [UIImage imageNamed:@"course"];
     UITabBarItem *couseItem = [[UITabBarItem alloc] initWithTitle:@"课程" image:[UIImage imageNamed:@"course"] tag:1];
     couseNav.tabBarItem = couseItem;
     
