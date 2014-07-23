@@ -157,8 +157,9 @@
     JJDirectionModel *model = [detailArray objectAtIndex:indexPath.row];
     [lableSwitchCell.imgView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseURL, model.tdPic]]];
     lableSwitchCell.nameLabel.text = model.tdName;
-    lableSwitchCell.personNums.text = [NSString stringWithFormat:@"%d", model.tdpersonnum];
+    lableSwitchCell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
     [lableSwitchCell.nameLabel resizeToFit];
+    lableSwitchCell.personNums.text = [NSString stringWithFormat:@"%d", model.tdpersonnum];
     lableSwitchCell.detailLa.text = model.tdDetail;
     lableSwitchCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return lableSwitchCell;
