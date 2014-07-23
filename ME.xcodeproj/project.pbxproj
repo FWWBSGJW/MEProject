@@ -73,8 +73,6 @@
 		5B717FB5197905BA00F1359C /* JJTestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B717F76197905BA00F1359C /* JJTestDetailViewController.m */; };
 		5B717FB6197905BA00F1359C /* JJTestDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B717F77197905BA00F1359C /* JJTestDetailViewController.xib */; };
 		5B717FB7197905BA00F1359C /* JJTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B717F79197905BA00F1359C /* JJTestModel.m */; };
-		5B717FB8197905BA00F1359C /* JJTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B717F7B197905BA00F1359C /* JJTestTableViewCell.m */; };
-		5B717FB9197905BA00F1359C /* JJTestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B717F7C197905BA00F1359C /* JJTestTableViewCell.xib */; };
 		5B717FBA197905BA00F1359C /* JJTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B717F7E197905BA00F1359C /* JJTestViewController.m */; };
 		5B717FBB197905BA00F1359C /* JJTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B717F7F197905BA00F1359C /* JJTestViewController.xib */; };
 		5B717FBC197905BA00F1359C /* questions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B717F80197905BA00F1359C /* questions.plist */; };
@@ -257,6 +255,10 @@
 		5BB54B2F197E3BAC0096DD7F /* CDsectionContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB54B2E197E3BAC0096DD7F /* CDsectionContent.m */; };
 		5BB54B32197E6ED70096DD7F /* CourseChapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB54B31197E6ED70096DD7F /* CourseChapter.m */; };
 		ABC2246C19793742008BD18C /* TestModelManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC2246B19793742008BD18C /* TestModelManage.m */; };
+		ABF01B04197F8D7300CC3002 /* JJDirectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF01B03197F8D7300CC3002 /* JJDirectionModel.m */; };
+		ABF01B07197F8D8800CC3002 /* JJDirectionManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF01B06197F8D8800CC3002 /* JJDirectionManage.m */; };
+		ABF01B0B197F8DFB00CC3002 /* JJTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF01B09197F8DFB00CC3002 /* JJTestTableViewCell.m */; };
+		ABF01B0C197F8DFB00CC3002 /* JJTestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABF01B0A197F8DFB00CC3002 /* JJTestTableViewCell.xib */; };
 		B0B0AD18197D327900B29458 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD15197D327900B29458 /* Default-568h@2x.png */; };
 		B0B0AD19197D327900B29458 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD16197D327900B29458 /* Default.png */; };
 		B0B0AD1A197D327900B29458 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD17197D327900B29458 /* Default@2x.png */; };
@@ -396,9 +398,6 @@
 		5B717F77197905BA00F1359C /* JJTestDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestDetailViewController.xib; sourceTree = "<group>"; };
 		5B717F78197905BA00F1359C /* JJTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestModel.h; sourceTree = "<group>"; };
 		5B717F79197905BA00F1359C /* JJTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestModel.m; sourceTree = "<group>"; };
-		5B717F7A197905BA00F1359C /* JJTestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestTableViewCell.h; sourceTree = "<group>"; };
-		5B717F7B197905BA00F1359C /* JJTestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestTableViewCell.m; sourceTree = "<group>"; };
-		5B717F7C197905BA00F1359C /* JJTestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestTableViewCell.xib; sourceTree = "<group>"; };
 		5B717F7D197905BA00F1359C /* JJTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestViewController.h; sourceTree = "<group>"; };
 		5B717F7E197905BA00F1359C /* JJTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestViewController.m; sourceTree = "<group>"; };
 		5B717F7F197905BA00F1359C /* JJTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestViewController.xib; sourceTree = "<group>"; };
@@ -615,6 +614,13 @@
 		5BB54B31197E6ED70096DD7F /* CourseChapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseChapter.m; sourceTree = "<group>"; };
 		ABC2246A19793742008BD18C /* TestModelManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestModelManage.h; path = Manage/TestModelManage.h; sourceTree = "<group>"; };
 		ABC2246B19793742008BD18C /* TestModelManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestModelManage.m; path = Manage/TestModelManage.m; sourceTree = "<group>"; };
+		ABF01B02197F8D7300CC3002 /* JJDirectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJDirectionModel.h; sourceTree = "<group>"; };
+		ABF01B03197F8D7300CC3002 /* JJDirectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJDirectionModel.m; sourceTree = "<group>"; };
+		ABF01B05197F8D8800CC3002 /* JJDirectionManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJDirectionManage.h; sourceTree = "<group>"; };
+		ABF01B06197F8D8800CC3002 /* JJDirectionManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJDirectionManage.m; sourceTree = "<group>"; };
+		ABF01B08197F8DFB00CC3002 /* JJTestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestTableViewCell.h; sourceTree = "<group>"; };
+		ABF01B09197F8DFB00CC3002 /* JJTestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestTableViewCell.m; sourceTree = "<group>"; };
+		ABF01B0A197F8DFB00CC3002 /* JJTestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestTableViewCell.xib; sourceTree = "<group>"; };
 		B0B0AD15197D327900B29458 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B0B0AD16197D327900B29458 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		B0B0AD17197D327900B29458 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -1291,9 +1297,9 @@
 		ABC2246419793599008BD18C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5B717F7A197905BA00F1359C /* JJTestTableViewCell.h */,
-				5B717F7B197905BA00F1359C /* JJTestTableViewCell.m */,
-				5B717F7C197905BA00F1359C /* JJTestTableViewCell.xib */,
+				ABF01B08197F8DFB00CC3002 /* JJTestTableViewCell.h */,
+				ABF01B09197F8DFB00CC3002 /* JJTestTableViewCell.m */,
+				ABF01B0A197F8DFB00CC3002 /* JJTestTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1325,6 +1331,8 @@
 			children = (
 				5B717F78197905BA00F1359C /* JJTestModel.h */,
 				5B717F79197905BA00F1359C /* JJTestModel.m */,
+				ABF01B02197F8D7300CC3002 /* JJDirectionModel.h */,
+				ABF01B03197F8D7300CC3002 /* JJDirectionModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1346,6 +1354,8 @@
 			children = (
 				ABC2246A19793742008BD18C /* TestModelManage.h */,
 				ABC2246B19793742008BD18C /* TestModelManage.m */,
+				ABF01B05197F8D8800CC3002 /* JJDirectionManage.h */,
+				ABF01B06197F8D8800CC3002 /* JJDirectionManage.m */,
 			);
 			name = Manage;
 			sourceTree = "<group>";
@@ -1477,6 +1487,7 @@
 				5B717FD3197905BA00F1359C /* CpersonNum@2x.png in Resources */,
 				5B7180D1197905C900F1359C /* 笔记.png in Resources */,
 				5B718091197905C900F1359C /* details_airplay@2x.png in Resources */,
+				ABF01B0C197F8DFB00CC3002 /* JJTestTableViewCell.xib in Resources */,
 				5B718083197905C900F1359C /* headAd2@2x.png in Resources */,
 				5B717FE1197905BA00F1359C /* thumbs-down.png in Resources */,
 				5B718070197905C900F1359C /* cellTag@2x.png in Resources */,
@@ -1486,7 +1497,6 @@
 				5B71807B197905C900F1359C /* CourseNoteData.plist in Resources */,
 				5B71811A197905D600F1359C /* NumCell.xib in Resources */,
 				5B7180AD197905C900F1359C /* details_left@2x.png in Resources */,
-				5B717FB9197905BA00F1359C /* JJTestTableViewCell.xib in Resources */,
 				5B7180D0197905C900F1359C /* 收藏.png in Resources */,
 				5B7180A9197905C900F1359C /* details_hd@2x.png in Resources */,
 				5B717FD6197905BA00F1359C /* friend.png in Resources */,
@@ -1618,9 +1628,9 @@
 				5B717F3C1978FE4E00F1359C /* JSONHTTPClient.m in Sources */,
 				5B717FAE197905BA00F1359C /* JJBaseViewController.m in Sources */,
 				5B7181261979069500F1359C /* DemoViewController.m in Sources */,
-				5B717FB8197905BA00F1359C /* JJTestTableViewCell.m in Sources */,
 				5B718123197905FD00F1359C /* MainViewController.m in Sources */,
 				5B717F491978FE4E00F1359C /* UIButton+WebCache.m in Sources */,
+				ABF01B04197F8D7300CC3002 /* JJDirectionModel.m in Sources */,
 				5B717F471978FE4E00F1359C /* SDWebImageManager.m in Sources */,
 				5B717FBA197905BA00F1359C /* JJTestViewController.m in Sources */,
 				5B717F2D1978FE4E00F1359C /* AFImageRequestOperation.m in Sources */,
@@ -1639,6 +1649,7 @@
 				5B717F4D1978FE4E00F1359C /* UIImageView+WebCache.m in Sources */,
 				5B717F5C1979050900F1359C /* DataOC.mm in Sources */,
 				5B71811D197905D600F1359C /* ProgressTableViewCell.m in Sources */,
+				ABF01B07197F8D8800CC3002 /* JJDirectionManage.m in Sources */,
 				5B717F5E1979050900F1359C /* UIScrollView+SVPullToRefresh.m in Sources */,
 				5B7180D4197905C900F1359C /* CouseAllDirection.m in Sources */,
 				5B717EA31978FD9600F1359C /* main.m in Sources */,
@@ -1656,6 +1667,7 @@
 				5B717FB2197905BA00F1359C /* JJMeasurementViewController.m in Sources */,
 				5B718113197905D600F1359C /* User.m in Sources */,
 				5B717F641979054D00F1359C /* UINavigationController+autoRotate.m in Sources */,
+				ABF01B0B197F8DFB00CC3002 /* JJTestTableViewCell.m in Sources */,
 				5B7180D6197905C900F1359C /* CChapterHead.m in Sources */,
 				5B717F4C1978FE4E00F1359C /* UIImage+WebP.m in Sources */,
 				5B717F421978FE4E00F1359C /* SDImageCache.m in Sources */,
@@ -1814,6 +1826,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ME/ME-Prefix.pch";
 				INFOPLIST_FILE = "ME/ME-Info.plist";
@@ -1827,6 +1840,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				COMPRESS_PNG_FILES = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ME/ME-Prefix.pch";
 				INFOPLIST_FILE = "ME/ME-Info.plist";

@@ -11,12 +11,15 @@
 #import "JJTestTableViewCell.h"
 #import "UILabel+dynamicSizeMe.h"
 #import "SVPullToRefresh.h"
+#import "JJDirectionManage.h"
+#import "JJDirectionModel.h"
+#import "UIImageView+WebCache.h"
 #define ScrollViewHeight 120
 #define pages 3
 
 @interface JJTestViewController ()
 {
-    NSArray *nameArray;
+    NSArray *detailArray;
 }
 @end
 
@@ -33,38 +36,9 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-//    self.navigationController.navigationBarHidden = YES;
-//    [JJTabBarViewController share].tabBar.hidden = NO;
+    //    self.navigationController.navigationBarHidden = YES;
+    //    [JJTabBarViewController share].tabBar.hidden = NO;
     self.tabBarController.tabBar.hidden = NO;
-}
-
-#pragma mark getData
-- (void)getData
-{
-    NSString * url = [@"http://app-cdn.2q10.com/api/currency" stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        NSURLResponse * resp;
-        NSError * error = nil;
-        NSData * data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]] returningResponse:&resp error:&error];
-        
-        if (error)
-        {
-            printf("%s \n",[[error localizedDescription] UTF8String]);
-            return ;
-        }
-        
-        if ([data length] > 0)
-        {
-//            serverRespObj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
-            //            NSLog(@"server return %@",serverRespObj);
-//            keyArray = @[];
-            // 切换到主线程刷新UI
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //                [self.table reloadData];
-            });
-        }
-    });
-    
 }
 
 
@@ -92,8 +66,8 @@
     self.testTableView.tableHeaderView = self.newsBG;
     [self.view addSubview:self.testTableView];
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"testName" ofType:@"plist"];
-    nameArray = [NSArray arrayWithContentsOfFile:path];
+    detailArray = [[NSArray alloc] init];
+    detailArray = [[[JJDirectionManage alloc] init] analyseJson];
     
     //防止下拉位子异常
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
@@ -110,11 +84,6 @@
     [UIApplication sharedApplication].statusBarFrame.size.height;
     self.testTableView.contentInset = insets;
     self.testTableView.scrollIndicatorInsets = insets;
-}
-
-- (NSInteger)numberOfPages
-{
-    return pages;
 }
 
 - (void)addTableViewTrag
@@ -142,12 +111,18 @@
 }
 
 
+- (NSInteger)numberOfPages
+{
+    return pages;
+}
+
+
 
 - (UIView *)pageAtIndex:(NSInteger)index
 {
     UIImageView *newsImage = [[UIImageView alloc]
                               initWithFrame:CGRectMake(0, 0, 320, ScrollViewHeight)];
-    newsImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"00%ld", (long)index]];
+    newsImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%ld", (long)index]];
     return newsImage;
 }
 
@@ -159,12 +134,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return detailArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    加载xib的tableviewcell
+    //    加载xib的tableviewcell
     JJTestTableViewCell * lableSwitchCell;
     UINib *n;
     static NSString *CellIdentifier = @"JJTestTableViewCell";
@@ -179,9 +154,12 @@
         n= [UINib nibWithNibName:@"PlayTableviewCell" bundle:[NSBundle mainBundle]];
         [tableView registerNib:n forCellReuseIdentifier:@"PlayTableviewCell"];
     }
-    lableSwitchCell.imgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"00%ld", (long)indexPath.row]];
-    lableSwitchCell.nameLabel.text = [nameArray objectAtIndex:indexPath.row];
+    JJDirectionModel *model = [detailArray objectAtIndex:indexPath.row];
+    [lableSwitchCell.imgView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseURL, model.tdPic]]];
+    lableSwitchCell.nameLabel.text = model.tdName;
+    lableSwitchCell.personNums.text = [NSString stringWithFormat:@"%d", model.tdpersonnum];
     [lableSwitchCell.nameLabel resizeToFit];
+    lableSwitchCell.detailLa.text = model.tdDetail;
     lableSwitchCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return lableSwitchCell;
 }
