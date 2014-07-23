@@ -254,11 +254,11 @@
 		5BACA1CF197D6F3F00E4A387 /* CDAllSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BACA1CE197D6F3F00E4A387 /* CDAllSection.m */; };
 		5BB54B2F197E3BAC0096DD7F /* CDsectionContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB54B2E197E3BAC0096DD7F /* CDsectionContent.m */; };
 		5BB54B32197E6ED70096DD7F /* CourseChapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB54B31197E6ED70096DD7F /* CourseChapter.m */; };
+		ABB8846C197FBFC900FE71A5 /* JJTestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABB8846B197FBFC900FE71A5 /* JJTestTableViewCell.xib */; };
 		ABC2246C19793742008BD18C /* TestModelManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC2246B19793742008BD18C /* TestModelManage.m */; };
 		ABF01B04197F8D7300CC3002 /* JJDirectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF01B03197F8D7300CC3002 /* JJDirectionModel.m */; };
 		ABF01B07197F8D8800CC3002 /* JJDirectionManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF01B06197F8D8800CC3002 /* JJDirectionManage.m */; };
 		ABF01B10197FBA8C00CC3002 /* JJTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF01B0E197FBA8C00CC3002 /* JJTestTableViewCell.m */; };
-		ABF01B11197FBA8C00CC3002 /* JJTestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABF01B0F197FBA8C00CC3002 /* JJTestTableViewCell.xib */; };
 		B0B0AD18197D327900B29458 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD15197D327900B29458 /* Default-568h@2x.png */; };
 		B0B0AD19197D327900B29458 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD16197D327900B29458 /* Default.png */; };
 		B0B0AD1A197D327900B29458 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD17197D327900B29458 /* Default@2x.png */; };
@@ -612,6 +612,7 @@
 		5BB54B2E197E3BAC0096DD7F /* CDsectionContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDsectionContent.m; sourceTree = "<group>"; };
 		5BB54B30197E6ED70096DD7F /* CourseChapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseChapter.h; sourceTree = "<group>"; };
 		5BB54B31197E6ED70096DD7F /* CourseChapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseChapter.m; sourceTree = "<group>"; };
+		ABB8846B197FBFC900FE71A5 /* JJTestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestTableViewCell.xib; sourceTree = "<group>"; };
 		ABC2246A19793742008BD18C /* TestModelManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestModelManage.h; path = Manage/TestModelManage.h; sourceTree = "<group>"; };
 		ABC2246B19793742008BD18C /* TestModelManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestModelManage.m; path = Manage/TestModelManage.m; sourceTree = "<group>"; };
 		ABF01B02197F8D7300CC3002 /* JJDirectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJDirectionModel.h; sourceTree = "<group>"; };
@@ -620,7 +621,6 @@
 		ABF01B06197F8D8800CC3002 /* JJDirectionManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJDirectionManage.m; sourceTree = "<group>"; };
 		ABF01B0D197FBA8C00CC3002 /* JJTestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestTableViewCell.h; sourceTree = "<group>"; };
 		ABF01B0E197FBA8C00CC3002 /* JJTestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestTableViewCell.m; sourceTree = "<group>"; };
-		ABF01B0F197FBA8C00CC3002 /* JJTestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestTableViewCell.xib; sourceTree = "<group>"; };
 		B0B0AD15197D327900B29458 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B0B0AD16197D327900B29458 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		B0B0AD17197D327900B29458 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -1297,9 +1297,9 @@
 		ABC2246419793599008BD18C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ABB8846B197FBFC900FE71A5 /* JJTestTableViewCell.xib */,
 				ABF01B0D197FBA8C00CC3002 /* JJTestTableViewCell.h */,
 				ABF01B0E197FBA8C00CC3002 /* JJTestTableViewCell.m */,
-				ABF01B0F197FBA8C00CC3002 /* JJTestTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1487,7 +1487,7 @@
 				5B717FD3197905BA00F1359C /* CpersonNum@2x.png in Resources */,
 				5B7180D1197905C900F1359C /* 笔记.png in Resources */,
 				5B718091197905C900F1359C /* details_airplay@2x.png in Resources */,
-				ABF01B11197FBA8C00CC3002 /* JJTestTableViewCell.xib in Resources */,
+				ABB8846C197FBFC900FE71A5 /* JJTestTableViewCell.xib in Resources */,
 				5B718083197905C900F1359C /* headAd2@2x.png in Resources */,
 				5B717FE1197905BA00F1359C /* thumbs-down.png in Resources */,
 				5B718070197905C900F1359C /* cellTag@2x.png in Resources */,

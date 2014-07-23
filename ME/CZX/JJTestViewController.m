@@ -46,7 +46,7 @@
 {
     [super viewDidLoad];
     //    self.navigationController.navigationBarHidden = YES;
-    self.navigationItem.title = @"测试";
+    self.navigationItem.title = @"技能测试";
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.newsView = [[XLCycleScrollView alloc]
@@ -58,7 +58,7 @@
     [self.newsBG addSubview:self.newsView];
     
     self.testTableView = [[UITableView alloc]
-                          initWithFrame:CGRectMake(0, 0, 320, 440)
+                          initWithFrame:CGRectMake(0, 0, 320, SCREEN_HEIGHT-40)
                           style:UITableViewStylePlain];
     self.testTableView.delegate = self;
     self.testTableView.dataSource = self;
@@ -156,8 +156,7 @@
     }
     JJDirectionModel *model = [detailArray objectAtIndex:indexPath.row];
     [lableSwitchCell.imgView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseURL, model.tdPic]]];
-    lableSwitchCell.nameLabel.text = model.tdName;
-    lableSwitchCell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+    lableSwitchCell.nameLabel.text = [NSString stringWithFormat:@" %@", model.tdName];
     [lableSwitchCell.nameLabel resizeToFit];
     lableSwitchCell.personNums.text = [NSString stringWithFormat:@"%d", model.tdpersonnum];
     lableSwitchCell.detailLa.text = @"想知道自己的Java水平吗？那就来Java技术测试来试试自己的能力吧";
