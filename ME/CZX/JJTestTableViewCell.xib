@@ -64,6 +64,8 @@
             <connections>
                 <outlet property="detailLa" destination="p1s-hk-ood" id="Iz4-UB-ncL"/>
                 <outlet property="imgView" destination="WEU-9Y-wWz" id="Z3I-pP-gFo"/>
+                <outlet property="myLabel1" destination="iuq-Lc-OIN" id="D6f-Pb-s4J"/>
+                <outlet property="myLabel2" destination="jv5-ZP-I35" id="hch-mc-3nO"/>
                 <outlet property="nameLabel" destination="hvc-ga-ddz" id="Xo8-Vn-AFI"/>
                 <outlet property="personNums" destination="khj-WZ-xSi" id="wnj-6j-Rkn"/>
                 <outlet property="testNumLa" destination="SM7-QI-F4H" id="Dg3-Qg-lTK"/>

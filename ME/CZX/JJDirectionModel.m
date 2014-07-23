@@ -12,7 +12,7 @@
 
 - (void)setDirectionModelWithDictionary:(NSDictionary *)dict
 {
-    _tdLink = [dict objectForKey:@"tdLink"];
+    _link = [dict objectForKey:@"link"];
     _tdId = [[dict objectForKey:@"tdId"] intValue];
     _tdName = [dict objectForKey:@"tdName"];
     _tdDetail = [dict objectForKey:@"tdDetail"];

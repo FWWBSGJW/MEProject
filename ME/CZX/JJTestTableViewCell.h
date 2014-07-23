@@ -14,5 +14,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *personNums;
 
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *myLabel1;
+@property (strong, nonatomic) IBOutlet UILabel *myLabel2;
 @property (strong, nonatomic) IBOutlet UIImageView *imgView;
 @end

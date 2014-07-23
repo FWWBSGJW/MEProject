@@ -14,12 +14,14 @@
 #import "JJDirectionManage.h"
 #import "JJDirectionModel.h"
 #import "UIImageView+WebCache.h"
+#import "JJTestDivideViewController.h"
 #define ScrollViewHeight 126
 #define pages 3
 
 @interface JJTestViewController ()
 {
     NSArray *detailArray;
+    NSMutableArray *linkArray;
 }
 @end
 
@@ -45,7 +47,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //    self.navigationController.navigationBarHidden = YES;
     self.navigationItem.title = @"技能测试";
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -58,7 +59,7 @@
     [self.newsBG addSubview:self.newsView];
     
     self.testTableView = [[UITableView alloc]
-                          initWithFrame:CGRectMake(0, 0, 320, SCREEN_HEIGHT-40)
+                          initWithFrame:CGRectMake(0, 0, 320, SCREEN_HEIGHT-49)
                           style:UITableViewStylePlain];
     self.testTableView.delegate = self;
     self.testTableView.dataSource = self;
@@ -68,7 +69,12 @@
     
     detailArray = [[NSArray alloc] init];
     detailArray = [[[JJDirectionManage alloc] init] analyseJson];
-    
+    linkArray = [[NSMutableArray alloc] init];
+    for (int i=0; i<detailArray.count; i++)
+    {
+        JJDirectionModel *model = [detailArray objectAtIndex:i];
+        [linkArray addObject:model.link];
+    }
     //防止下拉位子异常
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
@@ -94,19 +100,20 @@
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^{
             [weakself.testTableView.pullToRefreshView stopAnimating];
+            detailArray = [[[JJDirectionManage alloc] init] analyseJson];
             [self.testTableView reloadData];
         });
     }];
-    
-    [weakself.testTableView addInfiniteScrollingWithActionHandler:^{
-        int64_t delayInSeconds = 2.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^{
-            
-            [self.testTableView reloadData];
-            [weakself.testTableView.infiniteScrollingView stopAnimating];
-        });
-    }];
+//    
+//    [weakself.testTableView addInfiniteScrollingWithActionHandler:^{
+//        int64_t delayInSeconds = 2.0;
+//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//        dispatch_after(popTime, dispatch_get_main_queue(), ^{
+//            
+////            [self.testTableView reloadData];
+//            [weakself.testTableView.infiniteScrollingView stopAnimating];
+//        });
+//    }];
     
 }
 
@@ -166,7 +173,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.navigationController pushViewController:[[JJTestDetailViewController alloc] init] animated:YES];
+    JJTestDivideViewController *vc =  [[JJTestDivideViewController alloc] initWithDetailUrl:[linkArray objectAtIndex:indexPath.row]];
+    JJTestTableViewCell *cell = (JJTestTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    vc.title = cell.nameLabel.text;
+    [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 

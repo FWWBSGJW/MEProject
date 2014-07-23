@@ -10,7 +10,7 @@
 
 @interface JJDirectionModel : NSObject
 
-@property(nonatomic ,copy) NSString *tdLink;
+@property(nonatomic ,copy) NSString *link;
 @property(nonatomic) int tdId;
 @property(nonatomic ,copy) NSString *tdName;
 @property(nonatomic ,copy) NSString *tdPic;

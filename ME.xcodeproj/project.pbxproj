@@ -255,7 +255,9 @@
 		5BB54B2F197E3BAC0096DD7F /* CDsectionContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB54B2E197E3BAC0096DD7F /* CDsectionContent.m */; };
 		5BB54B32197E6ED70096DD7F /* CourseChapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB54B31197E6ED70096DD7F /* CourseChapter.m */; };
 		ABB8846C197FBFC900FE71A5 /* JJTestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABB8846B197FBFC900FE71A5 /* JJTestTableViewCell.xib */; };
-		ABC2246C19793742008BD18C /* TestModelManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC2246B19793742008BD18C /* TestModelManage.m */; };
+		ABB8847E197FEE3700FE71A5 /* JJTestDivideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB8847C197FEE3700FE71A5 /* JJTestDivideViewController.m */; };
+		ABB8847F197FEE3700FE71A5 /* JJTestDivideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABB8847D197FEE3700FE71A5 /* JJTestDivideViewController.xib */; };
+		ABB88482197FEEB000FE71A5 /* JJTestModelManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB88481197FEEB000FE71A5 /* JJTestModelManage.m */; };
 		ABF01B04197F8D7300CC3002 /* JJDirectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF01B03197F8D7300CC3002 /* JJDirectionModel.m */; };
 		ABF01B07197F8D8800CC3002 /* JJDirectionManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF01B06197F8D8800CC3002 /* JJDirectionManage.m */; };
 		ABF01B10197FBA8C00CC3002 /* JJTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF01B0E197FBA8C00CC3002 /* JJTestTableViewCell.m */; };
@@ -613,8 +615,11 @@
 		5BB54B30197E6ED70096DD7F /* CourseChapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseChapter.h; sourceTree = "<group>"; };
 		5BB54B31197E6ED70096DD7F /* CourseChapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseChapter.m; sourceTree = "<group>"; };
 		ABB8846B197FBFC900FE71A5 /* JJTestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestTableViewCell.xib; sourceTree = "<group>"; };
-		ABC2246A19793742008BD18C /* TestModelManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestModelManage.h; path = Manage/TestModelManage.h; sourceTree = "<group>"; };
-		ABC2246B19793742008BD18C /* TestModelManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestModelManage.m; path = Manage/TestModelManage.m; sourceTree = "<group>"; };
+		ABB8847B197FEE3700FE71A5 /* JJTestDivideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestDivideViewController.h; sourceTree = "<group>"; };
+		ABB8847C197FEE3700FE71A5 /* JJTestDivideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestDivideViewController.m; sourceTree = "<group>"; };
+		ABB8847D197FEE3700FE71A5 /* JJTestDivideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestDivideViewController.xib; sourceTree = "<group>"; };
+		ABB88480197FEEB000FE71A5 /* JJTestModelManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestModelManage.h; sourceTree = "<group>"; };
+		ABB88481197FEEB000FE71A5 /* JJTestModelManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestModelManage.m; sourceTree = "<group>"; };
 		ABF01B02197F8D7300CC3002 /* JJDirectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJDirectionModel.h; sourceTree = "<group>"; };
 		ABF01B03197F8D7300CC3002 /* JJDirectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJDirectionModel.m; sourceTree = "<group>"; };
 		ABF01B05197F8D8800CC3002 /* JJDirectionManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJDirectionManage.h; sourceTree = "<group>"; };
@@ -1322,6 +1327,9 @@
 				5B717F75197905BA00F1359C /* JJTestDetailViewController.h */,
 				5B717F76197905BA00F1359C /* JJTestDetailViewController.m */,
 				5B717F77197905BA00F1359C /* JJTestDetailViewController.xib */,
+				ABB8847B197FEE3700FE71A5 /* JJTestDivideViewController.h */,
+				ABB8847C197FEE3700FE71A5 /* JJTestDivideViewController.m */,
+				ABB8847D197FEE3700FE71A5 /* JJTestDivideViewController.xib */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -1352,10 +1360,10 @@
 		ABC2246919793705008BD18C /* Manage */ = {
 			isa = PBXGroup;
 			children = (
-				ABC2246A19793742008BD18C /* TestModelManage.h */,
-				ABC2246B19793742008BD18C /* TestModelManage.m */,
 				ABF01B05197F8D8800CC3002 /* JJDirectionManage.h */,
 				ABF01B06197F8D8800CC3002 /* JJDirectionManage.m */,
+				ABB88480197FEEB000FE71A5 /* JJTestModelManage.h */,
+				ABB88481197FEEB000FE71A5 /* JJTestModelManage.m */,
 			);
 			name = Manage;
 			sourceTree = "<group>";
@@ -1578,6 +1586,7 @@
 				5B717FAB197905BA00F1359C /* answer.plist in Resources */,
 				5B71808B197905C900F1359C /* J5.jpg in Resources */,
 				5B7180A3197905C900F1359C /* details_down@2x.png in Resources */,
+				ABB8847F197FEE3700FE71A5 /* JJTestDivideViewController.xib in Resources */,
 				5B7180D2197905C900F1359C /* 评论.png in Resources */,
 				5B7180A6197905C900F1359C /* details_full.png in Resources */,
 				5B7180B8197905C900F1359C /* details_progress.png in Resources */,
@@ -1645,6 +1654,7 @@
 				5B717F431978FE4E00F1359C /* SDWebImageCompat.m in Sources */,
 				5B717F301978FE4E00F1359C /* AFPropertyListRequestOperation.m in Sources */,
 				5BB54B2F197E3BAC0096DD7F /* CDsectionContent.m in Sources */,
+				ABB8847E197FEE3700FE71A5 /* JJTestDivideViewController.m in Sources */,
 				5B7180D3197905C900F1359C /* CourseDirection.m in Sources */,
 				5B717F4D1978FE4E00F1359C /* UIImageView+WebCache.m in Sources */,
 				5B717F5C1979050900F1359C /* DataOC.mm in Sources */,
@@ -1690,11 +1700,11 @@
 				5B717F2E1978FE4E00F1359C /* AFJSONRequestOperation.m in Sources */,
 				5B717F361978FE4E00F1359C /* JSONModel.m in Sources */,
 				5B717F4F1978FE4E00F1359C /* XLCycleScrollView.m in Sources */,
-				ABC2246C19793742008BD18C /* TestModelManage.m in Sources */,
 				5B717F391978FE4E00F1359C /* JSONModelError.m in Sources */,
 				5BACA1CC197D6D7D00E4A387 /* CDSection.m in Sources */,
 				5B717F2F1978FE4E00F1359C /* AFNetworkActivityIndicatorManager.m in Sources */,
 				5B717F441978FE4E00F1359C /* SDWebImageDecoder.m in Sources */,
+				ABB88482197FEEB000FE71A5 /* JJTestModelManage.m in Sources */,
 				5B718112197905D600F1359C /* OLNetManager.m in Sources */,
 				5BB54B32197E6ED70096DD7F /* CourseChapter.m in Sources */,
 				5B717FB5197905BA00F1359C /* JJTestDetailViewController.m in Sources */,
