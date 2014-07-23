@@ -15,6 +15,7 @@
 @property(nonatomic ,copy) NSString *tdName;
 @property(nonatomic ,copy) NSString *tdPic;
 @property(nonatomic ,copy) NSString *tdDetail;
+@property(nonatomic) int testnum;
 @property(nonatomic) int tdpersonnum;
 
 - (void)setDirectionModelWithDictionary:(NSDictionary *)dict;

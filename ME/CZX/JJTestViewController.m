@@ -14,7 +14,7 @@
 #import "JJDirectionManage.h"
 #import "JJDirectionModel.h"
 #import "UIImageView+WebCache.h"
-#define ScrollViewHeight 120
+#define ScrollViewHeight 126
 #define pages 3
 
 @interface JJTestViewController ()
@@ -122,7 +122,7 @@
 {
     UIImageView *newsImage = [[UIImageView alloc]
                               initWithFrame:CGRectMake(0, 0, 320, ScrollViewHeight)];
-    newsImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"%ld", (long)index]];
+    newsImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"headAd%ld", (long)index+1]];
     return newsImage;
 }
 
@@ -160,8 +160,8 @@
     lableSwitchCell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
     [lableSwitchCell.nameLabel resizeToFit];
     lableSwitchCell.personNums.text = [NSString stringWithFormat:@"%d", model.tdpersonnum];
-    lableSwitchCell.detailLa.text = model.tdDetail;
-    lableSwitchCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    lableSwitchCell.detailLa.text = @"想知道自己的Java水平吗？那就来Java技术测试来试试自己的能力吧";
+    lableSwitchCell.testNumLa.text = [NSString stringWithFormat:@"%d", model.testnum];    lableSwitchCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return lableSwitchCell;
 }
 

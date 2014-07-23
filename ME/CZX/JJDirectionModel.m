@@ -18,6 +18,7 @@
     _tdDetail = [dict objectForKey:@"tdDetail"];
     _tdPic = [dict objectForKey:@"tdPic"];
     _tdpersonnum = [[dict objectForKey:@"tdpersonnum"] intValue];
+    _testnum = [[dict objectForKey:@"testnum"] intValue];
 }
 
 @end

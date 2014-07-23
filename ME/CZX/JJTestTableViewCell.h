@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface JJTestTableViewCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *testNumLa;
 @property (strong, nonatomic) IBOutlet UILabel *detailLa;
 @property (strong, nonatomic) IBOutlet UILabel *personNums;
 
