@@ -11,17 +11,12 @@
 #import "JJTestTableViewCell.h"
 #import "UILabel+dynamicSizeMe.h"
 #import "SVPullToRefresh.h"
-#import "JJDirectionManage.h"
-#import "JJDirectionModel.h"
-#import "UIImageView+WebCache.h"
-#import "JJTestDivideViewController.h"
-#define ScrollViewHeight 126
+#define ScrollViewHeight 120
 #define pages 3
 
 @interface JJTestViewController ()
 {
-    NSArray *detailArray;
-    NSMutableArray *linkArray;
+    NSArray *nameArray;
 }
 @end
 
@@ -38,16 +33,46 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    //    self.navigationController.navigationBarHidden = YES;
-    //    [JJTabBarViewController share].tabBar.hidden = NO;
+//    self.navigationController.navigationBarHidden = YES;
+//    [JJTabBarViewController share].tabBar.hidden = NO;
     self.tabBarController.tabBar.hidden = NO;
+}
+
+#pragma mark getData
+- (void)getData
+{
+    NSString * url = [@"http://app-cdn.2q10.com/api/currency" stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSURLResponse * resp;
+        NSError * error = nil;
+        NSData * data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]] returningResponse:&resp error:&error];
+        
+        if (error)
+        {
+            printf("%s \n",[[error localizedDescription] UTF8String]);
+            return ;
+        }
+        
+        if ([data length] > 0)
+        {
+//            serverRespObj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+            //            NSLog(@"server return %@",serverRespObj);
+//            keyArray = @[];
+            // 切换到主线程刷新UI
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //                [self.table reloadData];
+            });
+        }
+    });
+    
 }
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = @"技能测试";
+    //    self.navigationController.navigationBarHidden = YES;
+    self.navigationItem.title = @"测试";
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.newsView = [[XLCycleScrollView alloc]
@@ -59,7 +84,7 @@
     [self.newsBG addSubview:self.newsView];
     
     self.testTableView = [[UITableView alloc]
-                          initWithFrame:CGRectMake(0, 0, 320, SCREEN_HEIGHT-49)
+                          initWithFrame:CGRectMake(0, 0, 320, 440)
                           style:UITableViewStylePlain];
     self.testTableView.delegate = self;
     self.testTableView.dataSource = self;
@@ -67,14 +92,9 @@
     self.testTableView.tableHeaderView = self.newsBG;
     [self.view addSubview:self.testTableView];
     
-    detailArray = [[NSArray alloc] init];
-    detailArray = [[[JJDirectionManage alloc] init] analyseJson];
-    linkArray = [[NSMutableArray alloc] init];
-    for (int i=0; i<detailArray.count; i++)
-    {
-        JJDirectionModel *model = [detailArray objectAtIndex:i];
-        [linkArray addObject:model.link];
-    }
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"testName" ofType:@"plist"];
+    nameArray = [NSArray arrayWithContentsOfFile:path];
+    
     //防止下拉位子异常
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
@@ -92,6 +112,11 @@
     self.testTableView.scrollIndicatorInsets = insets;
 }
 
+- (NSInteger)numberOfPages
+{
+    return pages;
+}
+
 - (void)addTableViewTrag
 {
     __weak JJTestViewController *weakself = self;
@@ -100,27 +125,20 @@
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^{
             [weakself.testTableView.pullToRefreshView stopAnimating];
-            detailArray = [[[JJDirectionManage alloc] init] analyseJson];
             [self.testTableView reloadData];
         });
     }];
-//    
-//    [weakself.testTableView addInfiniteScrollingWithActionHandler:^{
-//        int64_t delayInSeconds = 2.0;
-//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-//        dispatch_after(popTime, dispatch_get_main_queue(), ^{
-//            
-////            [self.testTableView reloadData];
-//            [weakself.testTableView.infiniteScrollingView stopAnimating];
-//        });
-//    }];
     
-}
-
-
-- (NSInteger)numberOfPages
-{
-    return pages;
+    [weakself.testTableView addInfiniteScrollingWithActionHandler:^{
+        int64_t delayInSeconds = 2.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^{
+            
+            [self.testTableView reloadData];
+            [weakself.testTableView.infiniteScrollingView stopAnimating];
+        });
+    }];
+    
 }
 
 
@@ -129,7 +147,7 @@
 {
     UIImageView *newsImage = [[UIImageView alloc]
                               initWithFrame:CGRectMake(0, 0, 320, ScrollViewHeight)];
-    newsImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"headAd%ld", (long)index+1]];
+    newsImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"00%ld", (long)index]];
     return newsImage;
 }
 
@@ -141,12 +159,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return detailArray.count;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    加载xib的tableviewcell
+//    加载xib的tableviewcell
     JJTestTableViewCell * lableSwitchCell;
     UINib *n;
     static NSString *CellIdentifier = @"JJTestTableViewCell";
@@ -161,22 +179,16 @@
         n= [UINib nibWithNibName:@"PlayTableviewCell" bundle:[NSBundle mainBundle]];
         [tableView registerNib:n forCellReuseIdentifier:@"PlayTableviewCell"];
     }
-    JJDirectionModel *model = [detailArray objectAtIndex:indexPath.row];
-    [lableSwitchCell.imgView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseURL, model.tdPic]]];
-    lableSwitchCell.nameLabel.text = [NSString stringWithFormat:@" %@", model.tdName];
+    lableSwitchCell.imgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"00%ld", (long)indexPath.row]];
+    lableSwitchCell.nameLabel.text = [nameArray objectAtIndex:indexPath.row];
     [lableSwitchCell.nameLabel resizeToFit];
-    lableSwitchCell.personNums.text = [NSString stringWithFormat:@"%d", model.tdpersonnum];
-    lableSwitchCell.detailLa.text = @"想知道自己的Java水平吗？那就来Java技术测试来试试自己的能力吧";
-    lableSwitchCell.testNumLa.text = [NSString stringWithFormat:@"%d", model.testnum];    lableSwitchCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    lableSwitchCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return lableSwitchCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    JJTestDivideViewController *vc =  [[JJTestDivideViewController alloc] initWithDetailUrl:[linkArray objectAtIndex:indexPath.row]];
-    JJTestTableViewCell *cell = (JJTestTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    vc.title = cell.nameLabel.text;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:[[JJTestDetailViewController alloc] init] animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 

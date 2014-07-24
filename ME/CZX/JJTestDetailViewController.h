@@ -8,7 +8,6 @@
 
 #import "JJBaseViewController.h"
 #import "JJMeasurementViewController.h"
-#import "JJTestModel.h"
 
 @interface JJTestDetailViewController : JJBaseViewController<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UIView *commentView;
@@ -19,14 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *testName;
 
 - (IBAction)buyOrEnter:(id)sender;
-@property (strong, nonatomic) IBOutlet UILabel *timeLa;
-@property (strong, nonatomic) IBOutlet UILabel *priceLa;
-@property (strong, nonatomic) IBOutlet UILabel *subjectNumLa;
-@property (strong, nonatomic) IBOutlet UILabel *directionLa;
 
-@property (strong, nonatomic) IBOutlet UILabel *scoreLa;
 @property (strong, nonatomic) IBOutlet UIButton *introduceButton;
 @property (strong, nonatomic) IBOutlet UIButton *commentButton;
-
-- (id)initWithModel:(JJTestModel *)paramModel;
 @end

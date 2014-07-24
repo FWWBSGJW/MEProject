@@ -8,7 +8,6 @@
 
 #import "JJBaseViewController.h"
 #import "JJTestDetailViewController.h"
-#import "JJTestDivideViewController.h"
 
 @interface JJBaseViewController ()
 
@@ -41,14 +40,9 @@
         if ([nextResponder isKindOfClass:[JJTestDetailViewController class]])
         {
             JJTestDetailViewController *vc = (JJTestDetailViewController *)nextResponder;
-            [vc.navigationController popViewControllerAnimated:YES];
+            [vc.navigationController popToRootViewControllerAnimated:YES];
         }
-        if([nextResponder isKindOfClass:[JJTestDivideViewController class]])
-        {
-            JJTestDivideViewController *vc = (JJTestDivideViewController *)nextResponder;
-            [vc.navigationController popViewControllerAnimated:YES];
-        }
-        
+
     }
 }
 
