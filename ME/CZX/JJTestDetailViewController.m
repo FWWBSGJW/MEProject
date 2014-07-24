@@ -7,10 +7,12 @@
 //
 
 #import "JJTestDetailViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface JJTestDetailViewController ()
 {
     NSArray *commentArray;
+    JJTestModel *myModel;
 }
 @end
 
@@ -25,6 +27,16 @@
     return self;
 }
 
+- (id)initWithModel:(JJTestModel *)paramModel
+{
+    self = [super init];
+    if (self) {
+        myModel = paramModel;
+    }
+    
+    return self;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
 //    [JJTabBarViewController share].tabBar.hidden = YES;
@@ -36,6 +48,9 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self loadModel];
+    
     UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
     [backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
@@ -50,7 +65,6 @@
     self.navigationItem.rightBarButtonItem = shareBarButton;
     
     self.navigationItem.title = @"测试详情";
-    self.imgView.image = [UIImage imageNamed:@"001.png"];
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
     
     [self.likeBtn addTarget:self action:@selector(like) forControlEvents:UIControlEventTouchUpInside];
@@ -67,6 +81,18 @@
     [self.introduceButton addTarget:self action:@selector(introduceButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.commentButton addTarget:self action:@selector(commentButton:) forControlEvents:UIControlEventTouchUpInside];
     self.commentButton.backgroundColor = RGBCOLOR(227, 227, 227);
+}
+
+- (void)loadModel
+{
+    [self.imgView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseURL, myModel.tcPhotoUrl]]];
+    self.directionLa.text = [NSString stringWithFormat:@"方向：%d", myModel.tdirection];
+    self.timeLa.text = [NSString stringWithFormat:@"时长：%d", myModel.tcTime];
+    self.subjectNumLa.text = [NSString stringWithFormat:@"题数：%d", myModel.subjectnums];
+    self.scoreLa.text = [NSString stringWithFormat:@"总分：%d", myModel.tcScore];
+    self.priceLa.text = [NSString stringWithFormat:@"价格：%d", myModel.tcPrice];
+    self.testName.text = myModel.tcName;
+    self.introduceView.text = myModel.tcIntro;
 }
 
 - (void)like
