@@ -20,7 +20,7 @@
 - (void)loadCourseInfoWithCourseID:(NSInteger)courseID
 {
     NSString *str = [kBaseURL stringByAppendingString:[NSString stringWithFormat:@"MobileEducation/courseIdAction?Cid=%d",courseID]];
-    NSLog(@"%@",str);
+    //NSLog(@"%@",str);
     NSURL *url = [NSURL URLWithString:str];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
     NSURLResponse *response = nil;

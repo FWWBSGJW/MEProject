@@ -28,7 +28,7 @@
         content.courseName = [array[i] objectForKey:@"courseName"];
         content.courseImageUrl = [array[i] objectForKey:@"courseImageUrl"];
         [cs.csContent addObject:content];
-        NSLog(@"%@",cs.csContent);
+        //NSLog(@"%@",cs.csContent);
     }
     
 

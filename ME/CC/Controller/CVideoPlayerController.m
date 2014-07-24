@@ -461,6 +461,11 @@
 
 #pragma mark - Actions
 //
+- (void)sendDanmaku:(UIButton *)sender
+{
+    
+}
+
 
 //显示和隐藏控制器
 - (void)bgButtonTouched:(UIButton *)sender

@@ -256,6 +256,10 @@
 		5BACA1CF197D6F3F00E4A387 /* CDAllSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BACA1CE197D6F3F00E4A387 /* CDAllSection.m */; };
 		5BB54B2F197E3BAC0096DD7F /* CDsectionContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB54B2E197E3BAC0096DD7F /* CDsectionContent.m */; };
 		5BB54B32197E6ED70096DD7F /* CourseChapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB54B31197E6ED70096DD7F /* CourseChapter.m */; };
+		5BB695C8197F92B500A4E6DE /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB695C6197F92B500A4E6DE /* CommentViewController.m */; };
+		5BB695C9197F92B500A4E6DE /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BB695C7197F92B500A4E6DE /* CommentViewController.xib */; };
+		5BB695D1198012D100A4E6DE /* SendComNoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB695D0198012D100A4E6DE /* SendComNoteView.m */; };
+		5BB695D3198012FD00A4E6DE /* SendComNoteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BB695D2198012FD00A4E6DE /* SendComNoteView.xib */; };
 		ABC2246C19793742008BD18C /* TestModelManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC2246B19793742008BD18C /* TestModelManage.m */; };
 		B0B0AD18197D327900B29458 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD15197D327900B29458 /* Default-568h@2x.png */; };
 		B0B0AD19197D327900B29458 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD16197D327900B29458 /* Default.png */; };
@@ -613,6 +617,12 @@
 		5BB54B2E197E3BAC0096DD7F /* CDsectionContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDsectionContent.m; sourceTree = "<group>"; };
 		5BB54B30197E6ED70096DD7F /* CourseChapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseChapter.h; sourceTree = "<group>"; };
 		5BB54B31197E6ED70096DD7F /* CourseChapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseChapter.m; sourceTree = "<group>"; };
+		5BB695C5197F92B500A4E6DE /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		5BB695C6197F92B500A4E6DE /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		5BB695C7197F92B500A4E6DE /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentViewController.xib; sourceTree = "<group>"; };
+		5BB695CF198012D100A4E6DE /* SendComNoteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendComNoteView.h; sourceTree = "<group>"; };
+		5BB695D0198012D100A4E6DE /* SendComNoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendComNoteView.m; sourceTree = "<group>"; };
+		5BB695D2198012FD00A4E6DE /* SendComNoteView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendComNoteView.xib; sourceTree = "<group>"; };
 		ABC2246A19793742008BD18C /* TestModelManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestModelManage.h; path = Manage/TestModelManage.h; sourceTree = "<group>"; };
 		ABC2246B19793742008BD18C /* TestModelManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestModelManage.m; path = Manage/TestModelManage.m; sourceTree = "<group>"; };
 		B0B0AD15197D327900B29458 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -1019,6 +1029,9 @@
 				5B717FEC197905C800F1359C /* CDetailCourseViewController.m */,
 				5B717FED197905C800F1359C /* CVideoPlayerController.h */,
 				5B717FEE197905C800F1359C /* CVideoPlayerController.m */,
+				5BB695C5197F92B500A4E6DE /* CommentViewController.h */,
+				5BB695C6197F92B500A4E6DE /* CommentViewController.m */,
+				5BB695C7197F92B500A4E6DE /* CommentViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1191,6 +1204,9 @@
 				5B718069197905C900F1359C /* CDetailHead.xib */,
 				5B71806A197905C900F1359C /* DanmakuView.h */,
 				5B71806B197905C900F1359C /* DnmakuView.m */,
+				5BB695CF198012D100A4E6DE /* SendComNoteView.h */,
+				5BB695D0198012D100A4E6DE /* SendComNoteView.m */,
+				5BB695D2198012FD00A4E6DE /* SendComNoteView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1435,6 +1451,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BB695C9197F92B500A4E6DE /* CommentViewController.xib in Resources */,
 				5B718111197905D600F1359C /* LoginViewController.xib in Resources */,
 				5B7180DA197905C900F1359C /* CCourse.xib in Resources */,
 				5B71809B197905C900F1359C /* details_definition_bg@2x.png in Resources */,
@@ -1583,6 +1600,7 @@
 				5B7180B3197905C900F1359C /* details_ordinary@2x.png in Resources */,
 				5B717FC0197905BA00F1359C /* 001@2x.png in Resources */,
 				5B718073197905C900F1359C /* course2.jpg in Resources */,
+				5BB695D3198012FD00A4E6DE /* SendComNoteView.xib in Resources */,
 				5B717FCC197905BA00F1359C /* up@2x.png in Resources */,
 				5B71811E197905D600F1359C /* UserInfoCell.xib in Resources */,
 				5B718082197905C900F1359C /* headAd1@2x.png in Resources */,
@@ -1658,6 +1676,7 @@
 				5B717F641979054D00F1359C /* UINavigationController+autoRotate.m in Sources */,
 				5B7180D6197905C900F1359C /* CChapterHead.m in Sources */,
 				5B717F4C1978FE4E00F1359C /* UIImage+WebP.m in Sources */,
+				5BB695C8197F92B500A4E6DE /* CommentViewController.m in Sources */,
 				5B717F421978FE4E00F1359C /* SDImageCache.m in Sources */,
 				5B717FB0197905BA00F1359C /* JJFinishViewController.m in Sources */,
 				5B717F351978FE4E00F1359C /* UIImageView+AFNetworking.m in Sources */,
@@ -1683,6 +1702,7 @@
 				5BACA1CC197D6D7D00E4A387 /* CDSection.m in Sources */,
 				5B717F2F1978FE4E00F1359C /* AFNetworkActivityIndicatorManager.m in Sources */,
 				5B717F441978FE4E00F1359C /* SDWebImageDecoder.m in Sources */,
+				5BB695D1198012D100A4E6DE /* SendComNoteView.m in Sources */,
 				5B718112197905D600F1359C /* OLNetManager.m in Sources */,
 				5BB54B32197E6ED70096DD7F /* CourseChapter.m in Sources */,
 				5B717FB5197905BA00F1359C /* JJTestDetailViewController.m in Sources */,

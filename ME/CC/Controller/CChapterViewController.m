@@ -10,6 +10,7 @@
 #import "CChapterViewController.h"
 #import "CCommentCell.h"
 #import "CourseChapter.h"
+#import "SendComNoteView.h"
 
 #import "CVideoPlayerController.h"
 #define headHeight 160
@@ -25,8 +26,8 @@ enum Button_Tag
 {
     ButtonTagPrivate = 400, //收藏按钮TAG
     ButtonTagDownLoad, //下载
-    ButtonTagShare,//分享
     ButtonTagComment,//评论
+    ButtonTagShare,//分享
     ButtonTagNote//笔记
 };
 
@@ -49,6 +50,8 @@ enum Button_Tag
 @property (strong, nonatomic) NSMutableArray *chapterOpenArray;//章节是否展开数组
 @property (weak, nonatomic) UISegmentedControl *segmentControl;
 
+@property (strong, nonatomic) SendComNoteView *sendComNoteView; //发送评论，笔记试图
+@property (weak, nonatomic) UIView *tabBarView;
 @end
 
 @implementation CChapterViewController
@@ -88,6 +91,9 @@ enum Button_Tag
         [tabBarView addSubview:button];
     }
     
+    self.tabBarView = tabBarView;
+    //[self.segmentControl addTarget:self action:@selector(segementChange) forControlEvents:UIControlEventValueChanged];
+    
     //注册cell
     
     UINib *nib = [UINib nibWithNibName:@"CCommentCell" bundle:[NSBundle mainBundle]];
@@ -125,6 +131,32 @@ enum Button_Tag
     }
     return _chapterOpenArray;
 }
+
+- (SendComNoteView *)sendComNoteView
+{
+    if (!_sendComNoteView) {
+        
+        _sendComNoteView = [[SendComNoteView alloc] init];
+        _sendComNoteView.frame = CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, -_sendComNoteView.frame.size.height, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height);
+        _sendComNoteView.alpha = 0.0;
+        [[UIApplication sharedApplication].keyWindow addSubview:_sendComNoteView];
+    }
+    return _sendComNoteView;
+}
+
+//- (CommentView *)sendCommentView
+//{
+//    if (!_sendCommentView) {
+//        _sendCommentView = [[CommentView alloc] init];
+//        //_sendCommentView.textView.delegate = self;
+////        _sendCommentView.frame = CGRectMake((SCREEN_WIDTH-_sendCommentView.frame.size.width)/2.0, -_sendCommentView.frame.size.height, _sendCommentView.frame.size.width, _sendCommentView.frame.size.height);
+////        _sendCommentView.alpha = 0;
+////        //[self.view addSubview:_sendCommentView];
+//       //[[UIApplication sharedApplication].keyWindow addSubview:_sendCommentView];
+//    
+//    }
+//    return _sendCommentView;
+//}
 
 #warning 以下三方法待实现后台获取数据
 - (NSArray *)courseChapterArray
@@ -424,6 +456,7 @@ enum Button_Tag
     }
 }
 
+
 #pragma mark - Action 方法
 
 #pragma mark  segement Changed 方法
@@ -457,7 +490,7 @@ enum Button_Tag
 #warning -  功能待实现
     switch (button.tag) {
         case ButtonTagPrivate:{
-            NSLog(@"private");
+            //NSLog(@"private");
         }
             break;
         case ButtonTagDownLoad:{
@@ -469,10 +502,35 @@ enum Button_Tag
         }
             break;
         case ButtonTagComment:{
+#pragma mark 待判断用户是否登录
+        /*
+            [UIView animateWithDuration:1.0f animations:^{
+                [self.sendCommentView setFrame:CGRectMake((SCREEN_WIDTH-_sendCommentView.frame.size.width)/2.0, 20.0, _sendCommentView.frame.size.width, _sendCommentView.frame.size.height)];
+                self.sendCommentView.alpha = 1.0f;
+            } completion:^(BOOL finished) {
+                NSLog(@"%@",self.sendCommentView) ;
+                [self.sendCommentView.textView becomeFirstResponder];
+            }];
             
+        }
+         */
+            //[self.view addSubview:self.sendCommentView];
+            UIView *view = [[UIView alloc] initWithFrame:self.view.frame];
+            view.backgroundColor = [UIColor blackColor];
+            view.alpha = 0.4;
+            [[UIApplication sharedApplication].keyWindow addSubview:view];
+            [UIView animateWithDuration:0.6f animations:^{
+                [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, 20.0, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
+                self.sendComNoteView.alpha = 1.0f;
+            } completion:^(BOOL finished) {
+                NSLog(@"%@",self.sendComNoteView) ;
+                [self.sendComNoteView.textView becomeFirstResponder];
+            }];
+
         }
             break;
         case ButtonTagNote:{
+            
             
         }
         default:

@@ -15,7 +15,7 @@
 {
     self.cdID = cdID;
     
-    NSLog(@"加载课程方向阶段数据");
+    //NSLog(@"加载课程方向阶段数据");
     NSString *string = [NSString stringWithFormat:@"MobileEducation/courseAction?Did=%d",self.cdID];
     NSString *str = [kBaseURL stringByAppendingString:string];
     
@@ -52,7 +52,7 @@
     for (NSDictionary *dic in array) {
         
         CDSection *cdSection = [CDSection courseSectionWithDictionary:dic];
-        NSLog(@"%@",cdSection);
+        //NSLog(@"%@",cdSection);
         [cdAllSectionArray addObject:cdSection];
         
     }
