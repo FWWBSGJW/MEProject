@@ -7,6 +7,7 @@
 //
 
 #import "SubjectController.h"
+#import "UILabel+dynamicSizeMe.h"
 
 @interface SubjectController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -17,6 +18,10 @@
     NSMutableArray *myWrongArray;
     int page;
     UITableView *myTableView;
+    UILabel *textView;
+    NSArray *currentAnArray;
+    NSArray *optionArray;
+
 }
 @end
 #define KColor RGBCOLOR(222, 255, 170)
@@ -49,11 +54,20 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    optionArray = @[@"A. ", @"B. ", @"C. ", @"D. "];
+    
+    textView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
+    textView.text = [NSString stringWithFormat:@"%d.%@", 1, [myQuestionArray objectAtIndex:page]];
+    textView.font = [UIFont systemFontOfSize:18.0];
+    [textView resizeToFit];
+    
+    currentAnArray = [myAnswerArray objectAtIndex:page];
     
     myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, 376)];
     myTableView.delegate = self;
     myTableView.dataSource = self;
     myTableView.tableFooterView = [[UIView alloc] init];
+    myTableView.tableHeaderView = textView;
     [self.view addSubview:myTableView];
     
     [self createPagingBtn];
@@ -67,6 +81,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@%@", [optionArray objectAtIndex:indexPath.row], [currentAnArray objectAtIndex:[indexPath row]]];
+    [cell.textLabel resizeToFit];
+    cell.textLabel.font = [UIFont systemFontOfSize:16.0];
 
     return cell;
 }
@@ -114,7 +131,7 @@
     if (page != 0)
     {
         page--;
-        [myTableView reloadData];
+        [self tableViewReload];
     }
 }
 
@@ -123,8 +140,14 @@
     if (page<myQuestionArray.count-1)
     {
         page++;
-        [myTableView reloadData];
+        [self tableViewReload];
     }
+}
+
+- (void)tableViewReload
+{
+    currentAnArray = [myAnswerArray objectAtIndex:page];
+    [myTableView reloadData];
 }
 
 - (void)back
