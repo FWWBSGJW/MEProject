@@ -60,7 +60,7 @@
 
 - (void)review
 {
-    [self.navigationController pushViewController:[[ReviewController alloc] initWithCorrectAnswer:myCorrectArray personAnswer:myPersonArray questionArray:myQuestionArray answerArray:myPersonArray] animated:YES];
+    [self.navigationController pushViewController:[[ReviewController alloc] initWithCorrectAnswer:myCorrectArray personAnswer:myPersonArray questionArray:myQuestionArray answerArray:myAnswerArray] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
