@@ -23,12 +23,6 @@ enum Segement_Type
     SegementNote //课程笔记
 };
 
-enum TextView_Type
-{
-    TextViewComment = 500,//评论textview
-    TextViewNote // 笔记textView
-};
-
 enum Button_Tag
 {
     ButtonTagPrivate = 400, //收藏按钮TAG
@@ -58,7 +52,6 @@ enum Button_Tag
 @property (weak, nonatomic) UISegmentedControl *segmentControl;
 
 @property (strong, nonatomic) SendComNoteView *sendComNoteView; //发送评论，笔记试图
-@property (strong, nonatomic) UIView *dimView; //发送评论时背影
 @property (weak, nonatomic) UIView *tabBarView;
 @end
 
@@ -175,28 +168,34 @@ enum Button_Tag
         _sendComNoteView = [[SendComNoteView alloc] init];
         _sendComNoteView.frame = CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, -_sendComNoteView.frame.size.height, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height);
         _sendComNoteView.alpha = 0.0;
-        [_sendComNoteView.sendButton addTarget:self action:@selector(sendComNote) forControlEvents:UIControlEventTouchUpInside];
-        [_sendComNoteView.backButton addTarget:self action:@selector(cancelSend) forControlEvents:UIControlEventTouchUpInside];
-        
+        [[UIApplication sharedApplication].keyWindow addSubview:_sendComNoteView];
     }
     return _sendComNoteView;
 }
 
+//- (CommentView *)sendCommentView
+//{
+//    if (!_sendCommentView) {
+//        _sendCommentView = [[CommentView alloc] init];
+//        //_sendCommentView.textView.delegate = self;
+////        _sendCommentView.frame = CGRectMake((SCREEN_WIDTH-_sendCommentView.frame.size.width)/2.0, -_sendCommentView.frame.size.height, _sendCommentView.frame.size.width, _sendCommentView.frame.size.height);
+////        _sendCommentView.alpha = 0;
+////        //[self.view addSubview:_sendCommentView];
+//       //[[UIApplication sharedApplication].keyWindow addSubview:_sendCommentView];
+//    
+//    }
+//    return _sendCommentView;
+//}
 
-- (UIView *)dimView
-{
-    if (!_dimView) {
-        _dimView = [[UIView alloc] initWithFrame:self.view.frame];
-        _dimView.backgroundColor = [UIColor blackColor];
-        _dimView.alpha = 0.4;
-    }
-    return _dimView;
-}
 #warning 以下三方法待实现后台获取数据
+<<<<<<< HEAD
 
 
 
 - (NSMutableArray *)courseChapterArray
+=======
+- (NSArray *)courseChapterArray
+>>>>>>> FETCH_HEAD
 {
     if (!_courseChapterArray) {
         [self.courseChapter loadCourseAllChapterWithCourseID:self.courseID];
@@ -565,76 +564,38 @@ enum Button_Tag
             break;
         case ButtonTagComment:{
 #pragma mark 待判断用户是否登录
-        
+        /*
+            [UIView animateWithDuration:1.0f animations:^{
+                [self.sendCommentView setFrame:CGRectMake((SCREEN_WIDTH-_sendCommentView.frame.size.width)/2.0, 20.0, _sendCommentView.frame.size.width, _sendCommentView.frame.size.height)];
+                self.sendCommentView.alpha = 1.0f;
+            } completion:^(BOOL finished) {
+                NSLog(@"%@",self.sendCommentView) ;
+                [self.sendCommentView.textView becomeFirstResponder];
+            }];
             
-            //弹出输入框
-            [[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
-            [[UIApplication sharedApplication].keyWindow addSubview:self.sendComNoteView];
-            [self.sendComNoteView.textView becomeFirstResponder];
-            self.sendComNoteView.titleLabel.text = @"发送评论";
-            self.sendComNoteView.tag = TextViewComment;
-            [UIView animateWithDuration:0.4f animations:^{
+        }
+         */
+            //[self.view addSubview:self.sendCommentView];
+            UIView *view = [[UIView alloc] initWithFrame:self.view.frame];
+            view.backgroundColor = [UIColor blackColor];
+            view.alpha = 0.4;
+            [[UIApplication sharedApplication].keyWindow addSubview:view];
+            [UIView animateWithDuration:0.6f animations:^{
                 [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, 20.0, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
                 self.sendComNoteView.alpha = 1.0f;
             } completion:^(BOOL finished) {
-                
+                NSLog(@"%@",self.sendComNoteView) ;
+                [self.sendComNoteView.textView becomeFirstResponder];
             }];
 
         }
             break;
         case ButtonTagNote:{
-            //弹出输入框
-            [[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
-            [[UIApplication sharedApplication].keyWindow addSubview:self.sendComNoteView];
-            [self.sendComNoteView.textView becomeFirstResponder];
-            self.sendComNoteView.titleLabel.text = @"写笔记";
-            self.sendComNoteView.tag = TextViewNote;
-            [UIView animateWithDuration:0.4f animations:^{
-                [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, 20.0, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
-                self.sendComNoteView.alpha = 1.0f;
-            } completion:^(BOOL finished) {
-                
-            }];
-
+            
             
         }
         default:
             break;
     }
 }
-
-#pragma sendView button action
-- (void)sendComNote
-{
-#pragma waring 此处待实现上传评论，笔记 ,刷新数据
-    //评论
-    if (self.sendComNoteView.tag == TextViewComment) {
-        NSLog(@"评论---%@",self.sendComNoteView.textView.text);
-    } else if (self.sendComNoteView.tag == TextViewNote){ //笔记
-        NSLog(@"笔记---%@",_sendComNoteView.textView.text);
-    }
-    
-    [self sendComNoteViewBack];
-    //self.sendComNoteView.textView.text = nil;
-}
-
-- (void)cancelSend
-{
-    [self sendComNoteViewBack];
-}
-
-- (void)sendComNoteViewBack
-{
-    [self.sendComNoteView.textView resignFirstResponder];
-
-    [UIView animateWithDuration:0.4f animations:^{
-        [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, -_sendComNoteView.frame.size.height, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
-        self.sendComNoteView.alpha = 0.0f;
-    } completion:^(BOOL finished) {
-        [self.dimView removeFromSuperview];
-        self.sendComNoteView.textView.text = nil;
-    }];
-
-}
-
 @end
