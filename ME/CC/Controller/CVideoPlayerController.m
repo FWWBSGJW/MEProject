@@ -4,7 +4,7 @@
 //
 //  Created by yato_kami on 14-7-10.
 //  Copyright (c) 2014年 yatokami. All rights reserved.
-//
+// 日常同步
 
 #import "CVideoPlayerController.h"
 #import <MediaPlayer/MediaPlayer.h>
