@@ -10,7 +10,6 @@
 
 @interface JJTestModel : NSObject
 
-<<<<<<< HEAD
 @property(nonatomic) int subjectnums;
 @property(nonatomic ,copy) NSString *sublink;
 @property(nonatomic) int tcId;
@@ -23,15 +22,6 @@
 @property(nonatomic) int tcTime;
 @property(nonatomic) int tdirection;
 @property(nonatomic ,copy) NSString *nextPage;
-=======
-@property(nonatomic ,copy) NSString *TimgUrl;
-@property(nonatomic ,copy) NSString *Tprice;
-@property(nonatomic) int Ttimes;
-@property(nonatomic ,copy) NSString *Tdirection;
-@property(nonatomic) int Tduration;
-@property(nonatomic) int Tamount;
-@property(nonatomic) int Tpoints;
 
->>>>>>> parent of 0ea4e60... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
-
+- (void)setTestModelWithDictionary:(NSDictionary *)dict;
 @end

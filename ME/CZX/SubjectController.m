@@ -57,7 +57,7 @@
     optionArray = @[@"A. ", @"B. ", @"C. ", @"D. "];
     
     textView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 10)];
-    textView.text = [NSString stringWithFormat:@"%d.%@", page+1, [myQuestionArray objectAtIndex:page]];
+    textView.text = [NSString stringWithFormat:@"%d.%@", 1, [myQuestionArray objectAtIndex:page]];
     textView.font = [UIFont systemFontOfSize:18.0];
     [textView resizeToFit];
     
@@ -70,7 +70,6 @@
     myTableView.tableHeaderView = textView;
     [self.view addSubview:myTableView];
     
-    [self createTitleView];
     [self createPagingBtn];
 }
 
@@ -147,7 +146,6 @@
 
 - (void)tableViewReload
 {
-    textView.text = [NSString stringWithFormat:@"%d.%@", page+1, [myQuestionArray objectAtIndex:page]];
     currentAnArray = [myAnswerArray objectAtIndex:page];
     [myTableView reloadData];
 }
