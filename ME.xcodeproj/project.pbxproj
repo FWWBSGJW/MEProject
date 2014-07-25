@@ -258,6 +258,10 @@
 		5BB54B32197E6ED70096DD7F /* CourseChapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB54B31197E6ED70096DD7F /* CourseChapter.m */; };
 		5BB695D1198012D100A4E6DE /* SendComNoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB695D0198012D100A4E6DE /* SendComNoteView.m */; };
 		5BB695D3198012FD00A4E6DE /* SendComNoteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BB695D2198012FD00A4E6DE /* SendComNoteView.xib */; };
+<<<<<<< HEAD
+=======
+		ABC2246C19793742008BD18C /* TestModelManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC2246B19793742008BD18C /* TestModelManage.m */; };
+>>>>>>> parent of 0ea4e60... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 		B0B0AD18197D327900B29458 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD15197D327900B29458 /* Default-568h@2x.png */; };
 		B0B0AD19197D327900B29458 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD16197D327900B29458 /* Default.png */; };
 		B0B0AD1A197D327900B29458 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD17197D327900B29458 /* Default@2x.png */; };
@@ -616,6 +620,11 @@
 		5BB695CF198012D100A4E6DE /* SendComNoteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendComNoteView.h; sourceTree = "<group>"; };
 		5BB695D0198012D100A4E6DE /* SendComNoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendComNoteView.m; sourceTree = "<group>"; };
 		5BB695D2198012FD00A4E6DE /* SendComNoteView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendComNoteView.xib; sourceTree = "<group>"; };
+<<<<<<< HEAD
+=======
+		ABC2246A19793742008BD18C /* TestModelManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestModelManage.h; path = Manage/TestModelManage.h; sourceTree = "<group>"; };
+		ABC2246B19793742008BD18C /* TestModelManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestModelManage.m; path = Manage/TestModelManage.m; sourceTree = "<group>"; };
+>>>>>>> parent of 0ea4e60... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 		B0B0AD15197D327900B29458 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B0B0AD16197D327900B29458 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		B0B0AD17197D327900B29458 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -1347,6 +1356,11 @@
 		ABC2246919793705008BD18C /* Manage */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
+=======
+				ABC2246A19793742008BD18C /* TestModelManage.h */,
+				ABC2246B19793742008BD18C /* TestModelManage.m */,
+>>>>>>> parent of 0ea4e60... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 			);
 			name = Manage;
 			sourceTree = "<group>";
@@ -1680,6 +1694,7 @@
 				5B717F2E1978FE4E00F1359C /* AFJSONRequestOperation.m in Sources */,
 				5B717F361978FE4E00F1359C /* JSONModel.m in Sources */,
 				5B717F4F1978FE4E00F1359C /* XLCycleScrollView.m in Sources */,
+				ABC2246C19793742008BD18C /* TestModelManage.m in Sources */,
 				5B717F391978FE4E00F1359C /* JSONModelError.m in Sources */,
 				5BACA1CC197D6D7D00E4A387 /* CDSection.m in Sources */,
 				5B717F2F1978FE4E00F1359C /* AFNetworkActivityIndicatorManager.m in Sources */,

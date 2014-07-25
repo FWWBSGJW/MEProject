@@ -10,6 +10,7 @@
 
 @implementation JJTestModel
 
+<<<<<<< HEAD
 - (void)setTestModelWithDictionary:(NSDictionary *)dict
 {
     _subjectnums = [[dict objectForKey:@"subjectnums"] intValue];
@@ -25,4 +26,6 @@
     _tdirection = [[dict objectForKey:@"tdirection"] intValue];
     _nextPage = [dict objectForKey:@"nextPage"];
 }
+=======
+>>>>>>> parent of 0ea4e60... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 @end

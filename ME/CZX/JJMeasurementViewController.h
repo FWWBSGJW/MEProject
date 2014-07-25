@@ -14,6 +14,4 @@
 @property(nonatomic, strong) UIButton *handInBtn;
 @property(nonatomic, strong) UIButton *reviewBtn;
 
-
-- (id)initWithSubjectDetailUrl:(NSString *)paramUrl;
 @end
