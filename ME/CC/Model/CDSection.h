@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CDsectionContent.h"
+
 //课程方向 阶段信息类
 
 @interface CDSection : NSObject
@@ -16,7 +16,7 @@
 //阶段名称
 @property (strong, nonatomic) NSString *csName;
 //阶段内容数组 存取CDsectionContent对象
-@property (strong, nonatomic) NSMutableArray *csContent;
+@property (strong, nonatomic) NSArray *csContent;
 
 
 //实例化方法

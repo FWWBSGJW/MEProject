@@ -11,13 +11,22 @@
 #import "DanmakuView.h"
 #import "DanmakuModel.h"
 
-
+enum SendType
+{
+    Send_Comment = 400,
+    Send_Note
+};
 
 @interface CVideoPlayerController ()
 {
    // NSTimer *_playTimer;
     UILabel *_label;    
     NSInteger _lastArrayNum ; //弹幕内容数组控制
+    UIButton *_playButton;//播放按钮
+    UITextField *_dmTextField; //发送弹幕文本框
+    
+    CGFloat _moveDanmukuY ;
+    CGFloat _staticDanmakuY ;
 }
 
 
@@ -67,17 +76,30 @@
 //弹幕计时器
 @property (strong, nonatomic) NSTimer *danmakuTimer;
 
-@property (strong, nonatomic) NSArray *danmaku; //弹幕数组
+@property (strong, nonatomic) NSMutableArray *danmaku; //弹幕数组
 @property (assign, nonatomic) NSTimeInterval startTime;
 @property (strong, nonatomic) NSURL *url;
+@property (strong, nonatomic) NSMutableArray *timerArray;//定时器数组
 
-//@property (strong, nonatomic) UIView *myControlView; //自定义按钮存放试图
+@property (strong, nonatomic) UIView *sendDanmakuView;//发送弹幕试图
+@property (strong, nonatomic) UIView *dimView;//发送时背景
+@property (strong, nonatomic) UIButton *cancelButton; //取消发送弹幕按钮
+@property (strong, nonatomic) UIButton *sendButton; //发送弹幕按钮
 
+@property (strong, nonatomic) NSTimer *myTimer;
 @end
 
 @implementation CVideoPlayerController
 
 #pragma getter and setter
+
+- (NSMutableArray *)timerArray
+{
+    if (!_timerArray) {
+        _timerArray = [NSMutableArray arrayWithCapacity:50];
+    }
+    return _timerArray;
+}
 
 - (DanmakuModel *)danmakuModel
 {
@@ -96,12 +118,55 @@
     return _danmaku;
 }
 
-
-
-- (void)playVideoWithVideoID : (NSInteger)videoID andVideoTitle:(NSString *)videoTitle
+- (UIView *)dimView
 {
-#warning 通过id获取视频url,弹幕 待实现
-    self.url = [[NSBundle mainBundle] URLForResource:@"promo_full" withExtension:@"mp4"];
+    if (!_dimView) {
+        _dimView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH)];
+        _dimView.backgroundColor = [UIColor blackColor];
+        _dimView.alpha = 0.8;
+    }
+    return _dimView;
+}
+
+- (UIView *)sendDanmakuView
+{
+    if (!_sendDanmakuView) {
+        _sendDanmakuView = [[UIView alloc] initWithFrame:CGRectMake(0, -40, SCREEN_HEIGHT, 40)];
+        _sendDanmakuView.backgroundColor = [UIColor blackColor];
+        _sendDanmakuView.alpha = 0.0f;
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(45, 5, SCREEN_HEIGHT-90, 30)];
+        [textField setBorderStyle:UITextBorderStyleRoundedRect];
+        [_sendDanmakuView addSubview:textField];
+        textField.backgroundColor = [UIColor grayColor];
+        textField.placeholder = @"请输入你想发的弹幕";
+        [textField setClearButtonMode:UITextFieldViewModeAlways];
+
+        _dmTextField = textField;
+        
+        UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        cancelButton.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        cancelButton.frame = CGRectMake(0, 5, 40, 30);
+        [cancelButton addTarget:self action:@selector(cancelSend) forControlEvents:UIControlEventTouchUpInside];
+        _cancelButton = cancelButton;
+        [_sendDanmakuView addSubview:cancelButton];
+        
+        UIButton *sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [sendButton setTitle:@"发送" forState:UIControlStateNormal];
+        sendButton.frame = CGRectMake(SCREEN_HEIGHT-40, 5, 40, 30);
+        sendButton.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        [sendButton addTarget:self action:@selector(doSend) forControlEvents:UIControlEventTouchUpInside];
+        _sendButton = sendButton;
+        [_sendDanmakuView addSubview:sendButton];
+    }
+    return _sendDanmakuView;
+}
+
+- (void)playVideoWithVideoID : (NSInteger)videoID andVideoTitle:(NSString *)videoTitle andVideoUrlString:(NSString *)urlString
+{
+#warning 通过id获取视频弹幕 待实现
+    NSLog(@"%@",urlString);
+    self.url = [NSURL URLWithString:urlString];
     self.moviePlayer.contentURL = self.url;
     self.title = videoTitle;
 }
@@ -110,13 +175,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self.moviePlayer prepareToPlay];
-    
     _lastArrayNum = 0;
-    //self.title = @"愤怒地小鸟";
-    self.gestureStatus = -1;
     
+    self.gestureStatus = -1;
     //监听视频文件预加载完成时
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(movieStart) name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
     //监听播放状态
@@ -125,16 +187,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishedPlay) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
     //NSLog(@"%f",self.moviePlayer.duration);
     //self.moviePlayer.initialPlaybackTime = 10.0; 通过这个可控制开始时间
-    //设置计时器
-    
-    
-    
-    
-    
     [self setUI];
     
-    
-
+    //初始化弹幕高度
+    _moveDanmukuY = 25.0;
+    _staticDanmakuY = SCREEN_WIDTH;
 }
 
 
@@ -149,41 +206,98 @@
 - (void)selectDanmuku
 {
     //NSLog(@"过了1s");
-    
-    CGFloat danmukuY = 25.0;
-    //NSLog(@"%@",self.danmaku);
+    _moveDanmukuY = 25.0;
     for (NSInteger i = _lastArrayNum; i < self.danmaku.count; i++) {
         if ((int)(self.moviePlayer.currentPlaybackTime) == [self.danmaku[i][@"Dtime"] integerValue]) {
-            DanmakuView *danmakuView = [self.danmakuModel dequeueReusableDanmakuWithDanmakuType:moveDanmaku];
-            if (danmakuView == nil) {
-                //NSLog(@"nil");
-                danmakuView = [[DanmakuView alloc] init];
+            
+            switch ([self.danmaku[i][@"Dtype"] integerValue]) {
+                case 0:  //动态弹幕 评论
+                {
+                    DanmakuView *danmakuView = [self.danmakuModel dequeueReusableDanmakuWithDanmakuType:moveDanmaku];
+                    if (danmakuView == nil) {
+                        //NSLog(@"nil");
+                        danmakuView = [[DanmakuView alloc] initMoveDM];
+                    }
+                    
+                    [danmakuView setSizeWithComponent:self.danmaku[i][@"Dcomponent"]];
+                    CGSize dmSize = danmakuView.frame.size;
+                    [danmakuView setFrame:CGRectMake(SCREEN_HEIGHT, _moveDanmukuY, dmSize.width, dmSize.height)];
+                    [self.danmakuView addSubview:danmakuView];
+                    
+                    //设置弹幕动画
+//                    [UIView animateWithDuration:4.0f animations:^{
+//                        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+//                        [danmakuView setFrame:CGRectMake(0.0-danmakuView.frame.size.width, danmakuView.frame.origin.y, danmakuView.frame.size.width, danmakuView.frame.size.height)];
+//                    } completion:^(BOOL finished) {
+//                        if (danmakuView.frame.origin.x < (-danmakuView.frame.size.width)) {
+//                            [self.danmakuModel addNoUseDanmaku:danmakuView WithDanmakuType:moveDanmaku];
+//                        }
+//                        
+//                    }];
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        [self moveDM:danmakuView];
+                    });
+                    _moveDanmukuY += 40;
+                }
+                    break;
+                case 1:   //静态弹幕
+                {
+                    DanmakuView *danmakuView = [self.danmakuModel dequeueReusableDanmakuWithDanmakuType:staticDanmaku];
+                    if (danmakuView == nil) {
+                        danmakuView = [[DanmakuView alloc] initStaticDM];
+                    }
+                    [danmakuView setStaticDMSizeWithComponent:self.danmaku[i][@"Dcomponent"]];
+                    CGSize dmSize = danmakuView.frame.size;
+                    [danmakuView setFrame:CGRectMake((SCREEN_HEIGHT-dmSize.width)/2.0, _staticDanmakuY-dmSize.height, dmSize.width, dmSize.height)];
+                    
+                    [self.danmakuView addSubview:danmakuView];
+                    NSLog(@"%f %f",danmakuView.frame.origin.x,danmakuView.frame.origin.y);
+                    _staticDanmakuY -= dmSize.height;
+                    
+                    //主线程跟新ui
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        [self performSelector:@selector(hidSDM:) withObject:danmakuView afterDelay:3.0f];
+                    });
+                    
+                }
+                default:
+                    break;
             }
             
-            [danmakuView setSizeWithComponent:self.danmaku[i][@"Dcomponent"]];
-            CGSize dmSize = danmakuView.frame.size;
-            [danmakuView setFrame:CGRectMake(SCREEN_HEIGHT, danmukuY, dmSize.width, dmSize.height)];
-            [self.danmakuView addSubview:danmakuView];
-
-            //设置弹幕动画
-            [UIView animateWithDuration:4.0f animations:^{
-                //CGPoint center = danmakuView.center;
-                //center.x -= (SCREEN_HEIGHT + size.width);
-                //danmakuView.center =center;
-                [danmakuView setFrame:CGRectMake(0.0-danmakuView.frame.size.width, danmakuView.frame.origin.y, danmakuView.frame.size.width, danmakuView.frame.size.height)];
-                //danmakuView setCenter:CGPointMake(danmakuView.center.x-SCREEN_HEIGHT-size, <#CGFloat y#>)
-            } completion:^(BOOL finished) {
-                if (danmakuView.frame.origin.x < (-danmakuView.frame.size.width)) {
-                    [self.danmakuModel addNoUseDanmaku:danmakuView WithDanmakuType:moveDanmaku];
-                }
-                
-            }];
-            danmukuY += 40;
         }
         if ((int)(self.moviePlayer.currentPlaybackTime) < [self.danmaku[i][@"Dtime"] integerValue])
             break;
     }
 }
+
+- (void)moveDM:(DanmakuView *)dmView
+{
+    [UIView animateWithDuration:4.0f animations:^{
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [dmView setFrame:CGRectMake(0.0-dmView.frame.size.width, dmView.frame.origin.y, dmView.frame.size.width, dmView.frame.size.height)];
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self hidMDM:dmView];
+        }
+        
+    }];
+    
+}
+
+- (void)hidSDM:(DanmakuView *)dmView
+{
+    dmView.alpha = 0.0;
+    [self.danmakuModel addNoUseDanmaku:dmView WithDanmakuType:staticDanmaku];
+    [dmView removeFromSuperview];
+    
+}
+
+- (void)hidMDM:(DanmakuView *)dmView
+{
+    [self.danmakuModel addNoUseDanmaku:dmView WithDanmakuType:staticDanmaku];
+    [dmView removeFromSuperview];
+}
+
 
 #pragma mark - 控制旋转
 -(BOOL)shouldAutorotate
@@ -206,7 +320,7 @@
     
     
     //添加弹幕视图
-    UIView *danmakuView = [[UIView alloc] initWithFrame:self.view.frame];
+    UIView *danmakuView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH)];
     self.danmakuView = danmakuView;
     [self.moviePlayer.view addSubview:self.danmakuView];
     
@@ -237,26 +351,30 @@
     UIButton *sendCommentButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //[sendCommentButton setTitle:@"发送弹幕" forState:UIControlStateNormal];
     sendCommentButton.frame = CGRectMake(50, 10, 30, 30);
+    sendCommentButton.tag = Send_Comment;
     [sendCommentButton setBackgroundImage:[UIImage imageNamed:@"评论"] forState:UIControlStateNormal];
     [sendCommentButton addTarget:self action:@selector(sendDanmaku:) forControlEvents:UIControlEventTouchUpInside];
     [self.controlBar addSubview:sendCommentButton];
     
     UIButton *sendNoteButton = [UIButton buttonWithType:UIButtonTypeCustom];
     sendNoteButton.frame = CGRectMake(100, 10, 30, 30);
+    sendNoteButton.tag = Send_Note;
     [sendNoteButton setBackgroundImage:[UIImage imageNamed:@"笔记"] forState:UIControlStateNormal];
     [sendNoteButton addTarget:self action:@selector(sendDanmaku:) forControlEvents:UIControlEventTouchUpInside];
     [self.controlBar addSubview:sendNoteButton];
     
     //弹幕开关
-    UILabel *dmLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_HEIGHT - 167, 10, 40, 30)];
+    UILabel *dmLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_HEIGHT - 127, 10, 40, 30)];
     dmLabel.text = @"弹幕";
     dmLabel.textColor = [UIColor whiteColor];
     dmLabel.font = [UIFont systemFontOfSize:12.0];
     //dmLabel.backgroundColor = [UIColor whiteColor];
     [self.controlBar addSubview:dmLabel];
     
-    UISwitch *dmSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(SCREEN_HEIGHT - 137, 10, 20, 15)];
+    UISwitch *dmSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(SCREEN_HEIGHT - 87, 10, 20, 10)];
     self.dmSwitch = dmSwitch;
+    [dmSwitch setOnTintColor:[UIColor  grayColor]];
+    dmSwitch.on = YES;
     [dmSwitch addTarget:self action:@selector(showOrHidDM:) forControlEvents:UIControlEventValueChanged];
     [self.controlBar addSubview:dmSwitch];
     
@@ -267,6 +385,7 @@
     [playButton setImage:[UIImage imageNamed:@"details_stop_select.png"] forState:UIControlStateSelected];
     [playButton addTarget:self action:@selector(playButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.controlBar addSubview:playButton];
+    _playButton = playButton;
     
     //快进
     UIButton *playUpButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -286,7 +405,7 @@
     
     //进度条
     //开始时间
-    UILabel *startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_HEIGHT-90, 5, 45, 15)];
+    UILabel *startTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_HEIGHT/2.0 - 46, 0, 45, 15)];
     self.startTimeLabel = startTimeLabel;
     [self.startTimeLabel setText:[NSString stringWithFormat:@"0"]];
     [self.startTimeLabel setTextColor:[UIColor whiteColor]];
@@ -296,6 +415,25 @@
     [self.startTimeLabel setFont:[UIFont systemFontOfSize:10]];
     [self.controlBar addSubview:self.startTimeLabel];
     
+    //时间分隔
+    UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_HEIGHT/2.0-1, 0, 2, 15)];
+    [line setText:@"/"];
+    [line setTextColor:[UIColor whiteColor]];
+    [line setBackgroundColor:[UIColor blackColor]];
+    [line setAlpha:0.6f];
+    [line setFont:[UIFont systemFontOfSize:10]];
+    [self.controlBar addSubview:line];
+    
+    //结束时间(总时间)
+    UILabel *endTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_HEIGHT/2.0+1, 0, 45, 15)];
+    self.endTimeLabel = endTimeLabel;
+    [self.endTimeLabel setText:@"0"];
+    [self.endTimeLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.endTimeLabel setTextColor:[UIColor whiteColor]];
+    [self.endTimeLabel setFont:[UIFont systemFontOfSize:10]];
+    [self.endTimeLabel setBackgroundColor:[UIColor blackColor]];
+    [self.endTimeLabel setAlpha:0.6f];
+    [self.controlBar addSubview:self.endTimeLabel];
     //进度条
     UISlider *sliderBar = [[UISlider alloc] initWithFrame:CGRectMake(0, -12, SCREEN_HEIGHT, 25)];
     _sliderBar = sliderBar;
@@ -314,25 +452,7 @@
     //[self.sliderBar addTarget:self action:@selector(sliderBarTouchDown:) forControlEvents:UIControlEventValueChanged];
     [self.controlBar addSubview:self.sliderBar];
     
-    //时间分隔
-    UILabel *line = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_HEIGHT-48, 5, 3, 15)];
-    [line setText:@"/"];
-    [line setTextColor:[UIColor whiteColor]];
-    [line setBackgroundColor:[UIColor blackColor]];
-    [line setAlpha:0.6f];
-    [line setFont:[UIFont systemFontOfSize:10]];
-    [self.controlBar addSubview:line];
     
-    //结束时间(总时间)
-    UILabel *endTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_HEIGHT-45, 5, 45, 15)];;
-    self.endTimeLabel = endTimeLabel;
-    [self.endTimeLabel setText:@"0"];
-    [self.endTimeLabel setTextAlignment:NSTextAlignmentCenter];
-    [self.endTimeLabel setTextColor:[UIColor whiteColor]];
-    [self.endTimeLabel setFont:[UIFont systemFontOfSize:10]];
-    [self.endTimeLabel setBackgroundColor:[UIColor blackColor]];
-    [self.endTimeLabel setAlpha:0.6f];
-    [self.controlBar addSubview:self.endTimeLabel];
     
     
     
@@ -463,9 +583,55 @@
 //
 - (void)sendDanmaku:(UIButton *)sender
 {
+    if (!_playButton.selected) {
+        [self playButtonClicked:_playButton];
+    }
     
+    [self.view addSubview:self.dimView];
+    [self.view addSubview:self.sendDanmakuView];
+    //[[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
+    //[[UIApplication sharedApplication].keyWindow addSubview:self.sendDanmakuView];
+    _dmTextField.placeholder = sender.tag == Send_Comment ? @"请输入你想发的评论" : @"请输入你想发的笔记";
+    [_dmTextField becomeFirstResponder];
+    [UIView animateWithDuration:0.4f animations:^{
+        self.sendDanmakuView.centerY = self.sendDanmakuView.centerY + self.sendDanmakuView.frame.size.height ;
+        self.sendDanmakuView.alpha = 0.8;
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
+- (void)cancelSend
+{
+    [self hidSendDanmakuView];
+}
+
+- (void)doSend
+{
+    NSString *danmaku = _dmTextField.text;
+#warning 待实现上传弹幕
+    NSLog(@"%@",danmaku);
+    [self hidSendDanmakuView];
+}
+
+- (void)hidSendDanmakuView
+{
+    
+    [_dmTextField resignFirstResponder];
+    [UIView animateWithDuration:0.4f animations:^{
+        self.sendDanmakuView.centerY = self.sendDanmakuView.centerY - self.sendDanmakuView.frame.size.height ;
+        self.sendDanmakuView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.sendDanmakuView removeFromSuperview];
+        [self.dimView removeFromSuperview];
+        _dmTextField.text = nil;
+    }];
+}
+
+- (void)showOrHidDM:(UISwitch *)swich
+{
+    
+}
 
 //显示和隐藏控制器
 - (void)bgButtonTouched:(UIButton *)sender
@@ -529,6 +695,12 @@
 - (void)timerClicked
 {
     
+    //异步加载弹幕
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        [self selectDanmuku];
+    });
+    
     //设置开始时间
     //NSLog(@"%f",self.moviePlayer.currentPlaybackTime);
     NSLog(@"%f",self.sliderBar.maximumValue);
@@ -538,7 +710,9 @@
     //self.sliderBar.value = self.moviePlayer.currentPlaybackTime;
     NSLog(@"%f",self.sliderBar.value);
     [self.endTimeLabel setText:[self secondTimeChange:[NSString stringWithFormat:@"%f",self.moviePlayer.duration]]];
-    [self selectDanmuku];
+    
+    
+    
 }
 
 //slider value change

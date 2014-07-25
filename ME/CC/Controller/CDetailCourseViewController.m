@@ -10,6 +10,7 @@
 #import "CDetailHead.h"
 #import "CChapterViewController.h"
 #import "CDAllSection.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface CDetailCourseViewController ()
 
@@ -67,6 +68,7 @@
 {
     [super viewDidLoad];
     self.tableView.rowHeight = 60.0; //设置cell高度
+   
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,18 +107,11 @@
     }
     
     CDSection *cdSection = self.cdAllSection.cdAllSectionArray[indexPath.section-1];
+    NSDictionary *csDic = cdSection.csContent[indexPath.row];
     
-    CDsectionContent *content = cdSection.csContent[indexPath.row];
-    cell.textLabel.text = content.courseName;
-    
-    if (!content.cacheImage) {
-        cell.imageView.image = [UIImage imageNamed:@"directionDefault"];
-        [self loadImageAsyncWithIndexPath:indexPath];
-        //NSLog(@"%d",cell.imageView.frame);
-    } else
-    {
-        cell.imageView.image = content.cacheImage;
-    }
+    cell.textLabel.text = csDic[@"courseName"];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kBaseURL, csDic[@"courseImageUrl"]]] placeholderImage:[UIImage imageNamed:@"directionDefault"]];
+
 
     return cell;
 }
@@ -161,7 +156,7 @@
 #pragma mark - 设置首个head的UI
 - (void)setFirstHeadUI:(CDetailHead *)headView
 {
-    headView.imageView.image = self.courseDirection.cacheImage;
+    [headView.imageView setImageWithURL:[NSURL URLWithString:self.courseDirection.CDimageUrlString] placeholderImage:[UIImage imageNamed:@"directionDefault"]];
     headView.detailTextView.text = self.courseDirection.CDdetail;
     headView.courseNumLabel.text = [NSString stringWithFormat:@"%d",self.courseDirection.CDcourseNum];
     headView.videoNumLabel.text = [NSString stringWithFormat:@"%d",self.courseDirection.CDvideoNum];
@@ -174,33 +169,14 @@
     if (indexPath.section) {
         CDSection *cdSection = self.cdAllSection.cdAllSectionArray[indexPath.section-1];
         
-        CDsectionContent *content = cdSection.csContent[indexPath.row];
-        NSLog(@"%d",content.courseID);
-        CChapterViewController *headVC = [CChapterViewController chapterVCwithCourseID:content.courseID];
+        NSDictionary *content = cdSection.csContent[indexPath.row];
+        CChapterViewController *headVC = [CChapterViewController chapterVCwithCourseID:[content[@"courseID"] integerValue]];
         
         [self.navigationController pushViewController:headVC animated:YES];
         
     }
 }
 
-#pragma mark - 异步加载图片
-- (void)loadImageAsyncWithIndexPath:(NSIndexPath *)indexPath
-{
-    
-    CDSection *cdSection = self.cdAllSection.cdAllSectionArray[indexPath.section-1];
-    CDsectionContent *content = cdSection.csContent[indexPath.row];
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kBaseURL,content.courseImageUrl]];
-    //NSLog(@"%@",url);
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (data && (connectionError == nil)&&response) {
-            content.cacheImage = [UIImage imageWithData:data];
-            if (content.cacheImage) {
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-        }
-    }];
-}
+
 
 @end

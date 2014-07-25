@@ -19,20 +19,8 @@
     NSArray *array = [dic[@"CScontent"] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         return [obj1[@"courseID"] compare:obj2[@"courseID"]];
     }];
-    //NSLog(@"%@",array);
-    cs.csContent = [[NSMutableArray alloc] initWithCapacity:array.count];
-    
-    for (NSInteger i=0; i<array.count; i++) {
-        CDsectionContent *content = [[CDsectionContent alloc] init];
-        content.courseID = [[array[i] objectForKey:@"courseID"] integerValue];
-        content.courseName = [array[i] objectForKey:@"courseName"];
-        content.courseImageUrl = [array[i] objectForKey:@"courseImageUrl"];
-        [cs.csContent addObject:content];
-        //NSLog(@"%@",cs.csContent);
-    }
-    
+    cs.csContent = array;
 
-    
     return cs;
 }
 

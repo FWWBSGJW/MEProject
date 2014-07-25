@@ -17,6 +17,10 @@ typedef NS_ENUM(NSInteger, DanmakuType) {
 
 @interface DanmakuModel : NSObject
 
+
+@property (assign, nonatomic) CGFloat moveDanmukuY;
+@property (assign, nonatomic) CGFloat staticDanmakuY;
+
 @property (strong, nonatomic) NSMutableArray *moveDanmakuReUseArray;
 @property (strong, nonatomic) NSMutableArray *staticDanmakuReUseArray;
 

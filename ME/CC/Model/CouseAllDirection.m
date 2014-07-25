@@ -19,7 +19,7 @@
     NSString *str = [kBaseURL stringByAppendingString:@"MobileEducation/directionAction"];
     
     NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.5f];
     
     NSURLResponse *response = nil;
     NSError *error = nil;

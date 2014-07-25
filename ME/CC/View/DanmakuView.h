@@ -14,4 +14,12 @@
 
 - (void)setSizeWithComponent:(NSString *)string;
 
+- (void)setStaticDMSizeWithComponent:(NSString *)string;
+
+- (instancetype)initStaticDM;
+
+- (instancetype)initMoveDM;
+
+
+
 @end

@@ -12,6 +12,7 @@
 #import "CCourseCell.h"
 #import "CourseDirection.h"
 #import "CDetailCourseViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface CCourseViewController ()
 
@@ -144,7 +145,7 @@
 {
     static NSString *cellIdentifier = @"courseIdentifier";
     CCourseCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    //cell.courseImageView.image = [UIImage imageNamed:@"course0.jpg"];
+   
     
     CourseDirection *cd = nil;
     cd = self.courseDirectionArray[indexPath.row];
@@ -157,12 +158,8 @@
     cell.coursePeopleNumLabel.text =  [NSString stringWithFormat:@"%d",cd.CDpeopleNum];
     cell.CoursetTimeLabel.text = [NSString stringWithFormat:@"%.1f小时",cd.CDtime];
     
-    if (!cd.cacheImage) {
-        cell.courseImageView.image = [UIImage imageNamed:@"directionDefault"];
-        [self loadImageAsyncWithIndexPath:indexPath];
-    }else {
-        cell.courseImageView.image = cd.cacheImage;
-    }
+    [cell.courseImageView setImageWithURL:[NSURL URLWithString:cd.CDimageUrlString] placeholderImage:[UIImage imageNamed:@"directionDefault"]];
+
     
     return cell;
 }
@@ -174,23 +171,6 @@
 }
 
 
-#pragma mark 异步加载图片
-- (void)loadImageAsyncWithIndexPath:(NSIndexPath *)indexPath
-{
-    CourseDirection *cd = self.courseDirectionArray[indexPath.row];
-    NSURL *url = [NSURL URLWithString:cd.CDimageUrlString];
-    //NSURL *url = [NSURL URLWithString:@"http://121.197.10.159:8080/images/couse0.jpg"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (data && (connectionError == nil) && response) {
-            cd.cacheImage = [UIImage imageWithData:data];
-            if (cd.cacheImage) {
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
-            
-        }
-    }];
-}
 
 #pragma mark - 设置headview - 顶部浮动ad
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
