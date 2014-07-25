@@ -10,13 +10,17 @@
 
 @interface JJTestModel : NSObject
 
-@property(nonatomic ,copy) NSString *TimgUrl;
-@property(nonatomic ,copy) NSString *Tprice;
-@property(nonatomic) int Ttimes;
-@property(nonatomic ,copy) NSString *Tdirection;
-@property(nonatomic) int Tduration;
-@property(nonatomic) int Tamount;
-@property(nonatomic) int Tpoints;
+@property(nonatomic) int subjectnums;
+@property(nonatomic ,copy) NSString *sublink;
+@property(nonatomic) int tcId;
+@property(nonatomic ,copy) NSString *tcIntro;
+@property(nonatomic ,copy) NSString *tcName;
+@property(nonatomic ,copy) NSString *tcPhotoUrl;
+@property(nonatomic) int tcNum;
+@property(nonatomic) int tcPrice;
+@property(nonatomic) int tcScore;
+@property(nonatomic) int tcTime;
+@property(nonatomic) int tdirection;
 
-
+- (void)setTestModelWithDictionary:(NSDictionary *)dict;
 @end

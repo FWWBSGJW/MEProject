@@ -10,4 +10,18 @@
 
 @implementation JJTestModel
 
+- (void)setTestModelWithDictionary:(NSDictionary *)dict
+{
+    _subjectnums = [[dict objectForKey:@"subjectnums"] intValue];
+    _sublink = [dict objectForKey:@"sublink"];
+    _tcId = [[dict objectForKey:@"tcId"] intValue];
+    _tcIntro = [dict objectForKey:@"tcIntro"];
+    _tcName = [dict objectForKey:@"tcName"];
+    _tcPhotoUrl = [dict objectForKey:@"tcPhotoUrl"];
+    _tcNum = [[dict objectForKey:@"tcNum"] intValue];
+    _tcPrice = [[dict objectForKey:@"tcPrice"] intValue];
+    _tcScore = [[dict objectForKey:@"tcScore"] intValue];
+    _tcTime = [[dict objectForKey:@"tcTime"] intValue];
+    _tdirection = [[dict objectForKey:@"tdirection"] intValue];
+}
 @end
