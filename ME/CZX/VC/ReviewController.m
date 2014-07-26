@@ -86,7 +86,7 @@
         }
         if (j<myWrongArray.count && [[myWrongArray objectAtIndex:j] isEqualToString:[NSString stringWithFormat:@"%d", i]])
         {
-            subjectBtn.backgroundColor = [UIColor redColor];
+            subjectBtn.backgroundColor = RGBCOLOR(230, 100, 120);
             j++;
         }
         

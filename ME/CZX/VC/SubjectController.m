@@ -21,7 +21,7 @@
     UILabel *textView;
     NSArray *currentAnArray;
     NSArray *optionArray;
-
+    UILabel *pageLabel;
 }
 @end
 #define KColor RGBCOLOR(222, 255, 170)
@@ -63,7 +63,7 @@
     
     currentAnArray = [myAnswerArray objectAtIndex:page];
     
-    myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 320, 376)];
+    myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, 320, 440)];
     myTableView.delegate = self;
     myTableView.dataSource = self;
     myTableView.tableFooterView = [[UIView alloc] init];
@@ -82,17 +82,34 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@%@", [optionArray objectAtIndex:indexPath.row], [currentAnArray objectAtIndex:[indexPath row]]];
+    int row = indexPath.row;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@%@", [optionArray objectAtIndex:row], [currentAnArray objectAtIndex:row]];
     [cell.textLabel resizeToFit];
+    if (![[myPersonArray objectAtIndex:page] isEqualToString:@"4"])
+    {
+        if (indexPath.row == [[myPersonArray objectAtIndex:page] intValue]) {
+            cell.backgroundColor = RGBCOLOR(230, 100, 120);
+        }
+    }
+    if (indexPath.row == [[myCorrectArray objectAtIndex:page] intValue]) {
+        cell.backgroundColor = KColor;
+    }
     cell.textLabel.font = [UIFont systemFontOfSize:16.0];
 
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 - (void)createTitleView
 {
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
     UILabel *titleLa = [[UILabel alloc] initWithFrame:CGRectMake(120, 20, 80, 44)];
+//    titleView.backgroundColor = KColor;
+    titleView.backgroundColor = [UIColor whiteColor];
     titleLa.text = @"查看题目";
     titleLa.textAlignment = NSTextAlignmentCenter;
     [titleView addSubview:titleLa];
@@ -103,14 +120,20 @@
     [dismissBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [dismissBtn addTarget:self action:@selector(back)
          forControlEvents:UIControlEventTouchUpInside];
+    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(240, 20, 80, 44)];
+    [rightBtn setTitle:@"截图保存" forState:UIControlStateNormal];
+    rightBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+    [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [rightBtn addTarget:self action:@selector(screenShot) forControlEvents:UIControlEventTouchUpInside];
+    [titleView addSubview:rightBtn];
     [titleView addSubview:dismissBtn];
     [self.view addSubview:titleView];
 }
 
 - (void)createPagingBtn
 {
-    self.upBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 440, 60, 40)];
-    self.downBtn = [[UIButton alloc] initWithFrame:CGRectMake(260, 440, 60, 40)];
+    self.upBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 440, 120, 40)];
+    self.downBtn = [[UIButton alloc] initWithFrame:CGRectMake(200, 440, 120, 40)];
     [self.upBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.downBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     //    [self.upBtn setImage:[UIImage imageNamed:@"up"] forState:UIControlStateNormal];
@@ -123,6 +146,11 @@
     self.downBtn.backgroundColor = KColor;
     [self.upBtn addTarget:self action:@selector(upPage) forControlEvents:UIControlEventTouchUpInside];
     [self.downBtn addTarget:self action:@selector(downPage) forControlEvents:UIControlEventTouchUpInside];
+    pageLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 440, 80, 40)];
+    pageLabel.backgroundColor = KColor;
+    pageLabel.textAlignment = NSTextAlignmentCenter;
+    pageLabel.text = [NSString stringWithFormat:@"%d/%d", page+1, myQuestionArray.count];
+    [self.view addSubview:pageLabel];
     [self.view addSubview:self.upBtn];
     [self.view addSubview:self.downBtn];
 }
@@ -148,6 +176,9 @@
 - (void)tableViewReload
 {
     textView.text = [NSString stringWithFormat:@"%d.%@", page+1, [myQuestionArray objectAtIndex:page]];
+    [textView resizeToFit];
+    myTableView.tableHeaderView = textView;
+    pageLabel.text = [NSString stringWithFormat:@"%d/%d", page+1, myQuestionArray.count];
     currentAnArray = [myAnswerArray objectAtIndex:page];
     [myTableView reloadData];
 }
@@ -155,6 +186,20 @@
 - (void)back
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)screenShot
+{
+    UIGraphicsBeginImageContext(self.view.bounds.size);
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image= UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+//    NSLog(@"image:%@",image);
+//    UIImageView *imaView = [[UIImageView alloc] initWithImage:image];
+//    imaView.frame = CGRectMake(0, 700, 500, 500);
+//    [self.view addSubview:imaView];
+    UIImageWriteToSavedPhotosAlbum(image, self, nil, nil);
 }
 
 - (void)didReceiveMemoryWarning
