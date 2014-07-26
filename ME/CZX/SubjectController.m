@@ -146,10 +146,6 @@
 
 - (void)tableViewReload
 {
-<<<<<<< HEAD:ME/CZX/SubjectController.m
-=======
-    textView.text = [NSString stringWithFormat:@"%d.%@", page+1, [myQuestionArray objectAtIndex:page]];
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject:ME/CZX/SubjectController.m
     currentAnArray = [myAnswerArray objectAtIndex:page];
     [myTableView reloadData];
 }

@@ -258,71 +258,6 @@
 		5BB54B32197E6ED70096DD7F /* CourseChapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB54B31197E6ED70096DD7F /* CourseChapter.m */; };
 		5BB695D1198012D100A4E6DE /* SendComNoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB695D0198012D100A4E6DE /* SendComNoteView.m */; };
 		5BB695D3198012FD00A4E6DE /* SendComNoteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BB695D2198012FD00A4E6DE /* SendComNoteView.xib */; };
-<<<<<<< HEAD
-=======
-		5BCF96F1198389120064ED84 /* answer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96A2198389120064ED84 /* answer.plist */; };
-		5BCF96F2198389120064ED84 /* comment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96A3198389120064ED84 /* comment.plist */; };
-		5BCF96F3198389120064ED84 /* JJBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96A5198389120064ED84 /* JJBaseViewController.m */; };
-		5BCF96F4198389120064ED84 /* JJBaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96A6198389120064ED84 /* JJBaseViewController.xib */; };
-		5BCF96F5198389120064ED84 /* JJDirectionManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96A8198389120064ED84 /* JJDirectionManage.m */; };
-		5BCF96F6198389120064ED84 /* JJDirectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96AA198389120064ED84 /* JJDirectionModel.m */; };
-		5BCF96F7198389120064ED84 /* JJFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96AC198389120064ED84 /* JJFinishViewController.m */; };
-		5BCF96F8198389120064ED84 /* JJFinishViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96AD198389120064ED84 /* JJFinishViewController.xib */; };
-		5BCF96F9198389120064ED84 /* JJMeasurementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96AF198389120064ED84 /* JJMeasurementViewController.m */; };
-		5BCF96FA198389120064ED84 /* JJMeasurementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96B0198389120064ED84 /* JJMeasurementViewController.xib */; };
-		5BCF96FB198389120064ED84 /* JJSubjectManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96B2198389120064ED84 /* JJSubjectManage.m */; };
-		5BCF96FC198389120064ED84 /* JJSubjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96B4198389120064ED84 /* JJSubjectModel.m */; };
-		5BCF96FD198389120064ED84 /* JJTestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96B6198389120064ED84 /* JJTestDetailViewController.m */; };
-		5BCF96FE198389120064ED84 /* JJTestDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96B7198389120064ED84 /* JJTestDetailViewController.xib */; };
-		5BCF96FF198389120064ED84 /* JJTestDivideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96B9198389120064ED84 /* JJTestDivideViewController.m */; };
-		5BCF9700198389120064ED84 /* JJTestDivideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96BA198389120064ED84 /* JJTestDivideViewController.xib */; };
-		5BCF9701198389120064ED84 /* JJTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96BC198389120064ED84 /* JJTestModel.m */; };
-		5BCF9702198389120064ED84 /* JJTestModelManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96BE198389120064ED84 /* JJTestModelManage.m */; };
-		5BCF9703198389120064ED84 /* JJTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96C0198389120064ED84 /* JJTestTableViewCell.m */; };
-		5BCF9704198389120064ED84 /* JJTestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96C1198389120064ED84 /* JJTestTableViewCell.xib */; };
-		5BCF9705198389120064ED84 /* JJTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96C3198389120064ED84 /* JJTestViewController.m */; };
-		5BCF9706198389120064ED84 /* JJTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96C4198389120064ED84 /* JJTestViewController.xib */; };
-		5BCF9707198389120064ED84 /* questions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96C5198389120064ED84 /* questions.plist */; };
-		5BCF9708198389120064ED84 /* ReviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96C7198389120064ED84 /* ReviewController.m */; };
-		5BCF9709198389120064ED84 /* SubjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF96C9198389120064ED84 /* SubjectController.m */; };
-		5BCF970A198389120064ED84 /* testDetail.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96CA198389120064ED84 /* testDetail.plist */; };
-		5BCF970B198389120064ED84 /* testName.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96CB198389120064ED84 /* testName.plist */; };
-		5BCF970C198389120064ED84 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96CD198389120064ED84 /* back@2x.png */; };
-		5BCF970D198389120064ED84 /* buy1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96CE198389120064ED84 /* buy1.png */; };
-		5BCF970E198389120064ED84 /* buy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96CF198389120064ED84 /* buy@2x.png */; };
-		5BCF970F198389120064ED84 /* buyUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96D0198389120064ED84 /* buyUp@2x.png */; };
-		5BCF9710198389120064ED84 /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96D1198389120064ED84 /* down@2x.png */; };
-		5BCF9711198389120064ED84 /* downUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96D2198389120064ED84 /* downUp@2x.png */; };
-		5BCF9712198389120064ED84 /* like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96D3198389120064ED84 /* like@2x.png */; };
-		5BCF9713198389120064ED84 /* likeUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96D4198389120064ED84 /* likeUp@2x.png */; };
-		5BCF9714198389120064ED84 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96D5198389120064ED84 /* share@2x.png */; };
-		5BCF9715198389120064ED84 /* shareUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96D6198389120064ED84 /* shareUp@2x.png */; };
-		5BCF9716198389120064ED84 /* up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96D7198389120064ED84 /* up@2x.png */; };
-		5BCF9717198389120064ED84 /* upUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96D8198389120064ED84 /* upUp@2x.png */; };
-		5BCF9718198389120064ED84 /* arrow-circle-right.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96DA198389120064ED84 /* arrow-circle-right.png */; };
-		5BCF9719198389120064ED84 /* arrow-downlaod-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96DB198389120064ED84 /* arrow-downlaod-circle.png */; };
-		5BCF971A198389120064ED84 /* bin.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96DC198389120064ED84 /* bin.png */; };
-		5BCF971B198389120064ED84 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96DD198389120064ED84 /* calendar.png */; };
-		5BCF971C198389120064ED84 /* chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96DE198389120064ED84 /* chat.png */; };
-		5BCF971D198389120064ED84 /* CpersonNum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96DF198389120064ED84 /* CpersonNum@2x.png */; };
-		5BCF971E198389120064ED84 /* CtimeNum.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96E0198389120064ED84 /* CtimeNum.png */; };
-		5BCF971F198389120064ED84 /* CuserPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96E1198389120064ED84 /* CuserPhoto.png */; };
-		5BCF9720198389120064ED84 /* friend.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96E2198389120064ED84 /* friend.png */; };
-		5BCF9721198389120064ED84 /* friends-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96E3198389120064ED84 /* friends-list.png */; };
-		5BCF9722198389120064ED84 /* inbox-active.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96E4198389120064ED84 /* inbox-active.png */; };
-		5BCF9723198389120064ED84 /* inbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96E5198389120064ED84 /* inbox.png */; };
-		5BCF9724198389120064ED84 /* locked-place.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96E6198389120064ED84 /* locked-place.png */; };
-		5BCF9725198389120064ED84 /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96E7198389120064ED84 /* message.png */; };
-		5BCF9726198389120064ED84 /* no-rate.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96E8198389120064ED84 /* no-rate.png */; };
-		5BCF9727198389120064ED84 /* rate.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96E9198389120064ED84 /* rate.png */; };
-		5BCF9728198389120064ED84 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96EA198389120064ED84 /* settings.png */; };
-		5BCF9729198389120064ED84 /* share1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96EB198389120064ED84 /* share1.png */; };
-		5BCF972A198389120064ED84 /* store.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96EC198389120064ED84 /* store.png */; };
-		5BCF972B198389120064ED84 /* thumbs-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96ED198389120064ED84 /* thumbs-down.png */; };
-		5BCF972C198389120064ED84 /* thumbs-up.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96EE198389120064ED84 /* thumbs-up.png */; };
-		5BCF972D198389120064ED84 /* writing.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96EF198389120064ED84 /* writing.png */; };
-		5BCF972E198389120064ED84 /* yen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF96F0198389120064ED84 /* yen@2x.png */; };
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 		B0B0AD18197D327900B29458 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD15197D327900B29458 /* Default-568h@2x.png */; };
 		B0B0AD19197D327900B29458 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD16197D327900B29458 /* Default.png */; };
 		B0B0AD1A197D327900B29458 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD17197D327900B29458 /* Default@2x.png */; };
@@ -681,86 +616,6 @@
 		5BB695CF198012D100A4E6DE /* SendComNoteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendComNoteView.h; sourceTree = "<group>"; };
 		5BB695D0198012D100A4E6DE /* SendComNoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendComNoteView.m; sourceTree = "<group>"; };
 		5BB695D2198012FD00A4E6DE /* SendComNoteView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendComNoteView.xib; sourceTree = "<group>"; };
-<<<<<<< HEAD
-=======
-		5BCF96A2198389120064ED84 /* answer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = answer.plist; sourceTree = "<group>"; };
-		5BCF96A3198389120064ED84 /* comment.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = comment.plist; sourceTree = "<group>"; };
-		5BCF96A4198389120064ED84 /* JJBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJBaseViewController.h; sourceTree = "<group>"; };
-		5BCF96A5198389120064ED84 /* JJBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJBaseViewController.m; sourceTree = "<group>"; };
-		5BCF96A6198389120064ED84 /* JJBaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJBaseViewController.xib; sourceTree = "<group>"; };
-		5BCF96A7198389120064ED84 /* JJDirectionManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJDirectionManage.h; sourceTree = "<group>"; };
-		5BCF96A8198389120064ED84 /* JJDirectionManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJDirectionManage.m; sourceTree = "<group>"; };
-		5BCF96A9198389120064ED84 /* JJDirectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJDirectionModel.h; sourceTree = "<group>"; };
-		5BCF96AA198389120064ED84 /* JJDirectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJDirectionModel.m; sourceTree = "<group>"; };
-		5BCF96AB198389120064ED84 /* JJFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJFinishViewController.h; sourceTree = "<group>"; };
-		5BCF96AC198389120064ED84 /* JJFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJFinishViewController.m; sourceTree = "<group>"; };
-		5BCF96AD198389120064ED84 /* JJFinishViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJFinishViewController.xib; sourceTree = "<group>"; };
-		5BCF96AE198389120064ED84 /* JJMeasurementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJMeasurementViewController.h; sourceTree = "<group>"; };
-		5BCF96AF198389120064ED84 /* JJMeasurementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJMeasurementViewController.m; sourceTree = "<group>"; };
-		5BCF96B0198389120064ED84 /* JJMeasurementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJMeasurementViewController.xib; sourceTree = "<group>"; };
-		5BCF96B1198389120064ED84 /* JJSubjectManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJSubjectManage.h; sourceTree = "<group>"; };
-		5BCF96B2198389120064ED84 /* JJSubjectManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJSubjectManage.m; sourceTree = "<group>"; };
-		5BCF96B3198389120064ED84 /* JJSubjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJSubjectModel.h; sourceTree = "<group>"; };
-		5BCF96B4198389120064ED84 /* JJSubjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJSubjectModel.m; sourceTree = "<group>"; };
-		5BCF96B5198389120064ED84 /* JJTestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestDetailViewController.h; sourceTree = "<group>"; };
-		5BCF96B6198389120064ED84 /* JJTestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestDetailViewController.m; sourceTree = "<group>"; };
-		5BCF96B7198389120064ED84 /* JJTestDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestDetailViewController.xib; sourceTree = "<group>"; };
-		5BCF96B8198389120064ED84 /* JJTestDivideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestDivideViewController.h; sourceTree = "<group>"; };
-		5BCF96B9198389120064ED84 /* JJTestDivideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestDivideViewController.m; sourceTree = "<group>"; };
-		5BCF96BA198389120064ED84 /* JJTestDivideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestDivideViewController.xib; sourceTree = "<group>"; };
-		5BCF96BB198389120064ED84 /* JJTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestModel.h; sourceTree = "<group>"; };
-		5BCF96BC198389120064ED84 /* JJTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestModel.m; sourceTree = "<group>"; };
-		5BCF96BD198389120064ED84 /* JJTestModelManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestModelManage.h; sourceTree = "<group>"; };
-		5BCF96BE198389120064ED84 /* JJTestModelManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestModelManage.m; sourceTree = "<group>"; };
-		5BCF96BF198389120064ED84 /* JJTestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestTableViewCell.h; sourceTree = "<group>"; };
-		5BCF96C0198389120064ED84 /* JJTestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestTableViewCell.m; sourceTree = "<group>"; };
-		5BCF96C1198389120064ED84 /* JJTestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestTableViewCell.xib; sourceTree = "<group>"; };
-		5BCF96C2198389120064ED84 /* JJTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestViewController.h; sourceTree = "<group>"; };
-		5BCF96C3198389120064ED84 /* JJTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestViewController.m; sourceTree = "<group>"; };
-		5BCF96C4198389120064ED84 /* JJTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestViewController.xib; sourceTree = "<group>"; };
-		5BCF96C5198389120064ED84 /* questions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = questions.plist; sourceTree = "<group>"; };
-		5BCF96C6198389120064ED84 /* ReviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewController.h; sourceTree = "<group>"; };
-		5BCF96C7198389120064ED84 /* ReviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewController.m; sourceTree = "<group>"; };
-		5BCF96C8198389120064ED84 /* SubjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectController.h; sourceTree = "<group>"; };
-		5BCF96C9198389120064ED84 /* SubjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectController.m; sourceTree = "<group>"; };
-		5BCF96CA198389120064ED84 /* testDetail.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = testDetail.plist; sourceTree = "<group>"; };
-		5BCF96CB198389120064ED84 /* testName.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = testName.plist; sourceTree = "<group>"; };
-		5BCF96CD198389120064ED84 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
-		5BCF96CE198389120064ED84 /* buy1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buy1.png; sourceTree = "<group>"; };
-		5BCF96CF198389120064ED84 /* buy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy@2x.png"; sourceTree = "<group>"; };
-		5BCF96D0198389120064ED84 /* buyUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buyUp@2x.png"; sourceTree = "<group>"; };
-		5BCF96D1198389120064ED84 /* down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@2x.png"; sourceTree = "<group>"; };
-		5BCF96D2198389120064ED84 /* downUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downUp@2x.png"; sourceTree = "<group>"; };
-		5BCF96D3198389120064ED84 /* like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like@2x.png"; sourceTree = "<group>"; };
-		5BCF96D4198389120064ED84 /* likeUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "likeUp@2x.png"; sourceTree = "<group>"; };
-		5BCF96D5198389120064ED84 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
-		5BCF96D6198389120064ED84 /* shareUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareUp@2x.png"; sourceTree = "<group>"; };
-		5BCF96D7198389120064ED84 /* up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up@2x.png"; sourceTree = "<group>"; };
-		5BCF96D8198389120064ED84 /* upUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upUp@2x.png"; sourceTree = "<group>"; };
-		5BCF96DA198389120064ED84 /* arrow-circle-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-circle-right.png"; sourceTree = "<group>"; };
-		5BCF96DB198389120064ED84 /* arrow-downlaod-circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-downlaod-circle.png"; sourceTree = "<group>"; };
-		5BCF96DC198389120064ED84 /* bin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bin.png; sourceTree = "<group>"; };
-		5BCF96DD198389120064ED84 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
-		5BCF96DE198389120064ED84 /* chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat.png; sourceTree = "<group>"; };
-		5BCF96DF198389120064ED84 /* CpersonNum@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CpersonNum@2x.png"; sourceTree = "<group>"; };
-		5BCF96E0198389120064ED84 /* CtimeNum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CtimeNum.png; sourceTree = "<group>"; };
-		5BCF96E1198389120064ED84 /* CuserPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CuserPhoto.png; sourceTree = "<group>"; };
-		5BCF96E2198389120064ED84 /* friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend.png; sourceTree = "<group>"; };
-		5BCF96E3198389120064ED84 /* friends-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friends-list.png"; sourceTree = "<group>"; };
-		5BCF96E4198389120064ED84 /* inbox-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inbox-active.png"; sourceTree = "<group>"; };
-		5BCF96E5198389120064ED84 /* inbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inbox.png; sourceTree = "<group>"; };
-		5BCF96E6198389120064ED84 /* locked-place.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locked-place.png"; sourceTree = "<group>"; };
-		5BCF96E7198389120064ED84 /* message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message.png; sourceTree = "<group>"; };
-		5BCF96E8198389120064ED84 /* no-rate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-rate.png"; sourceTree = "<group>"; };
-		5BCF96E9198389120064ED84 /* rate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rate.png; sourceTree = "<group>"; };
-		5BCF96EA198389120064ED84 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
-		5BCF96EB198389120064ED84 /* share1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share1.png; sourceTree = "<group>"; };
-		5BCF96EC198389120064ED84 /* store.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = store.png; sourceTree = "<group>"; };
-		5BCF96ED198389120064ED84 /* thumbs-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-down.png"; sourceTree = "<group>"; };
-		5BCF96EE198389120064ED84 /* thumbs-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up.png"; sourceTree = "<group>"; };
-		5BCF96EF198389120064ED84 /* writing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writing.png; sourceTree = "<group>"; };
-		5BCF96F0198389120064ED84 /* yen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yen@2x.png"; sourceTree = "<group>"; };
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 		B0B0AD15197D327900B29458 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B0B0AD16197D327900B29458 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		B0B0AD17197D327900B29458 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -828,10 +683,6 @@
 		5B717E9C1978FD9600F1359C /* ME */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-=======
-				5BCF96A1198389120064ED84 /* CZX */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B7180DF197905D600F1359C /* ZHZ */,
 				5B717FE5197905C800F1359C /* CC */,
 				5B717F65197905BA00F1359C /* CZX */,
@@ -1440,7 +1291,6 @@
 			path = mycell;
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
 		ABC2246419793599008BD18C /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1497,104 +1347,6 @@
 		ABC2246919793705008BD18C /* Manage */ = {
 			isa = PBXGroup;
 			children = (
-=======
-		5BCF96A1198389120064ED84 /* CZX */ = {
-			isa = PBXGroup;
-			children = (
-				5BCF96A2198389120064ED84 /* answer.plist */,
-				5BCF96A3198389120064ED84 /* comment.plist */,
-				5BCF96A4198389120064ED84 /* JJBaseViewController.h */,
-				5BCF96A5198389120064ED84 /* JJBaseViewController.m */,
-				5BCF96A6198389120064ED84 /* JJBaseViewController.xib */,
-				5BCF96A7198389120064ED84 /* JJDirectionManage.h */,
-				5BCF96A8198389120064ED84 /* JJDirectionManage.m */,
-				5BCF96A9198389120064ED84 /* JJDirectionModel.h */,
-				5BCF96AA198389120064ED84 /* JJDirectionModel.m */,
-				5BCF96AB198389120064ED84 /* JJFinishViewController.h */,
-				5BCF96AC198389120064ED84 /* JJFinishViewController.m */,
-				5BCF96AD198389120064ED84 /* JJFinishViewController.xib */,
-				5BCF96AE198389120064ED84 /* JJMeasurementViewController.h */,
-				5BCF96AF198389120064ED84 /* JJMeasurementViewController.m */,
-				5BCF96B0198389120064ED84 /* JJMeasurementViewController.xib */,
-				5BCF96B1198389120064ED84 /* JJSubjectManage.h */,
-				5BCF96B2198389120064ED84 /* JJSubjectManage.m */,
-				5BCF96B3198389120064ED84 /* JJSubjectModel.h */,
-				5BCF96B4198389120064ED84 /* JJSubjectModel.m */,
-				5BCF96B5198389120064ED84 /* JJTestDetailViewController.h */,
-				5BCF96B6198389120064ED84 /* JJTestDetailViewController.m */,
-				5BCF96B7198389120064ED84 /* JJTestDetailViewController.xib */,
-				5BCF96B8198389120064ED84 /* JJTestDivideViewController.h */,
-				5BCF96B9198389120064ED84 /* JJTestDivideViewController.m */,
-				5BCF96BA198389120064ED84 /* JJTestDivideViewController.xib */,
-				5BCF96BB198389120064ED84 /* JJTestModel.h */,
-				5BCF96BC198389120064ED84 /* JJTestModel.m */,
-				5BCF96BD198389120064ED84 /* JJTestModelManage.h */,
-				5BCF96BE198389120064ED84 /* JJTestModelManage.m */,
-				5BCF96BF198389120064ED84 /* JJTestTableViewCell.h */,
-				5BCF96C0198389120064ED84 /* JJTestTableViewCell.m */,
-				5BCF96C1198389120064ED84 /* JJTestTableViewCell.xib */,
-				5BCF96C2198389120064ED84 /* JJTestViewController.h */,
-				5BCF96C3198389120064ED84 /* JJTestViewController.m */,
-				5BCF96C4198389120064ED84 /* JJTestViewController.xib */,
-				5BCF96C5198389120064ED84 /* questions.plist */,
-				5BCF96C6198389120064ED84 /* ReviewController.h */,
-				5BCF96C7198389120064ED84 /* ReviewController.m */,
-				5BCF96C8198389120064ED84 /* SubjectController.h */,
-				5BCF96C9198389120064ED84 /* SubjectController.m */,
-				5BCF96CA198389120064ED84 /* testDetail.plist */,
-				5BCF96CB198389120064ED84 /* testName.plist */,
-				5BCF96CC198389120064ED84 /* tu */,
-				5BCF96D9198389120064ED84 /* 素材 */,
-			);
-			path = CZX;
-			sourceTree = "<group>";
-		};
-		5BCF96CC198389120064ED84 /* tu */ = {
-			isa = PBXGroup;
-			children = (
-				5BCF96CD198389120064ED84 /* back@2x.png */,
-				5BCF96CE198389120064ED84 /* buy1.png */,
-				5BCF96CF198389120064ED84 /* buy@2x.png */,
-				5BCF96D0198389120064ED84 /* buyUp@2x.png */,
-				5BCF96D1198389120064ED84 /* down@2x.png */,
-				5BCF96D2198389120064ED84 /* downUp@2x.png */,
-				5BCF96D3198389120064ED84 /* like@2x.png */,
-				5BCF96D4198389120064ED84 /* likeUp@2x.png */,
-				5BCF96D5198389120064ED84 /* share@2x.png */,
-				5BCF96D6198389120064ED84 /* shareUp@2x.png */,
-				5BCF96D7198389120064ED84 /* up@2x.png */,
-				5BCF96D8198389120064ED84 /* upUp@2x.png */,
-			);
-			path = tu;
-			sourceTree = "<group>";
-		};
-		5BCF96D9198389120064ED84 /* 素材 */ = {
-			isa = PBXGroup;
-			children = (
-				5BCF96DA198389120064ED84 /* arrow-circle-right.png */,
-				5BCF96DB198389120064ED84 /* arrow-downlaod-circle.png */,
-				5BCF96DC198389120064ED84 /* bin.png */,
-				5BCF96DD198389120064ED84 /* calendar.png */,
-				5BCF96DE198389120064ED84 /* chat.png */,
-				5BCF96DF198389120064ED84 /* CpersonNum@2x.png */,
-				5BCF96E0198389120064ED84 /* CtimeNum.png */,
-				5BCF96E1198389120064ED84 /* CuserPhoto.png */,
-				5BCF96E2198389120064ED84 /* friend.png */,
-				5BCF96E3198389120064ED84 /* friends-list.png */,
-				5BCF96E4198389120064ED84 /* inbox-active.png */,
-				5BCF96E5198389120064ED84 /* inbox.png */,
-				5BCF96E6198389120064ED84 /* locked-place.png */,
-				5BCF96E7198389120064ED84 /* message.png */,
-				5BCF96E8198389120064ED84 /* no-rate.png */,
-				5BCF96E9198389120064ED84 /* rate.png */,
-				5BCF96EA198389120064ED84 /* settings.png */,
-				5BCF96EB198389120064ED84 /* share1.png */,
-				5BCF96EC198389120064ED84 /* store.png */,
-				5BCF96ED198389120064ED84 /* thumbs-down.png */,
-				5BCF96EE198389120064ED84 /* thumbs-up.png */,
-				5BCF96EF198389120064ED84 /* writing.png */,
-				5BCF96F0198389120064ED84 /* yen@2x.png */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 			);
 			name = Manage;
 			sourceTree = "<group>";
@@ -1685,18 +1437,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B718111197905D600F1359C /* LoginViewController.xib in Resources */,
-<<<<<<< HEAD
-=======
-				5BCF971E198389120064ED84 /* CtimeNum.png in Resources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B7180DA197905C900F1359C /* CCourse.xib in Resources */,
 				5B71809B197905C900F1359C /* details_definition_bg@2x.png in Resources */,
 				5B717EAF1978FD9600F1359C /* Images.xcassets in Resources */,
-<<<<<<< HEAD
 				5B717FCB197905BA00F1359C /* shareUp@2x.png in Resources */,
-=======
-				5BCF9716198389120064ED84 /* up@2x.png in Resources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B718089197905C900F1359C /* J3.jpg in Resources */,
 				5B718072197905C900F1359C /* course1.jpg in Resources */,
 				5B7180CA197905C900F1359C /* details_up_select.png in Resources */,
@@ -1705,17 +1449,9 @@
 				5B718085197905C900F1359C /* J0.jpg in Resources */,
 				5B7180A4197905C900F1359C /* details_down_select.png in Resources */,
 				B0B0AD18197D327900B29458 /* Default-568h@2x.png in Resources */,
-<<<<<<< HEAD
-=======
-				5BCF972C198389120064ED84 /* thumbs-up.png in Resources */,
-				5BCF9728198389120064ED84 /* settings.png in Resources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B71808C197905C900F1359C /* J6.jpg in Resources */,
 				5B718081197905C900F1359C /* directionDefault.png in Resources */,
-<<<<<<< HEAD
 				5B717FBF197905BA00F1359C /* 000@2x.png in Resources */,
-=======
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B7180CE197905C900F1359C /* 下载.png in Resources */,
 				5B7180A0197905C900F1359C /* details_definition_select.png in Resources */,
 				5B7180AF197905C900F1359C /* details_mute@2x.png in Resources */,
@@ -1723,15 +1459,10 @@
 				5B7180C8197905C900F1359C /* details_up.png in Resources */,
 				5B7180BA197905C900F1359C /* details_progress_select.png in Resources */,
 				5B71808F197905C900F1359C /* J9.jpg in Resources */,
-<<<<<<< HEAD
 				5B717FC3197905BA00F1359C /* buy1.png in Resources */,
 				5B717FE0197905BA00F1359C /* store.png in Resources */,
 				5B718074197905C900F1359C /* course3.jpg in Resources */,
 				5B717FDC197905BA00F1359C /* no-rate.png in Resources */,
-=======
-				5B718074197905C900F1359C /* course3.jpg in Resources */,
-				5BCF970F198389120064ED84 /* buyUp@2x.png in Resources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B7180CD197905C900F1359C /* promo_full.mp4 in Resources */,
 				5B71809F197905C900F1359C /* details_definition_bg_line@2x.png in Resources */,
 				5B7180AA197905C900F1359C /* details_hd_select.png in Resources */,
@@ -1746,37 +1477,18 @@
 				5B717FC2197905BA00F1359C /* back@2x.png in Resources */,
 				5B717FD3197905BA00F1359C /* CpersonNum@2x.png in Resources */,
 				5B7180D1197905C900F1359C /* 笔记.png in Resources */,
-<<<<<<< HEAD
-=======
-				5BCF96F1198389120064ED84 /* answer.plist in Resources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B718091197905C900F1359C /* details_airplay@2x.png in Resources */,
 				5B718083197905C900F1359C /* headAd2@2x.png in Resources */,
 				5B717FE1197905BA00F1359C /* thumbs-down.png in Resources */,
 				5B718070197905C900F1359C /* cellTag@2x.png in Resources */,
 				5B7180B5197905C900F1359C /* details_ordinary_select@2x.png in Resources */,
-<<<<<<< HEAD
-=======
-				5BCF970A198389120064ED84 /* testDetail.plist in Resources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B7180C5197905C900F1359C /* details_stop@2x.png in Resources */,
 				5B7180D7197905C900F1359C /* CChapterHead.xib in Resources */,
 				5B71807B197905C900F1359C /* CourseNoteData.plist in Resources */,
 				5B71811A197905D600F1359C /* NumCell.xib in Resources */,
-<<<<<<< HEAD
-=======
-				5BCF9723198389120064ED84 /* inbox.png in Resources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B7180AD197905C900F1359C /* details_left@2x.png in Resources */,
 				5B717FB9197905BA00F1359C /* JJTestTableViewCell.xib in Resources */,
 				5B07E4E61980CE7F00B3965D /* 已收藏.png in Resources */,
-<<<<<<< HEAD
-=======
-				5BCF9704198389120064ED84 /* JJTestTableViewCell.xib in Resources */,
-				5BCF970B198389120064ED84 /* testName.plist in Resources */,
-				5BCF96F8198389120064ED84 /* JJFinishViewController.xib in Resources */,
-				5BCF9711198389120064ED84 /* downUp@2x.png in Resources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B7180D0197905C900F1359C /* 收藏.png in Resources */,
 				5B7180A9197905C900F1359C /* details_hd@2x.png in Resources */,
 				5B717FD6197905BA00F1359C /* friend.png in Resources */,
@@ -1784,22 +1496,15 @@
 				5B7180B2197905C900F1359C /* details_ordinary.png in Resources */,
 				5B7180DD197905C900F1359C /* CDetailHead.xib in Resources */,
 				5B7180B6197905C900F1359C /* details_Progress of the point.png in Resources */,
-<<<<<<< HEAD
 				5B717FE2197905BA00F1359C /* thumbs-up.png in Resources */,
-=======
-				5BCF971F198389120064ED84 /* CuserPhoto.png in Resources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B7180BB197905C900F1359C /* details_progress_select@2x.png in Resources */,
 				5B71809C197905C900F1359C /* details_definition_bg_bg2.png in Resources */,
 				5B718087197905C900F1359C /* J10.jpg in Resources */,
 				5B718088197905C900F1359C /* J2.jpg in Resources */,
 				5B717FE3197905BA00F1359C /* writing.png in Resources */,
 				5B7180CF197905C900F1359C /* 分享.png in Resources */,
-<<<<<<< HEAD
 				5B717FC5197905BA00F1359C /* buyUp@2x.png in Resources */,
 				5B717FBC197905BA00F1359C /* questions.plist in Resources */,
-=======
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B718098197905C900F1359C /* details_definition.png in Resources */,
 				5B717FAF197905BA00F1359C /* JJBaseViewController.xib in Resources */,
 				5B71807A197905C900F1359C /* CourseInfoData.plist in Resources */,
@@ -1809,21 +1514,13 @@
 				5B718097197905C900F1359C /* details_button_back_select@2x.png in Resources */,
 				5B71811C197905D600F1359C /* ProgressCell.xib in Resources */,
 				5B71808E197905C900F1359C /* J8.jpg in Resources */,
-<<<<<<< HEAD
-=======
-				5BCF972B198389120064ED84 /* thumbs-down.png in Resources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B7180D9197905C900F1359C /* CCommentCell.xib in Resources */,
 				5B717FD7197905BA00F1359C /* friends-list.png in Resources */,
 				5B717FB3197905BA00F1359C /* JJMeasurementViewController.xib in Resources */,
 				5B717FD5197905BA00F1359C /* CuserPhoto.png in Resources */,
 				5B7180CB197905C900F1359C /* details_up_select@2x.png in Resources */,
 				5B7180A5197905C900F1359C /* details_down_select@2x.png in Resources */,
-<<<<<<< HEAD
 				5B717FCA197905BA00F1359C /* share@2x.png in Resources */,
-=======
-				5BCF971D198389120064ED84 /* CpersonNum@2x.png in Resources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B718099197905C900F1359C /* details_definition@2x.png in Resources */,
 				5B717FB1197905BA00F1359C /* JJFinishViewController.xib in Resources */,
 				5B7180B1197905C900F1359C /* details_mute_select@2x.png in Resources */,
@@ -1840,26 +1537,19 @@
 				5B7180B0197905C900F1359C /* details_mute_select.png in Resources */,
 				5B7180AC197905C900F1359C /* details_left.png in Resources */,
 				5B71807F197905C900F1359C /* CuserPhoto.png in Resources */,
-<<<<<<< HEAD
 				5B717FC7197905BA00F1359C /* downUp@2x.png in Resources */,
 				5B717FC6197905BA00F1359C /* down@2x.png in Resources */,
-=======
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B7180C9197905C900F1359C /* details_up@2x.png in Resources */,
 				5B717FBB197905BA00F1359C /* JJTestViewController.xib in Resources */,
 				5B717FC4197905BA00F1359C /* buy@2x.png in Resources */,
 				5B717FC1197905BA00F1359C /* 002@2x.png in Resources */,
 				5B718080197905C900F1359C /* DamakuData.plist in Resources */,
-<<<<<<< HEAD
 				5B717FCE197905BA00F1359C /* arrow-circle-right.png in Resources */,
-=======
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B71809E197905C900F1359C /* details_definition_bg_line.png in Resources */,
 				5B7180CC197905C900F1359C /* Thumbs.db in Resources */,
 				5B7180B4197905C900F1359C /* details_ordinary_select.png in Resources */,
 				5B718094197905C900F1359C /* details_button_back.png in Resources */,
 				5B7180BE197905C900F1359C /* details_sound_select.png in Resources */,
-<<<<<<< HEAD
 				5B717FB6197905BA00F1359C /* JJTestDetailViewController.xib in Resources */,
 				5B718075197905C900F1359C /* course4.jpg in Resources */,
 				5B717FBD197905BA00F1359C /* testDetail.plist in Resources */,
@@ -1867,13 +1557,6 @@
 				5B718093197905C900F1359C /* details_airplay_select@2x.png in Resources */,
 				5B717FDB197905BA00F1359C /* message.png in Resources */,
 				5B7180C0197905C900F1359C /* details_start.png in Resources */,
-=======
-				5B718075197905C900F1359C /* course4.jpg in Resources */,
-				5BCF9725198389120064ED84 /* message.png in Resources */,
-				5B718093197905C900F1359C /* details_airplay_select@2x.png in Resources */,
-				5B7180C0197905C900F1359C /* details_start.png in Resources */,
-				5BCF970C198389120064ED84 /* back@2x.png in Resources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B7180B7197905C900F1359C /* details_Progress of the point@2x.png in Resources */,
 				5B717FDF197905BA00F1359C /* share1.png in Resources */,
 				5B71807E197905C900F1359C /* CtimeNum.png in Resources */,
@@ -1894,22 +1577,13 @@
 				B0B0AD1A197D327900B29458 /* Default@2x.png in Resources */,
 				5B717FD8197905BA00F1359C /* inbox-active.png in Resources */,
 				5B7180AE197905C900F1359C /* details_mute.png in Resources */,
-<<<<<<< HEAD
 				5B717FD1197905BA00F1359C /* calendar.png in Resources */,
 				5B71809D197905C900F1359C /* details_definition_bg_bg2@2x.png in Resources */,
-=======
-				5BCF9729198389120064ED84 /* share1.png in Resources */,
-				5B71809D197905C900F1359C /* details_definition_bg_bg2@2x.png in Resources */,
-				5BCF971A198389120064ED84 /* bin.png in Resources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B7180BC197905C900F1359C /* details_sound.png in Resources */,
 				5B7180BF197905C900F1359C /* details_sound_select@2x.png in Resources */,
 				5B717FC9197905BA00F1359C /* likeUp@2x.png in Resources */,
 				5B7180B3197905C900F1359C /* details_ordinary@2x.png in Resources */,
-<<<<<<< HEAD
 				5B717FC0197905BA00F1359C /* 001@2x.png in Resources */,
-=======
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B718073197905C900F1359C /* course2.jpg in Resources */,
 				5BB695D3198012FD00A4E6DE /* SendComNoteView.xib in Resources */,
 				5B717FCC197905BA00F1359C /* up@2x.png in Resources */,
@@ -1917,7 +1591,6 @@
 				5B718082197905C900F1359C /* headAd1@2x.png in Resources */,
 				B0B0AD19197D327900B29458 /* Default.png in Resources */,
 				5B718096197905C900F1359C /* details_button_back_select.png in Resources */,
-<<<<<<< HEAD
 				5B717FC8197905BA00F1359C /* like@2x.png in Resources */,
 				5B7180BD197905C900F1359C /* details_sound@2x.png in Resources */,
 				5B7180C6197905C900F1359C /* details_stop_select.png in Resources */,
@@ -1926,15 +1599,6 @@
 				5B717FD4197905BA00F1359C /* CtimeNum.png in Resources */,
 				5B717FD0197905BA00F1359C /* bin.png in Resources */,
 				5B717FBE197905BA00F1359C /* testName.plist in Resources */,
-=======
-				5BCF970D198389120064ED84 /* buy1.png in Resources */,
-				5B7180BD197905C900F1359C /* details_sound@2x.png in Resources */,
-				5B7180C6197905C900F1359C /* details_stop_select.png in Resources */,
-				5BCF972A198389120064ED84 /* store.png in Resources */,
-				5BCF9727198389120064ED84 /* rate.png in Resources */,
-				5BCF9722198389120064ED84 /* inbox-active.png in Resources */,
-				5B718071197905C900F1359C /* course0.jpg in Resources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1957,11 +1621,7 @@
 				5B717F3C1978FE4E00F1359C /* JSONHTTPClient.m in Sources */,
 				5B717FAE197905BA00F1359C /* JJBaseViewController.m in Sources */,
 				5B7181261979069500F1359C /* DemoViewController.m in Sources */,
-<<<<<<< HEAD
 				5B717FB8197905BA00F1359C /* JJTestTableViewCell.m in Sources */,
-=======
-				5BCF9705198389120064ED84 /* JJTestViewController.m in Sources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B718123197905FD00F1359C /* MainViewController.m in Sources */,
 				5B717F491978FE4E00F1359C /* UIButton+WebCache.m in Sources */,
 				5B717F471978FE4E00F1359C /* SDWebImageManager.m in Sources */,
@@ -2027,18 +1687,11 @@
 				5BB695D1198012D100A4E6DE /* SendComNoteView.m in Sources */,
 				5B718112197905D600F1359C /* OLNetManager.m in Sources */,
 				5BB54B32197E6ED70096DD7F /* CourseChapter.m in Sources */,
-<<<<<<< HEAD
 				5B717FB5197905BA00F1359C /* JJTestDetailViewController.m in Sources */,
-=======
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B717F3D1978FE4E00F1359C /* JSONModel+networking.m in Sources */,
 				5B71811B197905D600F1359C /* NumTableViewCell.m in Sources */,
 				5B718119197905D600F1359C /* FocusTableViewController.m in Sources */,
 				5B717F2C1978FE4E00F1359C /* AFHTTPRequestOperation.m in Sources */,
-<<<<<<< HEAD
-=======
-				5BCF96F7198389120064ED84 /* JJFinishViewController.m in Sources */,
->>>>>>> parent of 4432687... Merge branch 'master' of https://github.com/FWWBSGJW/MEProject
 				5B717ED31978FE2600F1359C /* JSONKit.m in Sources */,
 				5B717F331978FE4E00F1359C /* MyHttpClient.m in Sources */,
 				5B717F481978FE4E00F1359C /* SDWebImagePrefetcher.m in Sources */,
