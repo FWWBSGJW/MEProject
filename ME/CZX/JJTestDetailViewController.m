@@ -159,7 +159,7 @@
 
 - (IBAction)buyOrEnter:(id)sender
 {
-    JJMeasurementViewController *measureVC = [[JJMeasurementViewController alloc] initWithSubjectDetailUrl:myModel.sublink time:myModel.tcTime];
+    JJMeasurementViewController *measureVC = [[JJMeasurementViewController alloc] initWithSubjectDetailUrl:myModel.sublink];
     measureVC.title = self.testName.text;
     [self.navigationController pushViewController:measureVC animated:YES];
 }

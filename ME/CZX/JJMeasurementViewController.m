@@ -40,7 +40,6 @@
     NSArray *optionArray;
     UIButton *rightButton;
     int subjectCount;
-    int costTime;
 }
 @end
 
@@ -54,12 +53,11 @@
     return self;
 }
 
-- (id)initWithSubjectDetailUrl:(NSString *)paramUrl time:(int)paramTime
+- (id)initWithSubjectDetailUrl:(NSString *)paramUrl
 {
     self = [super init];
     if(self){
         subjectArray = [[[JJSubjectManage alloc] init] analyseSubjectJson:paramUrl];
-        mins = paramTime-1;
     }
     return self;
 }
@@ -74,8 +72,8 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    costTime=1;
     timeCount = 1;
+    mins = 0;
     page = 0;
     subjectCount = 0;
     optionArray = @[@"A. ", @"B. ", @"C. ", @"D. "];
@@ -195,6 +193,7 @@
             }
         }
     }
+    NSLog(@"%@,%@", correctAnArray, numberOfCorrectAnArray);
 }
 
 - (void)createPagingBtn
@@ -268,10 +267,6 @@
 
 - (void)handIn
 {
-    [timer invalidate];
-    timer = nil;
-    int myMins = costTime/60;
-    int mySeconds = costTime%60;
     int score = 0;
     for (int i=0; i<numberOfCorrectAnArray.count; i++)
     {
@@ -294,7 +289,7 @@
                                                    correctAnswer:numberOfCorrectAnArray
                                                    personAnswer:personNumAnswerArray
                                                    questionArray:queArray
-                                                   answerArray:anArray costMins:myMins costSeconds:mySeconds]
+                                                   answerArray:anArray]
                                          animated:YES];
 }
 
@@ -312,7 +307,6 @@
 
 - (void)timeUp:(NSTimer *)paramTimer
 {
-    costTime++;
     timeCount++;
     if (timeCount==60)
     {

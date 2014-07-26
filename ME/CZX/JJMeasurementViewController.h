@@ -15,5 +15,5 @@
 @property(nonatomic, strong) UIButton *reviewBtn;
 
 
-- (id)initWithSubjectDetailUrl:(NSString *)paramUrl time:(int)paramTime;
+- (id)initWithSubjectDetailUrl:(NSString *)paramUrl;
 @end

@@ -12,8 +12,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *scoreLa;
 - (IBAction)back:(id)sender;
-@property (strong, nonatomic) IBOutlet UILabel *timeLa;
 
-- (id)initWithScore:(NSString *)score correctAnswer:(NSArray *)correctArray personAnswer:(NSArray *)personArray questionArray:(NSArray *)queArray answerArray:(NSArray *)anArray costMins:(int)paramMins costSeconds:(int)paramSeconds;
+- (id)initWithScore:(NSString *)score correctAnswer:(NSArray *)correctArray personAnswer:(NSArray *)personArray questionArray:(NSArray *)queArray answerArray:(NSArray *)anArray;
 @property (strong, nonatomic) IBOutlet UIButton *reviewBtn;
 @end

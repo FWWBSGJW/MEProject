@@ -17,8 +17,6 @@
     NSArray *myPersonArray;
     NSArray *myQuestionArray;
     NSArray *myAnswerArray;
-    int myMins;
-    int mySeconds;
 }
 @end
 
@@ -33,7 +31,7 @@
     return self;
 }
 
-- (id)initWithScore:(NSString *)score correctAnswer:(NSArray *)correctArray personAnswer:(NSArray *)personArray questionArray:(NSArray *)queArray answerArray:(NSArray *)anArray costMins:(int)paramMins costSeconds:(int)paramSeconds
+- (id)initWithScore:(NSString *)score correctAnswer:(NSArray *)correctArray personAnswer:(NSArray *)personArray questionArray:(NSArray *)queArray answerArray:(NSArray *)anArray
 {
     self = [super init];
     if (self) {
@@ -42,8 +40,6 @@
         myPersonArray = personArray;
         myQuestionArray = queArray;
         myAnswerArray = anArray;
-        myMins = paramMins;
-        mySeconds = paramSeconds;
     }
     return self;
 }
@@ -58,14 +54,13 @@
     [super viewDidLoad];
     self.view.backgroundColor = RGBCOLOR(222, 255, 170);
     self.scoreLa.text = myScore;
-    self.timeLa.text = [NSString stringWithFormat:@"%02d:%02d", myMins, mySeconds];
     [self.reviewBtn addTarget:self action:@selector(review)
              forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)review
 {
-    [self.navigationController pushViewController:[[ReviewController alloc] initWithCorrectAnswer:myCorrectArray personAnswer:myPersonArray questionArray:myQuestionArray answerArray:myAnswerArray] animated:YES];
+    [self.navigationController pushViewController:[[ReviewController alloc] initWithCorrectAnswer:myCorrectArray personAnswer:myPersonArray questionArray:myQuestionArray answerArray:myPersonArray] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
