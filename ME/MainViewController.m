@@ -8,9 +8,10 @@
 
 #import "MainViewController.h"
 #import "CCourseViewController.h"
-#import "DemoViewController.h"
 #import "UserViewController.h"
 #import "JJTestViewController.h"
+#import "ExtendViewController.h"
+#import "QAViewController.h"
 
 @interface MainViewController ()
 
@@ -56,24 +57,24 @@
     
     
     
-    DemoViewController *demoVC2 = [[DemoViewController alloc] init];
-    UINavigationController *demoNav2 = [[UINavigationController alloc] initWithRootViewController:demoVC2];
+    ExtendViewController *extendVC = [[ExtendViewController alloc] init];
+    UINavigationController *extendNav = [[UINavigationController alloc] initWithRootViewController:extendVC];
     //UITabBarItem *demoItem2 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:3];
     UITabBarItem *addItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"Clear"] tag:3];
-    demoNav2.tabBarItem = addItem;
+    extendVC.tabBarItem = addItem;
     
     
     
-    DemoViewController *demoVC3 = [[DemoViewController alloc] init];
-    UINavigationController *demoNav3 = [[UINavigationController alloc] initWithRootViewController:demoVC3];
+    QAViewController *qaVC3 = [[QAViewController alloc] init];
+    UINavigationController *qaNav = [[UINavigationController alloc] initWithRootViewController:qaVC3];
     //UITabBarItem *demoItem3 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:4];
     UITabBarItem *qaItem = [[UITabBarItem alloc] initWithTitle:@"问答" image:[UIImage imageNamed:@"Q&A"] tag:4];
-    demoNav3.tabBarItem = qaItem;
+    qaVC3.tabBarItem = qaItem;
     
     self.tabBar.barTintColor = [UIColor whiteColor];
     self.tabBar.tintColor = [UIColor colorWithRed:88/255.0 green:246/255.0 blue:76/255.0 alpha:1.0];
     
-    NSArray *array = @[couseNav,testNav,demoNav2,demoNav3,userVC];
+    NSArray *array = @[couseNav,testNav,extendNav,qaNav,userVC];
     
     
     
@@ -89,7 +90,7 @@
 #pragma mark - 模态工具试图
 - (void)modalAddView
 {
-    DemoViewController *demoVC = [[DemoViewController alloc] init];
+    ExtendViewController *demoVC = [[ExtendViewController alloc] init];
     demoVC.view.backgroundColor = [UIColor colorWithRed:88/255.0 green:246/255.0 blue:76/255.0 alpha:1.0];    [self presentViewController:demoVC animated:YES completion:nil];
 }
 

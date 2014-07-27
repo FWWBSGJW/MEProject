@@ -1,18 +1,18 @@
 //
-//  DemoViewController.m
+//  QAViewController.m
 //  移动教育1.0
 //
 //  Created by yato_kami on 14-7-4.
 //  Copyright (c) 2014年 yatokami. All rights reserved.
 //
 
-#import "DemoViewController.h"
+#import "QAViewController.h"
 
-@interface DemoViewController ()
+@interface QAViewController ()
 @property (strong, nonatomic) UIWebView *webView;
 @end
 
-@implementation DemoViewController
+@implementation QAViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,9 +42,9 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
     self.webView = webView;
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(webGoback)];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStyleBordered  target:self action:@selector(webGoback)];
     self.navigationItem.leftBarButtonItem = backItem;
-    backItem.title = @"返回";
+    
 }
 
 - (void)webGoback

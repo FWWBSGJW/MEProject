@@ -128,10 +128,13 @@
     
         if (!view) {
             view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30)];
+            view.backgroundColor = [UIColor whiteColor];
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 20)];
             label.tag = 201;
-            view.backgroundColor = [UIColor colorWithRed:0.2 green:0.8 blue:0.2 alpha:0.8];
+            view.backgroundColor = [UIColor colorWithRed:128/255.0 green:1.0 blue:0 alpha:1.0];
+            //view.backgroundColor = [UIColor lightGrayColor];
             label.backgroundColor = [UIColor clearColor];
+            //label.backgroundColor = [UIColor whiteColor];
             [view addSubview:label];
         }
         UILabel *label = (UILabel *)[view viewWithTag:201];

@@ -59,7 +59,7 @@ enum Button_Tag
 
 @property (strong, nonatomic) SendComNoteView *sendComNoteView; //发送评论，笔记试图
 @property (strong, nonatomic) UIView *dimView; //发送评论时背影
-@property (weak, nonatomic) UIView *tabBarView;
+@property (weak, nonatomic) UIToolbar *toobar;
 @end
 
 @implementation CChapterViewController
@@ -77,7 +77,7 @@ enum Button_Tag
     
     _courseChapter = [[CourseChapter alloc] init];
     
-    
+    //上拉更多
     __weak CChapterViewController *weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf insertRowAtBottom];
@@ -86,26 +86,28 @@ enum Button_Tag
    
     self.title = self.courseInfoDic[@"cName"];
 
-    UIView *tabBarView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-30, SCREEN_WIDTH, 30.0f)];
-    tabBarView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:tabBarView];
-    //设置底部功能按钮
-    NSArray *array = [NSArray arrayWithObjects:@"收藏",@"下载",@"评论",@"分享",@"笔记", nil];
-    for (NSInteger i =0; i<5; i++) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [button setBackgroundColor:[UIColor whiteColor]];
-        
-        [button setBackgroundImage:[UIImage imageNamed:array[i]] forState:UIControlStateNormal];
-        
-        CGFloat blackWidth = (SCREEN_WIDTH - 30*5.0) / (array.count+1.0);
-        
-        button.frame = CGRectMake(blackWidth+(blackWidth+30) * i, 0, 30, 30);
-        button.tag = 400+i;
-        [button addTarget:self action:@selector(touchButton:) forControlEvents:UIControlEventTouchUpInside];
-        [tabBarView addSubview:button];
-    }
     
-    self.tabBarView = tabBarView;
+    
+    //设置底部功能按钮
+    
+    UIToolbar *toorBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-33, SCREEN_WIDTH, 33.0f)];
+    
+    NSMutableArray *items = [NSMutableArray arrayWithCapacity:12];
+    NSArray *array = [NSArray arrayWithObjects:@"cStar",@"cDownload",@"cMessage",@"share",@"cNote",nil];
+
+    for (NSInteger i =0; i<5; i++) {
+        
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:array[i]] style:UIBarButtonItemStyleBordered target:self action:@selector(touchButton:)];
+        item.tag = 400+i;
+        UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        [items addObject:item];
+        [items addObject:flexItem];
+    }
+    [items removeLastObject];
+    toorBar.items = items;
+    [self.view addSubview:toorBar];
+    
+    self.toobar = toorBar;
     
     //注册cell
     
@@ -146,7 +148,7 @@ enum Button_Tag
 + (instancetype)chapterVCwithCourseID:(NSInteger)courseID
 {
     CChapterViewController *VC = [[CChapterViewController alloc] init];
-    VC.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-30-64) style:UITableViewStylePlain];
+    VC.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-33-64) style:UITableViewStylePlain];
     
     VC.courseID = courseID;
     
@@ -375,10 +377,10 @@ enum Button_Tag
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:disCellIdentifier];
             if (!cell) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:disCellIdentifier];
-                cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 44 - headHeight);
-                UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(5, 5, SCREEN_WIDTH-10, SCREEN_HEIGHT - 44 - headHeight)];
+                cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - headHeight-33);
+                UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(5, 5, SCREEN_WIDTH-10, SCREEN_HEIGHT - 64-33 - headHeight)];
                 [textView setEditable:NO];
-                [textView setFont:[UIFont systemFontOfSize:16.0f]];
+                [textView setFont:[UIFont systemFontOfSize:13.0f]];
                 [cell.contentView addSubview:textView];
                 //_textView = textView;
                 
@@ -448,7 +450,7 @@ enum Button_Tag
 {
     switch (self.segmentControl.selectedSegmentIndex) {
         case SegementDiscription:
-            return SCREEN_HEIGHT - 44 - headHeight;
+            return SCREEN_HEIGHT - 64 - headHeight - 33;
             break;
         case SegementChapter:
             return 44;
@@ -538,20 +540,21 @@ enum Button_Tag
 }
 
 #pragma mark 功能button方法
-- (void)touchButton:(UIButton *)button
+- (void)touchButton:(UIBarButtonItem *)button
 {
 #warning -  功能待实现
     switch (button.tag) {
         case ButtonTagPrivate:{
-            [button setBackgroundImage:[UIImage imageNamed:@"已收藏"] forState:UIControlStateNormal];
+            //[button setBackgroundImage:[UIImage imageNamed:@"已收藏"] forState:UIControlStateNormal];
+            button.image = [UIImage imageNamed:@"cStarFull"];
             //NSLog(@"private");
-            if (button.selected == YES) {
-                [button setBackgroundImage:[UIImage imageNamed:@"收藏"] forState:UIControlStateNormal];
-                button.selected = NO;
-            } else{
-                [button setBackgroundImage:[UIImage imageNamed:@"已收藏"] forState:UIControlStateNormal];
-                button.selected = YES;
-            }
+//            if (button.selected == YES) {
+//                button.image = [UIImage imageNamed:@"cStar"];
+//                button.selected = NO;
+//            } else{
+//                button.image = [UIImage imageNamed:@"cStarFull"];
+//                button.selected = YES;
+//            }
             
         }
             break;

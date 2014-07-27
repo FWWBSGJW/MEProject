@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B02FDB61985566900B512B8 /* cDownload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B02FDB41985566900B512B8 /* cDownload@2x.png */; };
+		5B02FDB71985566900B512B8 /* cNote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B02FDB51985566900B512B8 /* cNote@2x.png */; };
+		5B02FDB91985576100B512B8 /* cStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B02FDB81985576100B512B8 /* cStar@2x.png */; };
+		5B02FDBB198557FB00B512B8 /* cMessage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B02FDBA198557FB00B512B8 /* cMessage@2x.png */; };
+		5B02FDBD19855B7500B512B8 /* cStarFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B02FDBC19855B7500B512B8 /* cStarFull@2x.png */; };
+		5B02FDC019855F1B00B512B8 /* ExtendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B02FDBF19855F1B00B512B8 /* ExtendViewController.m */; };
 		5B07E4E61980CE7F00B3965D /* 已收藏.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B07E4E51980CE7E00B3965D /* 已收藏.png */; };
 		5B717E971978FD9600F1359C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B717E961978FD9600F1359C /* Foundation.framework */; };
 		5B717E991978FD9600F1359C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B717E981978FD9600F1359C /* CoreGraphics.framework */; };
@@ -195,7 +201,7 @@
 		5B71811F197905D600F1359C /* UserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B718108197905D600F1359C /* UserInfoTableViewCell.m */; };
 		5B718120197905D600F1359C /* UserCenterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B71810A197905D600F1359C /* UserCenterTableViewController.m */; };
 		5B718123197905FD00F1359C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B718122197905FD00F1359C /* MainViewController.m */; };
-		5B7181261979069500F1359C /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7181251979069500F1359C /* DemoViewController.m */; };
+		5B7181261979069500F1359C /* QAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7181251979069500F1359C /* QAViewController.m */; };
 		5B7181281979099800F1359C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7181271979099800F1359C /* MediaPlayer.framework */; };
 		5BACA1CC197D6D7D00E4A387 /* CDSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BACA1CB197D6D7D00E4A387 /* CDSection.m */; };
 		5BACA1CF197D6F3F00E4A387 /* CDAllSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BACA1CE197D6F3F00E4A387 /* CDAllSection.m */; };
@@ -281,6 +287,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5B02FDB41985566900B512B8 /* cDownload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cDownload@2x.png"; path = "../../../../../Desktop/cDownload@2x.png"; sourceTree = "<group>"; };
+		5B02FDB51985566900B512B8 /* cNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cNote@2x.png"; path = "../../../../../Desktop/cNote@2x.png"; sourceTree = "<group>"; };
+		5B02FDB81985576100B512B8 /* cStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cStar@2x.png"; path = "../../../../../Desktop/cStar@2x.png"; sourceTree = "<group>"; };
+		5B02FDBA198557FB00B512B8 /* cMessage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cMessage@2x.png"; path = "../../../../../Desktop/cMessage@2x.png"; sourceTree = "<group>"; };
+		5B02FDBC19855B7500B512B8 /* cStarFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cStarFull@2x.png"; path = "../../../../../Desktop/cStarFull@2x.png"; sourceTree = "<group>"; };
+		5B02FDBE19855F1B00B512B8 /* ExtendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendViewController.h; sourceTree = "<group>"; };
+		5B02FDBF19855F1B00B512B8 /* ExtendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendViewController.m; sourceTree = "<group>"; };
 		5B07E4E51980CE7E00B3965D /* 已收藏.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已收藏.png"; sourceTree = "<group>"; };
 		5B717E931978FD9600F1359C /* ME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ME.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B717E961978FD9600F1359C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -547,8 +560,8 @@
 		5B71810A197905D600F1359C /* UserCenterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterTableViewController.m; sourceTree = "<group>"; };
 		5B718121197905FD00F1359C /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		5B718122197905FD00F1359C /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		5B7181241979069500F1359C /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
-		5B7181251979069500F1359C /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		5B7181241979069500F1359C /* QAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAViewController.h; sourceTree = "<group>"; };
+		5B7181251979069500F1359C /* QAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAViewController.m; sourceTree = "<group>"; };
 		5B7181271979099800F1359C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		5BACA1CA197D6D7D00E4A387 /* CDSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSection.h; sourceTree = "<group>"; };
 		5BACA1CB197D6D7D00E4A387 /* CDSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDSection.m; sourceTree = "<group>"; };
@@ -724,8 +737,10 @@
 				5B717EA61978FD9600F1359C /* AppDelegate.m */,
 				5B718121197905FD00F1359C /* MainViewController.h */,
 				5B718122197905FD00F1359C /* MainViewController.m */,
-				5B7181241979069500F1359C /* DemoViewController.h */,
-				5B7181251979069500F1359C /* DemoViewController.m */,
+				5B7181241979069500F1359C /* QAViewController.h */,
+				5B7181251979069500F1359C /* QAViewController.m */,
+				5B02FDBE19855F1B00B512B8 /* ExtendViewController.h */,
+				5B02FDBF19855F1B00B512B8 /* ExtendViewController.m */,
 				5B717E9E1978FD9600F1359C /* ME-Info.plist */,
 				5B717E9F1978FD9600F1359C /* InfoPlist.strings */,
 				5B717EA21978FD9600F1359C /* main.m */,
@@ -981,6 +996,11 @@
 		5B717FEF197905C800F1359C /* File */ = {
 			isa = PBXGroup;
 			children = (
+				5B02FDBC19855B7500B512B8 /* cStarFull@2x.png */,
+				5B02FDBA198557FB00B512B8 /* cMessage@2x.png */,
+				5B02FDB81985576100B512B8 /* cStar@2x.png */,
+				5B02FDB41985566900B512B8 /* cDownload@2x.png */,
+				5B02FDB51985566900B512B8 /* cNote@2x.png */,
 				5B717FF1197905C800F1359C /* course */,
 				5B717FF8197905C800F1359C /* CourseChapterData.plist */,
 				5B717FF9197905C800F1359C /* CourseCommentData.plist */,
@@ -1465,6 +1485,8 @@
 				5B7180C8197905C900F1359C /* details_up.png in Resources */,
 				5BB2DD4719838B160026D06D /* arrow-circle-right.png in Resources */,
 				5B7180BA197905C900F1359C /* details_progress_select.png in Resources */,
+				5B02FDB61985566900B512B8 /* cDownload@2x.png in Resources */,
+				5B02FDB71985566900B512B8 /* cNote@2x.png in Resources */,
 				5BB2DD5C19838B160026D06D /* writing.png in Resources */,
 				5B71808F197905C900F1359C /* J9.jpg in Resources */,
 				5B718074197905C900F1359C /* course3.jpg in Resources */,
@@ -1511,6 +1533,7 @@
 				5B7180BB197905C900F1359C /* details_progress_select@2x.png in Resources */,
 				5BB2DD4319838B160026D06D /* share@2x.png in Resources */,
 				5B71809C197905C900F1359C /* details_definition_bg_bg2.png in Resources */,
+				5B02FDBD19855B7500B512B8 /* cStarFull@2x.png in Resources */,
 				5B718087197905C900F1359C /* J10.jpg in Resources */,
 				5B718088197905C900F1359C /* J2.jpg in Resources */,
 				5B7180CF197905C900F1359C /* 分享.png in Resources */,
@@ -1542,6 +1565,8 @@
 				5B7180B0197905C900F1359C /* details_mute_select.png in Resources */,
 				5B7180AC197905C900F1359C /* details_left.png in Resources */,
 				5B71807F197905C900F1359C /* CuserPhoto.png in Resources */,
+				5B02FDB91985576100B512B8 /* cStar@2x.png in Resources */,
+				5B02FDBB198557FB00B512B8 /* cMessage@2x.png in Resources */,
 				5B7180C9197905C900F1359C /* details_up@2x.png in Resources */,
 				5BB2DD5319838B160026D06D /* locked-place.png in Resources */,
 				5B718080197905C900F1359C /* DamakuData.plist in Resources */,
@@ -1612,7 +1637,7 @@
 				5B718110197905D600F1359C /* LoginViewController.m in Sources */,
 				5BB2DD3019838B160026D06D /* JJTestModel.m in Sources */,
 				5B717F3C1978FE4E00F1359C /* JSONHTTPClient.m in Sources */,
-				5B7181261979069500F1359C /* DemoViewController.m in Sources */,
+				5B7181261979069500F1359C /* QAViewController.m in Sources */,
 				5BB2DD3419838B160026D06D /* JJTestViewController.m in Sources */,
 				5B718123197905FD00F1359C /* MainViewController.m in Sources */,
 				5B717F491978FE4E00F1359C /* UIButton+WebCache.m in Sources */,
@@ -1625,6 +1650,7 @@
 				5B718117197905D600F1359C /* DetailViewController.m in Sources */,
 				5B717F3E1978FE4E00F1359C /* JSONKeyMapper.m in Sources */,
 				5BB2DD2E19838B160026D06D /* JJTestDivideViewController.m in Sources */,
+				5B02FDC019855F1B00B512B8 /* ExtendViewController.m in Sources */,
 				5B7180D5197905C900F1359C /* DanmakuModel.m in Sources */,
 				5B7180DE197905C900F1359C /* DnmakuView.m in Sources */,
 				5B717F431978FE4E00F1359C /* SDWebImageCompat.m in Sources */,
