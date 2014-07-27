@@ -9,7 +9,7 @@
 #import "DemoViewController.h"
 
 @interface DemoViewController ()
-
+@property (strong, nonatomic) UIWebView *webView;
 @end
 
 @implementation DemoViewController
@@ -23,15 +23,33 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    //self.navigationController.navigationBarHidden = YES;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake(60, 100, 200, 200);
-    [button setTitle:@"touch" forState:UIControlStateNormal];
-    [self.view addSubview:button];
-    [button addTarget:self action:@selector(touche) forControlEvents:UIControlEventTouchUpInside];
+    self.title = @"问答";
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:webView];
+    webView.scalesPageToFit = YES;
+    NSString *urlStr =[NSString stringWithFormat:@"%@MobileEducation/qa",kBaseURL];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
+    self.webView = webView;
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(webGoback)];
+    self.navigationItem.leftBarButtonItem = backItem;
+    backItem.title = @"返回";
+}
+
+- (void)webGoback
+{
+    [self.webView goBack];
 }
 
 - (void)didReceiveMemoryWarning
