@@ -100,6 +100,8 @@
         }
         if ([self.courseCommentArray lastObject][@"nextPage"]) {
             self.nextCommentPageUrl = [self.courseCommentArray lastObject][@"nextPage"];
+        } else if ([self.courseCommentArray lastObject][@"nextPage"]==nil){
+            self.nextCommentPageUrl = nil;
         }
         [self.courseCommentArray removeLastObject];
         
@@ -112,32 +114,35 @@
 
 - (void)loadNextPageCourseComment
 {
-    NSURL *url = [NSURL URLWithString:self.nextCommentPageUrl];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
-    NSURLResponse *response = nil;
-    NSError *error = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    if (data != nil) {
-        NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-        
-        //self.courseCommentArray = array;
-        if (self.courseCommentArray) {
-            [self.courseCommentArray addObjectsFromArray:array];
+    if (self.nextCommentPageUrl) {
+        NSURL *url = [NSURL URLWithString:self.nextCommentPageUrl];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+        NSURLResponse *response = nil;
+        NSError *error = nil;
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        if (data != nil) {
+            NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            
+            //self.courseCommentArray = array;
+            if (self.courseCommentArray) {
+                [self.courseCommentArray addObjectsFromArray:array];
+            } else {
+                self.courseCommentArray = [NSMutableArray arrayWithArray:array];
+            }
+            if ([self.courseCommentArray lastObject][@"nextPage"]) {
+                self.nextCommentPageUrl = [self.courseCommentArray lastObject][@"nextPage"];
+            } else {
+                self.nextCommentPageUrl = nil;
+            }
+            [self.courseCommentArray removeLastObject];
+            
+        } else if (data == nil && error == nil) {
+            NSLog(@"空数据");
         } else {
-            self.courseCommentArray = [NSMutableArray arrayWithArray:array];
+            NSLog(@"%@",error.localizedDescription);
         }
-        if ([self.courseCommentArray lastObject][@"nextPage"]) {
-            self.nextCommentPageUrl = [self.courseCommentArray lastObject][@"nextPage"];
-        } else {
-            self.nextCommentPageUrl = nil;
-        }
-        [self.courseCommentArray removeLastObject];
-        
-    } else if (data == nil && error == nil) {
-        NSLog(@"空数据");
-    } else {
-        NSLog(@"%@",error.localizedDescription);
     }
+    
 }
 
 @end

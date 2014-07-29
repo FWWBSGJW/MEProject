@@ -7,7 +7,7 @@
 //
 
 #import "DanmakuModel.h"
-
+#import "AFJSONRequestOperation.h"
 #define maxNum 100
 
 @implementation DanmakuModel
@@ -43,6 +43,15 @@
         _moveDanmukuY = SCREEN_HEIGHT;
     }
     return _moveDanmukuY;
+}
+
+
+- (instancetype)initWithVideoID:(NSInteger)videoID andUserID:(NSInteger)userID
+{
+    self = [super init];
+    self.userID = userID;
+    self.videoID = videoID;
+    return self;
 }
 
 #pragma mark - 复用
@@ -88,6 +97,20 @@
         default:
             break;
     }
+}
+
+//下载弹幕数据
+- (void)loadDanmakuArray
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@MobileEducation/C_VideoAction?Vid=%d&userId=%d",kBaseURL,self.videoID,self.userID];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        self.danmakuArray = JSON;
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"%@,%@",error.localizedDescription,JSON);
+    }];
+    [op start];
 }
 
 #pragma mark - anima

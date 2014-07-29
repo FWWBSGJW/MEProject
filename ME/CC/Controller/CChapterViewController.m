@@ -117,7 +117,7 @@ enum Button_Tag
     
 }
 
-#pragma mark - 上拉刷新
+#pragma mark - 上拉更多
 - (void)insertRowAtBottom
 {
     __weak CChapterViewController *weakSelf = self;
@@ -125,19 +125,17 @@ enum Button_Tag
     int64_t delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        if (self.courseChapter.nextCommentPageUrl) {
+        
+        if (weakSelf.courseChapter.nextCommentPageUrl != nil) {
             [weakSelf.tableView beginUpdates];
-            //[weakSelf.dataSource addObject:[weakSelf.dataSource.lastObject dateByAddingTimeInterval:-90]];
-            //[weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:weakSelf.dataSource.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
             NSInteger dataCount = self.courseCommentArray.count;
             NSLog(@"%@",self.courseCommentArray);
             [self.courseChapter loadNextPageCourseComment];
             [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:dataCount inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            //[self.tableView reloadData];
             [weakSelf.tableView endUpdates];
             
-            [weakSelf.tableView.infiniteScrollingView stopAnimating];
         }
+        [weakSelf.tableView.infiniteScrollingView stopAnimating];
         
     });
 }
@@ -514,10 +512,14 @@ enum Button_Tag
             break;
         case SegementComment:
             self.tableView.showsInfiniteScrolling = YES;
+            [self.tableView reloadData];
+            break;
         case SegementNote:
-            self.tableView.showsInfiniteScrolling = YES;
-        default:
-            [self.tableView reloadData];;
+            self.tableView.showsInfiniteScrolling = NO;
+            [self.tableView reloadData];
+            break;
+        default: ;
+            //[self.tableView reloadData];;
     }
 }
 

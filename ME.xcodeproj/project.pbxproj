@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B02FDB61985566900B512B8 /* cDownload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B02FDB41985566900B512B8 /* cDownload@2x.png */; };
-		5B02FDB71985566900B512B8 /* cNote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B02FDB51985566900B512B8 /* cNote@2x.png */; };
-		5B02FDB91985576100B512B8 /* cStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B02FDB81985576100B512B8 /* cStar@2x.png */; };
-		5B02FDBB198557FB00B512B8 /* cMessage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B02FDBA198557FB00B512B8 /* cMessage@2x.png */; };
-		5B02FDBD19855B7500B512B8 /* cStarFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B02FDBC19855B7500B512B8 /* cStarFull@2x.png */; };
 		5B02FDC019855F1B00B512B8 /* ExtendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B02FDBF19855F1B00B512B8 /* ExtendViewController.m */; };
 		5B07E4E61980CE7F00B3965D /* 已收藏.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B07E4E51980CE7E00B3965D /* 已收藏.png */; };
 		5B717E971978FD9600F1359C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B717E961978FD9600F1359C /* Foundation.framework */; };
@@ -270,6 +265,13 @@
 		5BB54B32197E6ED70096DD7F /* CourseChapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB54B31197E6ED70096DD7F /* CourseChapter.m */; };
 		5BB695D1198012D100A4E6DE /* SendComNoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB695D0198012D100A4E6DE /* SendComNoteView.m */; };
 		5BB695D3198012FD00A4E6DE /* SendComNoteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BB695D2198012FD00A4E6DE /* SendComNoteView.xib */; };
+		5BFDD7C0198606870034CE0B /* cDownload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFDD7BB198606870034CE0B /* cDownload@2x.png */; };
+		5BFDD7C1198606870034CE0B /* cMessage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFDD7BC198606870034CE0B /* cMessage@2x.png */; };
+		5BFDD7C2198606870034CE0B /* cNote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFDD7BD198606870034CE0B /* cNote@2x.png */; };
+		5BFDD7C3198606870034CE0B /* cStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFDD7BE198606870034CE0B /* cStar@2x.png */; };
+		5BFDD7C4198606870034CE0B /* cStarFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFDD7BF198606870034CE0B /* cStarFull@2x.png */; };
+		5BFDD7C619860A730034CE0B /* Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BFDD7C519860A730034CE0B /* Property List.plist */; };
+		5BFDD7C819860DBB0034CE0B /* noteData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BFDD7C719860DBB0034CE0B /* noteData.plist */; };
 		B0B0AD18197D327900B29458 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD15197D327900B29458 /* Default-568h@2x.png */; };
 		B0B0AD19197D327900B29458 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD16197D327900B29458 /* Default.png */; };
 		B0B0AD1A197D327900B29458 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B0AD17197D327900B29458 /* Default@2x.png */; };
@@ -287,11 +289,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5B02FDB41985566900B512B8 /* cDownload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cDownload@2x.png"; path = "../../../../../Desktop/cDownload@2x.png"; sourceTree = "<group>"; };
-		5B02FDB51985566900B512B8 /* cNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cNote@2x.png"; path = "../../../../../Desktop/cNote@2x.png"; sourceTree = "<group>"; };
-		5B02FDB81985576100B512B8 /* cStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cStar@2x.png"; path = "../../../../../Desktop/cStar@2x.png"; sourceTree = "<group>"; };
-		5B02FDBA198557FB00B512B8 /* cMessage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cMessage@2x.png"; path = "../../../../../Desktop/cMessage@2x.png"; sourceTree = "<group>"; };
-		5B02FDBC19855B7500B512B8 /* cStarFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cStarFull@2x.png"; path = "../../../../../Desktop/cStarFull@2x.png"; sourceTree = "<group>"; };
 		5B02FDBE19855F1B00B512B8 /* ExtendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendViewController.h; sourceTree = "<group>"; };
 		5B02FDBF19855F1B00B512B8 /* ExtendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendViewController.m; sourceTree = "<group>"; };
 		5B07E4E51980CE7E00B3965D /* 已收藏.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已收藏.png"; sourceTree = "<group>"; };
@@ -649,6 +646,13 @@
 		5BB695CF198012D100A4E6DE /* SendComNoteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendComNoteView.h; sourceTree = "<group>"; };
 		5BB695D0198012D100A4E6DE /* SendComNoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendComNoteView.m; sourceTree = "<group>"; };
 		5BB695D2198012FD00A4E6DE /* SendComNoteView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendComNoteView.xib; sourceTree = "<group>"; };
+		5BFDD7BB198606870034CE0B /* cDownload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cDownload@2x.png"; sourceTree = "<group>"; };
+		5BFDD7BC198606870034CE0B /* cMessage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cMessage@2x.png"; sourceTree = "<group>"; };
+		5BFDD7BD198606870034CE0B /* cNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cNote@2x.png"; sourceTree = "<group>"; };
+		5BFDD7BE198606870034CE0B /* cStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cStar@2x.png"; sourceTree = "<group>"; };
+		5BFDD7BF198606870034CE0B /* cStarFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cStarFull@2x.png"; sourceTree = "<group>"; };
+		5BFDD7C519860A730034CE0B /* Property List.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Property List.plist"; sourceTree = "<group>"; };
+		5BFDD7C719860DBB0034CE0B /* noteData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = noteData.plist; sourceTree = "<group>"; };
 		B0B0AD15197D327900B29458 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B0B0AD16197D327900B29458 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		B0B0AD17197D327900B29458 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -996,11 +1000,11 @@
 		5B717FEF197905C800F1359C /* File */ = {
 			isa = PBXGroup;
 			children = (
-				5B02FDBC19855B7500B512B8 /* cStarFull@2x.png */,
-				5B02FDBA198557FB00B512B8 /* cMessage@2x.png */,
-				5B02FDB81985576100B512B8 /* cStar@2x.png */,
-				5B02FDB41985566900B512B8 /* cDownload@2x.png */,
-				5B02FDB51985566900B512B8 /* cNote@2x.png */,
+				5BFDD7BB198606870034CE0B /* cDownload@2x.png */,
+				5BFDD7BC198606870034CE0B /* cMessage@2x.png */,
+				5BFDD7BD198606870034CE0B /* cNote@2x.png */,
+				5BFDD7BE198606870034CE0B /* cStar@2x.png */,
+				5BFDD7BF198606870034CE0B /* cStarFull@2x.png */,
 				5B717FF1197905C800F1359C /* course */,
 				5B717FF8197905C800F1359C /* CourseChapterData.plist */,
 				5B717FF9197905C800F1359C /* CourseCommentData.plist */,
@@ -1026,6 +1030,7 @@
 				5B718055197905C900F1359C /* 评论.png */,
 				5B07E4E51980CE7E00B3965D /* 已收藏.png */,
 				5B717FF0197905C800F1359C /* cellTag@2x.png */,
+				5BFDD7C719860DBB0034CE0B /* noteData.plist */,
 			);
 			path = File;
 			sourceTree = "<group>";
@@ -1039,6 +1044,7 @@
 				5B717FF5197905C800F1359C /* course3.jpg */,
 				5B717FF6197905C800F1359C /* course4.jpg */,
 				5B717FF7197905C800F1359C /* course5.jpg */,
+				5BFDD7C519860A730034CE0B /* Property List.plist */,
 			);
 			path = course;
 			sourceTree = "<group>";
@@ -1454,6 +1460,7 @@
 				5B718111197905D600F1359C /* LoginViewController.xib in Resources */,
 				5BB2DD4D19838B160026D06D /* CtimeNum.png in Resources */,
 				5B7180DA197905C900F1359C /* CCourse.xib in Resources */,
+				5BFDD7C0198606870034CE0B /* cDownload@2x.png in Resources */,
 				5B71809B197905C900F1359C /* details_definition_bg@2x.png in Resources */,
 				5BB2DD2919838B160026D06D /* JJMeasurementViewController.xib in Resources */,
 				5B717EAF1978FD9600F1359C /* Images.xcassets in Resources */,
@@ -1485,8 +1492,6 @@
 				5B7180C8197905C900F1359C /* details_up.png in Resources */,
 				5BB2DD4719838B160026D06D /* arrow-circle-right.png in Resources */,
 				5B7180BA197905C900F1359C /* details_progress_select.png in Resources */,
-				5B02FDB61985566900B512B8 /* cDownload@2x.png in Resources */,
-				5B02FDB71985566900B512B8 /* cNote@2x.png in Resources */,
 				5BB2DD5C19838B160026D06D /* writing.png in Resources */,
 				5B71808F197905C900F1359C /* J9.jpg in Resources */,
 				5B718074197905C900F1359C /* course3.jpg in Resources */,
@@ -1497,6 +1502,7 @@
 				5B7180A8197905C900F1359C /* details_hd.png in Resources */,
 				5B718095197905C900F1359C /* details_button_back@2x.png in Resources */,
 				5B718079197905C900F1359C /* CourseDirectionData.plist in Resources */,
+				5BFDD7C2198606870034CE0B /* cNote@2x.png in Resources */,
 				5B717EA11978FD9600F1359C /* InfoPlist.strings in Resources */,
 				5B71808A197905C900F1359C /* J4.jpg in Resources */,
 				5B71809A197905C900F1359C /* details_definition_bg.png in Resources */,
@@ -1533,7 +1539,7 @@
 				5B7180BB197905C900F1359C /* details_progress_select@2x.png in Resources */,
 				5BB2DD4319838B160026D06D /* share@2x.png in Resources */,
 				5B71809C197905C900F1359C /* details_definition_bg_bg2.png in Resources */,
-				5B02FDBD19855B7500B512B8 /* cStarFull@2x.png in Resources */,
+				5BFDD7C4198606870034CE0B /* cStarFull@2x.png in Resources */,
 				5B718087197905C900F1359C /* J10.jpg in Resources */,
 				5B718088197905C900F1359C /* J2.jpg in Resources */,
 				5B7180CF197905C900F1359C /* 分享.png in Resources */,
@@ -1565,8 +1571,6 @@
 				5B7180B0197905C900F1359C /* details_mute_select.png in Resources */,
 				5B7180AC197905C900F1359C /* details_left.png in Resources */,
 				5B71807F197905C900F1359C /* CuserPhoto.png in Resources */,
-				5B02FDB91985576100B512B8 /* cStar@2x.png in Resources */,
-				5B02FDBB198557FB00B512B8 /* cMessage@2x.png in Resources */,
 				5B7180C9197905C900F1359C /* details_up@2x.png in Resources */,
 				5BB2DD5319838B160026D06D /* locked-place.png in Resources */,
 				5B718080197905C900F1359C /* DamakuData.plist in Resources */,
@@ -1580,6 +1584,7 @@
 				5B718093197905C900F1359C /* details_airplay_select@2x.png in Resources */,
 				5B7180C0197905C900F1359C /* details_start.png in Resources */,
 				5BB2DD3B19838B160026D06D /* back@2x.png in Resources */,
+				5BFDD7C819860DBB0034CE0B /* noteData.plist in Resources */,
 				5B7180B7197905C900F1359C /* details_Progress of the point@2x.png in Resources */,
 				5B71807E197905C900F1359C /* CtimeNum.png in Resources */,
 				5B71808D197905C900F1359C /* J7.jpg in Resources */,
@@ -1600,13 +1605,16 @@
 				5B71809D197905C900F1359C /* details_definition_bg_bg2@2x.png in Resources */,
 				5BB2DD4919838B160026D06D /* bin.png in Resources */,
 				5B7180BC197905C900F1359C /* details_sound.png in Resources */,
+				5BFDD7C619860A730034CE0B /* Property List.plist in Resources */,
 				5BB2DD3D19838B160026D06D /* buy@2x.png in Resources */,
+				5BFDD7C1198606870034CE0B /* cMessage@2x.png in Resources */,
 				5B7180BF197905C900F1359C /* details_sound_select@2x.png in Resources */,
 				5B7180B3197905C900F1359C /* details_ordinary@2x.png in Resources */,
 				5B718073197905C900F1359C /* course2.jpg in Resources */,
 				5BB695D3198012FD00A4E6DE /* SendComNoteView.xib in Resources */,
 				5B71811E197905D600F1359C /* UserInfoCell.xib in Resources */,
 				5B718082197905C900F1359C /* headAd1@2x.png in Resources */,
+				5BFDD7C3198606870034CE0B /* cStar@2x.png in Resources */,
 				B0B0AD19197D327900B29458 /* Default.png in Resources */,
 				5B718096197905C900F1359C /* details_button_back_select.png in Resources */,
 				5BB2DD3C19838B160026D06D /* buy1.png in Resources */,

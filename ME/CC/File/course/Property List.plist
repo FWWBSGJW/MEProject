@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>courseNoteName</key>
+		<string>普通笔记</string>
+		<key>noteNumber/笔记数量</key>
+		<integer>12</integer>
+		<key>url</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>课程章节number</key>
+		<integer>2</integer>
+		<key>课程章节的名字</key>
+		<string>认识java</string>
+		<key>noteNumber</key>
+		<integer>11</integer>
+		<key>Url</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>课程章节number</key>
+		<integer>3</integer>
+		<key>课程章节的名字</key>
+		<string>变量与运算符</string>
+		<key>noteNumber</key>
+		<integer>11</integer>
+		<key>Url</key>
+		<string></string>
+	</dict>
+</array>
+</plist>

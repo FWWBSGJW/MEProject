@@ -101,19 +101,12 @@ enum SendType
     return _timerArray;
 }
 
-- (DanmakuModel *)danmakuModel
-{
-    if (_danmakuModel == nil) {
-        _danmakuModel = [[DanmakuModel alloc] init];
-    }
-    return _danmakuModel;
-}
 
-- (NSArray *)danmaku
+- (NSMutableArray *)danmaku
 {
     if (!_danmaku) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"DamakuData.plist" ofType:nil];
-        _danmaku = [NSArray arrayWithContentsOfFile:path];
+        _danmaku = self.danmakuModel.danmakuArray;
+        NSLog(@"%@",_danmaku);
     }
     return _danmaku;
 }
@@ -164,8 +157,10 @@ enum SendType
 
 - (void)playVideoWithVideoID : (NSInteger)videoID andVideoTitle:(NSString *)videoTitle andVideoUrlString:(NSString *)urlString
 {
-#warning 通过id获取视频弹幕 待实现
+#warning 通过share类获取userID 待实现
     NSLog(@"%@",urlString);
+    _danmakuModel = [[DanmakuModel alloc] initWithVideoID:videoID andUserID:1];
+    [self.danmakuModel loadDanmakuArray];
     self.url = [NSURL URLWithString:urlString];
     self.moviePlayer.contentURL = self.url;
     self.title = videoTitle;
@@ -175,6 +170,8 @@ enum SendType
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     [self.moviePlayer prepareToPlay];
     _lastArrayNum = 0;
     
