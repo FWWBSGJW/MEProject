@@ -72,7 +72,7 @@ enum SendType
 //发表笔记按钮-静止弹幕
 @property (strong, nonatomic) UIButton *sendNoteButton;
 //弹幕开关
-@property (strong, nonatomic) UISwitch *dmSwitch;
+@property (strong, nonatomic) UISwitch *dmSwitch; //弹幕开关
 //弹幕计时器
 @property (strong, nonatomic) NSTimer *danmakuTimer;
 
@@ -222,15 +222,6 @@ enum SendType
                     [self.danmakuView addSubview:danmakuView];
                     
                     //设置弹幕动画
-//                    [UIView animateWithDuration:4.0f animations:^{
-//                        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-//                        [danmakuView setFrame:CGRectMake(0.0-danmakuView.frame.size.width, danmakuView.frame.origin.y, danmakuView.frame.size.width, danmakuView.frame.size.height)];
-//                    } completion:^(BOOL finished) {
-//                        if (danmakuView.frame.origin.x < (-danmakuView.frame.size.width)) {
-//                            [self.danmakuModel addNoUseDanmaku:danmakuView WithDanmakuType:moveDanmaku];
-//                        }
-//                        
-//                    }];
                     dispatch_sync(dispatch_get_main_queue(), ^{
                         [self moveDM:danmakuView];
                     });
@@ -284,6 +275,7 @@ enum SendType
 - (void)hidSDM:(DanmakuView *)dmView
 {
     dmView.alpha = 0.0;
+    _staticDanmakuY += dmView.frame.size.height;
     [self.danmakuModel addNoUseDanmaku:dmView WithDanmakuType:staticDanmaku];
     [dmView removeFromSuperview];
     
@@ -627,7 +619,7 @@ enum SendType
 
 - (void)showOrHidDM:(UISwitch *)swich
 {
-    
+    self.danmakuView.hidden = !swich.isOn;
 }
 
 //显示和隐藏控制器
@@ -691,21 +683,22 @@ enum SendType
 //定时器事件
 - (void)timerClicked
 {
-    
-    //异步加载弹幕
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        [self selectDanmuku];
-    });
+    if (self.dmSwitch.isOn) {
+        //异步加载弹幕
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            [self selectDanmuku];
+        });
+    }
     
     //设置开始时间
     //NSLog(@"%f",self.moviePlayer.currentPlaybackTime);
-    NSLog(@"%f",self.sliderBar.maximumValue);
+    //NSLog(@"%f",self.sliderBar.maximumValue);
     [self.startTimeLabel setText:[self secondTimeChange:[NSString stringWithFormat:@"%f",self.moviePlayer.currentPlaybackTime]]];
     [self.sliderBar setMaximumValue:self.moviePlayer.duration];
     [self.sliderBar setValue:self.moviePlayer.currentPlaybackTime];
     //self.sliderBar.value = self.moviePlayer.currentPlaybackTime;
-    NSLog(@"%f",self.sliderBar.value);
+    //NSLog(@"%f",self.sliderBar.value);
     [self.endTimeLabel setText:[self secondTimeChange:[NSString stringWithFormat:@"%f",self.moviePlayer.duration]]];
     
     
@@ -720,7 +713,7 @@ enum SendType
     if (!self.timer) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerClicked) userInfo:nil repeats:YES];
     }
-    NSLog(@"%f",sender.value);
+   // NSLog(@"%f",sender.value);
 }
 
 //slider touch down method

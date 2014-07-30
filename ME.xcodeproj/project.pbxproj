@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5B02FDC019855F1B00B512B8 /* ExtendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B02FDBF19855F1B00B512B8 /* ExtendViewController.m */; };
 		5B07E4E61980CE7F00B3965D /* 已收藏.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B07E4E51980CE7E00B3965D /* 已收藏.png */; };
+		5B2376D81988C15500805500 /* CDownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2376D71988C15500805500 /* CDownloadViewController.m */; };
 		5B717E971978FD9600F1359C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B717E961978FD9600F1359C /* Foundation.framework */; };
 		5B717E991978FD9600F1359C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B717E981978FD9600F1359C /* CoreGraphics.framework */; };
 		5B717E9B1978FD9600F1359C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B717E9A1978FD9600F1359C /* UIKit.framework */; };
@@ -292,6 +293,8 @@
 		5B02FDBE19855F1B00B512B8 /* ExtendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendViewController.h; sourceTree = "<group>"; };
 		5B02FDBF19855F1B00B512B8 /* ExtendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendViewController.m; sourceTree = "<group>"; };
 		5B07E4E51980CE7E00B3965D /* 已收藏.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已收藏.png"; sourceTree = "<group>"; };
+		5B2376D61988C15500805500 /* CDownloadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDownloadViewController.h; sourceTree = "<group>"; };
+		5B2376D71988C15500805500 /* CDownloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDownloadViewController.m; sourceTree = "<group>"; };
 		5B717E931978FD9600F1359C /* ME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ME.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B717E961978FD9600F1359C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5B717E981978FD9600F1359C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -993,6 +996,8 @@
 				5B717FE8197905C800F1359C /* CChapterViewController.m */,
 				5B717FED197905C800F1359C /* CVideoPlayerController.h */,
 				5B717FEE197905C800F1359C /* CVideoPlayerController.m */,
+				5B2376D61988C15500805500 /* CDownloadViewController.h */,
+				5B2376D71988C15500805500 /* CDownloadViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1660,6 +1665,7 @@
 				5BB2DD2E19838B160026D06D /* JJTestDivideViewController.m in Sources */,
 				5B02FDC019855F1B00B512B8 /* ExtendViewController.m in Sources */,
 				5B7180D5197905C900F1359C /* DanmakuModel.m in Sources */,
+				5B2376D81988C15500805500 /* CDownloadViewController.m in Sources */,
 				5B7180DE197905C900F1359C /* DnmakuView.m in Sources */,
 				5B717F431978FE4E00F1359C /* SDWebImageCompat.m in Sources */,
 				5B717F301978FE4E00F1359C /* AFPropertyListRequestOperation.m in Sources */,

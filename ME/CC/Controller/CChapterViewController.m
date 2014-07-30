@@ -12,8 +12,9 @@
 #import "CourseChapter.h"
 #import "SendComNoteView.h"
 #import "SVPullToRefresh.h"
-
+#import "User.h"
 #import "CVideoPlayerController.h"
+#import "CDownloadViewController.h"
 #define headHeight 160
 enum Segement_Type
 {
@@ -38,6 +39,12 @@ enum Button_Tag
     ButtonTagNote//笔记
 };
 
+enum DownloadButton_Tag
+{
+    DownloadCancel = 450, //取消下载
+    DownloadConfirm //确认下载
+};
+
 @interface CChapterViewController ()
 {
     CChapterHead *_headView; //课程head
@@ -60,20 +67,19 @@ enum Button_Tag
 @property (strong, nonatomic) SendComNoteView *sendComNoteView; //发送评论，笔记试图
 @property (strong, nonatomic) UIView *dimView; //发送评论时背影
 @property (weak, nonatomic) UIToolbar *toobar;
+
+@property (strong, nonatomic) UIView *downLoadBarView;
 @end
 
 @implementation CChapterViewController
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:YES];
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
     
     _courseChapter = [[CourseChapter alloc] init];
     
@@ -192,6 +198,30 @@ enum Button_Tag
     }
     return _dimView;
 }
+
+- (UIView *)downLoadBarView
+{
+    if (_downLoadBarView == nil) {
+        _downLoadBarView = [[UIView alloc] initWithFrame:self.toobar.frame];
+        _downLoadBarView.backgroundColor = [UIColor whiteColor];
+        UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        cancelButton.frame = CGRectMake(0, 0, _downLoadBarView.frame.size.width/2.0, _downLoadBarView.frame.size.height);
+        [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        cancelButton.tag = DownloadCancel;
+        [cancelButton addTarget:self action:@selector(doDownload:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *downloadButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        downloadButton.frame = CGRectMake(_downLoadBarView.frame.size.width/2.0, 0, _downLoadBarView.frame.size.width/2.0, _downLoadBarView.frame.size.height);
+        [downloadButton setTitle:@"下载" forState:UIControlStateNormal];
+        downloadButton.tag = DownloadConfirm;
+        [downloadButton addTarget:self action:@selector(doDownload:) forControlEvents:UIControlEventTouchUpInside];
+        [downloadButton setBackgroundColor:[UIColor redColor]];
+        [_downLoadBarView addSubview:cancelButton];
+        [_downLoadBarView addSubview:downloadButton];
+    }
+    return _downLoadBarView;
+}
+
 #warning 以下三方法待实现后台获取数据
 
 
@@ -467,7 +497,7 @@ enum Button_Tag
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section > 0) {
+    if (indexPath.section > 0 && !self.tableView.isEditing) {
         switch (self.segmentControl.selectedSegmentIndex) {
             case SegementChapter:
             {
@@ -493,6 +523,16 @@ enum Button_Tag
         }
     }
 }
+
+#pragma mark - 编辑模式 下载
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.segmentControl.selectedSegmentIndex == SegementChapter) {
+        return YES;
+    } else
+        return NO;
+}
+
 
 
 #pragma mark - Action 方法
@@ -527,6 +567,11 @@ enum Button_Tag
 - (void)clickHeader : (UIButton *)button
 {
     NSInteger section = button.tag;
+    [self openChapterWithSection:section];
+}
+//为下载复用
+- (void)openChapterWithSection:(NSInteger)section
+{
     NSMutableDictionary *chapterDic = self.courseChapterArray[section - 1];
     
     if (chapterDic[@"CCvideo"] == nil) {
@@ -548,6 +593,7 @@ enum Button_Tag
     switch (button.tag) {
         case ButtonTagPrivate:{
             //[button setBackgroundImage:[UIImage imageNamed:@"已收藏"] forState:UIControlStateNormal];
+            [self userCheck];
             button.image = [UIImage imageNamed:@"cStarFull"];
             //NSLog(@"private");
 //            if (button.selected == YES) {
@@ -562,6 +608,16 @@ enum Button_Tag
             break;
         case ButtonTagDownLoad:{
             
+            if (self.segmentControl.selectedSegmentIndex != SegementChapter) {
+                [self.segmentControl setSelectedSegmentIndex:SegementChapter];
+                [self.tableView reloadData];
+            }
+            [self.segmentControl setEnabled:NO];
+            if ([self.chapterOpenArray[0] integerValue] == 0) {
+                [self openChapterWithSection:1]; //展开第一行 提示可下载
+            }
+            [self.tableView setEditing:YES animated:YES];
+            [self.view addSubview:self.downLoadBarView];
         }
             break;
         case ButtonTagShare:{
@@ -608,6 +664,25 @@ enum Button_Tag
     }
 }
 
+#pragma mark download Action
+- (void)doDownload:(UIButton *)sender
+{
+    if (sender.tag == DownloadConfirm) {
+        NSArray *array = [self.tableView indexPathsForSelectedRows];
+        //NSLog(@"%@",array);
+        NSMutableArray *downChapterArray = [NSMutableArray arrayWithCapacity:array.count];
+        for (NSIndexPath *indexPath in array) {
+            NSDictionary *dic = self.courseChapterArray[indexPath.section-1];
+            NSArray *couseArray = dic[@"CCvideo"];
+            [downChapterArray addObject:couseArray[indexPath.row]];
+        }
+        //NSLog(@"%@",downChapterArray);
+    }
+    [self.tableView setEditing:NO animated:YES];
+    [self.segmentControl setEnabled:YES];
+    [self.downLoadBarView removeFromSuperview];
+}
+
 #pragma sendView button action
 - (void)sendComNote
 {
@@ -641,5 +716,16 @@ enum Button_Tag
     }];
 
 }
+
+#pragma mark - 用户登录相关
+
+- (void)userCheck
+{
+    User *user = [User sharedUser];
+    if (!user.info.isLogin) {
+        [user gotoUserLoginFrom:self];
+    }
+}
+
 
 @end
