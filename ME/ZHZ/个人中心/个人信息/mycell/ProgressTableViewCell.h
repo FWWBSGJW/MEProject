@@ -12,6 +12,6 @@
 
 @property (nonatomic,weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic,strong)  ZDProgressView *progressView;
-@property (nonatomic,weak) IBOutlet UIImageView *image;
+@property (nonatomic,weak) IBOutlet UIImageView *courseImage;
 
 @end

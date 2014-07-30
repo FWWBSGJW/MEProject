@@ -15,6 +15,19 @@
     // Initialization code
 }
 
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+	if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProgressCell" owner:self options:nil];
+		self = nib[0];
+		self.progressView = [[ZDProgressView alloc] initWithFrame:CGRectMake(96, 42, 204, 30)];
+		[self.contentView addSubview:self.progressView];
+		self.progressView.backgroundColor = [UIColor blackColor];
+		self.progressView.noColor = [UIColor whiteColor];
+		self.progressView.prsColor = [UIColor lightGrayColor];
+		self.highlighted = NO;
+	}
+	return self;
+}
 
 - (id)initWithFrame:(CGRect)frame{
 	NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProgressCell" owner:self options:nil];

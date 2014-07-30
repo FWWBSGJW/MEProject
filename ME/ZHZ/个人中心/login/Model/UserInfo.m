@@ -10,6 +10,7 @@
 #import "OLNetManager.h"
 
 @interface UserInfo ()
+@property (nonatomic) NSString * userId;
 @end
 
 @implementation UserInfo
@@ -19,7 +20,7 @@
 - (id)init{
 	if (self = [super init]) {
 		_data		= nil;
-		
+		_userId		= @"1";
 		_isLogin	= NO;
 		_account	= nil;
 		_name		= nil;
@@ -39,9 +40,10 @@
 	return self;
 }
 
-- (id)initWithUserId:(NSInteger)userId{
+- (id)initWithUserId:(NSString *)userId{
 	if (self = [super init]) {
 		_data		= [[OLNetManager userDataWithId:userId] objectForKey:@"result"];
+		_userId		= nil;
 		_account	= nil;
 		_name		= nil;
 		_sex		= nil;
@@ -61,9 +63,10 @@
 
 - (void)setAllData{
 	if (_data) {
+		_userId		= [_data objectForKey:@"userid"];
 		_account	= [_data objectForKey:@"account"];
 		_name		= [_data objectForKey:@"name"];
-		_sex		= [_data objectForKey:@"sex"];
+		_sex		= [[_data objectForKey:@"sex"] boolValue];
 		_imageUrl	= [_data objectForKey:@"image"];
 		_describe	= [_data objectForKey:@"describe"];
 		[_lcourses	addObjectsFromArray:[_data objectForKey:@"lcourses"]];
@@ -120,17 +123,27 @@
 
 //	NSDictionary *dic = [OLNetManager loginWith:userName andPassword:passWord succ:^(NSDictionary *successDict) {
 //	}];
-	NSDictionary *dic = [OLNetManager userDataWithId:1];
-	_data = [dic objectForKey:@"result"];
+//	NSDictionary *dic = [OLNetManager userDataWithId:_userId];
+	NSDictionary *dic = [OLNetManager loginWith:userName andPassword:passWord];
+	NSString *suc= [dic objectForKey:@"success"];
 #warning 判断登陆是否成功
-	if (_data) {
+	if ([suc isEqualToString:@"true"]) {
+		_data = [dic objectForKey:@"result"];
 		[self setAllData];
 		_isLogin = YES;
 		[self saveInfoToDocument];
 		return YES;
 	}
+	else{
+		NSLog(@"is faliure");
+		return NO;
+	}
 #endif
 	return NO;
+}
+
+- (void)update{
+	[OLNetManager userDataWithId:_userId];
 }
 
 - (BOOL)lastUserInfo{	//判断沙盒中是否存在用户信息

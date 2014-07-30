@@ -13,7 +13,8 @@
 #import "FocusTableViewController.h"
 #import "LoginViewController.h"
 #import "DetailViewController.h"
-
+#import "UIImageView+WebCache.h"
+#import "CourseTableViewController.h"
 typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
     UserCenterSectionStyelInfo = 0,
     UserCenterSectionStyelDetail,
@@ -40,6 +41,9 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 //	[_infoCell loadData];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+	self.tabBarController.tabBar.hidden = NO;
+}
 //- (void)waitData{
 //	while (!_user.info.account) {
 //		_user = [User sharedUser];
@@ -60,17 +64,21 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 - (void)courseLabelTouchEvent{
 	//course table
 	NSLog(@"course label table");
+	CourseTableViewController *ctb = [[CourseTableViewController alloc] initWithStyle:UITableViewStylePlain];
+	ctb.courses = _user.info.lcourses;
+	ctb.navigationItem.title = @"最近浏览";
+	[self.navigationController pushViewController:ctb animated:YES];
 }
 
 - (void)focusLabelTouchEvent{
-	FocusTableViewController *ftvc = [[FocusTableViewController alloc] initWithStyle:UITableViewStylePlain];
-	ftvc.data = [_user.info.focus mutableCopy];
+	FocusTableViewController *ftvc = [[FocusTableViewController alloc] initWithData:[_user.info.focus mutableCopy]];
+//	ftvc.data = [_user.info.focus mutableCopy];
 	[self.navigationController pushViewController:ftvc animated:YES];
 }
 
 - (void)focusedLabelTouchEvent{
-	FocusTableViewController *ftvc = [[FocusTableViewController alloc] initWithStyle:UITableViewStylePlain];
-	ftvc.data = [_user.info.focused mutableCopy];
+		FocusTableViewController *ftvc = [[FocusTableViewController alloc] initWithData:[_user.info.focused mutableCopy]];
+//	ftvc.data = [_user.info.focused mutableCopy];
 	[self.navigationController pushViewController:ftvc animated:YES];
 }
 #pragma mark - Table view data source
@@ -116,7 +124,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 				   focusNum:[_user.info.focus count]
 				 focusedNum:[_user.info.focused count]];
 		}
-		cell = _uiCell;
+		return _uiCell;
 	}else if (indexPath.section == UserCenterSectionStyelDetail){
 		//详情
 		cell = [[UITableViewCell alloc] init];
@@ -130,11 +138,11 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 			
 			[cell1 setSelectionStyle:UITableViewCellSelectionStyleNone];//取消被选中的高亮效果
 			cell1.nameLabel.text = [course objectForKey:@"courseName"];
-			cell1.image.image = [UIImage imageNamed:[course objectForKey:@"image"]];
+			[cell1.courseImage setImageWithURL:[NSURL URLWithString:[course objectForKey:@"image"]]];
 			cell1.progressView.progress = [[course objectForKey:@"progress"] doubleValue];
 			cell1.progressView.text = [NSString stringWithFormat:@"%.2lf%%",[[course objectForKey:@"progress"] doubleValue]*100];
 		}
-		cell = cell1;
+		return cell1;
 	}else if (indexPath.section == UserCenterSectionStyelQandA){
 		//最近的提问和回答
 		if (indexPath.row == 0) {
@@ -179,7 +187,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		cell.textLabel.textColor = [UIColor redColor];
 		cell.textLabel.textAlignment = NSTextAlignmentCenter;
 	}
-	
+	[cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
     return cell;
 }
 
@@ -247,9 +255,16 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		[self.navigationController pushViewController:detail animated:YES];
 		
 	}else if (indexPath.section == UserCenterSectionStyelBCcourse){
-		//
-	}else if (indexPath.section == UserCenterSectionStyelLcourse){
+		CourseTableViewController *ctb = [[CourseTableViewController alloc]initWithStyle:UITableViewStylePlain];
+		ctb.courses = (indexPath.row==1)?_user.info.bcourses:_user.info.ccourses;
+		self.navigationItem.title = (indexPath.row==1)?@"已购课程":@"已收藏课程";
+		[self.navigationController pushViewController:ctb animated:YES];
 		
+	}else if (indexPath.section == UserCenterSectionStyelLcourse){
+		//course interface
+		
+//		self.tabBarController.selectedIndex = 0;
+//		[[self.tabBarController.viewControllers objectAtIndex:0] pushViewController:ctb animated:YES	];
 	}else if (indexPath.section == UserCenterSectionStyelLink){
 		
 	}else if (indexPath.section == UserCenterSectionStyelQandA){

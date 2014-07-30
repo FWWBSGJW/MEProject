@@ -12,7 +12,7 @@
 @property (nonatomic,strong) NSDictionary *data;
 @property (nonatomic,strong) NSString	*account;	//账号
 @property (nonatomic,strong) NSString	*name;		//昵称
-@property (nonatomic,strong) NSString	*sex;		//性别
+@property (nonatomic,readonly)	BOOL	sex;		//性别
 @property (nonatomic,strong) NSString	*imageUrl;	//头像
 @property (nonatomic,strong) NSString	*describe;	//个性签名
 @property (nonatomic,readonly)	BOOL	isLogin;	//登陆状态
@@ -26,6 +26,6 @@
 - (BOOL)userLoginWith:(NSString *)userName andPassword:(NSString *)passWord;
 //判断用户名和密码 进行登录  成功返回YES 并将isLogin 改为YES
 - (BOOL)userLogout; //登出
-
-- (id)initWithUserId:(NSInteger)userId;
+- (void)update;
+- (id)initWithUserId:(NSString *)userId;
 @end
