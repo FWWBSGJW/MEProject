@@ -23,10 +23,7 @@
 @property (assign, nonatomic) NSInteger CDcourseNum;//课程数量
 @property (assign, nonatomic) NSInteger CDvideoNum; //课程方向视频数量
 @property (assign, nonatomic) NSInteger CDpracticeNum;//课程方向练习数
-//图片缓存，异步加载
-@property (strong, nonatomic) UIImage *cacheImage;
 
-//+ (instancetype)courseDirectionWithDictionary:(NSDictionary *)dictionary;
-//类赋值方法
+
 - (void)setCourseDirectionWithDictionary:(NSDictionary *)dictionary;
 @end

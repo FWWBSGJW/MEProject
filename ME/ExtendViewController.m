@@ -1,18 +1,18 @@
 //
-//  DemoViewController.m
-//  移动教育1.0
+//  ExtendViewController.m
+//  ME
 //
-//  Created by yato_kami on 14-7-4.
+//  Created by yato_kami on 14-7-28.
 //  Copyright (c) 2014年 yatokami. All rights reserved.
 //
 
-#import "DemoViewController.h"
+#import "ExtendViewController.h"
 
-@interface DemoViewController ()
+@interface ExtendViewController ()
 
 @end
 
-@implementation DemoViewController
+@implementation ExtendViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,21 +28,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake(60, 100, 200, 200);
-    [button setTitle:@"touch" forState:UIControlStateNormal];
+    [button setTitle:@"返回" forState:UIControlStateNormal];
+    self.view.backgroundColor = [UIColor greenColor];
+    [button setFrame:CGRectMake(SCREEN_WIDTH/2-50, SCREEN_HEIGHT/2-50, 100, 100)];
+    [button addTarget:self action:@selector(backHome) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
-    [button addTarget:self action:@selector(touche) forControlEvents:UIControlEventTouchUpInside];
+}
+
+
+- (void)backHome
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)touche
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

@@ -10,5 +10,9 @@
 
 @interface JJFinishViewController : JJBaseViewController
 
+@property (strong, nonatomic) IBOutlet UILabel *scoreLa;
 - (IBAction)back:(id)sender;
+
+- (id)initWithScore:(NSString *)score correctAnswer:(NSArray *)correctArray personAnswer:(NSArray *)personArray questionArray:(NSArray *)queArray answerArray:(NSArray *)anArray;
+@property (strong, nonatomic) IBOutlet UIButton *reviewBtn;
 @end

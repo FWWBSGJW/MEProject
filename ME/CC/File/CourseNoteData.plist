@@ -18,7 +18,7 @@
 		<key>CNdate</key>
 		<string>2014-01-02 12：00</string>
 		<key>CVNtime</key>
-		<string>07：02</string>
+		<integer>7</integer>
 	</dict>
 	<dict>
 		<key>CNid</key>

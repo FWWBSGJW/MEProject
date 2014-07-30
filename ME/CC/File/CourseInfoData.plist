@@ -17,5 +17,7 @@
 	<string>标准课程</string>
 	<key>courseTime</key>
 	<integer>566</integer>
+	<key>couseIsFavorited</key>
+	<integer>1</integer>
 </dict>
 </plist>

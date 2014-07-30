@@ -19,7 +19,19 @@
     [self setFrame:CGRectMake(0, 0, labelsize.width, labelsize.height)];
 }
 
-- (instancetype)init
+- (void)setStaticDMSizeWithComponent:(NSString *)string
+{
+    self.text = string;
+    CGSize size = CGSizeMake(SCREEN_HEIGHT/2.0, SCREEN_WIDTH/2.0);
+    //    获取当前文本的属性
+    NSDictionary * tdic = [NSDictionary dictionaryWithObjectsAndKeys:self.font,NSFontAttributeName,nil];
+    //ios7方法，获取文本需要的size，限制宽度
+    CGSize fitSize = [string boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:tdic context:nil].size;
+    
+    self.frame =CGRectMake(0,0, fitSize.width, fitSize.height);
+}
+
+- (instancetype)initMoveDM
 {
     self = [super init];
     self.backgroundColor = [UIColor clearColor];
@@ -28,6 +40,14 @@
     [self setShadowColor:[UIColor blackColor]];
     [self setShadowOffset:CGSizeMake(1.0, 2.0)];
     
+    return self;
+}
+
+- (instancetype)initStaticDM
+{
+    self = [self initMoveDM];
+    self.numberOfLines = 0;
+    [self setLineBreakMode:NSLineBreakByCharWrapping];
     return self;
 }
 

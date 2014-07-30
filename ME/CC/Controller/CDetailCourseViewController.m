@@ -9,28 +9,31 @@
 #import "CDetailCourseViewController.h"
 #import "CDetailHead.h"
 #import "CChapterViewController.h"
-
+#import "CDAllSection.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface CDetailCourseViewController ()
 
-@property (strong, nonatomic) NSArray *courseSectionArray; // 课程数组，分阶段
+@property (strong, nonatomic) CDAllSection *cdAllSection;//课程数组阶段模型
+
 @end
 
 @implementation CDetailCourseViewController
 
 #pragma mark - getter and setter
 
-
-- (NSArray *)courseSectionArray
+- (CDAllSection *)cdAllSection
 {
-    if (!_courseSectionArray) {
-#warning 待补完连接后台取数据，目前沙盒数据测试
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"CourseSectionData" ofType:@"plist"];
-        _courseSectionArray = [NSArray arrayWithContentsOfFile:path];
-        //NSLog(@"%@",_courseSectionArray);
+    if (!_cdAllSection) {
+        _cdAllSection = [[CDAllSection alloc] init];
+        if (_cdAllSection.cdAllSectionArray == nil) {
+            [_cdAllSection loadDataWithCDid:self.courseDirection.CDid];
+        }
     }
-    return _courseSectionArray;
+    return _cdAllSection;
 }
+
+
 
 #pragma mark - 类构造方法
 + (instancetype)detailCourseVCwithCourseDirection:(CourseDirection *)courseDirection
@@ -65,6 +68,7 @@
 {
     [super viewDidLoad];
     self.tableView.rowHeight = 60.0; //设置cell高度
+   
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,14 +80,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.courseSectionArray.count + 1;
+    return self.cdAllSection.cdAllSectionArray.count+1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section != 0 ) {
-        NSArray *CScontent = [self.courseSectionArray[section-1] objectForKey:@"CScontent"];
-        return CScontent.count;
+
+        CDSection *cdSection = self.cdAllSection.cdAllSectionArray[section-1];//.csContent;
+    
+        return cdSection.csContent.count;
     } else
         return 0;
 }
@@ -99,10 +105,14 @@
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         cell.textLabel.font = [UIFont boldSystemFontOfSize:15.0];
     }
-    NSArray *CScontent = [self.courseSectionArray[indexPath.section-1] objectForKey:@"CScontent"];
-    cell.textLabel.text = [CScontent[indexPath.row] objectForKey:@"courseName"];
-    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",[CScontent[indexPath.row] objectForKey:@"courseImageUrl"]]];
     
+    CDSection *cdSection = self.cdAllSection.cdAllSectionArray[indexPath.section-1];
+    NSDictionary *csDic = cdSection.csContent[indexPath.row];
+    
+    cell.textLabel.text = csDic[@"courseName"];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kBaseURL, csDic[@"courseImageUrl"]]] placeholderImage:[UIImage imageNamed:@"directionDefault"]];
+
+
     return cell;
 }
 
@@ -118,14 +128,21 @@
     
         if (!view) {
             view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30)];
+            view.backgroundColor = [UIColor whiteColor];
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 20)];
             label.tag = 201;
-            view.backgroundColor = [UIColor colorWithRed:0.2 green:0.8 blue:0.2 alpha:0.8];
+            view.backgroundColor = [UIColor colorWithRed:128/255.0 green:1.0 blue:0 alpha:1.0];
+            //view.backgroundColor = [UIColor lightGrayColor];
             label.backgroundColor = [UIColor clearColor];
+            //label.backgroundColor = [UIColor whiteColor];
             [view addSubview:label];
         }
         UILabel *label = (UILabel *)[view viewWithTag:201];
-        label.text = [NSString stringWithFormat:@"学习阶段%d:%@",section,[self.courseSectionArray[section - 1] objectForKey:@"CSname"]];
+        
+        CDSection *cdSection = self.cdAllSection.cdAllSectionArray[section-1];
+        label.text = [NSString stringWithFormat:@"学习阶段%d:%@",section,cdSection.csName];
+
+
         return view;
     }
     
@@ -142,7 +159,7 @@
 #pragma mark - 设置首个head的UI
 - (void)setFirstHeadUI:(CDetailHead *)headView
 {
-    headView.imageView.image = self.courseDirection.cacheImage;
+    [headView.imageView setImageWithURL:[NSURL URLWithString:self.courseDirection.CDimageUrlString] placeholderImage:[UIImage imageNamed:@"directionDefault"]];
     headView.detailTextView.text = self.courseDirection.CDdetail;
     headView.courseNumLabel.text = [NSString stringWithFormat:@"%d",self.courseDirection.CDcourseNum];
     headView.videoNumLabel.text = [NSString stringWithFormat:@"%d",self.courseDirection.CDvideoNum];
@@ -153,9 +170,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section) {
-        NSArray *stageArray = self.courseSectionArray[indexPath.section-1][@"CScontent"];
-        NSInteger courseID = [stageArray[indexPath.row][@"courseID"] integerValue];
-        CChapterViewController *headVC = [CChapterViewController chapterVCwithCourseID:courseID];
+        CDSection *cdSection = self.cdAllSection.cdAllSectionArray[indexPath.section-1];
+        
+        NSDictionary *content = cdSection.csContent[indexPath.row];
+        CChapterViewController *headVC = [CChapterViewController chapterVCwithCourseID:[content[@"courseID"] integerValue]];
+        
         [self.navigationController pushViewController:headVC animated:YES];
         
     }

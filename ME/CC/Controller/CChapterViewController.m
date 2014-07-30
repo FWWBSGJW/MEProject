@@ -9,8 +9,12 @@
 #import "CChapterHead.h"
 #import "CChapterViewController.h"
 #import "CCommentCell.h"
-
+#import "CourseChapter.h"
+#import "SendComNoteView.h"
+#import "SVPullToRefresh.h"
+#import "User.h"
 #import "CVideoPlayerController.h"
+#import "CDownloadViewController.h"
 #define headHeight 160
 enum Segement_Type
 {
@@ -20,13 +24,25 @@ enum Segement_Type
     SegementNote //课程笔记
 };
 
+enum TextView_Type
+{
+    TextViewComment = 500,//评论textview
+    TextViewNote // 笔记textView
+};
+
 enum Button_Tag
 {
     ButtonTagPrivate = 400, //收藏按钮TAG
     ButtonTagDownLoad, //下载
-    ButtonTagShare,//分享
     ButtonTagComment,//评论
+    ButtonTagShare,//分享
     ButtonTagNote//笔记
+};
+
+enum DownloadButton_Tag
+{
+    DownloadCancel = 450, //取消下载
+    DownloadConfirm //确认下载
 };
 
 @interface CChapterViewController ()
@@ -35,61 +51,100 @@ enum Button_Tag
     //UITextView *_textView; //课程介绍textview
 }
 
+@property (strong, nonatomic) CourseChapter *courseChapter;//课程模型
 
+@property (assign, nonatomic) NSInteger courseID;//课程id
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSDictionary *courseInfoDic;//课程信息字典
-@property (strong, nonatomic) NSArray *courseChapterArray;//课程章节数组
+@property (strong, nonatomic) NSMutableArray *courseChapterArray;//课程章节数组
 @property (strong, nonatomic) NSArray *courseCommentArray;//课程评论数组
 @property (strong, nonatomic) NSArray *courseNote; //课程笔记数组
 
 @property (strong, nonatomic) NSMutableArray *chapterOpenArray;//章节是否展开数组
 @property (weak, nonatomic) UISegmentedControl *segmentControl;
 
+@property (strong, nonatomic) SendComNoteView *sendComNoteView; //发送评论，笔记试图
+@property (strong, nonatomic) UIView *dimView; //发送评论时背影
+@property (weak, nonatomic) UIToolbar *toobar;
+
+@property (strong, nonatomic) UIView *downLoadBarView;
 @end
 
 @implementation CChapterViewController
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:YES];
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
     
-    self.title = self.courseInfoDic[@"courseName"];
-    UIView *tabBarView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-30, SCREEN_WIDTH, 30.0f)];
-    tabBarView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:tabBarView];
+    _courseChapter = [[CourseChapter alloc] init];
+    
+    //上拉更多
+    __weak CChapterViewController *weakSelf = self;
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf insertRowAtBottom];
+    }];
+    self.tableView.showsInfiniteScrolling = NO;
+   
+    self.title = self.courseInfoDic[@"cName"];
+
+    
+    
     //设置底部功能按钮
-    NSArray *array = [NSArray arrayWithObjects:@"收藏",@"下载",@"评论",@"分享",@"笔记", nil];
+    
+    UIToolbar *toorBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-33, SCREEN_WIDTH, 33.0f)];
+    
+    NSMutableArray *items = [NSMutableArray arrayWithCapacity:12];
+    NSArray *array = [NSArray arrayWithObjects:@"cStar",@"cDownload",@"cMessage",@"share",@"cNote",nil];
+
     for (NSInteger i =0; i<5; i++) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [button setBackgroundColor:[UIColor whiteColor]];
-        //[button setTitle:array[i] forState:UIControlStateNormal];
-        [button setBackgroundImage:[UIImage imageNamed:array[i]] forState:UIControlStateNormal];
-        //[button.imageView setContentMode:UIViewContentModeScaleToFill];
-        CGFloat blackWidth = (SCREEN_WIDTH - 30*5.0) / (array.count+1.0);
-        //[button setBackgroundColor:[UIColor grayColor]];
-        button.frame = CGRectMake(blackWidth+(blackWidth+30) * i, 0, 30, 30);
-        button.tag = 400+i;
-        [button addTarget:self action:@selector(touchButton:) forControlEvents:UIControlEventTouchUpInside];
-        [tabBarView addSubview:button];
+        
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:array[i]] style:UIBarButtonItemStyleBordered target:self action:@selector(touchButton:)];
+        item.tag = 400+i;
+        UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        [items addObject:item];
+        [items addObject:flexItem];
     }
+    [items removeLastObject];
+    toorBar.items = items;
+    [self.view addSubview:toorBar];
+    
+    self.toobar = toorBar;
     
     //注册cell
-    //[self.tableView registerClass:[CCommentCell class] forCellReuseIdentifier:@"commentCell"];
+    
     UINib *nib = [UINib nibWithNibName:@"CCommentCell" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"commentCell"];
     
     
 }
 
-
+#pragma mark - 上拉更多
+- (void)insertRowAtBottom
+{
+    __weak CChapterViewController *weakSelf = self;
+    
+    int64_t delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
+        if (weakSelf.courseChapter.nextCommentPageUrl != nil) {
+            [weakSelf.tableView beginUpdates];
+            NSInteger dataCount = self.courseCommentArray.count;
+            NSLog(@"%@",self.courseCommentArray);
+            [self.courseChapter loadNextPageCourseComment];
+            [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:dataCount inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [weakSelf.tableView endUpdates];
+            
+        }
+        [weakSelf.tableView.infiniteScrollingView stopAnimating];
+        
+    });
+}
 
 
 #pragma mark - 类实例方法
@@ -97,7 +152,10 @@ enum Button_Tag
 + (instancetype)chapterVCwithCourseID:(NSInteger)courseID
 {
     CChapterViewController *VC = [[CChapterViewController alloc] init];
-    VC.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-30-64) style:UITableViewStylePlain];
+    VC.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-33-64) style:UITableViewStylePlain];
+    
+    VC.courseID = courseID;
+    
     [VC.view addSubview:VC.tableView];
     return VC;
     
@@ -116,12 +174,63 @@ enum Button_Tag
     return _chapterOpenArray;
 }
 
+- (SendComNoteView *)sendComNoteView
+{
+    if (!_sendComNoteView) {
+        
+        _sendComNoteView = [[SendComNoteView alloc] init];
+        _sendComNoteView.frame = CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, -_sendComNoteView.frame.size.height, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height);
+        _sendComNoteView.alpha = 0.0;
+        [_sendComNoteView.sendButton addTarget:self action:@selector(sendComNote) forControlEvents:UIControlEventTouchUpInside];
+        [_sendComNoteView.backButton addTarget:self action:@selector(cancelSend) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _sendComNoteView;
+}
+
+
+- (UIView *)dimView
+{
+    if (!_dimView) {
+        _dimView = [[UIView alloc] initWithFrame:self.view.frame];
+        _dimView.backgroundColor = [UIColor blackColor];
+        _dimView.alpha = 0.4;
+    }
+    return _dimView;
+}
+
+- (UIView *)downLoadBarView
+{
+    if (_downLoadBarView == nil) {
+        _downLoadBarView = [[UIView alloc] initWithFrame:self.toobar.frame];
+        _downLoadBarView.backgroundColor = [UIColor whiteColor];
+        UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        cancelButton.frame = CGRectMake(0, 0, _downLoadBarView.frame.size.width/2.0, _downLoadBarView.frame.size.height);
+        [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        cancelButton.tag = DownloadCancel;
+        [cancelButton addTarget:self action:@selector(doDownload:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *downloadButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        downloadButton.frame = CGRectMake(_downLoadBarView.frame.size.width/2.0, 0, _downLoadBarView.frame.size.width/2.0, _downLoadBarView.frame.size.height);
+        [downloadButton setTitle:@"下载" forState:UIControlStateNormal];
+        downloadButton.tag = DownloadConfirm;
+        [downloadButton addTarget:self action:@selector(doDownload:) forControlEvents:UIControlEventTouchUpInside];
+        [downloadButton setBackgroundColor:[UIColor redColor]];
+        [_downLoadBarView addSubview:cancelButton];
+        [_downLoadBarView addSubview:downloadButton];
+    }
+    return _downLoadBarView;
+}
+
 #warning 以下三方法待实现后台获取数据
-- (NSArray *)courseChapterArray
+
+
+
+- (NSMutableArray *)courseChapterArray
 {
     if (!_courseChapterArray) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"CourseChapterData" ofType:@"plist"];
-        _courseChapterArray = [NSArray arrayWithContentsOfFile:path];
+        [self.courseChapter loadCourseAllChapterWithCourseID:self.courseID];
+        _courseChapterArray = self.courseChapter.courseChapterArray;
     }
     return _courseChapterArray;
 }
@@ -129,8 +238,8 @@ enum Button_Tag
 - (NSArray *)courseCommentArray
 {
     if (!_courseCommentArray) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"CourseCommentData" ofType:@"plist"];
-        _courseCommentArray = [NSArray arrayWithContentsOfFile:path];
+        [self.courseChapter loadCourseCommentWithCourseID:self.courseID andPage:1];
+        self.courseCommentArray = self.courseChapter.courseCommentArray;
     }
     return _courseCommentArray;
 }
@@ -138,9 +247,10 @@ enum Button_Tag
 - (NSDictionary *)courseInfoDic
 {
     if (!_courseInfoDic) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"CourseInfoData" ofType:@"plist"];
-        NSLog(@"%@",path);
-        _courseInfoDic = [NSDictionary dictionaryWithContentsOfFile:path];
+        [self.courseChapter loadCourseInfoWithCourseID:self.courseID];
+        _courseInfoDic = self.courseChapter.courseInfoDic;
+        //NSLog(@"%@",_courseInfoDic);
+        
     }
     return _courseInfoDic;
 }
@@ -231,13 +341,15 @@ enum Button_Tag
             _segmentControl = _headView.segmentControl;
             [self.segmentControl addTarget:self action:@selector(selectSegemnt) forControlEvents:UIControlEventValueChanged];
             
-            //NSLog(@"%@",self.courseInfoDic[@"courseImageUrl"]);
-            UIImage *image = [UIImage imageNamed:self.courseInfoDic[@"courseImageUrl"]];
-            [_headView.CCImageView setImage:image];
-            _headView.CCtypeLabel.text = self.courseInfoDic[@"courseType"];
-            _headView.CCpriceLaebl.text = [NSString stringWithFormat:@"%d元",[self.courseInfoDic[@"coursePrice"] integerValue]];
-            _headView.CCteacherLabel.text = self.courseInfoDic[@"courseTeacher"];
-            _headView.CCtimeLabel.text = [NSString stringWithFormat:@"%d分钟",[self.courseInfoDic[@"courseTime"] integerValue]];
+            //NSLog(@"%@",self.courseInfoDic);
+            
+            //UIImage *image = [UIImage imageNamed:self.courseInfoDic[@"courseImageUrl"]];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kBaseURL,self.courseInfoDic[@"cPic"]]];
+            [_headView.CCImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"directionDefault"]];
+            _headView.CCtypeLabel.text = self.courseInfoDic[@"type"];
+            _headView.CCpriceLaebl.text = [NSString stringWithFormat:@"%d元",[self.courseInfoDic[@"cPrice"] integerValue]];
+            _headView.CCteacherLabel.text = self.courseInfoDic[@"cTeacher"];
+            _headView.CCtimeLabel.text = [NSString stringWithFormat:@"%d分钟",[self.courseInfoDic[@"cTime"] integerValue]];
         }
         return _headView;
     } else {
@@ -269,7 +381,7 @@ enum Button_Tag
         }
         UILabel *label = (UILabel *)[headView viewWithTag:205];
         NSDictionary *chapterDic = self.courseChapterArray[section - 1];
-        label.text = [NSString stringWithFormat:@"第%d章 %@",[chapterDic[@"CCnum"] integerValue],chapterDic[@"CCname"]];
+        label.text = [NSString stringWithFormat:@"第%d章 %@",[chapterDic[@"chChapterNo"] integerValue],chapterDic[@"chChapterName"]];
         return headView;
     }
     
@@ -293,13 +405,14 @@ enum Button_Tag
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:disCellIdentifier];
             if (!cell) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:disCellIdentifier];
-                cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 44 - headHeight);
-                UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(5, 5, SCREEN_WIDTH-10, SCREEN_HEIGHT - 44 - headHeight)];
+                cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - headHeight-33);
+                UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(5, 5, SCREEN_WIDTH-10, SCREEN_HEIGHT - 64-33 - headHeight)];
                 [textView setEditable:NO];
-                [textView setFont:[UIFont systemFontOfSize:16.0f]];
+                [textView setFont:[UIFont systemFontOfSize:13.0f]];
                 [cell.contentView addSubview:textView];
                 //_textView = textView;
-                [textView setText:self.courseInfoDic[@"courseDescription"]];
+                
+                [textView setText:self.courseInfoDic[@"cDetail"]];
             }
             return cell;
         }
@@ -312,10 +425,11 @@ enum Button_Tag
                 cell = [[CCommentCell alloc] init];
             }
             NSDictionary *dic = self.courseCommentArray[indexPath.row];
-            cell.headImageView.image = [UIImage imageNamed:dic[@"userImageUrl"]];
-            cell.dateLable.text = dic[@"userConmentDate"];
-            cell.commentLabel.text = dic[@"userConment"];
-            cell.userNameLable.text = dic[@"userName"];
+            NSString *urlStr = [NSString stringWithFormat:@"%@%@",kBaseURL,dic[@"userPortrait"]];
+            [cell.headImageView setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"CuserPhoto"]];
+            cell.dateLable.text = dic[@"ccDate"];
+            cell.commentLabel.text = dic[@"ccContent"];
+            cell.userNameLable.text = dic[@"userSign"];
             
             return cell;
         }
@@ -335,9 +449,9 @@ enum Button_Tag
                 timeLable.tag = 120; //
             }
             NSArray *chapter = self.courseChapterArray[indexPath.section -1][@"CCvideo"];
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@",chapter[indexPath.row][@"CVnum"],chapter[indexPath.row][@"CVname"]];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@",chapter[indexPath.row][@"vSectionsNo"],chapter[indexPath.row][@"vSectionsName"]];
             UILabel *label = (UILabel *)[cell viewWithTag:120];
-            label.text = [NSString stringWithFormat:@"%@分钟",chapter[indexPath.row][@"CVtime"]];
+            label.text = [NSString stringWithFormat:@"%@分钟",chapter[indexPath.row][@"vTime"]];
             return cell;
         }
             break;
@@ -364,7 +478,7 @@ enum Button_Tag
 {
     switch (self.segmentControl.selectedSegmentIndex) {
         case SegementDiscription:
-            return SCREEN_HEIGHT - 44 - headHeight;
+            return SCREEN_HEIGHT - 64 - headHeight - 33;
             break;
         case SegementChapter:
             return 44;
@@ -383,17 +497,17 @@ enum Button_Tag
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section > 0) {
+    if (indexPath.section > 0 && !self.tableView.isEditing) {
         switch (self.segmentControl.selectedSegmentIndex) {
             case SegementChapter:
             {
                 //获取对应视频id
                 NSDictionary *dic = (self.courseChapterArray[indexPath.section-1][@"CCvideo"])[indexPath.row];
-                NSInteger CVid = [dic[@"CVid"] integerValue];
-                NSLog(@"%d",CVid);
+                NSInteger CVid = [dic[@"vId"] integerValue];
+                //NSLog(@"%d",CVid);
             
                 CVideoPlayerController *player = [[CVideoPlayerController alloc] init];
-                [player playVideoWithVideoID:CVid andVideoTitle:[NSString stringWithFormat:@"%@ %@",dic[@"CVnum"],dic[@"CVname"]]];
+                [player playVideoWithVideoID:CVid andVideoTitle:[NSString stringWithFormat:@"%@ %@",dic[@"vSectionsNo"],dic[@"vSectionsName"]] andVideoUrlString:[NSString stringWithFormat:@"%@%@",kBaseURL,dic[@"vUrl"]]] ;
                 [self presentMoviePlayerViewControllerAnimated:player];
                 
                 
@@ -410,27 +524,62 @@ enum Button_Tag
     }
 }
 
+#pragma mark - 编辑模式 下载
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.segmentControl.selectedSegmentIndex == SegementChapter) {
+        return YES;
+    } else
+        return NO;
+}
+
+
+
 #pragma mark - Action 方法
 
 #pragma mark  segement Changed 方法
 - (void)selectSegemnt
 {
-    NSLog(@"%d",self.segmentControl.selectedSegmentIndex);
+    //NSLog(@"%d",self.segmentControl.selectedSegmentIndex);
     switch (self.segmentControl.selectedSegmentIndex) {
         case SegementDiscription:
+            self.tableView.showsInfiniteScrolling = NO;
             [self.tableView reloadData];
             break;
-            
-        default:
-            [self.tableView reloadData];;
+        case SegementChapter:
+            self.tableView.showsInfiniteScrolling = NO;
+            [self.tableView reloadData];
+            break;
+        case SegementComment:
+            self.tableView.showsInfiniteScrolling = YES;
+            [self.tableView reloadData];
+            break;
+        case SegementNote:
+            self.tableView.showsInfiniteScrolling = NO;
+            [self.tableView reloadData];
+            break;
+        default: ;
+            //[self.tableView reloadData];;
     }
 }
 
-#pragma mark 点击header展开/收缩章节方法
+#pragma mark 点击header展开/收缩章节方法 --- 从后台获取章节信息
 - (void)clickHeader : (UIButton *)button
 {
     NSInteger section = button.tag;
-    NSLog(@"%d-touched",section);
+    [self openChapterWithSection:section];
+}
+//为下载复用
+- (void)openChapterWithSection:(NSInteger)section
+{
+    NSMutableDictionary *chapterDic = self.courseChapterArray[section - 1];
+    
+    if (chapterDic[@"CCvideo"] == nil) {
+        NSInteger chapterID = [chapterDic[@"chId"] integerValue];
+        NSArray *array = [self.courseChapter loadCourseDetailChapterWithChapterID:chapterID];
+        [chapterDic setObject:array forKey:@"CCvideo"];
+    }
+    //NSLog(@"%d-touched",section);
     NSInteger isOpen = [self.chapterOpenArray[section-1] integerValue];
     [self.chapterOpenArray replaceObjectAtIndex:section-1 withObject:(isOpen ? @0 : @1)];
     NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:section];
@@ -438,16 +587,37 @@ enum Button_Tag
 }
 
 #pragma mark 功能button方法
-- (void)touchButton:(UIButton *)button
+- (void)touchButton:(UIBarButtonItem *)button
 {
 #warning -  功能待实现
     switch (button.tag) {
         case ButtonTagPrivate:{
-            NSLog(@"private");
+            //[button setBackgroundImage:[UIImage imageNamed:@"已收藏"] forState:UIControlStateNormal];
+            [self userCheck];
+            button.image = [UIImage imageNamed:@"cStarFull"];
+            //NSLog(@"private");
+//            if (button.selected == YES) {
+//                button.image = [UIImage imageNamed:@"cStar"];
+//                button.selected = NO;
+//            } else{
+//                button.image = [UIImage imageNamed:@"cStarFull"];
+//                button.selected = YES;
+//            }
+            
         }
             break;
         case ButtonTagDownLoad:{
             
+            if (self.segmentControl.selectedSegmentIndex != SegementChapter) {
+                [self.segmentControl setSelectedSegmentIndex:SegementChapter];
+                [self.tableView reloadData];
+            }
+            [self.segmentControl setEnabled:NO];
+            if ([self.chapterOpenArray[0] integerValue] == 0) {
+                [self openChapterWithSection:1]; //展开第一行 提示可下载
+            }
+            [self.tableView setEditing:YES animated:YES];
+            [self.view addSubview:self.downLoadBarView];
         }
             break;
         case ButtonTagShare:{
@@ -455,14 +625,107 @@ enum Button_Tag
         }
             break;
         case ButtonTagComment:{
+#pragma mark 待判断用户是否登录
+        
             
+            //弹出输入框
+            [[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
+            [[UIApplication sharedApplication].keyWindow addSubview:self.sendComNoteView];
+            [self.sendComNoteView.textView becomeFirstResponder];
+            self.sendComNoteView.titleLabel.text = @"发送评论";
+            self.sendComNoteView.tag = TextViewComment;
+            [UIView animateWithDuration:0.4f animations:^{
+                [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, 20.0, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
+                self.sendComNoteView.alpha = 1.0f;
+            } completion:^(BOOL finished) {
+                
+            }];
+
         }
             break;
         case ButtonTagNote:{
+            //弹出输入框
+            [[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
+            [[UIApplication sharedApplication].keyWindow addSubview:self.sendComNoteView];
+            [self.sendComNoteView.textView becomeFirstResponder];
+            self.sendComNoteView.titleLabel.text = @"写笔记";
+            self.sendComNoteView.tag = TextViewNote;
+            [UIView animateWithDuration:0.4f animations:^{
+                [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, 20.0, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
+                self.sendComNoteView.alpha = 1.0f;
+            } completion:^(BOOL finished) {
+                
+            }];
+
             
         }
         default:
             break;
     }
 }
+
+#pragma mark download Action
+- (void)doDownload:(UIButton *)sender
+{
+    if (sender.tag == DownloadConfirm) {
+        NSArray *array = [self.tableView indexPathsForSelectedRows];
+        //NSLog(@"%@",array);
+        NSMutableArray *downChapterArray = [NSMutableArray arrayWithCapacity:array.count];
+        for (NSIndexPath *indexPath in array) {
+            NSDictionary *dic = self.courseChapterArray[indexPath.section-1];
+            NSArray *couseArray = dic[@"CCvideo"];
+            [downChapterArray addObject:couseArray[indexPath.row]];
+        }
+        //NSLog(@"%@",downChapterArray);
+    }
+    [self.tableView setEditing:NO animated:YES];
+    [self.segmentControl setEnabled:YES];
+    [self.downLoadBarView removeFromSuperview];
+}
+
+#pragma sendView button action
+- (void)sendComNote
+{
+#pragma waring 此处待实现上传评论，笔记 ,刷新数据
+    //评论
+    if (self.sendComNoteView.tag == TextViewComment) {
+        NSLog(@"评论---%@",self.sendComNoteView.textView.text);
+    } else if (self.sendComNoteView.tag == TextViewNote){ //笔记
+        NSLog(@"笔记---%@",_sendComNoteView.textView.text);
+    }
+    
+    [self sendComNoteViewBack];
+    //self.sendComNoteView.textView.text = nil;
+}
+
+- (void)cancelSend
+{
+    [self sendComNoteViewBack];
+}
+
+- (void)sendComNoteViewBack
+{
+    [self.sendComNoteView.textView resignFirstResponder];
+
+    [UIView animateWithDuration:0.4f animations:^{
+        [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, -_sendComNoteView.frame.size.height, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
+        self.sendComNoteView.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [self.dimView removeFromSuperview];
+        self.sendComNoteView.textView.text = nil;
+    }];
+
+}
+
+#pragma mark - 用户登录相关
+
+- (void)userCheck
+{
+    User *user = [User sharedUser];
+    if (!user.info.isLogin) {
+        [user gotoUserLoginFrom:self];
+    }
+}
+
+
 @end

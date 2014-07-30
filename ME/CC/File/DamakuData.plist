@@ -62,6 +62,20 @@
 		<key>userID</key>
 		<integer>0</integer>
 		<key>Dcomponent</key>
+		<string>我是笔记，hahahahahaha</string>
+		<key>videoID</key>
+		<integer>0</integer>
+		<key>Dtype</key>
+		<integer>1</integer>
+		<key>Dtime</key>
+		<integer>4</integer>
+		<key>Ddate</key>
+		<string>2014-01-01 11:11:12</string>
+	</dict>
+	<dict>
+		<key>userID</key>
+		<integer>0</integer>
+		<key>Dcomponent</key>
 		<string>5真有趣4</string>
 		<key>videoID</key>
 		<integer>0</integer>
@@ -108,7 +122,7 @@
 		<key>videoID</key>
 		<integer>0</integer>
 		<key>Dtype</key>
-		<integer>0</integer>
+		<integer>1</integer>
 		<key>Dtime</key>
 		<integer>15</integer>
 		<key>Ddate</key>

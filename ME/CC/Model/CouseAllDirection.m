@@ -19,7 +19,7 @@
     NSString *str = [kBaseURL stringByAppendingString:@"MobileEducation/directionAction"];
     
     NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.5f];
     
     NSURLResponse *response = nil;
     NSError *error = nil;
@@ -41,11 +41,11 @@
 {
     //反序列化
     NSArray *array = [NSJSONSerialization JSONObjectWithData:datda options:NSJSONReadingAllowFragments error:nil];
-    
-    //保存至沙箱，持久化
-    NSArray *docs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [docs[0] stringByAppendingPathComponent:@"CourseDirectionData.plist"];
-    [array writeToFile:path atomically:YES];
+//    
+//    //保存至沙箱，持久化
+//    NSArray *docs = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *path = [docs[0] stringByAppendingPathComponent:@"CourseDirectionData.plist"];
+//    [array writeToFile:path atomically:YES];
     
     NSMutableArray *allCDArray = [NSMutableArray array];
     for (NSDictionary *dic in array) {

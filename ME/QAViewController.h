@@ -1,5 +1,5 @@
 //
-//  DemoViewController.h
+//  QAViewController
 //  移动教育1.0
 //
 //  Created by yato_kami on 14-7-4.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DemoViewController : UIViewController
+@interface QAViewController : UIViewController
 
 @end

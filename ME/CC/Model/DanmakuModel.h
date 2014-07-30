@@ -17,9 +17,16 @@ typedef NS_ENUM(NSInteger, DanmakuType) {
 
 @interface DanmakuModel : NSObject
 
+
+@property (assign, nonatomic) CGFloat moveDanmukuY;
+@property (assign, nonatomic) CGFloat staticDanmakuY;
+
+@property (strong, nonatomic) NSMutableArray *danmakuArray;
 @property (strong, nonatomic) NSMutableArray *moveDanmakuReUseArray;
 @property (strong, nonatomic) NSMutableArray *staticDanmakuReUseArray;
 
+@property (assign, nonatomic) NSInteger userID;
+@property (assign, nonatomic) NSInteger videoID;
 /**
  *  寻找对应类型的可复用弹幕
  *
@@ -31,4 +38,7 @@ typedef NS_ENUM(NSInteger, DanmakuType) {
 
 - (void)addNoUseDanmaku:(DanmakuView *)danmakuLabel WithDanmakuType:(DanmakuType)type;
 
+- (instancetype)initWithVideoID:(NSInteger)videoID andUserID:(NSInteger)userID;
+
+- (void)loadDanmakuArray;
 @end

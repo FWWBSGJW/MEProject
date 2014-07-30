@@ -11,5 +11,9 @@
 @interface JJMeasurementViewController : JJBaseViewController<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UIButton *upBtn;
 @property (strong, nonatomic) UIButton *downBtn;
+@property(nonatomic, strong) UIButton *handInBtn;
+@property(nonatomic, strong) UIButton *reviewBtn;
 
+
+- (id)initWithSubjectDetailUrl:(NSString *)paramUrl;
 @end
