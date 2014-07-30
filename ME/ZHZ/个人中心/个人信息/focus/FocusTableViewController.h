@@ -16,4 +16,5 @@
 
 @interface FocusTableViewController : UITableViewController
 @property (nonatomic,strong) NSMutableArray *data;
+- (id)initWithData:(NSArray *)data;
 @end

@@ -51,6 +51,7 @@
 	   courseNum:(NSUInteger)num1
 		focusNum:(NSUInteger)num2
 	  focusedNum:(NSUInteger)num3{
+	
 	[_portrait setImageWithURL:[NSURL URLWithString:imageUrl]];
 	_nameLabel.text = name;
 	_courseNumLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num1];

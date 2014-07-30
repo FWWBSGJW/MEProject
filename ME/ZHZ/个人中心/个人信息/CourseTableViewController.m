@@ -1,21 +1,19 @@
 //
-//  FocusTableViewController.m
-//  Online_learning
+//  CourseTableViewController.m
+//  ME
 //
-//  Created by qf on 14/7/9.
-//  Copyright (c) 2014年 qf. All rights reserved.
+//  Created by qf on 14/7/22.
+//  Copyright (c) 2014年 yatokami. All rights reserved.
 //
 
-#import "FocusTableViewController.h"
+#import "CourseTableViewController.h"
+#import "ProgressTableViewCell.h"
 #import "UIImageView+WebCache.h"
-#import "DetailViewController.h"
-
-#define kDefault_portrait @"CuserPhoto"
-@interface FocusTableViewController ()
+@interface CourseTableViewController ()
 
 @end
 
-@implementation FocusTableViewController
+@implementation CourseTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -24,13 +22,6 @@
         // Custom initialization
     }
     return self;
-}
-
-- (id)initWithData:(NSArray *)data{
-	if (self = [super initWithStyle:UITableViewStylePlain]) {
-		self.data = [data mutableCopy];
-	}
-	return self;
 }
 
 - (void)viewDidLoad
@@ -44,44 +35,47 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+	self.tabBarController.tabBar.hidden = YES;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+	return 90;
+}
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [_data count];
+    return [_courses count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	static NSString *identifier = @"FocusCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+	static  NSString *identifier = @"CourseCell";
+    ProgressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	if (!cell) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+		cell = [[ProgressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
 	}
-    
-    // Configure the cell...
-	NSDictionary *focusDic = [_data objectAtIndex:indexPath.row];
-    [cell.imageView setImageWithURL:[NSURL URLWithString:[focusDic objectForKey:@"image"]] placeholderImage:[UIImage imageNamed:kDefault_portrait]];
-	cell.textLabel.text = [focusDic objectForKey:@"name"];
-	cell.detailTextLabel.text = [focusDic objectForKey:@"describe"];
+
+	NSDictionary *course = [_courses objectAtIndex:indexPath.row];
+		
+	[cell setSelectionStyle:UITableViewCellSelectionStyleNone];//取消被选中的高亮效果
+	cell.nameLabel.text = [course objectForKey:@"courseName"];
+	[cell.courseImage setImageWithURL:[NSURL URLWithString:[course objectForKey:@"image"]]];
+	cell.progressView.progress = [[course objectForKey:@"progress"] doubleValue];
+	cell.progressView.text = [NSString stringWithFormat:@"%.2lf%%",[[course objectForKey:@"progress"] doubleValue]*100];
+
     return cell;
 }
 
-#pragma mark - Table view delegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-	NSDictionary *dic = [_data objectAtIndex:indexPath.row];
-	DetailViewController *dvc = [[DetailViewController alloc] initWithUserId:[dic objectForKey:@"url"]];
-	[self.navigationController pushViewController:dvc animated:YES];
-}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

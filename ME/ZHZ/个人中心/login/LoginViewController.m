@@ -50,8 +50,10 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-	if (![textField.text isEqualToString:@""]) {
+	if (textField.tag == 1) {
 		[self login:nil];
+	}else{
+		[_userpwdText becomeFirstResponder];
 	}
 	return YES;
 }
@@ -87,6 +89,8 @@
 	_usernameText.returnKeyType = UIReturnKeyNext;
 	_userpwdText.returnKeyType = UIReturnKeyDone;
 	_usernameText.delegate = self;
+	_userpwdText.delegate = self;
+	_userpwdText.tag = 1;
 	if (_showCencel ) {
 		UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(cencel)];
 		self.navigationItem.leftBarButtonItem = barButton;

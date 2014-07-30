@@ -47,16 +47,6 @@
 //	self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",9];
 }
 
-//- (void)viewWillAppear:(BOOL)animated{
-//	User *user = [User sharedUser];
-//	if (!user.info.isLogin) {
-//		self.viewControllers = @[_logv];
-//	}else{
-//		self.viewControllers = @
-//	}
-//}
-
-
 
 - (void)didReceiveMemoryWarning
 {

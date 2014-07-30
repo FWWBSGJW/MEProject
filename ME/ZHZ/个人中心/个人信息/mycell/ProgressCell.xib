@@ -26,7 +26,7 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="image" destination="j3Q-7q-hcI" id="KcY-AB-YWq"/>
+                <outlet property="courseImage" destination="j3Q-7q-hcI" id="I2E-el-7ic"/>
                 <outlet property="nameLabel" destination="oRk-om-Dfr" id="jVh-N2-QLU"/>
             </connections>
         </tableViewCell>

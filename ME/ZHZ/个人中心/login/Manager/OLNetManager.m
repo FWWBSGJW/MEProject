@@ -10,7 +10,7 @@
 
 #define NetworkTimeout 30
 #define kURL_login @"http://121.197.10.159:8080/MobileEducation/userAction"
-
+#define kURL_test @"http://172.168.1.109:8080/MobileEducation/userAction"
 @interface OLNetManager(){
 //	void(^succ)(NSDictionary *dic);
 }
@@ -20,46 +20,38 @@
 
 @implementation OLNetManager
 
-+ (NSDictionary *)userDataWithId:(NSInteger)userId{
-	NSString *urlStr = [NSString stringWithFormat:@"%@?userId=%ld",kURL_login,userId];
-	NSURL *url = [NSURL URLWithString:urlStr];
++ (NSDictionary *)userDataWithId:(NSString*)userId{
+	NSString *urlStr = [NSString stringWithFormat:@"%@?userId=%@",kURL_login,userId];
+	NSURL *url = [NSURL URLWithString:userId];
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
-	//	[NSURLConnection connectionWithRequest:request delegate:self];
 	NSURLResponse *response = nil;
 	NSError *error = nil;
 	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-#warning 编码方式
-	NSString *str = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-	NSDictionary *dic = [str objectFromJSONString];
+//	NSString *str = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+//	NSString *strr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+	NSDictionary *dic = [data objectFromJSONData];
 	return dic;
 }
 
 + (NSDictionary *)loginWith:(NSString *)username
-				andPassword:(NSString *)password
-					   succ:(SUCCESSBLOCK)success{
-	NSString *urlStr = [NSString stringWithFormat:@"%@?account=%@&password=%@",kURL_login,username,password];
-	NSURL *url = [NSURL URLWithString:urlStr];
-	NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//	[NSURLConnection connectionWithRequest:request delegate:self];
+				andPassword:(NSString *)password{
+//	NSString *urlStr = [NSString stringWithFormat:@"%@?account=%@&password=%@",kURL_login,username,password];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!login?account=%@&pwd=%@",kURL_login,username,password]];
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+/*post
+	[request setTimeoutInterval:5];
+	[request setHTTPMethod:@"POST"];
+	
+	NSString *body = [NSString stringWithFormat:@"account=%@&pwd=%@",username,password];
+	NSData *bodyData = [body dataUsingEncoding:NSUTF8StringEncoding];
+	[request setHTTPBody:bodyData];
+ */
 	NSURLResponse *response = nil;
 	NSError *error = nil;
 	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-#warning 编码方式
-	NSString *str = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-	NSDictionary *dic = [str objectFromJSONString];
+	NSDictionary *dic = [data objectFromJSONData];
 	return dic;
 }
-//#pragma mark - url connection data delegate
-
-//- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
-//	[self.data appendData:data];
-//}
-
-//- (void)connectionDidFinishLoading:(NSURLConnection *)connection{
-//	NSString *str = [[NSString alloc] initWithData:_data encoding:NSASCIIStringEncoding];
-//	NSDictionary *dic = [str objectFromJSONString];
-//	succ(dic);
-//}
 
 - (id)init{
 	if (self = [super init]) {
