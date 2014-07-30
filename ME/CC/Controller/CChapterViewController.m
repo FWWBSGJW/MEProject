@@ -137,7 +137,12 @@ enum DownloadButton_Tag
             NSInteger dataCount = self.courseCommentArray.count;
             NSLog(@"%@",self.courseCommentArray);
             [self.courseChapter loadNextPageCourseComment];
-            [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:dataCount inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            NSMutableArray *indexPaths = [NSMutableArray arrayWithCapacity:self.courseCommentArray.count-dataCount];
+            for(NSInteger i = dataCount;i < self.courseCommentArray.count;i++){
+                NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
+                [indexPaths addObject:path];
+            }
+            [weakSelf.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
             [weakSelf.tableView endUpdates];
             
         }
@@ -690,6 +695,9 @@ enum DownloadButton_Tag
     //评论
     if (self.sendComNoteView.tag == TextViewComment) {
         NSLog(@"评论---%@",self.sendComNoteView.textView.text);
+#warning 待获取userID
+        [self.courseChapter sendCourseCommentWithCourseID:self.courseID andUserID:1 andContent:self.sendComNoteView.textView.text];
+        
     } else if (self.sendComNoteView.tag == TextViewNote){ //笔记
         NSLog(@"笔记---%@",_sendComNoteView.textView.text);
     }

@@ -8,10 +8,11 @@
 
 #import "CourseChapter.h"
 
-@interface CourseChapter()
+@interface CourseChapter() <NSURLConnectionDataDelegate>
 
 @property (strong, nonatomic) NSOperationQueue *queue;
 
+@property (strong, nonatomic) NSMutableData *myData;
 @end
 
 @implementation CourseChapter
@@ -145,4 +146,54 @@
     
 }
 
+- (void)sendCourseCommentWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID andContent:(NSString *)content
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@MobileEducation/uploadCComment",kBaseURL]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+     
+    NSString *bodyStr = [NSString stringWithFormat:@"CId=%d&userid=%d&ccContent=%@",courseID,userID,content];
+    NSLog(@"%@",bodyStr);
+    
+    NSData *body = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [request setHTTPBody:body];
+    NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [connection start];
+    
+}
+
+#pragma mark - 网络代理方法
+#pragma mark 1. 接收到服务器的响应，服务器要传数据，客户端做接收准备
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    NSLog(@"response --> %@", response);
+}
+
+#pragma mark 2. 接收服务器传输的数据，可能会多次执行
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    // 对每次传输的数据进行拼接，需要中转数据（属性）
+    [self.myData appendData:data];
+    NSLog(@"%@",self.myData);
+}
+
+#pragma mark 4. 服务器请求失败，原因很多（网络环境等等）
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"网络请求错误：%@", error.localizedDescription);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    NSLog(@"%@",self.myData);
+}
+
+#pragma mark 5. 向服务器发送数据，此方法仅适用于POST，尤其上传文件ß
+- (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
+{
+    NSLog(@"发送数据给服务器");
+}
 @end

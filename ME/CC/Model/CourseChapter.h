@@ -28,4 +28,6 @@
 
 - (void)loadNextPageCourseComment;
 
+- (void)sendCourseCommentWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID andContent:(NSString *)content;
+
 @end
