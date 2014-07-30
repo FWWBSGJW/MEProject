@@ -36,16 +36,15 @@
 + (NSDictionary *)loginWith:(NSString *)username
 				andPassword:(NSString *)password{
 //	NSString *urlStr = [NSString stringWithFormat:@"%@?account=%@&password=%@",kURL_login,username,password];
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!login?account=%@&pwd=%@",kURL_login,username,password]];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@!login",kURL_login]];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-/*post
 	[request setTimeoutInterval:5];
 	[request setHTTPMethod:@"POST"];
 	
 	NSString *body = [NSString stringWithFormat:@"account=%@&pwd=%@",username,password];
 	NSData *bodyData = [body dataUsingEncoding:NSUTF8StringEncoding];
 	[request setHTTPBody:bodyData];
- */
+
 	NSURLResponse *response = nil;
 	NSError *error = nil;
 	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];

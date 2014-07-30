@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	UserCenterSectionStyelLcourse,
 	UserCenterSectionStyelQandA,
 	UserCenterSectionStyelBCcourse,
+//	UserCenterSectionStyelTest,
 	UserCenterSectionStyelLink,
 	UserCenterSectionStyelLogout,
 };
@@ -103,6 +104,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		case UserCenterSectionStyelLcourse: return MIN([_user.info.lcourses count], 3); break;
 		case UserCenterSectionStyelQandA:	return 3; break;
 		case UserCenterSectionStyelBCcourse: return 2; break;
+//		case UserCenterSectionStyelTest	:  return 2;break;
 		default:
 			break;
 	}
