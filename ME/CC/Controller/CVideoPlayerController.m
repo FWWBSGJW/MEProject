@@ -29,7 +29,7 @@ enum SendType
     CGFloat _staticDanmakuY ;
 }
 
-
+@property (assign, nonatomic) NSInteger videoID;
 //自定义播放器控件
 //下边栏控制条
 @property (nonatomic, strong) UIView *controlBar;
@@ -148,7 +148,7 @@ enum SendType
         [sendButton setTitle:@"发送" forState:UIControlStateNormal];
         sendButton.frame = CGRectMake(SCREEN_HEIGHT-40, 5, 40, 30);
         sendButton.titleLabel.font = [UIFont systemFontOfSize:12.0];
-        [sendButton addTarget:self action:@selector(doSend) forControlEvents:UIControlEventTouchUpInside];
+        [sendButton addTarget:self action:@selector(doSend:) forControlEvents:UIControlEventTouchUpInside];
         _sendButton = sendButton;
         [_sendDanmakuView addSubview:sendButton];
     }
@@ -164,6 +164,7 @@ enum SendType
     self.url = [NSURL URLWithString:urlString];
     self.moviePlayer.contentURL = self.url;
     self.title = videoTitle;
+    self.videoID = videoID;
 }
 
 
@@ -581,6 +582,7 @@ enum SendType
     //[[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
     //[[UIApplication sharedApplication].keyWindow addSubview:self.sendDanmakuView];
     _dmTextField.placeholder = sender.tag == Send_Comment ? @"请输入你想发的评论" : @"请输入你想发的笔记";
+    _sendButton.tag = sender.tag;
     [_dmTextField becomeFirstResponder];
     [UIView animateWithDuration:0.4f animations:^{
         self.sendDanmakuView.centerY = self.sendDanmakuView.centerY + self.sendDanmakuView.frame.size.height ;
@@ -595,10 +597,16 @@ enum SendType
     [self hidSendDanmakuView];
 }
 
-- (void)doSend
+- (void)doSend:(UIButton *)sender
 {
     NSString *danmaku = _dmTextField.text;
-#warning 待实现上传弹幕
+#warning 待获取userID
+    [self.danmakuModel sendDanmakuWithUserID:1 andVideoTime:self.moviePlayer.currentPlaybackTime andvideoID:self.videoID andContent:danmaku andType:sender.tag];
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithObjects:@[danmaku,[NSNumber numberWithInteger:self.moviePlayer.currentPlaybackTime]] forKeys:@[@"Dcomponent",@"Dtime"]];
+    
+    [self.danmaku addObject:dic];
+    
     NSLog(@"%@",danmaku);
     [self hidSendDanmakuView];
 }

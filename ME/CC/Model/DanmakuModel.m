@@ -29,21 +29,6 @@
     return _staticDanmakuReUseArray;
 }
 
-- (CGFloat)staticDanmakuY
-{
-    if (!_staticDanmakuY) {
-        _staticDanmakuY = SCREEN_WIDTH;
-    }
-    return _staticDanmakuY;
-}
-
-- (CGFloat)moveDanmukuY
-{
-    if (!_moveDanmukuY) {
-        _moveDanmukuY = SCREEN_HEIGHT;
-    }
-    return _moveDanmukuY;
-}
 
 
 - (instancetype)initWithVideoID:(NSInteger)videoID andUserID:(NSInteger)userID
@@ -113,17 +98,24 @@
     [op start];
 }
 
-#pragma mark - anima
-
-//- (void)danmakuAnimOfStaticDM:(DanmakuView *)dmView
-//{
-//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//    dispatch_group_t group = dispatch_group_create();
-//    dispatch_group_async(group, queue, ^{
-//        NSTimer *myTimer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(dismissDM:) userInfo:dmView repeats:NO];
-//        
-//    })
-//}
-
+#pragma mark - 上传弹幕
+//121.197.10.159:8080/MobileEducation/uploadVComment?cvContent=lldsdfdsd&userId=1&vid=1&cvType=true&cvTime=21
+- (void)sendDanmakuWithUserID:(NSInteger)userID andVideoTime:(NSInteger)cvTime andvideoID:(NSInteger)videoID andContent:(NSString *)content andType:(NSInteger)cvType
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@MobileEducation/uploadVComment",kBaseURL]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    
+    NSString *bodyStr = [NSString stringWithFormat:@"cvContent=%@&userId=%d&vid=%d&cvType=%s&cvTime=%d",content,userID,videoID,cvType?"true":"false",cvTime];
+    NSLog(@"%@",bodyStr);
+    
+    NSData *body = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [request setHTTPBody:body];
+    NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [connection start];
+}
 
 @end

@@ -10,7 +10,7 @@
 
 @interface CChapterViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
 
-+ (instancetype)chapterVCwithCourseID:(NSInteger)courseID; //以id实例化方法
++ (instancetype)chapterVCwithCourseID:(NSInteger)courseID; //以课程id实例化方法
 
 
 @end
