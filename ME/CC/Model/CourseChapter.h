@@ -15,7 +15,7 @@
 @property (strong, nonatomic) NSDictionary *courseInfoDic;//课程信息字典
 @property (strong, nonatomic) NSMutableArray *courseChapterArray;//课程章节数组
 @property (strong, nonatomic) NSMutableArray *courseCommentArray;//课程评论数组
-
+@property (strong, nonatomic) NSMutableArray *couserNoteArray;//课程笔记数组
 @property (strong, nonatomic) NSString *nextCommentPageUrl;
 
 - (void)loadCourseInfoWithCourseID:(NSInteger)courseID; //通过课程id载入课程信息
@@ -24,10 +24,15 @@
 
 - (NSArray *)loadCourseDetailChapterWithChapterID:(NSInteger)chapterID;//用过章id 返回此章中的具体章节
 
-- (void)loadCourseCommentWithCourseID:(NSInteger)courseID andPage:(NSInteger)pageNum; 
+- (void)loadCourseCommentWithCourseID:(NSInteger)courseID andPage:(NSInteger)pageNum; //载入评论
 
-- (void)loadNextPageCourseComment;
-
+- (void)loadNextPageCourseComment; //评论下一页
+//发送评论
 - (void)sendCourseCommentWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID andContent:(NSString *)content;
 
+//收藏
+- (void)privateWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID;
+//笔记
+- (void)loadCourseNoteArrayWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID;
+- (NSMutableArray *)loadCourseDetailNoteWithUrl:(NSString *)urlStr;
 @end

@@ -15,6 +15,7 @@
 #import "User.h"
 #import "CVideoPlayerController.h"
 #import "CDownloadViewController.h"
+#import "CNoteCell.h"
 #define headHeight 160
 enum Segement_Type
 {
@@ -59,9 +60,10 @@ enum DownloadButton_Tag
 @property (strong, nonatomic) NSDictionary *courseInfoDic;//课程信息字典
 @property (strong, nonatomic) NSMutableArray *courseChapterArray;//课程章节数组
 @property (strong, nonatomic) NSArray *courseCommentArray;//课程评论数组
-@property (strong, nonatomic) NSArray *courseNote; //课程笔记数组
+@property (strong, nonatomic) NSMutableArray *courseNoteArray; //课程笔记数组
 
 @property (strong, nonatomic) NSMutableArray *chapterOpenArray;//章节是否展开数组
+@property (strong, nonatomic) NSMutableArray *noteOpenArray; //笔记是否展开数组
 @property (weak, nonatomic) UISegmentedControl *segmentControl;
 
 @property (strong, nonatomic) SendComNoteView *sendComNoteView; //发送评论，笔记试图
@@ -120,6 +122,8 @@ enum DownloadButton_Tag
     UINib *nib = [UINib nibWithNibName:@"CCommentCell" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"commentCell"];
     
+    UINib *nib2 = [UINib nibWithNibName:@"CNoteCell" bundle:[NSBundle mainBundle]];
+    [self.tableView registerNib:nib2 forCellReuseIdentifier:@"noteCell"];
     
 }
 
@@ -177,6 +181,18 @@ enum DownloadButton_Tag
         }
     }
     return _chapterOpenArray;
+}
+
+- (NSMutableArray *)noteOpenArray
+{
+    if (!_noteOpenArray) {
+        _noteOpenArray = [NSMutableArray arrayWithCapacity:self.courseNoteArray.count];
+        for (NSInteger i = 0; i<self.courseNoteArray.count; i++) {
+            [_noteOpenArray addObject:@0];
+        }
+    }
+  
+    return _noteOpenArray;
 }
 
 - (SendComNoteView *)sendComNoteView
@@ -260,13 +276,14 @@ enum DownloadButton_Tag
     return _courseInfoDic;
 }
 
-- (NSArray *)courseNote
+- (NSMutableArray *)courseNoteArray
 {
-    if (!_courseNote) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"CourseNoteData" ofType:@"plist"];
-        _courseNote = [NSArray arrayWithContentsOfFile:path];
+#warning 待通过share类获取id
+    if (!_courseNoteArray) {
+        [self.courseChapter loadCourseNoteArrayWithCourseID:self.courseID andUserID:1];
+        _courseNoteArray = self.courseChapter.couserNoteArray;
     }
-    return _courseNote;
+    return _courseNoteArray;
 }
 
 
@@ -301,9 +318,11 @@ enum DownloadButton_Tag
             return 1;
             break;
         case SegementNote:
-            return 1;
+            return 1 + self.courseNoteArray.count;
+            break;
         case SegementChapter:
             return 1 + self.courseChapterArray.count;
+            break;
         default:
             return 1;
             break;
@@ -328,8 +347,16 @@ enum DownloadButton_Tag
         }
         case SegementComment:
             return self.courseCommentArray.count;
-        case SegementNote:
-            return self.courseNote.count;
+            break;
+        case SegementNote: {
+            if (section == 0) {
+                return 0;
+            } else{
+                //return  [self.chapterOpenArray[section-1] integerValue] == 0 ? 0:((NSArray *)[self.courseChapterArray[section-1] objectForKey:@"CCvideo"]).count;
+                return ([self.noteOpenArray[section-1] integerValue] == 0) ? 0:((NSArray *)[self.courseNoteArray[section-1] objectForKey:@"CCnote"]).count;
+            }
+            break;
+        }
         default:
             return 0;
             break;
@@ -369,7 +396,8 @@ enum DownloadButton_Tag
             imageView.image = [UIImage imageNamed:@"cellTag"];
             //设置三角形图片的旋转角度
             
-            [self.chapterOpenArray[section-1] integerValue] ? [imageView setTransform:CGAffineTransformMakeRotation(M_PI_2)] : [imageView setTransform:CGAffineTransformMakeRotation(0)];
+            NSMutableArray *openArray = (self.segmentControl.selectedSegmentIndex == SegementChapter ? self.chapterOpenArray : self.noteOpenArray);
+            [openArray[section-1] integerValue] ? [imageView setTransform:CGAffineTransformMakeRotation(M_PI_2)] : [imageView setTransform:CGAffineTransformMakeRotation(0)];
             
             [headView addSubview:imageView];
             UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 2, SCREEN_WIDTH-40, 30)];
@@ -384,9 +412,16 @@ enum DownloadButton_Tag
             [headView addSubview:textLabel];
             [headView addSubview:button];
         }
-        UILabel *label = (UILabel *)[headView viewWithTag:205];
-        NSDictionary *chapterDic = self.courseChapterArray[section - 1];
-        label.text = [NSString stringWithFormat:@"第%d章 %@",[chapterDic[@"chChapterNo"] integerValue],chapterDic[@"chChapterName"]];
+        if (self.segmentControl.selectedSegmentIndex == SegementChapter) {
+            UILabel *label = (UILabel *)[headView viewWithTag:205];
+            NSDictionary *chapterDic = self.courseChapterArray[section - 1];
+            label.text = [NSString stringWithFormat:@"第%d章 %@",[chapterDic[@"chChapterNo"] integerValue],chapterDic[@"chChapterName"]];
+        } else if (self.segmentControl.selectedSegmentIndex == SegementNote){
+            UILabel *label = (UILabel *)[headView viewWithTag:205];
+            NSDictionary *noteDic = self.courseNoteArray[section - 1];
+            label.text = (section == 1 ? @"普通笔记" : [NSString stringWithFormat:@"第%d章 %@",[noteDic[@"chChapterNo"] integerValue],noteDic[@"chChapterName"]]);
+        }
+        
         return headView;
     }
     
@@ -434,7 +469,7 @@ enum DownloadButton_Tag
             [cell.headImageView setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"CuserPhoto"]];
             cell.dateLable.text = dic[@"ccDate"];
             cell.commentLabel.text = dic[@"ccContent"];
-            cell.userNameLable.text = dic[@"userSign"];
+            cell.userNameLable.text = dic[@"userName"];
             
             return cell;
         }
@@ -463,15 +498,24 @@ enum DownloadButton_Tag
         case SegementNote:
         {
             static NSString *noteCellIdentifier = @"noteCell";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:noteCellIdentifier];
-            if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:noteCellIdentifier];
+            
+            CNoteCell *cell = [tableView dequeueReusableCellWithIdentifier:noteCellIdentifier];
+            
+            NSArray *noteArray = self.courseNoteArray[indexPath.section-1][@"CCnote"];
+            NSDictionary *noteDic = noteArray[indexPath.row];
+            
+            if (indexPath.section == 1) {
+                cell.noteLabel.text = noteDic[@"cnContext"];
+                cell.chapterLabel.text = noteDic[@"cnDate"];
+                cell.timeLabel.text = @"无";
+            } else{
+                cell.noteLabel.text = noteDic[@"Dcomponent"];
+                cell.chapterLabel.text = [NSString stringWithFormat:@"%@ %@",noteDic[@"vSectionsNo"],noteDic[@"vSectionsName"]];
+                cell.timeLabel.text = [NSString stringWithFormat:@"%@",[self chageTime:[noteDic[@"Dtime"] integerValue]]];
             }
-            NSDictionary *dic = self.courseNote[indexPath.row];
-            cell.textLabel.text = dic[@"CNcomment"];
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@:%@  %@",dic[@"CVnum"],dic[@"CVname"],dic[@"CNdate"]];
+            
+            
             return cell;
-
         }
         default:
             return nil;
@@ -489,7 +533,7 @@ enum DownloadButton_Tag
             return 44;
             break;
         case SegementNote:
-            return 44;
+            return 60;
         case SegementComment:
             return 70;
         default:
@@ -564,7 +608,7 @@ enum DownloadButton_Tag
             [self.tableView reloadData];
             break;
         default: ;
-            //[self.tableView reloadData];;
+            [self.tableView reloadData];;
     }
 }
 
@@ -577,18 +621,32 @@ enum DownloadButton_Tag
 //为下载复用
 - (void)openChapterWithSection:(NSInteger)section
 {
-    NSMutableDictionary *chapterDic = self.courseChapterArray[section - 1];
-    
-    if (chapterDic[@"CCvideo"] == nil) {
-        NSInteger chapterID = [chapterDic[@"chId"] integerValue];
-        NSArray *array = [self.courseChapter loadCourseDetailChapterWithChapterID:chapterID];
-        [chapterDic setObject:array forKey:@"CCvideo"];
+    if (self.segmentControl.selectedSegmentIndex == SegementChapter) {
+        NSMutableDictionary *chapterDic = self.courseChapterArray[section - 1];
+        
+        if (chapterDic[@"CCvideo"] == nil) {
+            NSInteger chapterID = [chapterDic[@"chId"] integerValue];
+            NSArray *array = [self.courseChapter loadCourseDetailChapterWithChapterID:chapterID];
+            [chapterDic setObject:array forKey:@"CCvideo"];
+        }
+        //NSLog(@"%d-touched",section);
+        NSInteger isOpen = [self.chapterOpenArray[section-1] integerValue];
+        [self.chapterOpenArray replaceObjectAtIndex:section-1 withObject:(isOpen ? @0 : @1)];
+        NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:section];
+        [self.tableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else if (self.segmentControl.selectedSegmentIndex == SegementNote){
+        NSMutableDictionary *noteDic = self.courseNoteArray[section-1];
+        if (noteDic[@"CCnote"] == nil) {
+            NSString *url = noteDic[@"innerUrl"];
+            NSMutableArray *array = [self.courseChapter loadCourseDetailNoteWithUrl:url];
+            [noteDic setObject:array forKey:@"CCnote"];
+        }
+        NSInteger isOpen = [self.noteOpenArray[section-1] integerValue];
+        [self.noteOpenArray replaceObjectAtIndex:section-1 withObject:(isOpen?@0:@1)];
+        NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:section];
+        [self.tableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationAutomatic];
+        
     }
-    //NSLog(@"%d-touched",section);
-    NSInteger isOpen = [self.chapterOpenArray[section-1] integerValue];
-    [self.chapterOpenArray replaceObjectAtIndex:section-1 withObject:(isOpen ? @0 : @1)];
-    NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:section];
-    [self.tableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark 功能button方法
@@ -735,5 +793,15 @@ enum DownloadButton_Tag
     }
 }
 
+#pragma mark - 时间转换
+
+- (NSString *)chageTime:(NSInteger)theSecond
+{
+    NSInteger h,m,s;
+    h = theSecond/3600;
+    m = (theSecond-h*3600)/60;
+    s = theSecond%60;
+    return [NSString stringWithFormat:@"%02d:%02d:%02d",h,m,s];
+}
 
 @end

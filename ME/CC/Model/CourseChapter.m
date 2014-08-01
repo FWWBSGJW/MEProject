@@ -22,7 +22,7 @@
 {
     NSString *str = [kBaseURL stringByAppendingString:[NSString stringWithFormat:@"MobileEducation/courseIdAction?Cid=%d",courseID]];
     NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.5f];
     NSURLResponse *response = nil;
     NSError *error = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
@@ -43,7 +43,7 @@
 {
     NSString *str = [kBaseURL stringByAppendingString:[NSString stringWithFormat:@"MobileEducation/chapterAction?CId=%d",courseID]];
     NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.5f];
     NSURLResponse *response = nil;
     NSError *error = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
@@ -153,8 +153,9 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
-     
+
     NSString *bodyStr = [NSString stringWithFormat:@"CId=%d&userid=%d&ccContent=%@",courseID,userID,content];
+    
     NSLog(@"%@",bodyStr);
     
     NSData *body = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
@@ -163,6 +164,67 @@
     NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
     [connection start];
     
+}
+/*
+- (void)privateWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@MobileEducation/uploadCComment",kBaseURL]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    
+    //NSString *bodyStr = [NSString stringWithFormat:@"CId=%d&userid=%d&ccContent=%@",courseID,userID,content];
+    //NSLog(@"%@",bodyStr);
+    
+    //NSData *body = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [request setHTTPBody:body];
+    NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [connection start];
+}*/
+
+- (void)loadCourseNoteArrayWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID
+{
+    NSString *str = [kBaseURL stringByAppendingString:[NSString stringWithFormat:@"MobileEducation/chapterNote?cid=%d&userId=%d",courseID,userID]];
+    NSURL *url = [NSURL URLWithString:str];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.5f];
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if (data != nil) {
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        NSMutableDictionary *normalDic = [NSMutableDictionary dictionaryWithDictionary:dic[@"normalNote"]];
+        NSMutableArray *array = dic[@"videoNote"];
+        NSMutableArray *noteArray = [NSMutableArray arrayWithCapacity:1+array.count];
+        [noteArray addObject:normalDic];
+        for (NSInteger i = 0; i < array.count; i++) {
+            [noteArray addObject:[NSMutableDictionary dictionaryWithDictionary:array[i]]];
+        }
+        self.couserNoteArray = noteArray;
+    } else if (data == nil && error == nil) {
+        NSLog(@"空数据");
+    } else {
+        NSLog(@"%@",error.localizedDescription);
+    }
+}
+
+- (NSMutableArray *)loadCourseDetailNoteWithUrl:(NSString *)urlStr
+{
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSArray *array;
+    if (data != nil) {
+        array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    } else if (data == nil && error == nil) {
+        NSLog(@"空数据");
+    } else {
+        NSLog(@"%@",error.localizedDescription);
+    }
+    return [NSMutableArray arrayWithArray:array];
 }
 
 #pragma mark - 网络代理方法

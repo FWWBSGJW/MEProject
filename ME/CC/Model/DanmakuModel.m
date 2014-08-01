@@ -91,7 +91,8 @@
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        self.danmakuArray = JSON;
+        //self.danmakuArray = JSON;
+        self.danmakuArray = [NSMutableArray arrayWithArray:JSON];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"%@,%@",error.localizedDescription,JSON);
     }];

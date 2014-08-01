@@ -106,7 +106,7 @@ enum SendType
 {
     if (!_danmaku) {
         _danmaku = self.danmakuModel.danmakuArray;
-        NSLog(@"%@",_danmaku);
+        //NSLog(@"%@",_danmaku);
     }
     return _danmaku;
 }
@@ -261,7 +261,7 @@ enum SendType
 
 - (void)moveDM:(DanmakuView *)dmView
 {
-    [UIView animateWithDuration:4.0f animations:^{
+    [UIView animateWithDuration:5.5f animations:^{
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
         [dmView setFrame:CGRectMake(0.0-dmView.frame.size.width, dmView.frame.origin.y, dmView.frame.size.width, dmView.frame.size.height)];
     } completion:^(BOOL finished) {
@@ -601,11 +601,12 @@ enum SendType
 {
     NSString *danmaku = _dmTextField.text;
 #warning 待获取userID
-    [self.danmakuModel sendDanmakuWithUserID:1 andVideoTime:self.moviePlayer.currentPlaybackTime andvideoID:self.videoID andContent:danmaku andType:sender.tag];
+    NSInteger theType = (sender.tag == Send_Comment)?0:1;
+    [self.danmakuModel sendDanmakuWithUserID:1 andVideoTime:self.moviePlayer.currentPlaybackTime+1 andvideoID:self.videoID andContent:danmaku andType:theType];
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjects:@[danmaku,[NSNumber numberWithInteger:self.moviePlayer.currentPlaybackTime]] forKeys:@[@"Dcomponent",@"Dtime"]];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjects:@[danmaku,[NSNumber numberWithInteger:self.moviePlayer.currentPlaybackTime+1],[NSNumber numberWithInteger:theType]] forKeys:@[@"Dcomponent",@"Dtime",@"Dtype"]];
     
-    [self.danmaku addObject:dic];
+    [self.danmaku insertObject:dic atIndex:_lastArrayNum];
     
     NSLog(@"%@",danmaku);
     [self hidSendDanmakuView];
