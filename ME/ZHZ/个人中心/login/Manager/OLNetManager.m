@@ -10,7 +10,7 @@
 
 #define NetworkTimeout 30
 #define kURL_login @"http://121.197.10.159:8080/MobileEducation/userAction"
-#define kURL_test @"http://172.168.1.109:8080/MobileEducation/userAction"
+#define kURL_test @"http://172.16.54.199:8080/MobileEducation/userAction"
 @interface OLNetManager(){
 //	void(^succ)(NSDictionary *dic);
 }
@@ -41,13 +41,17 @@
 	[request setTimeoutInterval:5];
 	[request setHTTPMethod:@"POST"];
 	
-	NSString *body = [NSString stringWithFormat:@"account=%@&pwd=%@",username,password];
+	NSString *body = [NSString stringWithFormat:@"userAccount=%@&userPass=%@",username,password];
 	NSData *bodyData = [body dataUsingEncoding:NSUTF8StringEncoding];
 	[request setHTTPBody:bodyData];
 
 	NSURLResponse *response = nil;
 	NSError *error = nil;
 	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+	if (error) {
+		NSLog(@"%@",error);
+	}
+	NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	NSDictionary *dic = [data objectFromJSONData];
 	return dic;
 }

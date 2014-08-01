@@ -123,8 +123,8 @@
 
 //	NSDictionary *dic = [OLNetManager loginWith:userName andPassword:passWord succ:^(NSDictionary *successDict) {
 //	}];
-	NSDictionary *dic = [OLNetManager userDataWithId:_userId];
-//	NSDictionary *dic = [OLNetManager loginWith:userName andPassword:passWord];
+//	NSDictionary *dic = [OLNetManager userDataWithId:_userId];
+	NSDictionary *dic = [OLNetManager loginWith:userName andPassword:passWord];
 	NSString *suc= [dic objectForKey:@"success"];
 #warning 判断登陆是否成功
 	if ([suc isEqualToString:@"true"]) {
