@@ -754,6 +754,8 @@ enum DownloadButton_Tag
     if (self.sendComNoteView.tag == TextViewComment) {
         NSLog(@"评论---%@",self.sendComNoteView.textView.text);
 #warning 待获取userID
+        [self userCheck];
+        User *user = [User sharedUser];
         [self.courseChapter sendCourseCommentWithCourseID:self.courseID andUserID:1 andContent:self.sendComNoteView.textView.text];
         
     } else if (self.sendComNoteView.tag == TextViewNote){ //笔记
