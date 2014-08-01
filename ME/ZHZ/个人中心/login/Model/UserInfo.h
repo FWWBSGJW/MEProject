@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @interface UserInfo : NSObject
+@property (nonatomic,strong) NSString	*userId;
 @property (nonatomic,strong) NSDictionary *data;
 @property (nonatomic,strong) NSString	*account;	//账号
 @property (nonatomic,strong) NSString	*name;		//昵称

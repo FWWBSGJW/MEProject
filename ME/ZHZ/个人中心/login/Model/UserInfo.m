@@ -10,7 +10,6 @@
 #import "OLNetManager.h"
 
 @interface UserInfo ()
-@property (nonatomic) NSString * userId;
 @end
 
 @implementation UserInfo

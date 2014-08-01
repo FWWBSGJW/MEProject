@@ -99,7 +99,7 @@
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    NSLog(@"%@",self.selectedViewController);
+//    NSLog(@"%@",self.selectedViewController);
     return [self.selectedViewController supportedInterfaceOrientations];
 }
 
