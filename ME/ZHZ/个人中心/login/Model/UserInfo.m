@@ -24,7 +24,7 @@
 		_isLogin	= NO;
 		_account	= nil;
 		_name		= nil;
-		_sex		= nil;
+		_sex		= NO;
 //		_image		= nil;
 		_imageUrl	= nil;
 		_describe	= nil;
@@ -46,7 +46,7 @@
 		_userId		= nil;
 		_account	= nil;
 		_name		= nil;
-		_sex		= nil;
+		_sex		= NO;
 		_imageUrl	= nil;
 		_describe	= nil;
 		_lcourses	= [[NSMutableArray alloc] initWithCapacity:42];
@@ -63,12 +63,12 @@
 
 - (void)setAllData{
 	if (_data) {
-		_userId		= [_data objectForKey:@"userid"];
-		_account	= [_data objectForKey:@"account"];
-		_name		= [_data objectForKey:@"name"];
-		_sex		= [[_data objectForKey:@"sex"] boolValue];
-		_imageUrl	= [_data objectForKey:@"image"];
-		_describe	= [_data objectForKey:@"describe"];
+		_userId		= [_data objectForKey:@"userId"];
+		_account	= [_data objectForKey:@"userAccount"];
+		_name		= [_data objectForKey:@"userName"];
+		_sex		= [[_data objectForKey:@"userSex"] boolValue];
+		_imageUrl	= [_data objectForKey:@"userPortrait"];
+		_describe	= [_data objectForKey:@"userSign"];
 		[_lcourses	addObjectsFromArray:[_data objectForKey:@"lcourses"]];
 		[_ccourses  addObjectsFromArray:[_data objectForKey:@"ccourses"]];
 		[_bcourses  addObjectsFromArray:[_data objectForKey:@"bcourses"]];
@@ -86,7 +86,7 @@
 		_isLogin	= NO;
 		_account	= nil;
 		_name		= nil;
-		_sex		= nil;
+		_sex		= NO;
 //		_image		= nil;
 		_imageUrl	= nil;
 		_describe	= nil;

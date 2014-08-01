@@ -9,6 +9,7 @@
 #import "CourseTableViewController.h"
 #import "ProgressTableViewCell.h"
 #import "UIImageView+WebCache.h"
+#import "CChapterViewController.h"
 @interface CourseTableViewController ()
 
 @end
@@ -67,14 +68,16 @@
 	NSDictionary *course = [_courses objectAtIndex:indexPath.row];
 		
 	[cell setSelectionStyle:UITableViewCellSelectionStyleNone];//取消被选中的高亮效果
-	cell.nameLabel.text = [course objectForKey:@"courseName"];
-	[cell.courseImage setImageWithURL:[NSURL URLWithString:[course objectForKey:@"image"]]];
-	cell.progressView.progress = [[course objectForKey:@"progress"] doubleValue];
-	cell.progressView.text = [NSString stringWithFormat:@"%.2lf%%",[[course objectForKey:@"progress"] doubleValue]*100];
+	
+	[cell cellWithCourse:course];
 
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	ProgressTableViewCell *cell = (ProgressTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+	[self.navigationController pushViewController:[CChapterViewController chapterVCwithCourseID:[cell.courseId integerValue]] animated:YES];
+}
 
 /*
 // Override to support conditional editing of the table view.

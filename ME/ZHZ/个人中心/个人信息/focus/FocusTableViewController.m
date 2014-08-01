@@ -70,9 +70,9 @@
     
     // Configure the cell...
 	NSDictionary *focusDic = [_data objectAtIndex:indexPath.row];
-    [cell.imageView setImageWithURL:[NSURL URLWithString:[focusDic objectForKey:@"image"]] placeholderImage:[UIImage imageNamed:kDefault_portrait]];
-	cell.textLabel.text = [focusDic objectForKey:@"name"];
-	cell.detailTextLabel.text = [focusDic objectForKey:@"describe"];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:kUrl_image([focusDic objectForKey:@"userPortrait"])] placeholderImage:[UIImage imageNamed:kDefault_portrait]];
+	cell.textLabel.text = [focusDic objectForKey:@"userName"];
+	cell.detailTextLabel.text = [focusDic objectForKey:@"userSign"];
     return cell;
 }
 

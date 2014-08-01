@@ -7,6 +7,7 @@
 //
 
 #import "ProgressTableViewCell.h"
+#import "UIImageView+WebCache.h"
 
 @implementation ProgressTableViewCell
 
@@ -39,6 +40,15 @@
 	self.progressView.prsColor = [UIColor lightGrayColor];
 	self.highlighted = NO;
 	return self;
+}
+
+- (void)cellWithCourse:(NSDictionary *)course{
+	self.nameLabel.text = [course objectForKey:@"cName"];
+	[self.courseImage setImageWithURL:[NSURL URLWithString:kUrl_image([course objectForKey:@"cPic"])]];
+//	NSLog(@"%@",kUrl_image([course objectForKey:@"cPic"]));
+	self.progressView.progress = [[course objectForKey:@"progress"] doubleValue];
+	self.progressView.text = [NSString stringWithFormat:@"%.2lf%%",[[course objectForKey:@"progress"] doubleValue]*100];
+	self.courseId = [course objectForKey:@"cid"];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

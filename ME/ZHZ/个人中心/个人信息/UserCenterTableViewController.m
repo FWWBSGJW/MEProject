@@ -15,6 +15,7 @@
 #import "DetailViewController.h"
 #import "UIImageView+WebCache.h"
 #import "CourseTableViewController.h"
+#import "CChapterViewController.h"
 typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
     UserCenterSectionStyelInfo = 0,
     UserCenterSectionStyelDetail,
@@ -139,10 +140,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 			NSDictionary *course = [_user.info.lcourses objectAtIndex:indexPath.row];
 			
 			[cell1 setSelectionStyle:UITableViewCellSelectionStyleNone];//取消被选中的高亮效果
-			cell1.nameLabel.text = [course objectForKey:@"courseName"];
-			[cell1.courseImage setImageWithURL:[NSURL URLWithString:[course objectForKey:@"image"]]];
-			cell1.progressView.progress = [[course objectForKey:@"progress"] doubleValue];
-			cell1.progressView.text = [NSString stringWithFormat:@"%.2lf%%",[[course objectForKey:@"progress"] doubleValue]*100];
+			[cell1 cellWithCourse:course];
 		}
 		return cell1;
 	}else if (indexPath.section == UserCenterSectionStyelQandA){
@@ -171,13 +169,13 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 			NumTableViewCell *numCell = [[NumTableViewCell alloc] initWithFrame:CGRectNull];
 			numCell.textLabel.text = @"已购买课程";
 			numCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			numCell.numLabel.text = [NSString stringWithFormat:@"%lu",[_user.info.bcourses count]];
+			numCell.numLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)[_user.info.bcourses count]];
 			cell = numCell;
 		}else {
 			NumTableViewCell *numCell = [[NumTableViewCell alloc] initWithFrame:CGRectNull];
 			numCell.textLabel.text = @"收藏的课程";
 			numCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			numCell.numLabel.text = [NSString stringWithFormat:@"%lu",[_user.info.ccourses count]];
+			numCell.numLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)[_user.info.ccourses count]];
 			cell = numCell;
 		}
 	}else if(indexPath.section == UserCenterSectionStyelLink){
@@ -258,15 +256,13 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		
 	}else if (indexPath.section == UserCenterSectionStyelBCcourse){
 		CourseTableViewController *ctb = [[CourseTableViewController alloc]initWithStyle:UITableViewStylePlain];
-		ctb.courses = (indexPath.row==1)?_user.info.bcourses:_user.info.ccourses;
-		self.navigationItem.title = (indexPath.row==1)?@"已购课程":@"已收藏课程";
+		ctb.courses = (indexPath.row==0)?_user.info.bcourses:_user.info.ccourses;
+//		self.navigationController.title = (indexPath.row==0)?@"已购课程":@"已收藏课程";
 		[self.navigationController pushViewController:ctb animated:YES];
 		
 	}else if (indexPath.section == UserCenterSectionStyelLcourse){
-		//course interface
-		
-//		self.tabBarController.selectedIndex = 0;
-//		[[self.tabBarController.viewControllers objectAtIndex:0] pushViewController:ctb animated:YES	];
+		ProgressTableViewCell *cell = (ProgressTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+		[self.navigationController pushViewController:[CChapterViewController chapterVCwithCourseID:[cell.courseId integerValue]] animated:YES];
 	}else if (indexPath.section == UserCenterSectionStyelLink){
 		
 	}else if (indexPath.section == UserCenterSectionStyelQandA){

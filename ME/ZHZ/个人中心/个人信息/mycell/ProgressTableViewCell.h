@@ -13,5 +13,6 @@
 @property (nonatomic,weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic,strong)  ZDProgressView *progressView;
 @property (nonatomic,weak) IBOutlet UIImageView *courseImage;
-
+@property (nonatomic,strong) NSString *courseId;
+- (void)cellWithCourse:(NSDictionary *)course;
 @end

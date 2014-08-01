@@ -22,7 +22,7 @@
 
 + (NSDictionary *)userDataWithId:(NSString*)userId{
 	NSString *urlStr = [NSString stringWithFormat:@"%@?userId=%@",kURL_login,userId];
-	NSURL *url = [NSURL URLWithString:userId];
+	NSURL *url = [NSURL URLWithString:urlStr];
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
 	NSURLResponse *response = nil;
 	NSError *error = nil;
