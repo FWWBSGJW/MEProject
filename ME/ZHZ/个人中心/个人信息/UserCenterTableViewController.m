@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	UserCenterSectionStyelLcourse,
 	UserCenterSectionStyelQandA,
 	UserCenterSectionStyelBCcourse,
-//	UserCenterSectionStyelTest,
+	UserCenterSectionStyelWrongTest,
 	UserCenterSectionStyelLink,
 	UserCenterSectionStyelLogout,
 };
@@ -91,9 +91,9 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-	if (indexPath.section == 0) {
+	if (indexPath.section == UserCenterSectionStyelInfo) {
 		return 90;
-	}else if(indexPath.section == 2){
+	}else if(indexPath.section == UserCenterSectionStyelLcourse){
 		return 90;
 	}
 	return 44;
@@ -186,6 +186,10 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		cell.textLabel.text = @"退出登陆";
 		cell.textLabel.textColor = [UIColor redColor];
 		cell.textLabel.textAlignment = NSTextAlignmentCenter;
+	}else if(indexPath.section == UserCenterSectionStyelWrongTest){
+		cell = [[UITableViewCell alloc] init];
+		cell.textLabel.text = @"错题集";
+		cell.textLabel.textColor = [UIColor redColor];
 	}
 	[cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
     return cell;
@@ -267,8 +271,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		
 	}else if (indexPath.section == UserCenterSectionStyelQandA){
 			
-	}
-	else{
+	}else if (indexPath.section == UserCenterSectionStyelWrongTest){
 		
 	}
 }

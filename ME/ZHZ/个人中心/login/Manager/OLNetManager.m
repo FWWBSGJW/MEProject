@@ -51,7 +51,8 @@
 	if (error) {
 		NSLog(@"%@",error);
 	}
-	NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+	//test
+//	NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	NSDictionary *dic = [data objectFromJSONData];
 	return dic;
 }
