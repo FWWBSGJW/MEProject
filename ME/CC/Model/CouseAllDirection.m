@@ -10,8 +10,6 @@
 
 @implementation CouseAllDirection
 
-
-
 - (void)loadData
 {
     
@@ -20,13 +18,12 @@
     
     NSURL *url = [NSURL URLWithString:str];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.5f];
-    
+
     NSURLResponse *response = nil;
     NSError *error = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    //NSLog(@"%@",data);
-    
+    NSLog(@"%@",data);
+
     if (data != nil) {
         [self handleJSONData:data];
     } else if (data == nil && error == nil) {
@@ -34,7 +31,7 @@
     } else {
         NSLog(@"%@",error.localizedDescription);
     }
-    
+  
 }
 
 - (void)handleJSONData:(NSData *)datda

@@ -14,6 +14,7 @@
 //存储所有课程方向数据
 @property (strong, nonatomic) NSMutableArray *allCourseDirectionArray;
 
+
 - (void)loadData;
 
 @end

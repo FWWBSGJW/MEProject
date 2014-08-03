@@ -136,17 +136,20 @@ enum DownloadButton_Tag
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
-        if (weakSelf.courseChapter.nextCommentPageUrl != nil) {
+        if (weakSelf.courseChapter.nextCommentPageUrl != nil && self.segmentControl.selectedSegmentIndex == SegementComment) {
             [weakSelf.tableView beginUpdates];
-            NSInteger dataCount = self.courseCommentArray.count;
-            NSLog(@"%@",self.courseCommentArray);
-            [self.courseChapter loadNextPageCourseComment];
-            NSMutableArray *indexPaths = [NSMutableArray arrayWithCapacity:self.courseCommentArray.count-dataCount];
-            for(NSInteger i = dataCount;i < self.courseCommentArray.count;i++){
-                NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
-                [indexPaths addObject:path];
+            if (self.segmentControl.selectedSegmentIndex == SegementComment) {
+                NSInteger dataCount = self.courseCommentArray.count;
+                NSLog(@"%@",self.courseCommentArray);
+                [self.courseChapter loadNextPageCourseComment];
+                NSMutableArray *indexPaths = [NSMutableArray arrayWithCapacity:self.courseCommentArray.count-dataCount];
+                for(NSInteger i = dataCount;i < self.courseCommentArray.count;i++){
+                    NSIndexPath *path = [NSIndexPath indexPathForRow:i inSection:0];
+                    [indexPaths addObject:path];
+                }
+                [weakSelf.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
             }
-            [weakSelf.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+            
             [weakSelf.tableView endUpdates];
             
         }

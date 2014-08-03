@@ -43,7 +43,9 @@
 //        _courseDirectionArray = [NSArray arrayWithContentsOfFile:filePath];
         
         if (self.courseAllDirection.allCourseDirectionArray == nil) {
+  
             [self.courseAllDirection loadData];
+            
             _courseDirectionArray = self.courseAllDirection.allCourseDirectionArray;
         }
         //NSLog(@"%@",_courseDirectionArray);
