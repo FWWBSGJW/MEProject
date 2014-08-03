@@ -47,7 +47,21 @@
 //	self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",9];
 }
 
-
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+	User *user = [User sharedUser];
+	if (!user.info.isLogin) {
+		_logv = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
+		//		[user gotoUserLoginFrom:[self.viewControllers objectAtIndex:0]];
+		//		[self pushViewController:_logv animated:YES];
+		self.viewControllers = @[_logv];
+		
+	}else{
+		_uvc = [[UserCenterTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		self.viewControllers = @[_uvc];
+	}
+	
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
