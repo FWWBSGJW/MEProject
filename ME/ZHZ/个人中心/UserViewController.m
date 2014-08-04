@@ -4,7 +4,7 @@
 //
 //  Created by qf on 14/7/15.
 //  Copyright (c) 2014年 qf. All rights reserved.
-//
+// 同步
 
 #import "UserViewController.h"
 #import "LoginViewController.h"
