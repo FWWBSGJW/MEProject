@@ -10,9 +10,9 @@
 NSArray *commentServerRespObj;
 @implementation JJCommentManage
 
-- (NSMutableArray *)analyseCommentJsonForVC:(JJTestDetailViewController *)paramVC
+- (NSMutableArray *)analyseCommentJsonForVC:(JJTestDetailViewController *)paramVC withCommentUrl:(NSString *)paramUrl
 {
-    [self getDataForVC:paramVC];
+    [self getDataForVC:paramVC withCommentUrl:paramUrl];
     
     return [self analyse];
 }
@@ -31,9 +31,9 @@ NSArray *commentServerRespObj;
 }
 
 
-- (void)getDataForVC:(JJTestDetailViewController *)paramVC
+- (void)getDataForVC:(JJTestDetailViewController *)paramVC withCommentUrl:(NSString *)paramUrl
 {
-    NSString * url = [@"http://121.197.10.159:8080/MobileEducation/direction/listCtest.action?page=1&CId=1" stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString * url = [paramUrl stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
     NSURLResponse * resp;

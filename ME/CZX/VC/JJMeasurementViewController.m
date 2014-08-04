@@ -333,7 +333,7 @@
         int a = [[personNumAnswerArray objectAtIndex:count] intValue];
         [personRealArray replaceObjectAtIndex:count withObject:[abc objectAtIndex:a]];
     }
-    NSLog(@"%@", personRealArray);
+//    NSLog(@"%@", personRealArray);
     JJFinishViewController *vc = [[JJFinishViewController alloc]
                                   initWithScore:[NSString stringWithFormat:@"%d", score*10]
                                   correctAnswer:numberOfCorrectAnArray
@@ -343,15 +343,18 @@
     vc.highScoreUrl = self.highScoreUrl;
     [self.navigationController pushViewController:vc
                                          animated:YES];
-    [self postGrade];
+    [self postGrade:score*20 withTCid:self.tcid time:myMins];
+//    [self postGrade];
 }
 
-- (void)postGrade
+- (void)postGrade:(int)score withTCid:(int)tcid time:(int)time
 {
+    User *user = [User sharedUser];
     NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/uploadScore";
-    urlAsString = [urlAsString stringByAppendingString:@"?userId=1"];
-    urlAsString = [urlAsString stringByAppendingString:@"&HScore=140&tcId=1&time=10"];
-    //[NSString stringWithFormat:@"&CId=%d", self.myModel.tcId]];
+//    urlAsString = [urlAsString stringByAppendingString:@"?userId=1"];
+//    urlAsString = [urlAsString stringByAppendingString:@"&HScore=140&tcId=1&time=10"];
+    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%@&HScore=%d&tcId=%d&time=%d",user.info.userId, score, tcid, time]];
+//    //[NSString stringWithFormat:@"&CId=%d", self.myModel.tcId]];
     NSURL *url = [NSURL URLWithString:urlAsString];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     [urlRequest setTimeoutInterval:30.0f];

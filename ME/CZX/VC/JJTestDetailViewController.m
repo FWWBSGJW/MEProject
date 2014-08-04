@@ -33,7 +33,7 @@
     self = [super init];
     if (self) {
         self.myModel = paramModel;
-        self.commentArray = [[[JJCommentManage alloc] init] analyseCommentJsonForVC:self] ;
+        self.commentArray = [[[JJCommentManage alloc] init] analyseCommentJsonForVC:self withCommentUrl:@"http://121.197.10.159:8080/MobileEducation/direction/listCtest.action?page=1&CId=1"];
     }
     
     return self;
@@ -203,6 +203,7 @@
 {
     JJMeasurementViewController *measureVC = [[JJMeasurementViewController alloc] initWithSubjectDetailUrl:self.myModel.sublink time:self.myModel.tcTime];
     measureVC.title = self.testName.text;
+    measureVC.tcid = self.myModel.tcId;
     measureVC.highScoreUrl = self.myModel.highScoreUrl;
     [self.navigationController pushViewController:measureVC animated:YES];
 }
