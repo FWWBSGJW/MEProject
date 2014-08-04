@@ -62,10 +62,10 @@ NSString *const kRangkingModelUserName = @"userName";
 //    return [NSDictionary dictionaryWithDictionary:mutableDict];
 //}
 
-- (NSString *)description 
-{
-    return [NSString stringWithFormat:@"%@", [self dictionaryRepresentation]];
-}
+//- (NSString *)description 
+//{
+//    return [NSString stringWithFormat:@"%@", [self dictionaryRepresentation]];
+//}
 
 #pragma mark - Helper Method
 - (id)objectOrNilForKey:(id)aKey fromDictionary:(NSDictionary *)dict

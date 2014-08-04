@@ -46,6 +46,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
+//    [backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+//    [backBtn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+//    self.navigationItem.leftBarButtonItem = backBarButton;
+    
+    
     self.navigationItem.title = @"技能测试";
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -82,6 +89,11 @@
     [self addTableViewTrag];
 }
 
+//- (void)pop
+//{
+//    [self.navigationController pushViewController:[JJTestDetailViewController testDetailVCwithTestID:1] animated:YES];
+//}
+
 - (void)adjustTableViewInsert
 {
     UIEdgeInsets insets = self.testTableView.contentInset;
@@ -115,7 +127,6 @@
 //    }];
     
 }
-
 
 - (NSInteger)numberOfPages
 {

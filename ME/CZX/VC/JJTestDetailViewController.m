@@ -11,6 +11,7 @@
 #import "CCommentCell.h"
 #import "JJCommentManage.h"
 #import "UIImageView+WebCache.h"
+#import "SingleTestManage.h"
 
 @interface JJTestDetailViewController ()
 {
@@ -37,6 +38,16 @@
     }
     
     return self;
+}
+
++ (instancetype)testDetailVCwithTestID:(NSInteger)testID;
+{
+    JJTestDetailViewController *vc = [[JJTestDetailViewController alloc] init];
+    vc.myModel = [[[SingleTestManage alloc] init]
+                  analyseTestJson:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/getSTestModel?tcId=%d", testID]];
+    vc.commentArray = [[[JJCommentManage alloc] init] analyseCommentJsonForVC:vc withCommentUrl:@"http://121.197.10.159:8080/MobileEducation/direction/listCtest.action?page=1&CId=1"];
+//    [vc loadModel];
+    return vc;
 }
 
 - (void)viewWillAppear:(BOOL)animated

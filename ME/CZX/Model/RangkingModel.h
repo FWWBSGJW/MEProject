@@ -9,15 +9,15 @@
 
 
 
-@interface RangkingModel : NSObject <NSCoding, NSCopying>
+@interface RangkingModel : NSObject
 
 @property (nonatomic, strong) NSString *userPortrait;
 @property (nonatomic, assign) double score;
 @property (nonatomic, assign) double time;
 @property (nonatomic, strong) NSString *userName;
 
-+ (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
+//+ (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
-- (NSDictionary *)dictionaryRepresentation;
+//- (NSDictionary *)dictionaryRepresentation;
 
 @end
