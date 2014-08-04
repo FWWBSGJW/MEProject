@@ -82,7 +82,7 @@
 - (void)addTableView
 {
     self.testTableView = [[UITableView alloc]
-                          initWithFrame:CGRectMake(0, 0, 320, 440)
+                          initWithFrame:CGRectMake(0, 0, 320, SCREEN_HEIGHT-40)
                           style:UITableViewStylePlain];
     self.testTableView.tableFooterView = [[UIView alloc] init];
     self.testTableView.delegate = self;

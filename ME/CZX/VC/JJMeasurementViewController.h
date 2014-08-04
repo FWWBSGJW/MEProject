@@ -18,6 +18,7 @@
 @property(nonatomic, strong) NSArray *subjectArray;
 @property(nonatomic, strong) UIActivityIndicatorView *activityView;
 @property(nonatomic, copy) NSString *highScoreUrl;
+@property(nonatomic) int tcid;
 
 
 - (id)initWithSubjectDetailUrl:(NSString *)paramUrl time:(int)paramTime;
