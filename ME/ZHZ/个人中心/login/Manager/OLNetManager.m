@@ -55,6 +55,10 @@
 //	NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 //	NSLog(@“%@ by str",str,self);
 	NSDictionary *dic = [data objectFromJSONData];
+	if (error) {
+		NSLog(@"%@",error);
+		dic = @{@"success":@"no link"};
+	}
 	return dic;
 }
 

@@ -34,7 +34,8 @@
 		_focused	= [[NSMutableArray alloc] initWithCapacity:42];
 		_questions	= [[NSMutableArray alloc] initWithCapacity:42];
 		_answers	= [[NSMutableArray alloc] initWithCapacity:42];
-		[self lastUserInfo];  //初始化时判断沙盒中是否存在数据
+		_testcollection	= [[NSMutableArray alloc] initWithCapacity:42];
+		[self lastUserInfo];  //初始化时判断沙盒中是否存在数据 并设置数据
 	}
 	return self;
 }
@@ -55,6 +56,8 @@
 		_focused	= [[NSMutableArray alloc] initWithCapacity:42];
 		_questions	= [[NSMutableArray alloc] initWithCapacity:42];
 		_answers	= [[NSMutableArray alloc] initWithCapacity:42];
+		_testcollection = [[NSMutableArray alloc] initWithCapacity:42];
+
 		[self setAllData];
 	}
 	return self;
@@ -75,6 +78,7 @@
 		[_focused	addObjectsFromArray:[_data objectForKey:@"focused"]];
 		[_questions addObjectsFromArray:[_data objectForKey:@"questions"]];
 		[_answers	addObjectsFromArray:[_data objectForKey:@"answers"]];
+		[_testcollection addObjectsFromArray:[_data objectForKey:@"testcollection"]];
 	}
 }
 
@@ -86,6 +90,7 @@
 	[_focused removeAllObjects];
 	[_questions removeAllObjects];
 	[_answers removeAllObjects];
+	[_testcollection removeAllObjects];
 }
 
 - (BOOL)userLogout{
@@ -100,6 +105,9 @@
 		_imageUrl	= nil;
 		_describe	= nil;
 		[self removeArrayData];
+#ifdef Test
+		return YES;
+#endif
 		[self saveUserStatus];
 		return YES;
 	}
@@ -109,21 +117,12 @@
 //登陆 进行网络请求
 - (BOOL)userLoginWith:(NSString *)userName andPassword:(NSString *)passWord{
 	/*test*/
-
-#define Test 0
-#if Test
-	if ([userName isEqualToString:@"admin"] && [passWord isEqualToString:@"123456"]) {
-		NSBundle *bundle = [NSBundle mainBundle];
-		NSURL *sourceUrl = [bundle URLForResource:@"User" withExtension:@"plist"];
-		NSDictionary *source = [NSDictionary dictionaryWithContentsOfURL:sourceUrl];
-		_data = [source objectForKey:@"userInfo"];
-		[self setAllData];
-		_isLogin = YES;
-		[self saveInfoToDocument];
+#ifdef Test
+	if ([userName isEqualToString:@"1"] && [passWord isEqualToString:@"1"]) {
+		[self lastUserInfo];
 		return YES;
 	}
-#else
-
+#endif
 //	NSDictionary *dic = [OLNetManager loginWith:userName andPassword:passWord succ:^(NSDictionary *successDict) {
 //	}];
 //	NSDictionary *dic = [OLNetManager userDataWithId:_userId];
@@ -136,12 +135,13 @@
 		_isLogin = YES;
 		[self saveInfoToDocument];
 		return YES;
+	}else if([suc isEqualToString:@"no link"]){
+		NSLog(@"no link OLNetWorking");
 	}
 	else{
 		NSLog(@"user login is faliure by %@",self);
 		return NO;
 	}
-#endif
 	return NO;
 }
 
@@ -150,6 +150,7 @@
 	NSString *suc = [dic objectForKey:@"success"];
 	
 	if ([suc isEqualToString:@"true"]) {
+		_data = dic[@"result"];
 		[self removeArrayData];
 		[self setAllData];
 		[self saveInfoToDocument];

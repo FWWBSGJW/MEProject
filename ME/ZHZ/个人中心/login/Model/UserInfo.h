@@ -24,6 +24,7 @@
 @property (nonatomic,strong) NSMutableArray		*focused;	//关注我的人
 @property (nonatomic,strong) NSMutableArray		*questions;	//我的提问
 @property (nonatomic,strong) NSMutableArray		*answers;	//我的回答
+@property (nonatomic,strong) NSMutableArray		*testcollection;		//收藏的测试
 - (BOOL)userLoginWith:(NSString *)userName andPassword:(NSString *)passWord;
 //判断用户名和密码 进行登录  成功返回YES 并将isLogin 改为YES
 - (BOOL)userLogout; //登出
