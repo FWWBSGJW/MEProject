@@ -286,11 +286,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	}else if (indexPath.section == UserCenterSectionStyelQandA){
 			
 	}else if (indexPath.section == UserCenterSectionStyelWrongTest){
-<<<<<<< HEAD
 		[self.navigationController pushViewController:[[WrongSubjectViewController alloc] initWithWrongSubjectArray:[[[JJSubjectManage alloc] init] queryModels]] animated:YES];
-=======
-        [self.navigationController pushViewController:[[WrongSubjectViewController alloc] initWithWrongSubjectArray:[[[JJSubjectManage alloc] init] queryModels]] animated:YES];
->>>>>>> FETCH_HEAD
 	}
 }
 
