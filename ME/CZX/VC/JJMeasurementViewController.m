@@ -350,7 +350,7 @@
 {
     NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/uploadScore";
     urlAsString = [urlAsString stringByAppendingString:@"?userId=1"];
-    urlAsString = [urlAsString stringByAppendingString:@"&HScore=100&tcId=1&time=10"];
+    urlAsString = [urlAsString stringByAppendingString:@"&HScore=140&tcId=1&time=10"];
     //[NSString stringWithFormat:@"&CId=%d", self.myModel.tcId]];
     NSURL *url = [NSURL URLWithString:urlAsString];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];

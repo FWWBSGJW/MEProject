@@ -16,6 +16,8 @@
 #import "UIImageView+WebCache.h"
 #import "CourseTableViewController.h"
 #import "CChapterViewController.h"
+#import "WrongSubjectViewController.h"
+#import "JJSubjectManage.h"
 typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
     UserCenterSectionStyelInfo = 0,
     UserCenterSectionStyelDetail,
@@ -272,7 +274,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	}else if (indexPath.section == UserCenterSectionStyelQandA){
 			
 	}else if (indexPath.section == UserCenterSectionStyelWrongTest){
-		
+        [self.navigationController pushViewController:[[WrongSubjectViewController alloc] initWithWrongSubjectArray:[[[JJSubjectManage alloc] init] queryModels]] animated:YES];
 	}
 }
 
