@@ -74,7 +74,7 @@ NSArray *serverRespObj;
         {
             serverRespObj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
             NSArray *array = [self analyseJson];
-            if (array.count != [self queryModels].count) {
+            if (array.count != [self queryModels].count || [self queryModels].count==0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     vc.detailArray = array;
                     [vc.testTableView reloadData];
