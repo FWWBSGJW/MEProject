@@ -78,6 +78,16 @@
 	}
 }
 
+- (void)removeArrayData{
+	[_lcourses removeAllObjects];
+	[_ccourses removeAllObjects];
+	[_bcourses removeAllObjects];
+	[_focus removeAllObjects];
+	[_focused removeAllObjects];
+	[_questions removeAllObjects];
+	[_answers removeAllObjects];
+}
+
 - (BOOL)userLogout{
 	if (_isLogin == YES) {
 		_data		= nil;
@@ -89,13 +99,7 @@
 //		_image		= nil;
 		_imageUrl	= nil;
 		_describe	= nil;
-		[_lcourses removeAllObjects];
-		[_ccourses removeAllObjects];
-		[_bcourses removeAllObjects];
-		[_focus removeAllObjects];
-		[_focused removeAllObjects];
-		[_questions removeAllObjects];
-		[_answers removeAllObjects];
+		[self removeArrayData];
 		[self saveUserStatus];
 		return YES;
 	}
@@ -125,7 +129,7 @@
 //	NSDictionary *dic = [OLNetManager userDataWithId:_userId];
 	NSDictionary *dic = [OLNetManager loginWith:userName andPassword:passWord];
 	NSString *suc= [dic objectForKey:@"success"];
-#warning 判断登陆是否成功
+
 	if ([suc isEqualToString:@"true"]) {
 		_data = [dic objectForKey:@"result"];
 		[self setAllData];
@@ -134,11 +138,26 @@
 		return YES;
 	}
 	else{
-		NSLog(@"is faliure");
+		NSLog(@"user login is faliure by %@",self);
 		return NO;
 	}
 #endif
 	return NO;
+}
+
+- (BOOL)refresh{
+	NSDictionary *dic = [OLNetManager userDataWithId:_userId];
+	NSString *suc = [dic objectForKey:@"success"];
+	
+	if ([suc isEqualToString:@"true"]) {
+		[self removeArrayData];
+		[self setAllData];
+		[self saveInfoToDocument];
+		return YES;
+	}else {
+		NSLog(@"user refresh is faliuser by %@",self);
+		return NO;
+	}
 }
 
 - (void)update{

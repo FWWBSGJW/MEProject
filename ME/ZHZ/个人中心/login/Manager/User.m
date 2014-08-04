@@ -35,6 +35,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(User);
 	}
 }
 
+-(BOOL)refreshInfo{
+	return [_info refresh];
+}
+
 - (void)logout{
 	[_info userLogout];	//用户登出
 }

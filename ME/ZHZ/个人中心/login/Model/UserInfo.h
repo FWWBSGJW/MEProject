@@ -29,4 +29,5 @@
 - (BOOL)userLogout; //登出
 - (void)update;
 - (id)initWithUserId:(NSString *)userId;
+- (BOOL)refresh;
 @end

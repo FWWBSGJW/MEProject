@@ -21,4 +21,5 @@
 - (BOOL)loginWith:(NSString *)username Password:(NSString *)pwd;//调出登陆界面
 - (void)logout;
 + (User *)sharedUser;
+- (BOOL)refreshInfo;
 @end

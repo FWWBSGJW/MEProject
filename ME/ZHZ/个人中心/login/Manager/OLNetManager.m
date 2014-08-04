@@ -53,6 +53,7 @@
 	}
 	//test
 //	NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//	NSLog(@“%@ by str",str,self);
 	NSDictionary *dic = [data objectFromJSONData];
 	return dic;
 }

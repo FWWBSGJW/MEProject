@@ -16,6 +16,8 @@
 #import "UIImageView+WebCache.h"
 #import "CourseTableViewController.h"
 #import "CChapterViewController.h"
+#import "WrongSubjectViewController.h"
+#import "JJSubjectManage.h"
 typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
     UserCenterSectionStyelInfo = 0,
     UserCenterSectionStyelDetail,
@@ -25,6 +27,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	UserCenterSectionStyelWrongTest,
 	UserCenterSectionStyelLink,
 	UserCenterSectionStyelLogout,
+	UserCenterSectionStyelCount
 };
 
 
@@ -40,7 +43,18 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
     [super viewDidLoad];
     _user = [User sharedUser];
 	self.navigationItem.title = @"用户中心";
-//	[_infoCell loadData];
+	UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshUserInfo)];
+	self.navigationItem.rightBarButtonItem = rightItem;
+}
+
+- (void)refreshUserInfo{
+	if ([_user refreshInfo]){
+		
+		[self.tableView reloadData];
+	}else{
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"刷新失败" message:@"网络连接超时或用户账号异常" delegate:self cancelButtonTitle:@"cencle" otherButtonTitles:nil, nil];
+		[alert show];
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -87,7 +101,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 #if 1
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 7;
+    return UserCenterSectionStyelCount;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -272,7 +286,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	}else if (indexPath.section == UserCenterSectionStyelQandA){
 			
 	}else if (indexPath.section == UserCenterSectionStyelWrongTest){
-		
+		[self.navigationController pushViewController:[[WrongSubjectViewController alloc] initWithWrongSubjectArray:[[[JJSubjectManage alloc] init] queryModels]] animated:YES];
 	}
 }
 
