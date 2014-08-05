@@ -14,6 +14,7 @@
 #import "SingleTestManage.h"
 #import "User.h"
 #import "SendComNoteView.h"
+#import "SVPullToRefresh.h"
 
 @interface JJTestDetailViewController ()
 {
@@ -102,7 +103,6 @@
     [self sendTestCommentWithTestID:self.myModel.tcId
                           andUserID:[user.info.userId intValue]
                          andContent:self.sendComNoteView.textView.text];
-//    self.commentArray = [[[JJCommentManage alloc] init] analyseCommentJsonForVC:self withCommentUrl:@"http://121.197.10.159:8080/MobileEducation/direction/listCtest.action?page=1&CId=1"];
     [self sendComNoteViewBack];
     //self.sendComNoteView.textView.text = nil;
 }
@@ -144,7 +144,7 @@
      queue:queue
      completionHandler:^(NSURLResponse *response, NSData *data,
                          NSError *error) {
-         self.commentArray = [[[JJCommentManage alloc] init] analyseCommentJsonForVC:self withCommentUrl:@"http://121.197.10.159:8080/MobileEducation/direction/listCtest.action?page=1&CId=1"];
+         self.commentArray = [[[JJCommentManage alloc] init] analyseCommentJsonForVC:self withCommentUrl:self.myModel.commentLink];
          if ([data length] >0 &&
              error == nil){
              NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -167,7 +167,7 @@
     self = [super init];
     if (self) {
         self.myModel = paramModel;
-        self.commentArray = [[[JJCommentManage alloc] init] analyseCommentJsonForVC:self withCommentUrl:@"http://121.197.10.159:8080/MobileEducation/direction/listCtest.action?page=1&CId=1"];
+        self.commentArray = [[[JJCommentManage alloc] init] analyseCommentJsonForVC:self withCommentUrl:self.myModel.commentLink];
     }
     
     return self;
@@ -178,7 +178,7 @@
     JJTestDetailViewController *vc = [[JJTestDetailViewController alloc] init];
     vc.myModel = [[[SingleTestManage alloc] init]
                   analyseTestJson:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/getSTestModel?tcId=%d", testID]];
-    vc.commentArray = [[[JJCommentManage alloc] init] analyseCommentJsonForVC:vc withCommentUrl:@"http://121.197.10.159:8080/MobileEducation/direction/listCtest.action?page=1&CId=1"];
+    vc.commentArray = [[[JJCommentManage alloc] init] analyseCommentJsonForVC:vc withCommentUrl:vc.myModel.commentLink];
 //    [vc loadModel];
     return vc;
 }
@@ -222,7 +222,6 @@
             NSDictionary *dict = [user.info.testcollection objectAtIndex:i];
             int dictTCID = [[dict objectForKey:@"tcId"] intValue];
             int mymodelTCID = self.myModel.tcId;
-            NSLog(@"%d %d", mymodelTCID, dictTCID);
             if (dictTCID == mymodelTCID)
             {
                 [self.likeBtn setImage:[UIImage imageNamed:@"likeUp"] forState:UIControlStateNormal];
@@ -238,11 +237,56 @@
     self.commentTableView.delegate = self;
     self.commentTableView.dataSource = self;
     self.commentTableView.tableFooterView = [[UIView alloc] init];
+    [self addTableViewTrag];
     
     [self.introduceButton addTarget:self action:@selector(introduceButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.commentButton addTarget:self action:@selector(commentButton:) forControlEvents:UIControlEventTouchUpInside];
 //    self.commentButton.backgroundColor = RGBCOLOR(227, 227, 227);
 }
+
+- (void)addTableViewTrag
+{
+    __weak JJTestDetailViewController *weakself = self;
+//    [weakself.commentTableView addPullToRefreshWithActionHandler:^{
+//        int64_t delayInSeconds = 2.0;
+//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//        dispatch_after(popTime, dispatch_get_main_queue(), ^{
+//            [weakself.testTableView.pullToRefreshView stopAnimating];
+//            if (self.testArray.count==0)
+//            {
+//                self.testArray = [[NSMutableArray alloc] init];
+//                NSArray *temArray = [[[JJTestModelManage alloc] init] analyseTestJson:originUrl];
+//                [self.testArray addObjectsFromArray:temArray];
+//                [self.testTableView reloadData];
+//            }
+//        });
+//    }];
+    
+    [weakself.commentTableView addInfiniteScrollingWithActionHandler:^{
+        int64_t delayInSeconds = 2.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^{
+            [weakself.commentTableView.infiniteScrollingView stopAnimating];
+            if (self.nextPage)
+            {
+                NSMutableArray *temArray = [[[JJCommentManage alloc] init] analyseCommentJsonWithCommentUrl:self.nextPage];
+                [self.commentArray addObjectsFromArray:temArray];
+                if (temArray.count == 13) {
+                    JJCommentModel *model = [self.commentArray lastObject];
+                    self.nextPage = model.nextPage;
+                    [self.commentArray removeLastObject];
+                }
+                else
+                {
+                    self.nextPage = @"";
+                }
+                [self.commentTableView reloadData];
+            }
+        });
+    }];
+    
+}
+
 
 - (void)loadModel
 {

@@ -17,6 +17,7 @@
 @property (nonatomic, assign) double userid;
 @property (nonatomic, strong) NSString *ccContent;
 @property (nonatomic, strong) NSString *ccDate;
+@property(nonatomic, strong) NSString *nextPage;
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
 - (instancetype)initWithDictionary:(NSDictionary *)dict;

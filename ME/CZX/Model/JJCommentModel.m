@@ -14,6 +14,7 @@ NSString *const kJJCommentModelUserSign = @"userName";
 NSString *const kJJCommentModelUserid = @"userid";
 NSString *const kJJCommentModelCcContent = @"ccContent";
 NSString *const kJJCommentModelCcDate = @"ccDate";
+NSString *const kJJCommentModelnextPage = @"nextPage";
 
 
 @interface JJCommentModel ()
@@ -50,6 +51,7 @@ NSString *const kJJCommentModelCcDate = @"ccDate";
             self.userid = [[self objectOrNilForKey:kJJCommentModelUserid fromDictionary:dict] doubleValue];
             self.ccContent = [self objectOrNilForKey:kJJCommentModelCcContent fromDictionary:dict];
             self.ccDate = [self objectOrNilForKey:kJJCommentModelCcDate fromDictionary:dict];
+            self.nextPage = [self objectOrNilForKey:kJJCommentModelnextPage fromDictionary:dict];
 
     }
     

@@ -31,6 +31,7 @@
 
 @property(nonatomic, strong) JJTestModel *myModel;
 @property(nonatomic, strong) NSMutableArray *commentArray;
+@property(nonatomic, strong) NSString *nextPage;
 
 - (IBAction)writeComment:(id)sender;
 

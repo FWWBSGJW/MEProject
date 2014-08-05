@@ -89,8 +89,15 @@ NSDictionary *testServerRespObj;
         dispatch_async(dispatch_get_main_queue(), ^{
             [paramVC addTableView];
             paramVC.testArray = (NSMutableArray *)[self analyse];
-            paramVC.linkModel = [paramVC.testArray lastObject];
-            [paramVC.testArray removeLastObject];
+            if (paramVC.testArray.count == 7)
+            {
+                paramVC.linkModel = [paramVC.testArray lastObject];
+                [paramVC.testArray removeLastObject];
+            }
+            else
+            {
+                paramVC.linkModel = nil;
+            }
             [paramVC.testTableView reloadData];
             [paramVC.activityView stopAnimating];
         });
