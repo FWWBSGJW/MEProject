@@ -6,6 +6,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController">
             <connections>
+                <outlet property="accountTF" destination="Fwx-wP-hlz" id="tle-NI-Sfa"/>
+                <outlet property="checkingTF" destination="jYa-jD-C8s" id="JB6-bu-mwc"/>
+                <outlet property="nickNameTF" destination="tlg-V2-4z4" id="qir-Cf-88x"/>
+                <outlet property="pwdTF" destination="y4U-rJ-r38" id="jib-EP-Ty5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

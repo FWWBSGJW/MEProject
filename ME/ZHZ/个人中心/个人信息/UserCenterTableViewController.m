@@ -19,9 +19,10 @@
 #import "WrongSubjectViewController.h"
 #import "JJSubjectManage.h"
 #import "TestCollectionTableViewController.h"
+#import "QATableViewController.h"
 typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
-    UserCenterSectionStyelInfo = 0,
-    UserCenterSectionStyelDetail,
+//    UserCenterSectionStyelInfo = 0,
+    UserCenterSectionStyelDetail = 0,
 	UserCenterSectionStyelLcourse,
 	UserCenterSectionStyelQandA,
 	UserCenterSectionStyelBCcourse,
@@ -46,12 +47,33 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	self.navigationItem.title = @"用户中心";
 	UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshUserInfo)];
 	self.navigationItem.rightBarButtonItem = rightItem;
+	
+	_uiCell = [[UserInfoTableViewCell alloc] initWithFrame:CGRectNull];
+	_uiCell.delegate = self;
+	if (_user.info.isLogin) {
+		[_uiCell setAImage:_user.info.imageUrl
+				andName:_user.info.name
+			  courseNum:[_user.info.testcollection count]
+			   focusNum:[_user.info.focus count]
+			 focusedNum:[_user.info.focused count]];
+	}
+	self.tableView.tableHeaderView = _uiCell;
+	self.tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)reloadData{
+	[_uiCell setAImage:_user.info.imageUrl
+			   andName:_user.info.name
+			 courseNum:[_user.info.testcollection count]
+			  focusNum:[_user.info.focus count]
+			focusedNum:[_user.info.focused count]];
+	[self.tableView reloadData];
 }
 
 - (void)refreshUserInfo{
 	if ([_user refreshInfo]){
 		
-		[self.tableView reloadData];
+		[self reloadData];
 	}else{
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"刷新失败" message:@"网络连接超时或用户账号异常" delegate:self cancelButtonTitle:@"cencle" otherButtonTitles:nil, nil];
 		[alert show];
@@ -60,16 +82,11 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 
 - (void)viewWillAppear:(BOOL)animated{
 	self.tabBarController.tabBar.hidden = NO;
+	if (_user) {
+		[self reloadData];
+	}
 }
-//- (void)waitData{
-//	while (!_user.info.account) {
-//		_user = [User sharedUser];
-//	}
-//	[self performSelector:@selector(reloadUserData) withObject:nil afterDelay:0.2];
-//}
-//- (void)reloadUserData{
-//	[self.tableView reloadData];
-//}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -106,9 +123,10 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-	if (indexPath.section == UserCenterSectionStyelInfo) {
-		return 90;
-	}else if(indexPath.section == UserCenterSectionStyelLcourse){
+//	if (indexPath.section == UserCenterSectionStyelInfo) {
+//		return 90;
+//	}else
+		if(indexPath.section == UserCenterSectionStyelLcourse){
 		return 61;
 	}
 	return 44;
@@ -130,20 +148,21 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = nil;
-	if (indexPath.section == UserCenterSectionStyelInfo) {
-		_uiCell = [[UserInfoTableViewCell alloc] initWithFrame:CGRectNull];
-		[_uiCell setSelectionStyle:UITableViewCellSelectionStyleNone];	//设置cell被选中时的StyleNone 没有高亮效果
-//		_uiCell.userInteractionEnabled = NO;	//将cell设置为不可选中 ps:会使触摸事件失效
-		_uiCell.delegate = self;
-		if (_user.info.isLogin) {
-			[_uiCell setAImage:_user.info.imageUrl
-					andName:_user.info.name
-				  courseNum:[_user.info.lcourses count]
-				   focusNum:[_user.info.focus count]
-				 focusedNum:[_user.info.focused count]];
-		}
-		return _uiCell;
-	}else if (indexPath.section == UserCenterSectionStyelDetail){
+//	if (indexPath.section == UserCenterSectionStyelInfo) {
+//		_uiCell = [[UserInfoTableViewCell alloc] initWithFrame:CGRectNull];
+//		[_uiCell setSelectionStyle:UITableViewCellSelectionStyleNone];	//设置cell被选中时的StyleNone 没有高亮效果
+////		_uiCell.userInteractionEnabled = NO;	//将cell设置为不可选中 ps:会使触摸事件失效
+//		_uiCell.delegate = self;
+//		if (_user.info.isLogin) {
+//			[_uiCell setAImage:_user.info.imageUrl
+//					andName:_user.info.name
+//				  courseNum:[_user.info.lcourses count]
+//				   focusNum:[_user.info.focus count]
+//				 focusedNum:[_user.info.focused count]];
+//		}
+//		return _uiCell;
+//	}else
+		if (indexPath.section == UserCenterSectionStyelDetail){
 		//详情
 		cell = [[UITableViewCell alloc] init];
 		cell.textLabel.text = @"详细信息";
@@ -204,7 +223,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	}else if(indexPath.section == UserCenterSectionStyelTest){
 		if (indexPath.row==0) {
 			NumTableViewCell *numCell = [[NumTableViewCell alloc] initWithFrame:CGRectNull];
-			numCell.textLabel.text = @"收藏的课程";
+			numCell.textLabel.text = @"收藏的测试";
 			numCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			numCell.numLabel.text = [NSString stringWithFormat:@"%lu",[_user.info.testcollection count]];
 			cell = numCell;
@@ -224,6 +243,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	}
 	return nil;
 }
+
 #endif
 /*
 // Override to support conditional editing of the table view.
@@ -293,7 +313,11 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	}else if (indexPath.section == UserCenterSectionStyelLink){
 		
 	}else if (indexPath.section == UserCenterSectionStyelQandA){
-			
+		if (indexPath.row == 1) {
+			QATableViewController *qavc = [[QATableViewController alloc] initWithStyle:UITableViewStylePlain];
+			qavc.data = _user.info.questions;
+			[self.navigationController pushViewController:qavc animated:YES];
+		}
 	}else if (indexPath.section == UserCenterSectionStyelTest){
 		if (indexPath.row == 0) {
 			TestCollectionTableViewController *tctvc = [[TestCollectionTableViewController alloc] initWithStyle:UITableViewStylePlain withData:_user.info.testcollection];
@@ -303,4 +327,5 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		}
 	}
 }
+
 @end

@@ -58,11 +58,11 @@
 	_focusNumLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num2];
 	_focusedNumLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num3];
 }
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
+//- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+//{
+//    [super setSelected:selected animated:animated];
+//
+//    // Configure the view for the selected state
+//}
 
 @end

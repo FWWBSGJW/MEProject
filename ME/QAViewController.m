@@ -27,6 +27,10 @@
 {
     [super viewWillAppear:YES];
     //self.navigationController.navigationBarHidden = YES;
+	if (_url) {
+		[_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
+	}
+	[_webView reload];
 }
 
 - (void)viewDidLoad
@@ -35,13 +39,13 @@
     // Do any additional setup after loading the view.
     self.title = @"问答";
     UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:webView];
     webView.scalesPageToFit = YES;
     NSString *urlStr =[NSString stringWithFormat:@"%@MobileEducation/qa",kBaseURL];
     NSURL *url = [NSURL URLWithString:urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
     self.webView = webView;
+	[self.view addSubview:self.webView];
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStyleBordered  target:self action:@selector(webGoback)];
     self.navigationItem.leftBarButtonItem = backItem;
     
@@ -50,6 +54,16 @@
 - (void)webGoback
 {
     [self.webView goBack];
+}
+
++ (instancetype)shareQA{
+	static QAViewController *qa = nil;
+	@synchronized(self){
+		if (!qa) {
+			qa = [[QAViewController alloc] init];
+		}
+	}
+	return qa;
 }
 
 - (void)didReceiveMemoryWarning

@@ -65,7 +65,7 @@
     
     
     
-    QAViewController *qaVC3 = [[QAViewController alloc] init];
+    QAViewController *qaVC3 = [QAViewController shareQA];
     UINavigationController *qaNav = [[UINavigationController alloc] initWithRootViewController:qaVC3];
     //UITabBarItem *demoItem3 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:4];
     UITabBarItem *qaItem = [[UITabBarItem alloc] initWithTitle:@"问答" image:[UIImage imageNamed:@"Q&A"] tag:4];

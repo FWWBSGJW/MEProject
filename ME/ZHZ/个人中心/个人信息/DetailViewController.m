@@ -52,6 +52,7 @@
 	if (_userData) {
 		[_portrait setImageWithURL:[NSURL URLWithString:_userData.imageUrl] placeholderImage:[UIImage imageNamed:kDefault_portrait]];
 		_nameLabel.text = [NSString stringWithFormat:@"%@%@",_userData.name,_userData.sex?@"♂":@"♀"];
+		self.title = _userData.name;
 		if ([_userData.describe isEqualToString:NULL] || !_userData.describe) {
 			_describleLabel.text = @"暂无个人描述";
 			_describleLabel.textColor = [UIColor lightGrayColor];

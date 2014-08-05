@@ -10,6 +10,8 @@
 #import "UIImageView+WebCache.h"
 #import "JJTestTableViewCell.h"
 #import "UILabel+dynamicSizeMe.h"
+#import "JJTestDetailViewController.h"
+
 @interface TestCollectionTableViewController ()
 @end
 
@@ -108,6 +110,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-	
+	[self.navigationController pushViewController:[JJTestDetailViewController testDetailVCwithTestID:[[[_testData objectAtIndex:indexPath.row] objectForKey:@"tcId"] integerValue]] animated:YES];
 }
 @end

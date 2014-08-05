@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface QAViewController : UIViewController
-
+@property (nonatomic,strong) NSString *url;
++ (instancetype)shareQA;
 @end

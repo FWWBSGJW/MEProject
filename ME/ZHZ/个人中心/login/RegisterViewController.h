@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface RegisterViewController : UIViewController
-
+@property (nonatomic,weak) IBOutlet UITextField *accountTF;
+@property (nonatomic,weak) IBOutlet UITextField	*nickNameTF;
+@property (nonatomic,weak) IBOutlet UITextField *pwdTF;
+@property (nonatomic,weak) IBOutlet UITextField *checkingTF;
 @end

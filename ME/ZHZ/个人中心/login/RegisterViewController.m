@@ -8,7 +8,14 @@
 
 #import "RegisterViewController.h"
 
-@interface RegisterViewController ()
+@interface RegisterViewController (){
+	NSString *account;
+	NSString *nickName;
+	NSString *passWord;
+	BOOL accountIsRight;
+	BOOL nickNameIsRight;
+	BOOL passWordIsRight;
+}
 
 @end
 
@@ -19,6 +26,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+		account = nil;
+		nickName = nil;
+		passWord = nil;
     }
     return self;
 }
@@ -27,6 +37,27 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)showLast{
+	if (!accountIsRight) {
+		_accountTF.text = nil;
+	}
+	if (!nickNameIsRight) {
+		_nickNameTF.text = nil;
+	}
+	_pwdTF.text = nil;
+	_checkingTF.text = nil;
+}
+
+- (void)userRegister{
+	account = _accountTF.text;
+	nickName = _nickNameTF.text;
+	passWord = _pwdTF.text;
+	if (![passWord isEqualToString:_checkingTF.text]) {
+		
+		return ;
+	}
 }
 
 - (void)didReceiveMemoryWarning
