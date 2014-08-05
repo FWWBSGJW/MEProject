@@ -843,6 +843,7 @@ enum DownloadButton_Tag
 - (void)sendComNote
 {
 #pragma waring 此处待实现上传评论，笔记 ,刷新数据
+    
     [self userCheck];
     //评论
     if ([User sharedUser].info.isLogin) {
@@ -856,6 +857,7 @@ enum DownloadButton_Tag
             
         } else if (self.sendComNoteView.tag == TextViewNote){ //笔记
             NSLog(@"笔记---%@",_sendComNoteView.textView.text);
+            [self.courseChapter sendCourseNoteWithCourseID:1 andUserID:self.courseID andContent:self.sendComNoteView.textView.text];
         }
         
         [self sendComNoteViewBack];
