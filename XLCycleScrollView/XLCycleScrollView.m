@@ -160,6 +160,24 @@
     }
 }
 
+//-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+//{
+//    [myTimer invalidate];
+//}
+//-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+//{
+//    myTimer=[NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(scrollToNextPage:) userInfo:nil repeats:YES];
+//}
+//
+//-(void)scrollToNextPage:(id)sender
+//{
+//    [UIView animateWithDuration:1.0 animations:^{
+//        _curPage = [self validPageValue:_curPage+1];
+//    }];
+//    [self loadData];
+//}
+
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)aScrollView {
     
     [_scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width, 0) animated:YES];

@@ -21,6 +21,7 @@
 @interface JJTestViewController ()
 {
     NSMutableArray *linkArray;
+    NSTimer *myTimer;
 }
 @end
 
@@ -89,11 +90,6 @@
     [self addTableViewTrag];
 }
 
-//- (void)pop
-//{
-//    [self.navigationController pushViewController:[JJTestDetailViewController testDetailVCwithTestID:1] animated:YES];
-//}
-
 - (void)adjustTableViewInsert
 {
     UIEdgeInsets insets = self.testTableView.contentInset;
@@ -132,7 +128,6 @@
 {
     return pages;
 }
-
 
 
 - (UIView *)pageAtIndex:(NSInteger)index

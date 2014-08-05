@@ -13,11 +13,16 @@
 #import "UIImageView+WebCache.h"
 #import "SingleTestManage.h"
 #import "User.h"
+#import "SendComNoteView.h"
 
 @interface JJTestDetailViewController ()
 {
 }
+@property (strong, nonatomic) UIView *dimView; //发送评论时背影
+@property (strong, nonatomic) SendComNoteView *sendComNoteView; //发送评论，笔记试图
+
 @end
+
 
 @implementation JJTestDetailViewController
 
@@ -28,6 +33,133 @@
 
     }
     return self;
+}
+
+- (UIView *)dimView
+{
+    if (!_dimView) {
+        _dimView = [[UIView alloc] initWithFrame:self.view.frame];
+        _dimView.backgroundColor = [UIColor blackColor];
+        _dimView.alpha = 0.4;
+    }
+    return _dimView;
+}
+
+
+- (IBAction)writeComment:(id)sender
+{
+    [self userCheck];
+    if ([User sharedUser].info.isLogin) {
+        [[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.sendComNoteView];
+        [self.sendComNoteView.textView becomeFirstResponder];
+        self.sendComNoteView.titleLabel.text = @"发送评论";
+        [UIView animateWithDuration:0.4f animations:^{
+            [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, 20.0, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
+            self.sendComNoteView.alpha = 1.0f;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+}
+
+- (void)sendComNoteViewBack
+{
+    [self.sendComNoteView.textView resignFirstResponder];
+    
+    [UIView animateWithDuration:0.4f animations:^{
+        [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, -_sendComNoteView.frame.size.height, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
+        self.sendComNoteView.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [self.dimView removeFromSuperview];
+        self.sendComNoteView.textView.text = nil;
+    }];
+    
+}
+
+- (SendComNoteView *)sendComNoteView
+{
+    if (!_sendComNoteView) {
+        
+        _sendComNoteView = [[SendComNoteView alloc] init];
+        _sendComNoteView.frame = CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, -_sendComNoteView.frame.size.height, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height);
+        _sendComNoteView.alpha = 0.0;
+        [_sendComNoteView.sendButton addTarget:self action:@selector(sendComNote) forControlEvents:UIControlEventTouchUpInside];
+        [_sendComNoteView.backButton addTarget:self action:@selector(cancelSend) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _sendComNoteView;
+}
+
+
+- (void)sendComNote
+{
+#pragma waring 此处待实现上传评论，笔记 ,刷新数据
+    //评论
+//        NSLog(@"评论---%@",self.sendComNoteView.textView.text);
+    [self userCheck];
+    User *user = [User sharedUser];
+    [self sendTestCommentWithTestID:self.myModel.tcId
+                          andUserID:[user.info.userId intValue]
+                         andContent:self.sendComNoteView.textView.text];
+//    self.commentArray = [[[JJCommentManage alloc] init] analyseCommentJsonForVC:self withCommentUrl:@"http://121.197.10.159:8080/MobileEducation/direction/listCtest.action?page=1&CId=1"];
+    [self sendComNoteViewBack];
+    //self.sendComNoteView.textView.text = nil;
+}
+
+- (void)cancelSend
+{
+    [self sendComNoteViewBack];
+}
+
+
+- (void)sendTestCommentWithTestID:(NSInteger)testID andUserID:(NSInteger)userID andContent:(NSString *)content
+{
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@MobileEducation/uploadCTest",kBaseURL]];
+//    
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+//    //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+//    [request setHTTPMethod:@"POST"];
+//    
+//    NSString *bodyStr = [NSString stringWithFormat:@"CId=%d&userid=%d&ccContent=%@",testID,userID,content];
+//    
+////    NSLog(@"%@",bodyStr);
+//    
+//    NSData *body = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
+//    
+//    [request setHTTPBody:body];
+//    NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+//    [connection start];
+    NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/uploadCTest";
+//    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?CId=%d&userid=%d&ccContent=#%@#",testID,userID,content]];
+    NSURL *url = [NSURL URLWithString:urlAsString];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+    [urlRequest setTimeoutInterval:30.0f];
+    [urlRequest setHTTPMethod:@"POST"];
+    NSString *body = [NSString stringWithFormat:@"?CId=%d&userid=%d&ccContent=%@",testID,userID,content];
+    [urlRequest setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection
+     sendAsynchronousRequest:urlRequest
+     queue:queue
+     completionHandler:^(NSURLResponse *response, NSData *data,
+                         NSError *error) {
+         self.commentArray = [[[JJCommentManage alloc] init] analyseCommentJsonForVC:self withCommentUrl:@"http://121.197.10.159:8080/MobileEducation/direction/listCtest.action?page=1&CId=1"];
+         if ([data length] >0 &&
+             error == nil){
+             NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSLog(@"HTML = %@", html);
+         }
+         else if ([data length] == 0 &&
+                  error == nil){
+             NSLog(@"Nothing was downloaded.");
+         }
+         else if (error != nil){
+             NSLog(@"Error happened = %@", error);
+         }
+     }];
+
+    
 }
 
 - (id)initWithModel:(JJTestModel *)paramModel
@@ -119,51 +251,58 @@
     self.timeLa.text = [NSString stringWithFormat:@"时长：%d", self.myModel.tcTime];
     self.subjectNumLa.text = [NSString stringWithFormat:@"题数：%d", self.myModel.subjectnums];
     self.scoreLa.text = [NSString stringWithFormat:@"总分：%d", self.myModel.tcScore];
-    self.priceLa.text = [NSString stringWithFormat:@"价格：%d", self.myModel.tcPrice];
+//    self.priceLa.text = [NSString stringWithFormat:@"价格：%d", self.myModel.tcPrice];
     self.testName.text = self.myModel.tcName;
     self.introduceView.text = self.myModel.tcIntro;
 }
 
 - (void)like
 {
-    NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/collecteTest";
-    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&CId=%d", [[User sharedUser].info.userId intValue], self.myModel.tcId]];
-    NSURL *url = [NSURL URLWithString:urlAsString];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-    [urlRequest setTimeoutInterval:30.0f];
-    [urlRequest setHTTPMethod:@"POST"];
-    NSString *body = @"bodyParam1=BodyValue1&bodyParam2=BodyValue2";
-    [urlRequest setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]]; NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection
-     sendAsynchronousRequest:urlRequest
-     queue:queue
-     completionHandler:^(NSURLResponse *response, NSData *data,
-                         NSError *error) {
-         if ([data length] >0 &&
-             error == nil){
-             NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]; NSLog(@"HTML = %@", html);
-         }
-         else if ([data length] == 0 &&
-                  error == nil){
-             NSLog(@"Nothing was downloaded.");
-         }
-         else if (error != nil){
-             NSLog(@"Error happened = %@", error);
-         }
-     }];
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:0.5];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.likeBtn cache:YES];
-    if ([self.likeBtn.titleLabel.text  isEqual: @"收藏"])
+    [self userCheck];
+    if ([User sharedUser].info.isLogin) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDuration:0.5];
+        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.likeBtn cache:YES];
+        if ([self.likeBtn.titleLabel.text  isEqual: @"收藏"])
         {
-        [self.likeBtn setImage:[UIImage imageNamed:@"likeUp"] forState:UIControlStateNormal];
-        [self.likeBtn setTitle:@"已收藏" forState:UIControlStateNormal];
-    }else{
-        [self.likeBtn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-        [self.likeBtn setTitle:@"收藏" forState:UIControlStateNormal];
+            [self.likeBtn setImage:[UIImage imageNamed:@"likeUp"] forState:UIControlStateNormal];
+            [self.likeBtn setTitle:@"已收藏" forState:UIControlStateNormal];
+        }else{
+            [self.likeBtn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+            [self.likeBtn setTitle:@"收藏" forState:UIControlStateNormal];
+        }
+        [UIView commitAnimations];
+
+        NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/collecteTest";
+        urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&CId=%d", [[User sharedUser].info.userId intValue], self.myModel.tcId]];
+        NSURL *url = [NSURL URLWithString:urlAsString];
+        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+        [urlRequest setTimeoutInterval:30.0f];
+        [urlRequest setHTTPMethod:@"POST"];
+        NSString *body = @"bodyParam1=BodyValue1&bodyParam2=BodyValue2";
+        [urlRequest setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        [NSURLConnection
+         sendAsynchronousRequest:urlRequest
+         queue:queue
+         completionHandler:^(NSURLResponse *response, NSData *data,
+                             NSError *error) {
+             [[User sharedUser] refreshInfo];
+             if ([data length] >0 &&
+                 error == nil){
+                 NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                 NSLog(@"HTML = %@", html);
+             }
+             else if ([data length] == 0 &&
+                      error == nil){
+                 NSLog(@"Nothing was downloaded.");
+             }
+             else if (error != nil){
+                 NSLog(@"Error happened = %@", error);
+             }
+         }];
     }
-    [UIView commitAnimations];
 }
 
 - (void)pop
@@ -227,11 +366,25 @@
 
 - (IBAction)buyOrEnter:(id)sender
 {
-    JJMeasurementViewController *measureVC = [[JJMeasurementViewController alloc] initWithSubjectDetailUrl:self.myModel.sublink time:self.myModel.tcTime];
-    measureVC.title = self.testName.text;
-    measureVC.tcid = self.myModel.tcId;
-    measureVC.highScoreUrl = self.myModel.highScoreUrl;
-    [self.navigationController pushViewController:measureVC animated:YES];
+    [self userCheck];
+    if ([User sharedUser].info.isLogin)
+    {
+        JJMeasurementViewController *measureVC = [[JJMeasurementViewController alloc] initWithSubjectDetailUrl:self.myModel.sublink time:self.myModel.tcTime];
+        measureVC.title = self.testName.text;
+        measureVC.tcid = self.myModel.tcId;
+        measureVC.highScoreUrl = self.myModel.highScoreUrl;
+        [self.navigationController pushViewController:measureVC animated:YES];
+    }
+}
+
+#pragma mark - 用户登录相关
+
+- (void)userCheck
+{
+    User *user = [User sharedUser];
+    if (!user.info.isLogin) {
+        [user gotoUserLoginFrom:self];
+    }
 }
 
 - (void)share:(id)sender

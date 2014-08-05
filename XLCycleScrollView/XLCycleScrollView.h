@@ -23,6 +23,7 @@
     NSInteger _curPage;
     
     NSMutableArray *_curViews;
+//    NSTimer *myTimer;
 }
 
 @property (nonatomic,readonly) UIScrollView *scrollView;

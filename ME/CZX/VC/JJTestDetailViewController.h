@@ -21,7 +21,7 @@
 
 - (IBAction)buyOrEnter:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *timeLa;
-@property (strong, nonatomic) IBOutlet UILabel *priceLa;
+//@property (strong, nonatomic) IBOutlet UILabel *priceLa;
 @property (strong, nonatomic) IBOutlet UILabel *subjectNumLa;
 @property (strong, nonatomic) IBOutlet UILabel *directionLa;
 
@@ -32,6 +32,7 @@
 @property(nonatomic, strong) JJTestModel *myModel;
 @property(nonatomic, strong) NSMutableArray *commentArray;
 
+- (IBAction)writeComment:(id)sender;
 
 - (id)initWithModel:(JJTestModel *)paramModel;
 - (void)loadModel;

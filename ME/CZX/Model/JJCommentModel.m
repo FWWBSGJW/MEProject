@@ -10,7 +10,7 @@
 
 NSString *const kJJCommentModelCcId = @"ccId";
 NSString *const kJJCommentModelUserPortrait = @"userPortrait";
-NSString *const kJJCommentModelUserSign = @"userSign";
+NSString *const kJJCommentModelUserSign = @"userName";
 NSString *const kJJCommentModelUserid = @"userid";
 NSString *const kJJCommentModelCcContent = @"ccContent";
 NSString *const kJJCommentModelCcDate = @"ccDate";
