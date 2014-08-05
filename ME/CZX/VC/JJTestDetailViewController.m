@@ -15,6 +15,7 @@
 #import "User.h"
 #import "SendComNoteView.h"
 #import "SVPullToRefresh.h"
+#import "DetailViewController.h"
 
 @interface JJTestDetailViewController ()
 {
@@ -300,6 +301,7 @@
     self.introduceView.text = self.myModel.tcIntro;
 }
 
+#pragma mark 收藏
 - (void)like
 {
     [self userCheck];
@@ -349,6 +351,8 @@
     }
 }
 
+
+
 - (void)pop
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -385,8 +389,20 @@
     lableSwitchCell.userNameLable.text = commentModel.userSign;
     lableSwitchCell.commentLabel.text = commentModel.ccContent;
     lableSwitchCell.dateLable.text = commentModel.ccDate;
+    lableSwitchCell.imageButton.tag = indexPath.row;
+    [lableSwitchCell.imageButton addTarget:self action:@selector(touchHeadImage:) forControlEvents:UIControlEventTouchUpInside];
+
     
     return lableSwitchCell;
+}
+
+#pragma mark touch headImageButton
+- (void)touchHeadImage:(UIButton *)sender
+{
+    JJCommentModel *model = [self.commentArray objectAtIndex:sender.tag];
+    DetailViewController *detailVC = [[DetailViewController alloc] initWithUserId:
+                                      [NSString stringWithFormat:@"%d", (int)model.userid]];
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

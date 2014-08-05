@@ -7,7 +7,8 @@
 //
 
 #import "JJSubjectManage.h"
-#define kFileName @"wrongSubjectModelArray.arch"
+#import "User.h"
+//#define kFileName @"wrongSubjectModelArray.arch"
 @interface NSURL (doc)
 + (NSString *)applicationDocumentsDirectory ;
 @end
@@ -101,7 +102,10 @@ NSArray *subjectServerRespObj;
 
 -(NSString *)getFilePath{
     //    NSString *string = [[NSURL applicationDocumentsDirectory] stringByAppendingPathComponent:@"CZX.Me"];
-    NSString * dataBasePath = [[NSURL applicationDocumentsDirectory] stringByAppendingPathComponent:kFileName];
+    User *user = [User sharedUser];
+    NSString * dataBasePath = [[NSURL applicationDocumentsDirectory]
+                               stringByAppendingPathComponent:
+                               [NSString stringWithFormat:@"wrongSubjectModelArray%d.arch", [user.info.userId intValue]]];
     return dataBasePath;
 }
 
