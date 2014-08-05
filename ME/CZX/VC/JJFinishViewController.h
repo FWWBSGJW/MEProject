@@ -20,7 +20,6 @@
 @property (nonatomic, copy) NSString *highScoreUrl;
 @property(nonatomic, strong) UITableView *scoreTableView;
 @property(nonatomic, strong) NSArray *scoreArray;
-- (IBAction)wrongSubject:(id)sender;
 @property(nonatomic, strong) UIActivityIndicatorView *activityView;
 - (void)achieveScoreView;
 @end
