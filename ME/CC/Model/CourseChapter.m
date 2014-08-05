@@ -165,24 +165,28 @@
     [connection start];
     
 }
-/*
-- (void)privateWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID
+
+//121.197.10.159:8080/MobileEducation/collectionAction?userId=1&CId=1
+- (NSInteger)privateWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@MobileEducation/uploadCComment",kBaseURL]];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-    //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"POST"];
-    
-    //NSString *bodyStr = [NSString stringWithFormat:@"CId=%d&userid=%d&ccContent=%@",courseID,userID,content];
-    //NSLog(@"%@",bodyStr);
-    
-    //NSData *body = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
-    
-    [request setHTTPBody:body];
-    NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
-    [connection start];
-}*/
+    NSString *str = [kBaseURL stringByAppendingString:[NSString stringWithFormat:@"MobileEducation/collectionAction?userId=%d&CId=%d",userID,courseID]];
+    NSURL *url = [NSURL URLWithString:str];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if (data != nil) {
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        return [dic[@"success"] integerValue];
+        
+    } else if (data == nil && error == nil) {
+        NSLog(@"空数据");
+        return 0;
+    } else {
+        NSLog(@"%@",error.localizedDescription);
+        return 0;
+    }
+}
 
 - (void)loadCourseNoteArrayWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID
 {

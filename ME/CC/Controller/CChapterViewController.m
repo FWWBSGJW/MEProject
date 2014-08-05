@@ -16,6 +16,7 @@
 #import "CVideoPlayerController.h"
 #import "CDownloadViewController.h"
 #import "CNoteCell.h"
+#import "DetailViewController.h"
 #define headHeight 160
 enum Segement_Type
 {
@@ -69,7 +70,8 @@ enum DownloadButton_Tag
 @property (strong, nonatomic) SendComNoteView *sendComNoteView; //发送评论，笔记试图
 @property (strong, nonatomic) UIView *dimView; //发送评论时背影
 @property (weak, nonatomic) UIToolbar *toobar;
-
+@property (strong, nonatomic) UILabel *alertLabel;
+@property (strong, nonatomic) UIActionSheet *actionSheet;
 @property (strong, nonatomic) UIView *downLoadBarView;
 @end
 
@@ -91,9 +93,8 @@ enum DownloadButton_Tag
         [weakSelf insertRowAtBottom];
     }];
     self.tableView.showsInfiniteScrolling = NO;
-   
+    [self setExtraCellLineHidden:self.tableView]; //隐藏多需的cell线
     self.title = self.courseInfoDic[@"cName"];
-
     
     
     //设置底部功能按钮
@@ -114,6 +115,17 @@ enum DownloadButton_Tag
     [items removeLastObject];
     toorBar.items = items;
     [self.view addSubview:toorBar];
+    
+    if ([User sharedUser].info.isLogin) {
+        NSLog(@"收藏课程-----%@",[User sharedUser].info.ccourses);
+        for (NSDictionary *dic in [User sharedUser].info.ccourses) {
+            if ([dic[@"cid"] integerValue] == self.courseID) {
+                UIBarButtonItem *item = items[0];
+                item.image = [UIImage imageNamed:@"cStarFull"];
+                break;
+            }
+        }
+    }
     
     self.toobar = toorBar;
     
@@ -175,6 +187,30 @@ enum DownloadButton_Tag
 
 #pragma mark - getter and setter
 
+- (UIActionSheet *)actionSheet
+{
+    if (!_actionSheet) {
+        _actionSheet = [[UIActionSheet alloc] initWithTitle:@"登陆才能使用此功能哦~" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"登陆" otherButtonTitles:nil, nil];
+    }
+    return _actionSheet;
+}
+
+- (UILabel *)alertLabel
+{
+    if (!_alertLabel) {
+        _alertLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-60, SCREEN_HEIGHT/2-60, 120, 60)];
+        _alertLabel.layer.cornerRadius = 10;
+        _alertLabel.layer.masksToBounds = YES;
+        _alertLabel.backgroundColor = [UIColor blackColor];
+        _alertLabel.alpha = 0.9;
+        _alertLabel.text = @"";
+        _alertLabel.textColor = [UIColor whiteColor];
+        [_alertLabel setTextAlignment:NSTextAlignmentCenter];
+        _alertLabel.font = [UIFont systemFontOfSize:13.0];
+    }
+    return _alertLabel;
+}
+
 - (NSMutableArray *)chapterOpenArray
 {
     if (!_chapterOpenArray) {
@@ -227,6 +263,8 @@ enum DownloadButton_Tag
 {
     if (_downLoadBarView == nil) {
         _downLoadBarView = [[UIView alloc] initWithFrame:self.toobar.frame];
+        _downLoadBarView.layer.borderWidth = 0.25;
+        _downLoadBarView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         _downLoadBarView.backgroundColor = [UIColor whiteColor];
         UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         cancelButton.frame = CGRectMake(0, 0, _downLoadBarView.frame.size.width/2.0, _downLoadBarView.frame.size.height);
@@ -245,9 +283,6 @@ enum DownloadButton_Tag
     }
     return _downLoadBarView;
 }
-
-#warning 以下三方法待实现后台获取数据
-
 
 
 - (NSMutableArray *)courseChapterArray
@@ -281,8 +316,8 @@ enum DownloadButton_Tag
 
 - (NSMutableArray *)courseNoteArray
 {
-#warning 待通过share类获取id
-    if (!_courseNoteArray) {
+    if (!_courseNoteArray && [User sharedUser].info.isLogin) {
+        
         [self.courseChapter loadCourseNoteArrayWithCourseID:self.courseID andUserID:1];
         _courseNoteArray = self.courseChapter.couserNoteArray;
     }
@@ -392,10 +427,15 @@ enum DownloadButton_Tag
         UIView *headView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"chapterHeadIdentifier"];
         if (!headView) {
             
-            headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
+            headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
             //headView.backgroundColor = [UIColor colorWithRed:0.2 green:0.8 blue:0.2 alpha:0.8];
+            
+            headView.layer.borderWidth = 0.25;
+            headView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+            headView.layer.masksToBounds = YES;
+            
             headView.backgroundColor = [UIColor whiteColor];
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 20, 20)];
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 12, 20, 20)];
             imageView.image = [UIImage imageNamed:@"cellTag"];
             //设置三角形图片的旋转角度
             
@@ -403,7 +443,7 @@ enum DownloadButton_Tag
             [openArray[section-1] integerValue] ? [imageView setTransform:CGAffineTransformMakeRotation(M_PI_2)] : [imageView setTransform:CGAffineTransformMakeRotation(0)];
             
             [headView addSubview:imageView];
-            UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 2, SCREEN_WIDTH-40, 30)];
+            UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 6, SCREEN_WIDTH-40, 30)];
             [textLabel setBackgroundColor:[UIColor clearColor]];
             textLabel.tag = 205;
             UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -411,7 +451,7 @@ enum DownloadButton_Tag
             button.tag = section;
             //[button setBackgroundColor:[UIColor greenColor]];
             [button addTarget:self action:@selector(clickHeader:) forControlEvents:UIControlEventTouchUpInside];
-            button.frame = CGRectMake(0, 0, SCREEN_WIDTH, 35);
+            button.frame = CGRectMake(0, 1, SCREEN_WIDTH, 42);
             [headView addSubview:textLabel];
             [headView addSubview:button];
         }
@@ -435,7 +475,7 @@ enum DownloadButton_Tag
     if (section == 0) {
         return headHeight;
     } else
-        return 35;
+        return 44.0;
 }
 
 
@@ -456,6 +496,7 @@ enum DownloadButton_Tag
                 //_textView = textView;
                 
                 [textView setText:self.courseInfoDic[@"cDetail"]];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             }
             return cell;
         }
@@ -466,13 +507,18 @@ enum DownloadButton_Tag
             CCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:commentCellIdentifier forIndexPath:indexPath];
             if (cell==nil) {
                 cell = [[CCommentCell alloc] init];
+                
             }
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             NSDictionary *dic = self.courseCommentArray[indexPath.row];
             NSString *urlStr = [NSString stringWithFormat:@"%@%@",kBaseURL,dic[@"userPortrait"]];
             [cell.headImageView setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"CuserPhoto"]];
+            
             cell.dateLable.text = dic[@"ccDate"];
             cell.commentLabel.text = dic[@"ccContent"];
             cell.userNameLable.text = dic[@"userName"];
+            cell.imageButton.tag = indexPath.row;
+            [cell.imageButton addTarget:self action:@selector(touchHeadImage:) forControlEvents:UIControlEventTouchUpInside];
             
             return cell;
         }
@@ -549,11 +595,12 @@ enum DownloadButton_Tag
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section > 0 && !self.tableView.isEditing) {
+    if (!self.tableView.isEditing) {
         switch (self.segmentControl.selectedSegmentIndex) {
             case SegementChapter:
             {
                 //获取对应视频id
+                
                 NSDictionary *dic = (self.courseChapterArray[indexPath.section-1][@"CCvideo"])[indexPath.row];
                 NSInteger CVid = [dic[@"vId"] integerValue];
                 //NSLog(@"%d",CVid);
@@ -568,6 +615,16 @@ enum DownloadButton_Tag
             case SegementNote:
             {
                 
+            }
+                break;
+            case SegementComment:
+            {
+                /*
+                NSDictionary *dic = self.courseCommentArray[indexPath.row];
+                NSString *userID = dic[@"userid"];
+                DetailViewController *detailVC = [[DetailViewController alloc] initWithUserId:userID];
+                [self.navigationController pushViewController:detailVC animated:YES];
+                 */
             }
                 break;
             default:
@@ -588,6 +645,15 @@ enum DownloadButton_Tag
 
 
 #pragma mark - Action 方法
+
+#pragma mark touch headImageButton
+- (void)touchHeadImage:(UIButton *)sender
+{
+    NSDictionary *dic = self.courseCommentArray[sender.tag];
+    NSString *userID = dic[@"userid"];
+    DetailViewController *detailVC = [[DetailViewController alloc] initWithUserId:userID];
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
 
 #pragma mark  segement Changed 方法
 - (void)selectSegemnt
@@ -660,16 +726,36 @@ enum DownloadButton_Tag
         case ButtonTagPrivate:{
             //[button setBackgroundImage:[UIImage imageNamed:@"已收藏"] forState:UIControlStateNormal];
             [self userCheck];
-            button.image = [UIImage imageNamed:@"cStarFull"];
-            //NSLog(@"private");
-//            if (button.selected == YES) {
-//                button.image = [UIImage imageNamed:@"cStar"];
-//                button.selected = NO;
-//            } else{
-//                button.image = [UIImage imageNamed:@"cStarFull"];
-//                button.selected = YES;
-//            }
-            
+            if ([User sharedUser].info.isLogin) {
+                button.image = [UIImage imageNamed:@"cStarFull"];
+                NSInteger userID = [[User sharedUser].info.userId integerValue];
+                NSInteger result = [self.courseChapter privateWithCourseID:self.courseID andUserID:userID];
+                if (result == 1) {
+                    self.alertLabel.text = @"收藏成功!";
+                    button.image = [UIImage imageNamed:@"cStarFull"];
+                }else if(result == 2){
+                    self.alertLabel.text = @"取消收藏成功!";
+                    button.image = [UIImage imageNamed:@"cStar"];
+                }else{
+                    self.alertLabel.text = @"操作失败!";
+                }
+                
+                [[UIApplication sharedApplication].keyWindow addSubview:_alertLabel];
+                [UIView animateKeyframesWithDuration:0.8f delay:0.6f options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+                    self.alertLabel.alpha = 0.0f;
+                } completion:^(BOOL finished) {
+                    [self.alertLabel removeFromSuperview];
+                    self.alertLabel = nil;
+                }];
+                
+//                [UIView animateWithDuration:3.5f animations:^{
+//                    self.alertLabel.alpha = 0.0f;
+//                } completion:^(BOOL finished) {
+//                    [self.alertLabel removeFromSuperview];
+//                    self.alertLabel = nil;
+//                }];
+            }
+
         }
             break;
         case ButtonTagDownLoad:{
@@ -691,38 +777,42 @@ enum DownloadButton_Tag
         }
             break;
         case ButtonTagComment:{
-#pragma mark 待判断用户是否登录
-        
-            
-            //弹出输入框
-            [[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
-            [[UIApplication sharedApplication].keyWindow addSubview:self.sendComNoteView];
-            [self.sendComNoteView.textView becomeFirstResponder];
-            self.sendComNoteView.titleLabel.text = @"发送评论";
-            self.sendComNoteView.tag = TextViewComment;
-            [UIView animateWithDuration:0.4f animations:^{
-                [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, 20.0, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
-                self.sendComNoteView.alpha = 1.0f;
-            } completion:^(BOOL finished) {
-                
-            }];
+            [self userCheck];
+            if ([User sharedUser].info.isLogin) {
+                //弹出输入框
+                [[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
+                [[UIApplication sharedApplication].keyWindow addSubview:self.sendComNoteView];
+                [self.sendComNoteView.textView becomeFirstResponder];
+                //self.sendComNoteView.titleLabel.text = @"发送评论";
+                self.sendComNoteView.titleLabel.backgroundColor = [UIColor greenColor];
+                self.sendComNoteView.tag = TextViewComment;
+                [UIView animateWithDuration:0.4f animations:^{
+                    [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, 20.0, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
+                    self.sendComNoteView.alpha = 1.0f;
+                } completion:^(BOOL finished) {
+                    
+                }];
+            }
 
         }
             break;
         case ButtonTagNote:{
             //弹出输入框
-            [[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
-            [[UIApplication sharedApplication].keyWindow addSubview:self.sendComNoteView];
-            [self.sendComNoteView.textView becomeFirstResponder];
-            self.sendComNoteView.titleLabel.text = @"写笔记";
-            self.sendComNoteView.tag = TextViewNote;
-            [UIView animateWithDuration:0.4f animations:^{
-                [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, 20.0, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
-                self.sendComNoteView.alpha = 1.0f;
-            } completion:^(BOOL finished) {
-                
-            }];
-
+            [self userCheck];
+            if ([User sharedUser].info.isLogin) {
+                [[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
+                [[UIApplication sharedApplication].keyWindow addSubview:self.sendComNoteView];
+                [self.sendComNoteView.textView becomeFirstResponder];
+                //self.sendComNoteView.titleLabel.backgroundColor = [UIColor blueColor];
+                self.sendComNoteView.titleLabel.text = @"写笔记";
+                self.sendComNoteView.tag = TextViewNote;
+                [UIView animateWithDuration:0.4f animations:^{
+                    [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, 20.0, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
+                    self.sendComNoteView.alpha = 1.0f;
+                } completion:^(BOOL finished) {
+                    
+                }];
+            }
             
         }
         default:
@@ -753,20 +843,24 @@ enum DownloadButton_Tag
 - (void)sendComNote
 {
 #pragma waring 此处待实现上传评论，笔记 ,刷新数据
+    [self userCheck];
     //评论
-    if (self.sendComNoteView.tag == TextViewComment) {
-        NSLog(@"评论---%@",self.sendComNoteView.textView.text);
-#warning 待获取userID
-        [self userCheck];
-        User *user = [User sharedUser];
-        [self.courseChapter sendCourseCommentWithCourseID:self.courseID andUserID:1 andContent:self.sendComNoteView.textView.text];
+    if ([User sharedUser].info.isLogin) {
+        if (self.sendComNoteView.tag == TextViewComment) {
+            NSLog(@"评论---%@",self.sendComNoteView.textView.text);
+            User *user = [User sharedUser];
+            if (user.info.isLogin) {
+                NSInteger userID = [user.info.userId integerValue];
+                [self.courseChapter sendCourseCommentWithCourseID:self.courseID andUserID:userID andContent:self.sendComNoteView.textView.text];
+            }
+            
+        } else if (self.sendComNoteView.tag == TextViewNote){ //笔记
+            NSLog(@"笔记---%@",_sendComNoteView.textView.text);
+        }
         
-    } else if (self.sendComNoteView.tag == TextViewNote){ //笔记
-        NSLog(@"笔记---%@",_sendComNoteView.textView.text);
+        [self sendComNoteViewBack];
+        //self.sendComNoteView.textView.text = nil;
     }
-    
-    [self sendComNoteViewBack];
-    //self.sendComNoteView.textView.text = nil;
 }
 
 - (void)cancelSend
@@ -792,9 +886,8 @@ enum DownloadButton_Tag
 
 - (void)userCheck
 {
-    User *user = [User sharedUser];
-    if (!user.info.isLogin) {
-        [user gotoUserLoginFrom:self];
+    if(![User sharedUser].info.isLogin){
+        [self.actionSheet showFromToolbar:self.toobar];
     }
 }
 
@@ -807,6 +900,21 @@ enum DownloadButton_Tag
     m = (theSecond-h*3600)/60;
     s = theSecond%60;
     return [NSString stringWithFormat:@"%02d:%02d:%02d",h,m,s];
+}
+
+- (void)setExtraCellLineHidden: (UITableView *)tableView
+{
+    UIView *view = [UIView new];
+    view.backgroundColor = [UIColor clearColor];
+    [tableView setTableFooterView:view];
+}
+
+#pragma mark - delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [[User sharedUser] gotoUserLoginFrom:self];
+    }
 }
 
 @end

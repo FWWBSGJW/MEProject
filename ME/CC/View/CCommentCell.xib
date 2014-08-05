@@ -36,12 +36,20 @@
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doc-VB-e7J">
+                        <rect key="frame" x="0.0" y="0.0" width="83" height="69"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="commentLabel" destination="ufe-sf-yO2" id="K1g-ty-IWo"/>
                 <outlet property="dateLable" destination="TfZ-IH-ULQ" id="zf1-O1-9go"/>
                 <outlet property="headImageView" destination="swr-RI-Z3Q" id="InX-Mj-oF0"/>
+                <outlet property="imageButton" destination="doc-VB-e7J" id="elW-mr-N87"/>
                 <outlet property="userNameLable" destination="ff5-pR-5tr" id="zjR-OX-tFB"/>
             </connections>
         </tableViewCell>

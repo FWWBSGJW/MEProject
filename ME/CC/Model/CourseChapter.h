@@ -31,7 +31,7 @@
 - (void)sendCourseCommentWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID andContent:(NSString *)content;
 
 //收藏
-- (void)privateWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID;
+- (NSInteger)privateWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID;
 //笔记
 - (void)loadCourseNoteArrayWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID;
 - (NSMutableArray *)loadCourseDetailNoteWithUrl:(NSString *)urlStr;

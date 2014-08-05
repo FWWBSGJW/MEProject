@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CChapterViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
+@interface CChapterViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>
 
 + (instancetype)chapterVCwithCourseID:(NSInteger)courseID; //以课程id实例化方法
 

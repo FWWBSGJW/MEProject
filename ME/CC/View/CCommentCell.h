@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLable;
 @property (weak, nonatomic) IBOutlet UILabel *commentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLable;
+@property (weak, nonatomic) IBOutlet UIButton *imageButton;
 
 @end

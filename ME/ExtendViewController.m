@@ -33,6 +33,7 @@
     [button setFrame:CGRectMake(SCREEN_WIDTH/2-50, SCREEN_HEIGHT/2-50, 100, 100)];
     [button addTarget:self action:@selector(backHome) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
+    
 }
 
 

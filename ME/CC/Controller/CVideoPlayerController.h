@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface CVideoPlayerController : MPMoviePlayerViewController <UIAlertViewDelegate, UIGestureRecognizerDelegate>
+@interface CVideoPlayerController : MPMoviePlayerViewController <UIAlertViewDelegate, UIGestureRecognizerDelegate,UIAlertViewDelegate>
 
 //通过id构建视频
 - (void)playVideoWithVideoID : (NSInteger)videoID andVideoTitle:(NSString *)videoTitle andVideoUrlString:(NSString *)urlString;

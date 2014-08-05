@@ -11,7 +11,9 @@
 #define maxNum 100
 
 @implementation DanmakuModel
-
+{
+    NSInteger _lastArrayNum ; //弹幕内容数组控制
+}
 #pragma mark getter and setter
 - (NSMutableArray *)moveDanmakuReUseArray
 {
@@ -29,13 +31,29 @@
     return _staticDanmakuReUseArray;
 }
 
-
+- (NSMutableArray *)dmChannel
+{
+    if (!_dmChannel) {
+        _dmChannel = [NSMutableArray arrayWithCapacity:SCREEN_HEIGHT/_moveDanmukuHeight];
+        for (NSInteger i=0; i < SCREEN_HEIGHT/_moveDanmukuHeight; i++) {
+            [_dmChannel addObject:@1];
+        }
+    }
+    return _dmChannel;
+}
 
 - (instancetype)initWithVideoID:(NSInteger)videoID andUserID:(NSInteger)userID
 {
     self = [super init];
     self.userID = userID;
     self.videoID = videoID;
+
+    _moveDanmukuHeight = 25.0;
+    _lastArrayNum = 0;
+    //初始化弹幕高度
+    _staticDanmakuY = SCREEN_WIDTH;
+    [self loadDanmakuArray];
+    
     return self;
 }
 
@@ -117,6 +135,128 @@
     [request setHTTPBody:body];
     NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
     [connection start];
+}
+
+#pragma mark - 选择实现实现弹幕
+- (void)selectDanmukuWithCurrentTime:(NSTimeInterval)currentPlaybackTime
+{
+    for (NSInteger i = _lastArrayNum; i < self.danmakuArray.count; i++) {
+        if ((int)(currentPlaybackTime) == [self.danmakuArray[i][@"Dtime"] integerValue]) {
+            
+            
+            switch ([self.danmakuArray[i][@"Dtype"] integerValue]) {
+                case 0:  //动态弹幕 评论
+                {
+                    NSInteger dmChaennel = self.seletDanmakuChannel;
+                    NSLog(@"----------------通道--------%d",dmChaennel);
+                    self.moveDanmukuY = self.moveDanmukuHeight * dmChaennel;
+                    DanmakuView *danmakuView = [self dequeueReusableDanmakuWithDanmakuType:moveDanmaku];
+                    if (danmakuView == nil) {
+                        //NSLog(@"nil");
+                        danmakuView = [[DanmakuView alloc] initMoveDM];
+                    }
+                    
+                    [danmakuView setSizeWithComponent:self.danmakuArray[i][@"Dcomponent"]];
+                    CGSize dmSize = danmakuView.frame.size;
+                    [danmakuView setFrame:CGRectMake(SCREEN_HEIGHT, self.moveDanmukuY, dmSize.width, dmSize.height)];
+                    [self.danmakuView addSubview:danmakuView];
+                    //设置弹幕动画
+//                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//                        NSLog(@"%f    %f",danmakuView.frame.origin.x,danmakuView.frame.origin.y);
+//                        [self.danmakuView addSubview:danmakuView];
+//                        [self danmakuChannelOpen:dmChaennel WithDMwith:dmSize.width];
+//                        [self moveDM:danmakuView];
+//                    }];
+                    
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        
+                        [self danmakuChannelOpen:dmChaennel WithDMwith:dmSize.width];
+                        [self moveDM:danmakuView];
+                    });
+                }
+                    break;
+                case 1:   //静态弹幕
+                {
+                    DanmakuView *danmakuView = [self dequeueReusableDanmakuWithDanmakuType:staticDanmaku];
+                    if (danmakuView == nil) {
+                        danmakuView = [[DanmakuView alloc] initStaticDM];
+                    }
+                    [danmakuView setStaticDMSizeWithComponent:self.danmakuArray[i][@"Dcomponent"]];
+                    CGSize dmSize = danmakuView.frame.size;
+                    [danmakuView setFrame:CGRectMake((SCREEN_HEIGHT-dmSize.width)/2.0, _staticDanmakuY-dmSize.height, dmSize.width, dmSize.height)];
+                    
+                    
+                    NSLog(@"%f %f",danmakuView.frame.origin.x,danmakuView.frame.origin.y);
+                    _staticDanmakuY -= dmSize.height;
+                    [self.danmakuView addSubview:danmakuView];
+                    //主线程跟新ui
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        
+                        [self performSelector:@selector(hidSDM:) withObject:danmakuView afterDelay:3.0f];
+                    }];
+                    
+                }
+                default:
+                    break;
+            }
+            
+        }
+        if ((int)(currentPlaybackTime) < [self.danmakuArray[i][@"Dtime"] integerValue])
+            break;
+    }
+
+}
+
+- (void)moveDM:(DanmakuView *)dmView
+{
+    [self performSelector:@selector(hidMDM:) withObject:dmView afterDelay:5.5f];
+    [UIView animateWithDuration:5.5f animations:^{
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [dmView setFrame:CGRectMake(0.0-dmView.frame.size.width, dmView.frame.origin.y, dmView.frame.size.width, dmView.frame.size.height)];
+    } ];
+    
+}
+
+- (void)hidSDM:(DanmakuView *)dmView
+{
+    dmView.alpha = 0.0;
+    _staticDanmakuY += dmView.frame.size.height;
+    [self addNoUseDanmaku:dmView WithDanmakuType:staticDanmaku];
+    [dmView removeFromSuperview];
+    
+}
+
+- (void)hidMDM:(DanmakuView *)dmView
+{
+    [self addNoUseDanmaku:dmView WithDanmakuType:staticDanmaku];
+    [dmView removeFromSuperview];
+}
+
+#pragma mark - 选取空余位置出现弹幕
+- (NSInteger)seletDanmakuChannel
+{
+    NSInteger i;
+    for (i = 0; i < self.dmChannel.count; i++) {
+        if ([self.dmChannel[i] integerValue] == 1)
+            break;
+    }
+    i = (i<self.dmChannel.count ? i:0);
+    self.dmChannel[i] = @0;
+    return i;
+}
+
+- (void)danmakuChannelOpen:(NSInteger)dmChannel WithDMwith:(CGFloat)dmWith
+{
+    static CGFloat moveDMtime = 5.5f;
+    CGFloat denyTime = (dmWith)/SCREEN_WIDTH * moveDMtime;
+    [self performSelector:@selector(danmakuChannelShouldOpen:) withObject:[NSNumber numberWithInteger:dmChannel] afterDelay:denyTime];
+
+}
+
+
+- (void)danmakuChannelShouldOpen:(NSNumber *)dmChannel
+{
+    self.dmChannel[[dmChannel integerValue]] = @1;
 }
 
 @end

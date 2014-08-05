@@ -10,6 +10,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "DanmakuView.h"
 #import "DanmakuModel.h"
+#import "User.h"
 
 enum SendType
 {
@@ -19,16 +20,15 @@ enum SendType
 
 @interface CVideoPlayerController ()
 {
-   // NSTimer *_playTimer;
     UILabel *_label;    
     NSInteger _lastArrayNum ; //弹幕内容数组控制
     UIButton *_playButton;//播放按钮
     UITextField *_dmTextField; //发送弹幕文本框
-    
-    CGFloat _moveDanmukuY ;
-    CGFloat _staticDanmakuY ;
-}
 
+}
+@property (strong, nonatomic) NSOperationQueue *dmQueue;
+
+@property (assign, nonatomic) NSInteger userID; //-1代表游客
 @property (assign, nonatomic) NSInteger videoID;
 //自定义播放器控件
 //下边栏控制条
@@ -76,7 +76,6 @@ enum SendType
 //弹幕计时器
 @property (strong, nonatomic) NSTimer *danmakuTimer;
 
-@property (strong, nonatomic) NSMutableArray *danmaku; //弹幕数组
 @property (assign, nonatomic) NSTimeInterval startTime;
 @property (strong, nonatomic) NSURL *url;
 @property (strong, nonatomic) NSMutableArray *timerArray;//定时器数组
@@ -87,11 +86,30 @@ enum SendType
 @property (strong, nonatomic) UIButton *sendButton; //发送弹幕按钮
 
 @property (strong, nonatomic) NSTimer *myTimer;
+@property (strong, nonatomic) UIAlertView *alertView;
+
 @end
 
 @implementation CVideoPlayerController
 
 #pragma getter and setter
+
+- (NSInteger)userID
+{
+    if (!_userID) {
+        User *user = [User sharedUser];
+        _userID = (user.info.isLogin ? [user.info.userId integerValue] : -1);
+    }
+    return _userID;
+}
+
+- (UIAlertView *)alertView
+{
+    if (!_alertView) {
+        _alertView = [[UIAlertView alloc] initWithTitle:@"您还没有登陆" message:@"对不起，游客无法发送（评论/笔记）弹幕的哦~" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+    }
+    return _alertView;
+}
 
 - (NSMutableArray *)timerArray
 {
@@ -101,15 +119,6 @@ enum SendType
     return _timerArray;
 }
 
-
-- (NSMutableArray *)danmaku
-{
-    if (!_danmaku) {
-        _danmaku = self.danmakuModel.danmakuArray;
-        //NSLog(@"%@",_danmaku);
-    }
-    return _danmaku;
-}
 
 - (UIView *)dimView
 {
@@ -157,10 +166,9 @@ enum SendType
 
 - (void)playVideoWithVideoID : (NSInteger)videoID andVideoTitle:(NSString *)videoTitle andVideoUrlString:(NSString *)urlString
 {
-#warning 通过share类获取userID 待实现
-    NSLog(@"%@",urlString);
-    _danmakuModel = [[DanmakuModel alloc] initWithVideoID:videoID andUserID:1];
-    [self.danmakuModel loadDanmakuArray];
+
+    _danmakuModel = [[DanmakuModel alloc] initWithVideoID:videoID andUserID:self.userID ];    //[self.danmakuModel loadDanmakuArray];
+    
     self.url = [NSURL URLWithString:urlString];
     self.moviePlayer.contentURL = self.url;
     self.title = videoTitle;
@@ -186,10 +194,9 @@ enum SendType
     //NSLog(@"%f",self.moviePlayer.duration);
     //self.moviePlayer.initialPlaybackTime = 10.0; 通过这个可控制开始时间
     [self setUI];
+    self.danmakuModel.danmakuView = self.danmakuView;
     
-    //初始化弹幕高度
-    _moveDanmukuY = 25.0;
-    _staticDanmakuY = SCREEN_WIDTH;
+    self.dmQueue = [[NSOperationQueue alloc] init];
 }
 
 
@@ -199,94 +206,7 @@ enum SendType
     
 }
 
-#pragma mark - 弹幕实现
 
-- (void)selectDanmuku
-{
-    //NSLog(@"过了1s");
-    _moveDanmukuY = 25.0;
-    for (NSInteger i = _lastArrayNum; i < self.danmaku.count; i++) {
-        if ((int)(self.moviePlayer.currentPlaybackTime) == [self.danmaku[i][@"Dtime"] integerValue]) {
-            
-            switch ([self.danmaku[i][@"Dtype"] integerValue]) {
-                case 0:  //动态弹幕 评论
-                {
-                    DanmakuView *danmakuView = [self.danmakuModel dequeueReusableDanmakuWithDanmakuType:moveDanmaku];
-                    if (danmakuView == nil) {
-                        //NSLog(@"nil");
-                        danmakuView = [[DanmakuView alloc] initMoveDM];
-                    }
-                    
-                    [danmakuView setSizeWithComponent:self.danmaku[i][@"Dcomponent"]];
-                    CGSize dmSize = danmakuView.frame.size;
-                    [danmakuView setFrame:CGRectMake(SCREEN_HEIGHT, _moveDanmukuY, dmSize.width, dmSize.height)];
-                    [self.danmakuView addSubview:danmakuView];
-                    
-                    //设置弹幕动画
-                    dispatch_sync(dispatch_get_main_queue(), ^{
-                        [self moveDM:danmakuView];
-                    });
-                    _moveDanmukuY += 40;
-                }
-                    break;
-                case 1:   //静态弹幕
-                {
-                    DanmakuView *danmakuView = [self.danmakuModel dequeueReusableDanmakuWithDanmakuType:staticDanmaku];
-                    if (danmakuView == nil) {
-                        danmakuView = [[DanmakuView alloc] initStaticDM];
-                    }
-                    [danmakuView setStaticDMSizeWithComponent:self.danmaku[i][@"Dcomponent"]];
-                    CGSize dmSize = danmakuView.frame.size;
-                    [danmakuView setFrame:CGRectMake((SCREEN_HEIGHT-dmSize.width)/2.0, _staticDanmakuY-dmSize.height, dmSize.width, dmSize.height)];
-                    
-                    [self.danmakuView addSubview:danmakuView];
-                    NSLog(@"%f %f",danmakuView.frame.origin.x,danmakuView.frame.origin.y);
-                    _staticDanmakuY -= dmSize.height;
-                    
-                    //主线程跟新ui
-                    dispatch_sync(dispatch_get_main_queue(), ^{
-                        [self performSelector:@selector(hidSDM:) withObject:danmakuView afterDelay:3.0f];
-                    });
-                    
-                }
-                default:
-                    break;
-            }
-            
-        }
-        if ((int)(self.moviePlayer.currentPlaybackTime) < [self.danmaku[i][@"Dtime"] integerValue])
-            break;
-    }
-}
-
-- (void)moveDM:(DanmakuView *)dmView
-{
-    [UIView animateWithDuration:5.5f animations:^{
-        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-        [dmView setFrame:CGRectMake(0.0-dmView.frame.size.width, dmView.frame.origin.y, dmView.frame.size.width, dmView.frame.size.height)];
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [self hidMDM:dmView];
-        }
-        
-    }];
-    
-}
-
-- (void)hidSDM:(DanmakuView *)dmView
-{
-    dmView.alpha = 0.0;
-    _staticDanmakuY += dmView.frame.size.height;
-    [self.danmakuModel addNoUseDanmaku:dmView WithDanmakuType:staticDanmaku];
-    [dmView removeFromSuperview];
-    
-}
-
-- (void)hidMDM:(DanmakuView *)dmView
-{
-    [self.danmakuModel addNoUseDanmaku:dmView WithDanmakuType:staticDanmaku];
-    [dmView removeFromSuperview];
-}
 
 
 #pragma mark - 控制旋转
@@ -573,23 +493,27 @@ enum SendType
 //
 - (void)sendDanmaku:(UIButton *)sender
 {
+    
     if (!_playButton.selected) {
         [self playButtonClicked:_playButton];
     }
-    
-    [self.view addSubview:self.dimView];
-    [self.view addSubview:self.sendDanmakuView];
-    //[[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
-    //[[UIApplication sharedApplication].keyWindow addSubview:self.sendDanmakuView];
-    _dmTextField.placeholder = sender.tag == Send_Comment ? @"请输入你想发的评论" : @"请输入你想发的笔记";
-    _sendButton.tag = sender.tag;
-    [_dmTextField becomeFirstResponder];
-    [UIView animateWithDuration:0.4f animations:^{
-        self.sendDanmakuView.centerY = self.sendDanmakuView.centerY + self.sendDanmakuView.frame.size.height ;
-        self.sendDanmakuView.alpha = 0.8;
-    } completion:^(BOOL finished) {
-        
-    }];
+    if (self.userID == -1) {
+        [self.alertView show];
+    }else{
+        [self.view addSubview:self.dimView];
+        [self.view addSubview:self.sendDanmakuView];
+        //[[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
+        //[[UIApplication sharedApplication].keyWindow addSubview:self.sendDanmakuView];
+        _dmTextField.placeholder = (sender.tag == Send_Comment ? @"请输入你想发的评论" : @"请输入你想发的笔记");
+        _sendButton.tag = sender.tag;
+        [_dmTextField becomeFirstResponder];
+        [UIView animateWithDuration:0.4f animations:^{
+            self.sendDanmakuView.centerY = self.sendDanmakuView.centerY + self.sendDanmakuView.frame.size.height ;
+            self.sendDanmakuView.alpha = 0.8;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
 }
 
 - (void)cancelSend
@@ -600,14 +524,14 @@ enum SendType
 - (void)doSend:(UIButton *)sender
 {
     NSString *danmaku = _dmTextField.text;
-#warning 待获取userID
+
     NSInteger theType = (sender.tag == Send_Comment)?0:1;
     [self.danmakuModel sendDanmakuWithUserID:1 andVideoTime:self.moviePlayer.currentPlaybackTime+1 andvideoID:self.videoID andContent:danmaku andType:theType];
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjects:@[danmaku,[NSNumber numberWithInteger:self.moviePlayer.currentPlaybackTime+1],[NSNumber numberWithInteger:theType]] forKeys:@[@"Dcomponent",@"Dtime",@"Dtype"]];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjects:@[danmaku,[NSNumber numberWithInteger:self.moviePlayer.currentPlaybackTime],[NSNumber numberWithInteger:theType]] forKeys:@[@"Dcomponent",@"Dtime",@"Dtype"]];
     
-    [self.danmaku insertObject:dic atIndex:_lastArrayNum];
-    
+    //[self.danmaku insertObject:dic atIndex:_lastArrayNum];
+    [self.danmakuModel.danmakuArray insertObject:dic atIndex:_lastArrayNum];
     NSLog(@"%@",danmaku);
     [self hidSendDanmakuView];
 }
@@ -661,7 +585,7 @@ enum SendType
 {
     if ([sender isSelected]) {
         [self.moviePlayer play];
-        [self.timer setFireDate:[NSDate date]];//重写开始定时器
+        //[self.timer setFireDate:[NSDate date]];//重写开始定时器
         [sender setSelected:NO];
         [sender setImage:[UIImage imageNamed:@"details_stop_select.png"] forState:UIControlStateSelected];
         [sender setImage:[UIImage imageNamed:@"details_stop.png"] forState:UIControlStateNormal];
@@ -670,7 +594,7 @@ enum SendType
         [sender setSelected:YES];
         [sender setImage:[UIImage imageNamed:@"details_start.png"] forState:UIControlStateSelected];
         [sender setImage:[UIImage imageNamed:@"details_start_select.png"] forState:UIControlStateNormal];
-        [self.timer setFireDate:[NSDate distantFuture]]; //暂停定时器
+        
     }
 }
 
@@ -693,11 +617,19 @@ enum SendType
 - (void)timerClicked
 {
     if (self.dmSwitch.isOn) {
+        
+        NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
+            @autoreleasepool {
+                [self.danmakuModel selectDanmukuWithCurrentTime:self.moviePlayer.currentPlaybackTime];
+            }
+        }];
+        [self.dmQueue addOperation:op];
         //异步加载弹幕
-        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        dispatch_async(queue, ^{
-            [self selectDanmuku];
-        });
+//        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//        dispatch_async(queue, ^{
+//            //[self selectDanmuku];
+//            [self.danmakuModel selectDanmukuWithCurrentTime:self.moviePlayer.currentPlaybackTime];
+//        });
     }
     
     //设置开始时间
@@ -752,9 +684,12 @@ enum SendType
             //NSLog(@"duration%f",self.moviePlayer.duration);
             //NSLog(@"inittime,%f \n endplay%f",self.moviePlayer.initialPlaybackTime,self.moviePlayer.endPlaybackTime);
             //NSLog(@"%f",self.moviePlayer.currentPlaybackTime); //可获取当前时间
-            
+            [self.timer setFireDate:[NSDate distantFuture]]; //暂停定时器
+        
+            NSLog(@"zanting---------");
             break;
-            
+        case MPMoviePlaybackStatePlaying:
+            [self.timer setFireDate:[NSDate date]];
         default:
             break;
     }
@@ -825,6 +760,12 @@ enum SendType
     
     NSString *string = [NSString stringWithFormat:@"%02d:%02d:%02d",h,m,s];
     return string;
+}
+
+#pragma mark - delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self playButtonClicked:_playButton];
 }
 
 @end

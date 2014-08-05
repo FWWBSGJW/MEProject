@@ -15,7 +15,8 @@
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"SendComNoteView" owner:self options:nil];
     self = nib[0];
     if (self) {
-        
+        self.layer.cornerRadius = 10;
+        self.layer.masksToBounds = YES;
     }
     return self;
 }

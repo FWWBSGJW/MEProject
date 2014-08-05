@@ -86,14 +86,15 @@
 {
     [super viewDidLoad];
     
+    
     //注册自定义单元格
     UINib *nib = [UINib nibWithNibName:@"CCourse" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"courseIdentifier"];
-    
+    /*
     //设置登陆按钮
     UIBarButtonItem *loginItem = [[UIBarButtonItem alloc] initWithTitle:@"登陆" style:UIBarButtonItemStylePlain target:self action:@selector(login)];
     [self.navigationItem setLeftBarButtonItem:loginItem animated:YES];
- 
+     */
     //防止下拉位子异常
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
