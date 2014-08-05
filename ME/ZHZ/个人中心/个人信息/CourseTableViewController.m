@@ -10,6 +10,9 @@
 #import "ProgressTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "CChapterViewController.h"
+#import "CAlertLabel.h"
+#import "User.h"
+#import "OLNetManager.h"
 @interface CourseTableViewController ()
 
 @end
@@ -33,7 +36,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -79,27 +82,35 @@
 	[self.navigationController pushViewController:[CChapterViewController chapterVCwithCourseID:[cell.courseId integerValue]] animated:YES];
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+		if (![OLNetManager privateWithCourseID:[[_courses[indexPath.row] objectForKey:@"cid"] intValue] andUserID:[User sharedUser].info.userId]){
+			//网络请求 结果错误 提示
+			[[CAlertLabel alertLabelWithAdjustFrameForText:@"删除失败"] showAlertLabel];
+			return ;
+		}
+		[[CAlertLabel alertLabelWithAdjustFrameForText:@"删除成功"] showAlertLabel];
+		[_courses removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+		[[User sharedUser] refreshInfo];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.

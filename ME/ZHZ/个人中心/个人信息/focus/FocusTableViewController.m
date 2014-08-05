@@ -9,7 +9,8 @@
 #import "FocusTableViewController.h"
 #import "UIImageView+WebCache.h"
 #import "DetailViewController.h"
-
+#import "User.h"
+#import "CAlertLabel.h"
 #define kDefault_portrait @"CuserPhoto"
 @interface FocusTableViewController ()
 
@@ -41,7 +42,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	 self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,7 +55,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [_data count];
 }
@@ -82,27 +82,37 @@
 	DetailViewController *dvc = [[DetailViewController alloc] initWithUserId:[dic objectForKey:@"url"]];
 	[self.navigationController pushViewController:dvc animated:YES];
 }
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+#warning 网络请求
+//		if (![OLNetManager deleteCollectionTestWithUserId:[User sharedUser].info.userId andTestId:[_testData[indexPath.row] objectForKey:@"tcId"]]){
+//			//网络请求 结果错误 提示
+//			[[CAlertLabel alertLabelWithAdjustFrameForText:@"删除失败"] showAlertLabel];
+//			return ;
+//		}
+		[[CAlertLabel alertLabelWithAdjustFrameForText:@"删除成功"] showAlertLabel];
+		[_data removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+		[[User sharedUser] refreshInfo];
+
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.

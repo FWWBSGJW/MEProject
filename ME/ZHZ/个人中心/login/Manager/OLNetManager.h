@@ -14,4 +14,6 @@
 + (NSDictionary *)loginWith:(NSString *)username
 	  andPassword:(NSString *)password;
 + (NSDictionary *)userDataWithId:(NSString *)userId;
++ (BOOL)deleteCollectionTestWithUserId:(NSString *)userId andTestId:(NSString *)testId;
++ (NSInteger)privateWithCourseID:(NSInteger)courseID andUserID:(NSString *)userID;
 @end

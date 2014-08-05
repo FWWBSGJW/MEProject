@@ -62,6 +62,47 @@
 	return dic;
 }
 
++ (BOOL)deleteCollectionTestWithUserId:(NSString *)userId andTestId:(NSString *)testId{
+	NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/collecteTest";
+    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%@&CId=%@", userId, testId]];
+    NSURL *url = [NSURL URLWithString:urlAsString];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+    [urlRequest setTimeoutInterval:30.0f];
+    [urlRequest setHTTPMethod:@"POST"];
+    NSString *body = @"bodyParam1=BodyValue1&bodyParam2=BodyValue2";
+    [urlRequest setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	NSURLResponse *response = nil;
+	NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
+	if (error) {
+		NSLog(@"%@",error);
+	}
+	
+	NSDictionary *dic = [data objectFromJSONData];
+	return [dic objectForKey:@"success"];
+}
+
++ (NSInteger)privateWithCourseID:(NSInteger)courseID andUserID:(NSString *)userID
+{
+    NSString *str = [kBaseURL stringByAppendingString:[NSString stringWithFormat:@"MobileEducation/collectionAction?userId=%@&CId=%ld",userID,(long)courseID]];
+    NSURL *url = [NSURL URLWithString:str];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if (data != nil) {
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        return [dic[@"success"] integerValue];
+        
+    } else if (data == nil && error == nil) {
+        NSLog(@"空数据");
+        return 0;
+    } else {
+        NSLog(@"%@",error.localizedDescription);
+        return 0;
+    }
+}
 - (id)init{
 	if (self = [super init]) {
 		

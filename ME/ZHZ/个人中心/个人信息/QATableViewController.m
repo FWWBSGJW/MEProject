@@ -61,19 +61,40 @@
 		cell = [[QATableViewCell alloc] init];
 	}
 	NSDictionary *qa = [_data objectAtIndex:indexPath.row];
-	cell.title = qa[@"qtitle"];
-	cell.date = qa[@"qdate"];
-	cell.content = qa[@"qcontent"];
+	if (self.style == QAStyleQuestion) {
+		cell.title = qa[@"qtitle"];
+		cell.date = qa[@"qdate"];
+		cell.content = qa[@"qcontent"];
+	}else {
+		cell.title = qa[@"qtitle"];
+		cell.date = qa[@"atime"];
+		cell.content = qa[@"acontent"];
+	}
 	[cell setUI];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-	self.tabBarController.selectedIndex = 3;
-	QAViewController *qavc = [QAViewController shareQA];
-	NSString *qid = [[_data objectAtIndex:indexPath.row] objectForKey:@"qid"];
-	NSString *url = [NSString stringWithFormat:@"%@MobileEducation/contentuser?qid=%@",kBaseURL,qid];
-	qavc.url = url;
+	UIViewController *vc = [[UIViewController alloc] init];
+	vc.view.frame = [[UIScreen mainScreen] bounds];
+	UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.frame];
+	webView.scalesPageToFit = YES;
+	NSString *urlStr ;
+	if (self.style == QAStyleQuestion) {
+		NSString *qid = [[_data objectAtIndex:indexPath.row] objectForKey:@"qid"];
+		urlStr = [NSString stringWithFormat:@"%@MobileEducation/contentuser?qid=%@",kBaseURL,qid];
+	}else{
+		NSString *aid = [[_data objectAtIndex:indexPath.row] objectForKey:@"aid"];
+		urlStr = [NSString stringWithFormat:@"%@MobileEducation/contentself?aid=%@",kBaseURL,aid];
+	}
+	NSURL *url = [NSURL URLWithString:urlStr];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:request];
+	
+	
+	[vc.view addSubview:webView];
+	[self.navigationController pushViewController:vc animated:YES];
+//	self.tabBarController.selectedIndex = 3;
 }
 
 /*

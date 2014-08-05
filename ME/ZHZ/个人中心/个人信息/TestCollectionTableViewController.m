@@ -11,7 +11,8 @@
 #import "JJTestTableViewCell.h"
 #import "UILabel+dynamicSizeMe.h"
 #import "JJTestDetailViewController.h"
-
+#import "OLNetManager.h"
+#import "CAlertLabel.h"
 @interface TestCollectionTableViewController ()
 @end
 
@@ -65,13 +66,9 @@
         NSArray *_nib=[[NSBundle mainBundle] loadNibNamed:@"JJTestTableViewCell"
                                                     owner:self  options:nil];
         lableSwitchCell  = [_nib objectAtIndex:0];
-        //通过这段代码，来完成LableSwitchXibCell的ReuseIdentifier的设置
-        //这里是比较容易忽视的，若没有此段，再次载入LableSwitchXibCell时，dequeueReusableCellWithIdentifier:的值依然为nil
         n= [UINib nibWithNibName:@"PlayTableviewCell" bundle:[NSBundle mainBundle]];
         [tableView registerNib:n forCellReuseIdentifier:@"PlayTableviewCell"];
 		}
-//    JJTestModel *testModel = [[JJTestModel alloc] init];
-//    testModel = [self.testArray objectAtIndex:indexPath.row];
 	NSDictionary *dic = [_testData objectAtIndex:indexPath.row];
     [lableSwitchCell.imgView setImageWithURL:[NSURL URLWithString:kUrl_image(dic[@"tcPhotoUrl"])]];
     lableSwitchCell.nameLabel.text = [NSString stringWithFormat:@" %@", dic[@"tcName"]];
@@ -101,9 +98,15 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-#warning 删除数据请求
+		if (![OLNetManager deleteCollectionTestWithUserId:[User sharedUser].info.userId andTestId:[_testData[indexPath.row] objectForKey:@"tcId"]]){
+			//网络请求 结果错误 提示
+			[[CAlertLabel alertLabelWithAdjustFrameForText:@"删除失败"] showAlertLabel];
+			return ;
+		}
+		[[CAlertLabel alertLabelWithAdjustFrameForText:@"成功"] showAlertLabel];
 		[_testData removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+		[[User sharedUser] refreshInfo];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   

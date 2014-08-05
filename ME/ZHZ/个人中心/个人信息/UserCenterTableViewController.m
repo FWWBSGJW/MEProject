@@ -75,7 +75,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		
 		[self reloadData];
 	}else{
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"刷新失败" message:@"网络连接超时或用户账号异常" delegate:self cancelButtonTitle:@"cencle" otherButtonTitles:nil, nil];
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"刷新失败" message:@"网络连接超时或用户账号异常" delegate:self cancelButtonTitle:@"Cancle" otherButtonTitles:nil, nil];
 		[alert show];
 	}
 }
@@ -136,7 +136,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 {
 	switch (section) {
 		case UserCenterSectionStyelLcourse: return MIN([_user.info.lcourses count], 3); break;
-		case UserCenterSectionStyelQandA:	return 3; break;
+		case UserCenterSectionStyelQandA:	return 2; break;
 		case UserCenterSectionStyelBCcourse: return 2; break;
 		case UserCenterSectionStyelTest	:  return 2;break;
 		default:
@@ -179,11 +179,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		return cell1;
 	}else if (indexPath.section == UserCenterSectionStyelQandA){
 		//最近的提问和回答
-		if (indexPath.row == 0) {
-			cell = [[UITableViewCell alloc] init];
-			cell.textLabel.text = @"全部问答动态";
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		}else if(indexPath.row == 1){
+		if(indexPath.row == 0){
 			//用含 num 的自定义Cell
 			NumTableViewCell *numCell = [[NumTableViewCell alloc] initWithFrame:CGRectNull];
 			numCell.textLabel.text = @"问过";
@@ -313,9 +309,15 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	}else if (indexPath.section == UserCenterSectionStyelLink){
 		
 	}else if (indexPath.section == UserCenterSectionStyelQandA){
-		if (indexPath.row == 1) {
+		if (indexPath.row == 0) {
 			QATableViewController *qavc = [[QATableViewController alloc] initWithStyle:UITableViewStylePlain];
+			qavc.style = QAStyleQuestion;
 			qavc.data = _user.info.questions;
+			[self.navigationController pushViewController:qavc animated:YES];
+		}else if (indexPath.row == 1){
+			QATableViewController *qavc = [[QATableViewController alloc] initWithStyle:UITableViewStylePlain];
+			qavc.style = QAStyleAnswer;
+			qavc.data = _user.info.answers;
 			[self.navigationController pushViewController:qavc animated:YES];
 		}
 	}else if (indexPath.section == UserCenterSectionStyelTest){

@@ -37,7 +37,7 @@
             <connections>
                 <outlet property="contentLabel" destination="DoS-QU-00v" id="9UL-eC-mzd"/>
                 <outlet property="dateLabel" destination="DfW-xq-H5A" id="Tuo-R5-nmy"/>
-                <outlet property="titleLabel" destination="DoS-QU-00v" id="XYR-BH-42p"/>
+                <outlet property="titleLabel" destination="PAQ-u1-hgt" id="xgT-hE-Awz"/>
             </connections>
         </tableViewCell>
     </objects>

@@ -7,7 +7,6 @@
 //
 
 #import "QAViewController.h"
-
 @interface QAViewController ()
 @property (strong, nonatomic) UIWebView *webView;
 @end
@@ -27,9 +26,7 @@
 {
     [super viewWillAppear:YES];
     //self.navigationController.navigationBarHidden = YES;
-	if (_url) {
-		[_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
-	}
+	[_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
 	[_webView reload];
 }
 
@@ -53,6 +50,14 @@
 
 - (void)webGoback
 {
+	if (![_url isEqualToString:[NSString stringWithFormat:@"%@MobileEducation/qa",kBaseURL]]) {
+		_url = [NSString stringWithFormat:@"%@MobileEducation/qa",kBaseURL];
+		[_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
+		[_webView reload];
+		return;
+	}
+
+	
     [self.webView goBack];
 }
 
