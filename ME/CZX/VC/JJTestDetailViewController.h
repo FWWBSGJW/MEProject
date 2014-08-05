@@ -35,5 +35,6 @@
 
 - (id)initWithModel:(JJTestModel *)paramModel;
 - (void)loadModel;
++ (instancetype)testDetailVCwithTestID:(NSInteger)testID;
 @property(nonatomic, strong) UITableView *commentTableView;
 @end

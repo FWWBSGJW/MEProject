@@ -11,6 +11,8 @@
 #import "CCommentCell.h"
 #import "JJCommentManage.h"
 #import "UIImageView+WebCache.h"
+#import "SingleTestManage.h"
+#import "User.h"
 
 @interface JJTestDetailViewController ()
 {
@@ -37,6 +39,16 @@
     }
     
     return self;
+}
+
++ (instancetype)testDetailVCwithTestID:(NSInteger)testID;
+{
+    JJTestDetailViewController *vc = [[JJTestDetailViewController alloc] init];
+    vc.myModel = [[[SingleTestManage alloc] init]
+                  analyseTestJson:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/getSTestModel?tcId=%d", testID]];
+    vc.commentArray = [[[JJCommentManage alloc] init] analyseCommentJsonForVC:vc withCommentUrl:@"http://121.197.10.159:8080/MobileEducation/direction/listCtest.action?page=1&CId=1"];
+//    [vc loadModel];
+    return vc;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -67,9 +79,26 @@
     self.navigationItem.rightBarButtonItem = shareBarButton;
     
     self.navigationItem.title = @"测试详情";
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
+
     
     [self.likeBtn addTarget:self action:@selector(like) forControlEvents:UIControlEventTouchUpInside];
+    User *user = [User sharedUser];
+    if(user.info.isLogin == YES)
+    {
+        for (int i=0; i<user.info.testcollection.count; i++)
+        {
+            NSDictionary *dict = [user.info.testcollection objectAtIndex:i];
+            int dictTCID = [[dict objectForKey:@"tcId"] intValue];
+            int mymodelTCID = self.myModel.tcId;
+            NSLog(@"%d %d", mymodelTCID, dictTCID);
+            if (dictTCID == mymodelTCID)
+            {
+                [self.likeBtn setImage:[UIImage imageNamed:@"likeUp"] forState:UIControlStateNormal];
+                [self.likeBtn setTitle:@"已收藏" forState:UIControlStateNormal];
+                break;
+            }
+        }
+    }
     
     self.commentTableView = [[UITableView alloc]
                          initWithFrame:self.commentView.bounds style:UITableViewStylePlain];
@@ -97,11 +126,8 @@
 
 - (void)like
 {
-//    NSLog(@"%@", [User sharedUser].info.name);
     NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/collecteTest";
-    urlAsString = [urlAsString stringByAppendingString:@"?userId=1"];
-    urlAsString = [urlAsString stringByAppendingString:@"&CId=1"];
-                   //[NSString stringWithFormat:@"&CId=%d", self.myModel.tcId]];
+    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&CId=%d", [[User sharedUser].info.userId intValue], self.myModel.tcId]];
     NSURL *url = [NSURL URLWithString:urlAsString];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     [urlRequest setTimeoutInterval:30.0f];

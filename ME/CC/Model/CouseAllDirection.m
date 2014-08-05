@@ -22,7 +22,11 @@
     NSURLResponse *response = nil;
     NSError *error = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+<<<<<<< HEAD
     //NSLog(@"%@",data);
+=======
+//    NSLog(@"%@",data);
+>>>>>>> FETCH_HEAD
 
     if (data != nil) {
         [self handleJSONData:data];

@@ -18,13 +18,14 @@
 #import "CChapterViewController.h"
 #import "WrongSubjectViewController.h"
 #import "JJSubjectManage.h"
+#import "TestCollectionTableViewController.h"
 typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
     UserCenterSectionStyelInfo = 0,
     UserCenterSectionStyelDetail,
 	UserCenterSectionStyelLcourse,
 	UserCenterSectionStyelQandA,
 	UserCenterSectionStyelBCcourse,
-	UserCenterSectionStyelWrongTest,
+	UserCenterSectionStyelTest,
 	UserCenterSectionStyelLink,
 	UserCenterSectionStyelLogout,
 	UserCenterSectionStyelCount
@@ -108,7 +109,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	if (indexPath.section == UserCenterSectionStyelInfo) {
 		return 90;
 	}else if(indexPath.section == UserCenterSectionStyelLcourse){
-		return 90;
+		return 61;
 	}
 	return 44;
 }
@@ -119,7 +120,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		case UserCenterSectionStyelLcourse: return MIN([_user.info.lcourses count], 3); break;
 		case UserCenterSectionStyelQandA:	return 3; break;
 		case UserCenterSectionStyelBCcourse: return 2; break;
-//		case UserCenterSectionStyelTest	:  return 2;break;
+		case UserCenterSectionStyelTest	:  return 2;break;
 		default:
 			break;
 	}
@@ -200,10 +201,18 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		cell.textLabel.text = @"退出登陆";
 		cell.textLabel.textColor = [UIColor redColor];
 		cell.textLabel.textAlignment = NSTextAlignmentCenter;
-	}else if(indexPath.section == UserCenterSectionStyelWrongTest){
-		cell = [[UITableViewCell alloc] init];
-		cell.textLabel.text = @"错题集";
-		cell.textLabel.textColor = [UIColor redColor];
+	}else if(indexPath.section == UserCenterSectionStyelTest){
+		if (indexPath.row==0) {
+			NumTableViewCell *numCell = [[NumTableViewCell alloc] initWithFrame:CGRectNull];
+			numCell.textLabel.text = @"收藏的课程";
+			numCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			numCell.numLabel.text = [NSString stringWithFormat:@"%lu",[_user.info.testcollection count]];
+			cell = numCell;
+		}else{
+			cell = [[UITableViewCell alloc] init];
+			cell.textLabel.text = @"错题集";
+			cell.textLabel.textColor = [UIColor redColor];
+		}
 	}
 	[cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
     return cell;
@@ -285,10 +294,13 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		
 	}else if (indexPath.section == UserCenterSectionStyelQandA){
 			
-	}else if (indexPath.section == UserCenterSectionStyelWrongTest){
-		[self.navigationController pushViewController:[[WrongSubjectViewController alloc] initWithWrongSubjectArray:[[[JJSubjectManage alloc] init] queryModels]] animated:YES];
+	}else if (indexPath.section == UserCenterSectionStyelTest){
+		if (indexPath.row == 0) {
+			TestCollectionTableViewController *tctvc = [[TestCollectionTableViewController alloc] initWithStyle:UITableViewStylePlain withData:_user.info.testcollection];
+			[self.navigationController pushViewController:tctvc animated:YES];
+		}else{
+			[self.navigationController pushViewController:[[WrongSubjectViewController alloc] initWithWrongSubjectArray:[[[JJSubjectManage alloc] init] queryModels]] animated:YES];
+		}
 	}
 }
-
-
 @end

@@ -18,6 +18,8 @@
 @property (nonatomic,strong) UIImageView *portrait;
 @property (nonatomic,strong) UILabel *nameLabel;
 @property (nonatomic,strong) UILabel *describleLabel;
+@property (nonatomic,strong) UIButton *focuse;
+@property (nonatomic)		 BOOL	 *local;
 @end
 
 @implementation DetailViewController

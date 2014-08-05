@@ -20,7 +20,7 @@
 	if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
 		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProgressCell" owner:self options:nil];
 		self = nib[0];
-		self.progressView = [[ZDProgressView alloc] initWithFrame:CGRectMake(96, 42, 204, 30)];
+		self.progressView = [[ZDProgressView alloc] initWithFrame:CGRectMake(_nameLabel.left, _nameLabel.bottom + 2, 204, 25)];
 		[self.contentView addSubview:self.progressView];
 		self.progressView.backgroundColor = [UIColor blackColor];
 		self.progressView.noColor = [UIColor whiteColor];
@@ -33,7 +33,7 @@
 - (id)initWithFrame:(CGRect)frame{
 	NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ProgressCell" owner:self options:nil];
 	self = nib[0];
-	self.progressView = [[ZDProgressView alloc] initWithFrame:CGRectMake(96, 42, 204, 30)];
+	self.progressView = [[ZDProgressView alloc] initWithFrame:CGRectMake(_nameLabel.left, _nameLabel.bottom + 2, 204, 25)];
 	[self.contentView addSubview:self.progressView];
 	self.progressView.backgroundColor = [UIColor blackColor];
 	self.progressView.noColor = [UIColor whiteColor];
