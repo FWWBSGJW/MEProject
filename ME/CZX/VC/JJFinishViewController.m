@@ -15,6 +15,7 @@
 #import "RangkingModel.h"
 #import "UIImageView+WebCache.h"
 #import "RankingManage.h"
+#import <ShareSDK/ShareSDK.h>
 
 @interface JJFinishViewController ()
 {
@@ -65,7 +66,33 @@
 
 - (IBAction)share:(id)sender
 {
+    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK"  ofType:@"jpg"];
+    NSString *content = [NSString stringWithFormat:@"正在使用ME手机app学习java，c++等，还在测试中得了%d分，你们也来学习吧！", [myScore intValue]];
+    //构造分享内容
+    id<ISSContent> publishContent = [ShareSDK content:content
+                                       defaultContent:content
+                                                image:[ShareSDK imageWithPath:imagePath]
+                                                title:@"分享"
+                                                  url:nil
+                                          description:@"这是一条测试信息"
+                                            mediaType:SSPublishContentMediaTypeNews];
     
+    [ShareSDK showShareActionSheet:nil
+                         shareList:nil
+                           content:publishContent
+                     statusBarTips:YES
+                       authOptions:nil
+                      shareOptions: nil
+                            result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                                if (state == SSResponseStateSuccess)
+                                {
+                                    NSLog(@"分享成功");
+                                }
+                                else if (state == SSResponseStateFail)
+                                {
+                                    NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
+                                }
+                            }];
 }
 
 - (void)achieveScoreView

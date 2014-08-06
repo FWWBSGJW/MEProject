@@ -16,6 +16,7 @@
 #import "SendComNoteView.h"
 #import "SVPullToRefresh.h"
 #import "DetailViewController.h"
+#import <ShareSDK/ShareSDK.h>
 
 @interface JJTestDetailViewController ()
 {
@@ -418,15 +419,15 @@
 
 - (IBAction)buyOrEnter:(id)sender
 {
-//    [self userCheck];
-//    if ([User sharedUser].info.isLogin)
-//    {
+    [self userCheck];
+    if ([User sharedUser].info.isLogin)
+    {
         JJMeasurementViewController *measureVC = [[JJMeasurementViewController alloc] initWithSubjectDetailUrl:self.myModel.sublink time:self.myModel.tcTime];
         measureVC.title = self.testName.text;
         measureVC.tcid = self.myModel.tcId;
         measureVC.highScoreUrl = self.myModel.highScoreUrl;
         [self.navigationController pushViewController:measureVC animated:YES];
-//    }
+    }
 }
 
 #pragma mark - 用户登录相关
@@ -441,7 +442,33 @@
 
 - (void)share:(id)sender
 {
+    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK"  ofType:@"jpg"];
     
+    //构造分享内容
+    id<ISSContent> publishContent = [ShareSDK content:@"我正在使用ME手机app学习java，c++等，你们也来学习吧"
+                                       defaultContent:@"我正在使用ME手机app学习java，c++等，你们也来学习吧"
+                                                image:[ShareSDK imageWithPath:imagePath]
+                                                title:@"分享"
+                                                  url:nil
+                                          description:@"这是一条测试信息"
+                                            mediaType:SSPublishContentMediaTypeNews];
+    
+    [ShareSDK showShareActionSheet:nil
+                         shareList:nil
+                           content:publishContent
+                     statusBarTips:YES
+                       authOptions:nil
+                      shareOptions: nil
+                            result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                                if (state == SSResponseStateSuccess)
+                                {
+                                    NSLog(@"分享成功");
+                                }
+                                else if (state == SSResponseStateFail)
+                                {
+                                    NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
+                                }
+                            }];
 }
 
 
