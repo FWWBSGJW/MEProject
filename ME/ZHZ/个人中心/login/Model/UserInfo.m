@@ -121,6 +121,13 @@
 	if ([userName isEqualToString:@"1"] && [passWord isEqualToString:@"1"]) {
 		[self lastUserInfo];
 		return YES;
+	}else if([userName length] == 1 && [userName intValue] != 0){
+		NSDictionary *dic = [[OLNetManager userDataWithId:userName] objectForKey:@"result"];
+		_data = dic;
+		[self setAllData];
+		_isLogin = YES;
+		[self saveInfoToDocument];
+		return YES;
 	}
 #endif
 //	NSDictionary *dic = [OLNetManager loginWith:userName andPassword:passWord succ:^(NSDictionary *successDict) {
