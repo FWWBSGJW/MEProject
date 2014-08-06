@@ -13,6 +13,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import <ShareSDK/ShareSDK.h>
 
 @implementation AppDelegate
 
@@ -21,6 +22,15 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    [ShareSDK registerApp:@"26ca72829fb0"];
+    [ShareSDK waitAppSettingComplete:^{
+        
+        //在这里面调用相关的ShareSDK功能接口代码
+        NSLog(@"回调");
+        
+    }];
+
     
     MainViewController *mainVC = [[MainViewController alloc] init];
     self.window.rootViewController = mainVC;

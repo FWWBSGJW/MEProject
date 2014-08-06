@@ -17,6 +17,7 @@
 #import "CDownloadViewController.h"
 #import "CNoteCell.h"
 #import "DetailViewController.h"
+#import <ShareSDK/ShareSDK.h>
 #define headHeight 160
 enum Segement_Type
 {
@@ -773,7 +774,33 @@ enum DownloadButton_Tag
         }
             break;
         case ButtonTagShare:{
+            NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK"  ofType:@"jpg"];
             
+            //构造分享内容
+            id<ISSContent> publishContent = [ShareSDK content:@"我正在使用ME手机app学习java，c++等，你们也来学习吧"
+                                               defaultContent:@"我正在使用ME手机app学习java，c++等，你们也来学习吧"
+                                                        image:[ShareSDK imageWithPath:imagePath]
+                                                        title:@"分享"
+                                                          url:nil
+                                                  description:@"这是一条测试信息"
+                                                    mediaType:SSPublishContentMediaTypeNews];
+            
+            [ShareSDK showShareActionSheet:nil
+                                 shareList:nil
+                                   content:publishContent
+                             statusBarTips:YES
+                               authOptions:nil
+                              shareOptions: nil
+                                    result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                                        if (state == SSResponseStateSuccess)
+                                        {
+                                            NSLog(@"分享成功");
+                                        }
+                                        else if (state == SSResponseStateFail)
+                                        {
+                                            NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
+                                        }
+                                    }];
         }
             break;
         case ButtonTagComment:{
