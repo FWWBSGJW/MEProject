@@ -26,6 +26,8 @@
     int myMins;
     int mySeconds;
 }
+
+@property(nonatomic, strong) UILabel *alertLabel;
 @end
 
 @implementation JJFinishViewController
@@ -61,11 +63,16 @@
     [[[RankingManage alloc] init] analyseRankingJsonForVC:self withUrl:self.highScoreUrl];
 }
 
+- (IBAction)share:(id)sender
+{
+    
+}
+
 - (void)achieveScoreView
 {
     scoreTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 250)];
     scoreTableView.scrollEnabled = NO;
-    scoreTableView.userInteractionEnabled = NO;
+    scoreTableView.allowsSelection = NO;
     scoreTableView.delegate = self;
     scoreTableView.dataSource = self;
     [self.scoreView addSubview:scoreTableView];
@@ -106,10 +113,23 @@
         lableSwitchCell.nameLa.text = model.userName;
         lableSwitchCell.scoreLa.text = [NSString stringWithFormat:@"考%d分", (int)model.score];
         lableSwitchCell.timeLa.text = [NSString stringWithFormat:@"时间%d", (int)model.time];
+        lableSwitchCell.tag = indexPath.row;
+        [lableSwitchCell.imageBtn addTarget:self action:@selector(touchHeadImage:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return lableSwitchCell;
 }
+
+- (void)touchHeadImage:(id)sender
+{
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
 
 - (void)viewDidLoad
 {
@@ -125,8 +145,43 @@
     [self.activityView startAnimating];
     self.activityView.color = [UIColor blackColor];
     [self.view addSubview:self.activityView];
-
+    if (self.result == 0)
+    {
+//        [self createWinView];
+        self.winnerLabel.text = @"很可惜,没上榜...";
+        self.winnerLabel.textColor = [UIColor blackColor];
+        self.winnerLabel.font = [UIFont systemFontOfSize:20];
+    }
+    
 //    [self achieveScoreView];
+}
+
+- (UILabel *)alertLabel
+{
+    if (!_alertLabel) {
+        _alertLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-60, SCREEN_HEIGHT/2-60, 120, 60)];
+        _alertLabel.layer.cornerRadius = 10;
+        _alertLabel.layer.masksToBounds = YES;
+        _alertLabel.backgroundColor = [UIColor whiteColor];
+        _alertLabel.textColor = [UIColor orangeColor];
+        _alertLabel.alpha = 0.9;
+        _alertLabel.text = @"";
+        [_alertLabel setTextAlignment:NSTextAlignmentCenter];
+        _alertLabel.font = [UIFont systemFontOfSize:13.0];
+        _alertLabel.text = @"恭喜上榜！";
+    }
+    return _alertLabel;
+}
+
+- (void)createWinView
+{
+    [[UIApplication sharedApplication].keyWindow addSubview:[self alertLabel]];
+    [UIView animateKeyframesWithDuration:2.0f delay:0.6f options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+        self.alertLabel.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [self.alertLabel removeFromSuperview];
+        self.alertLabel = nil;
+    }];
 }
 
 - (void)changeBackground:(int)paramScore

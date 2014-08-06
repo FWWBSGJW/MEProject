@@ -322,32 +322,24 @@
 
         NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/collecteTest";
         urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&CId=%d", [[User sharedUser].info.userId intValue], self.myModel.tcId]];
+//        urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=1&CId=%d", self.myModel.tcId]];
         NSURL *url = [NSURL URLWithString:urlAsString];
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-        [urlRequest setTimeoutInterval:30.0f];
-        [urlRequest setHTTPMethod:@"POST"];
-        NSString *body = @"bodyParam1=BodyValue1&bodyParam2=BodyValue2";
-        [urlRequest setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
-        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-        [NSURLConnection
-         sendAsynchronousRequest:urlRequest
-         queue:queue
-         completionHandler:^(NSURLResponse *response, NSData *data,
-                             NSError *error) {
-             [[User sharedUser] refreshInfo];
-             if ([data length] >0 &&
-                 error == nil){
-                 NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                 NSLog(@"HTML = %@", html);
-             }
-             else if ([data length] == 0 &&
-                      error == nil){
-                 NSLog(@"Nothing was downloaded.");
-             }
-             else if (error != nil){
-                 NSLog(@"Error happened = %@", error);
-             }
-         }];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+        NSURLResponse *response = nil;
+        NSError *error = nil;
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+         if ([data length] >0 &&
+             error == nil){
+             NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSLog(@"HTML = %@", html);
+         }
+         else if ([data length] == 0 &&
+                  error == nil){
+             NSLog(@"Nothing was downloaded.");
+         }
+         else if (error != nil){
+             NSLog(@"Error happened = %@", error);
+         }
     }
 }
 
@@ -426,15 +418,15 @@
 
 - (IBAction)buyOrEnter:(id)sender
 {
-    [self userCheck];
-    if ([User sharedUser].info.isLogin)
-    {
+//    [self userCheck];
+//    if ([User sharedUser].info.isLogin)
+//    {
         JJMeasurementViewController *measureVC = [[JJMeasurementViewController alloc] initWithSubjectDetailUrl:self.myModel.sublink time:self.myModel.tcTime];
         measureVC.title = self.testName.text;
         measureVC.tcid = self.myModel.tcId;
         measureVC.highScoreUrl = self.myModel.highScoreUrl;
         [self.navigationController pushViewController:measureVC animated:YES];
-    }
+//    }
 }
 
 #pragma mark - 用户登录相关

@@ -39,9 +39,10 @@ NSString *const kRangkingModelUserName = @"userName";
     
     // This check serves to make sure that a non-NSDictionary object
     // passed into the model class doesn't break the parsing.
-    if(self && [dict isKindOfClass:[NSDictionary class]]) {
-            self.userPortrait = [self objectOrNilForKey:kRangkingModelUserPortrait fromDictionary:dict];
-            self.score = [[self objectOrNilForKey:kRangkingModelScore fromDictionary:dict] doubleValue];
+    if(self && [dict isKindOfClass:[NSDictionary class]])
+    {
+        self.userPortrait = [self objectOrNilForKey:kRangkingModelUserPortrait fromDictionary:dict];
+        self.score = [[self objectOrNilForKey:kRangkingModelScore fromDictionary:dict] doubleValue];
         self.time = [[self objectOrNilForKey:kRangkingModelTime fromDictionary:dict] doubleValue];
             self.userName = [self objectOrNilForKey:kRangkingModelUserName fromDictionary:dict];
 

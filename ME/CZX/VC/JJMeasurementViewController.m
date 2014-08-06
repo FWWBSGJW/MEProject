@@ -335,75 +335,42 @@
     }
 //    NSLog(@"%@", personRealArray);
     JJFinishViewController *vc = [[JJFinishViewController alloc]
-                                  initWithScore:[NSString stringWithFormat:@"%d", score*10]
+                                  initWithScore:[NSString stringWithFormat:@"%d", score*20]
                                   correctAnswer:numberOfCorrectAnArray
                                   personAnswer:personNumAnswerArray
                                   questionArray:queArray
                                   answerArray:anArray costMins:myMins costSeconds:mySeconds];
     vc.highScoreUrl = self.highScoreUrl;
+    vc.result = [self postGrade:score*20 withTCid:self.tcid time:myMins];
     [self.navigationController pushViewController:vc
                                          animated:YES];
-    [self postGrade:score*20 withTCid:self.tcid time:myMins];
-//    [self postGrade];
 }
 
-- (void)postGrade:(int)score withTCid:(int)tcid time:(int)time
+- (int)postGrade:(int)score withTCid:(int)tcid time:(int)time
 {
     User *user = [User sharedUser];
-//    NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/uploadScore";
-//    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&HScore=%d&tcId=%d&time=%d",[user.info.userId intValue], score, tcid, time]];
-//    NSURL *url = [NSURL URLWithString:urlAsString];
-//    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-//    [urlRequest setTimeoutInterval:30.0f];
-//    [urlRequest setHTTPMethod:@"POST"];
-//    NSString *body = @"bodyParam1=BodyValue1&bodyParam2=BodyValue2&bodyParam3=BodyValue3&bodyParam4=BodyValue4";
-//    [urlRequest setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
-//    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-//    [NSURLConnection
-//     sendAsynchronousRequest:urlRequest
-//     queue:queue
-//     completionHandler:^(NSURLResponse *response, NSData *data,
-//                         NSError *error) {
-//         if ([data length] >0 &&
-//             error == nil){
-//             NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]; NSLog(@"HTML = %@", html);
-//         }
-//         else if ([data length] == 0 &&
-//                  error == nil){
-//             NSLog(@"Nothing was downloaded.");
-//         }
-//         else if (error != nil){
-//             NSLog(@"Error happened = %@", error);
-//         }
-//     }];
     NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/uploadScore";
-//    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=1&HScore=120&tcId=1&time=9"]];
     urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&hscore=%d&tcId=%d&time=%d",[user.info.userId intValue], score, tcid, time]];
     NSURL *url = [NSURL URLWithString:urlAsString];
-//    NSLog(@"%@", url);
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-    [urlRequest setTimeoutInterval:30.0f];
-    [urlRequest setHTTPMethod:@"GET"];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [NSURLConnection
-     sendAsynchronousRequest:urlRequest
-     queue:queue
-     completionHandler:^(NSURLResponse *response,
-                         NSData *data,
-                         NSError *error) {
-         if ([data length] >0 &&
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if ([data length] >0 &&
+        error == nil){
+        NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"HTML = %@", html);
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        return [[dict objectForKey:@"sucess"] intValue];
+    }
+    else if ([data length] == 0 &&
              error == nil){
-             NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-             NSLog(@"HTML = %@", html);
-         }
-         else if ([data length] == 0 &&
-                  error == nil){
-             NSLog(@"Nothing was downloaded.");
-         }
-         else if (error != nil){
-             NSLog(@"Error happened = %@", error);
-         }
-     }];
+        NSLog(@"Nothing was downloaded.");
+    }
+    else if (error != nil){
+        NSLog(@"Error happened = %@", error);
+    }
+    return 0;
 }
 
 #pragma mark 回顾

@@ -59,10 +59,18 @@
                         <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Nu-SJ-ixr">
+                        <rect key="frame" x="10" y="3" width="42" height="42"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="headView" destination="lvd-xt-jOH" id="F9R-WM-0gG"/>
+                <outlet property="imageBtn" destination="8Nu-SJ-ixr" id="4IJ-YC-CSW"/>
                 <outlet property="nameLa" destination="vd6-wO-pdb" id="48C-ZS-jNS"/>
                 <outlet property="rankingLa" destination="tuC-ku-DAZ" id="Ba7-T8-J8C"/>
                 <outlet property="scoreLa" destination="zIr-mn-K2i" id="XwA-Sh-HdW"/>

@@ -17,9 +17,12 @@
 - (id)initWithScore:(NSString *)score correctAnswer:(NSArray *)correctArray personAnswer:(NSArray *)personArray questionArray:(NSArray *)queArray answerArray:(NSArray *)anArray costMins:(int)paramMins costSeconds:(int)paramSeconds;
 @property (strong, nonatomic) IBOutlet UIButton *reviewBtn;
 @property (strong, nonatomic) IBOutlet UIView *scoreView;
+@property (strong, nonatomic) IBOutlet UILabel *winnerLabel;
 @property (nonatomic, copy) NSString *highScoreUrl;
 @property(nonatomic, strong) UITableView *scoreTableView;
 @property(nonatomic, strong) NSArray *scoreArray;
 @property(nonatomic, strong) UIActivityIndicatorView *activityView;
+@property(nonatomic) int result;
+- (IBAction)share:(id)sender;
 - (void)achieveScoreView;
 @end
