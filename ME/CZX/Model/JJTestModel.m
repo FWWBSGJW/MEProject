@@ -25,5 +25,6 @@
     _tcTime = [[dict objectForKey:@"tcTime"] intValue];
     _tdirection = [[dict objectForKey:@"tdirection"] intValue];
     _nextPage = [dict objectForKey:@"nextPage"];
+    _commentLink = [dict objectForKey:@"commentLink"];
 }
 @end

@@ -133,8 +133,14 @@
             if (self.linkModel.nextPage) {
                 NSArray *temArray = [[[JJTestModelManage alloc] init] analyseTestJson:self.linkModel.nextPage];
                 [self.testArray addObjectsFromArray:temArray];
-                self.linkModel = [self.testArray lastObject];
-                [self.testArray removeLastObject];
+                if (temArray.count == 7) {
+                    self.linkModel = [self.testArray lastObject];
+                    [self.testArray removeLastObject];
+                }
+                else
+                {
+                    self.linkModel = nil;
+                }
                 [self.testTableView reloadData];
             }
         });

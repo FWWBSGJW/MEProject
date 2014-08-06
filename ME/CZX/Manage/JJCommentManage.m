@@ -30,6 +30,36 @@ NSArray *commentServerRespObj;
     return mArray;
 }
 
+- (NSMutableArray *)analyseCommentJsonWithCommentUrl:(NSString *)paramUrl
+{
+    [self getCommentDataWithUrl:paramUrl];
+    return [self analyse];
+}
+
+- (void)getCommentDataWithUrl:(NSString *)paramUrl
+{
+    NSString * url = [paramUrl stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURLResponse * resp;
+    NSError * error = nil;
+    NSData * data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]] returningResponse:&resp error:&error];
+    if (error)
+    {
+        printf("%s \n",[[error localizedDescription] UTF8String]);
+        return ;
+    }
+    
+    if ([data length] > 0)
+    {
+        commentServerRespObj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+        //            NSLog(@"server return %@",serverRespObj);
+        //            keyArray = @[];
+        // 切换到主线程刷新UI
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        });
+    }
+
+}
 
 - (void)getDataForVC:(JJTestDetailViewController *)paramVC withCommentUrl:(NSString *)paramUrl
 {
@@ -53,6 +83,16 @@ NSArray *commentServerRespObj;
         // 切换到主线程刷新UI
         dispatch_async(dispatch_get_main_queue(), ^{
             paramVC.commentArray = [self analyse];
+            if (paramVC.commentArray.count == 13)
+            {
+                JJCommentModel *model = [paramVC.commentArray lastObject];
+                paramVC.nextPage = model.nextPage;
+                [paramVC.commentArray removeLastObject];
+            }
+            else
+            {
+                paramVC.nextPage = @"";
+            }
             [paramVC.commentTableView reloadData];
         });
     }

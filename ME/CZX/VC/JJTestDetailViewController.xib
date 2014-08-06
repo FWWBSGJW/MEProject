@@ -13,7 +13,6 @@
                 <outlet property="introduceButton" destination="iu9-i4-6Ta" id="mNv-pJ-zXZ"/>
                 <outlet property="introduceView" destination="rAa-0r-N1d" id="Upr-Ad-74W"/>
                 <outlet property="likeBtn" destination="luT-0I-2Y7" id="4yO-qF-y3R"/>
-                <outlet property="priceLa" destination="hmM-wb-tKB" id="fjj-3t-dqr"/>
                 <outlet property="scoreLa" destination="UMS-af-Y6U" id="2tw-Hq-wuL"/>
                 <outlet property="subjectNumLa" destination="qub-3L-tIT" id="rDw-bx-g3g"/>
                 <outlet property="testName" destination="hKe-J7-S0m" id="bhx-cH-qkV"/>
@@ -36,12 +35,14 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngr-0d-qWp">
-                            <rect key="frame" x="90" y="110" width="90" height="30"/>
+                            <rect key="frame" x="90" y="85" width="90" height="55"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="进入测试">
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="进入测试" image="test.png">
                                 <color key="titleColor" red="0.0090650475540000001" green="0.0086398190730000001" blue="0.0089953937349999992" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <state key="highlighted" title="进入测试" image="testUp.png"/>
                             <connections>
                                 <action selector="buyOrEnter:" destination="-1" eventType="touchUpInside" id="qXt-gb-AKa"/>
                             </connections>
@@ -68,13 +69,6 @@
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="价格：100.00元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmM-wb-tKB">
-                            <rect key="frame" x="0.0" y="90" width="90" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="italicSystem" pointSize="11"/>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="时长：40分钟" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25Q-Mo-hp0">
                             <rect key="frame" x="90" y="32" width="90" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -95,6 +89,19 @@
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iId-Jm-UWq">
+                            <rect key="frame" x="0.0" y="85" width="90" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="写测评" image="cmt.png">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" title="写测评" image="commentUp.png"/>
+                            <connections>
+                                <action selector="writeComment:" destination="-1" eventType="touchUpInside" id="9Em-gK-MJ0"/>
+                            </connections>
+                        </button>
                     </subviews>
                 </view>
                 <button opaque="NO" alpha="0.79999999999999982" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iu9-i4-6Ta">
@@ -151,6 +158,10 @@
         </view>
     </objects>
     <resources>
+        <image name="cmt.png" width="20" height="20"/>
+        <image name="commentUp.png" width="20" height="20"/>
         <image name="like.png" width="20" height="20"/>
+        <image name="test.png" width="20" height="20"/>
+        <image name="testUp.png" width="20" height="20"/>
     </resources>
 </document>

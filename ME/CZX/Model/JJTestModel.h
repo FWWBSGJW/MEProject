@@ -11,6 +11,7 @@
 @interface JJTestModel : NSObject
 
 @property(nonatomic ,copy) NSString *highScoreUrl;
+@property(nonatomic ,copy) NSString *commentLink;
 @property(nonatomic) int subjectnums;
 @property(nonatomic ,copy) NSString *sublink;
 @property(nonatomic) int tcId;

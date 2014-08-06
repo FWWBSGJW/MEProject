@@ -377,33 +377,33 @@
 //         }
 //     }];
     NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/uploadScore";
-    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=1&HScore=120&tcId=1&time=9"]];
-//    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&HScore=%d&tcId=%d&time=%d",[user.info.userId intValue], score, tcid, time]];
+//    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=1&HScore=120&tcId=1&time=9"]];
+    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&hscore=%d&tcId=%d&time=%d",[user.info.userId intValue], score, tcid, time]];
     NSURL *url = [NSURL URLWithString:urlAsString];
-    NSLog(@"%@", url);
-//    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-//    [urlRequest setTimeoutInterval:30.0f];
-//    [urlRequest setHTTPMethod:@"GET"];
-//    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-//    [NSURLConnection
-//     sendAsynchronousRequest:urlRequest
-//     queue:queue
-//     completionHandler:^(NSURLResponse *response,
-//                         NSData *data,
-//                         NSError *error) {
-//         if ([data length] >0 &&
-//             error == nil){
-//             NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//             NSLog(@"HTML = %@", html);
-//         }
-//         else if ([data length] == 0 &&
-//                  error == nil){
-//             NSLog(@"Nothing was downloaded.");
-//         }
-//         else if (error != nil){
-//             NSLog(@"Error happened = %@", error);
-//         }
-//     }];
+//    NSLog(@"%@", url);
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+    [urlRequest setTimeoutInterval:30.0f];
+    [urlRequest setHTTPMethod:@"GET"];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection
+     sendAsynchronousRequest:urlRequest
+     queue:queue
+     completionHandler:^(NSURLResponse *response,
+                         NSData *data,
+                         NSError *error) {
+         if ([data length] >0 &&
+             error == nil){
+             NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSLog(@"HTML = %@", html);
+         }
+         else if ([data length] == 0 &&
+                  error == nil){
+             NSLog(@"Nothing was downloaded.");
+         }
+         else if (error != nil){
+             NSLog(@"Error happened = %@", error);
+         }
+     }];
 }
 
 #pragma mark 回顾

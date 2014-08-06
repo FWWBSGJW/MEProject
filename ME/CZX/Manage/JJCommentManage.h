@@ -13,4 +13,5 @@
 @interface JJCommentManage : NSObject
 
 - (NSMutableArray *)analyseCommentJsonForVC:(JJTestDetailViewController *)paramVC withCommentUrl:(NSString *)paramUrl;
+- (NSMutableArray *)analyseCommentJsonWithCommentUrl:(NSString *)paramUrl;
 @end

@@ -29,7 +29,8 @@
 - (void)loadNextPageCourseComment; //评论下一页
 //发送评论
 - (void)sendCourseCommentWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID andContent:(NSString *)content;
-
+//发送笔记
+- (void)sendCourseNoteWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID andContent:(NSString *)content;
 //收藏
 - (NSInteger)privateWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID;
 //笔记

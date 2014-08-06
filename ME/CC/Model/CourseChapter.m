@@ -231,6 +231,22 @@
     return [NSMutableArray arrayWithArray:array];
 }
 
+
+- (void)sendCourseNoteWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID andContent:(NSString *)content
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@MobileEducation/uploadCNote",kBaseURL]];
+    AFHTTPClient *httpClient = [AFHTTPClient clientWithBaseURL:url];
+    //[aClient setDefaultHeader:@"Accept" value:@"text/json"];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:userID],@"userId",[NSNumber numberWithInteger:courseID],@"cid",content,@"cnContext", nil];
+    [httpClient postPath:nil parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject){
+        NSLog(@"%@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error.localizedDescription);
+    }];
+    
+}
+
 #pragma mark - 网络代理方法
 #pragma mark 1. 接收到服务器的响应，服务器要传数据，客户端做接收准备
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
