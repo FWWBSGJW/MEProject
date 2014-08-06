@@ -39,10 +39,15 @@
 {
     CAlertLabel *alertLabel = [CAlertLabel alertLabelWithFrame:CGRectZero andText:text];
     //alertLabel.text = string;
-    CGSize size = CGSizeMake(150,200);
+    CGSize size = CGSizeMake(155,155);
     NSDictionary *attribute = @{NSFontAttributeName: alertLabel.font};
     CGSize labelsize = [text boundingRectWithSize:size options:NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
-    [alertLabel setFrame:CGRectMake((SCREEN_WIDTH-labelsize.width*1.5)/2, (SCREEN_HEIGHT-labelsize.height*2)/2 - 40.0, labelsize.width*1.5, labelsize.height*2)];
+    CGFloat labelWidth = labelsize.width*1.6 < 120 ? 120:labelsize.width*1.6;
+    labelWidth = labelWidth < 155 ? labelWidth:155;
+    CGFloat labelHeight = labelsize.height*1.5 < 70 ? 70:labelsize.height*1.5;
+    labelHeight = labelHeight < 155 ? labelHeight:155;
+    NSLog(@"%f--%f-",labelWidth,labelHeight);
+    [alertLabel setFrame:CGRectMake((SCREEN_WIDTH-labelWidth)/2, (SCREEN_HEIGHT-labelHeight)/2 - 50.0, labelWidth, labelHeight)];
     return alertLabel;
 }
 

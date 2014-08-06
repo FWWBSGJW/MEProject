@@ -164,6 +164,7 @@ enum SendType
     return _sendDanmakuView;
 }
 
+#pragma mark - 实例化
 - (void)playVideoWithVideoID : (NSInteger)videoID andVideoTitle:(NSString *)videoTitle andVideoUrlString:(NSString *)urlString
 {
 
@@ -173,6 +174,12 @@ enum SendType
     self.moviePlayer.contentURL = self.url;
     self.title = videoTitle;
     self.videoID = videoID;
+}
+
+- (void)playVideoWithVideoID:(NSInteger)videoID andStartTime:(NSTimeInterval)time andVideoUrlString:(NSString *)urlString andVideoTitle:(NSString *)title
+{
+    [self playVideoWithVideoID:videoID andVideoTitle:title andVideoUrlString:urlString];
+    self.moviePlayer.initialPlaybackTime = time;
 }
 
 

@@ -234,6 +234,7 @@
 
 - (void)sendCourseNoteWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID andContent:(NSString *)content
 {
+    /*
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@MobileEducation/uploadCNote",kBaseURL]];
     AFHTTPClient *httpClient = [AFHTTPClient clientWithBaseURL:url];
     //[aClient setDefaultHeader:@"Accept" value:@"text/json"];
@@ -244,6 +245,22 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error.localizedDescription);
     }];
+     */
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@MobileEducation/uploadCNote",kBaseURL]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    
+    NSString *bodyStr = [NSString stringWithFormat:@"userId=%D&cid=%d&cnContext=%@",userID,courseID,content];
+    
+    NSLog(@"%@",bodyStr);
+    
+    NSData *body = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [request setHTTPBody:body];
+    NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [connection start];
     
 }
 

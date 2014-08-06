@@ -18,6 +18,7 @@
 #import "CNoteCell.h"
 #import "DetailViewController.h"
 #import <ShareSDK/ShareSDK.h>
+#import "CAlertLabel.h"
 #define headHeight 160
 enum Segement_Type
 {
@@ -71,7 +72,6 @@ enum DownloadButton_Tag
 @property (strong, nonatomic) SendComNoteView *sendComNoteView; //发送评论，笔记试图
 @property (strong, nonatomic) UIView *dimView; //发送评论时背影
 @property (weak, nonatomic) UIToolbar *toobar;
-@property (strong, nonatomic) UILabel *alertLabel;
 @property (strong, nonatomic) UIActionSheet *actionSheet;
 @property (strong, nonatomic) UIView *downLoadBarView;
 @end
@@ -118,7 +118,7 @@ enum DownloadButton_Tag
     [self.view addSubview:toorBar];
     
     if ([User sharedUser].info.isLogin) {
-        NSLog(@"收藏课程-----%@",[User sharedUser].info.ccourses);
+        //NSLog(@"收藏课程-----%@",[User sharedUser].info.ccourses);
         for (NSDictionary *dic in [User sharedUser].info.ccourses) {
             if ([dic[@"cid"] integerValue] == self.courseID) {
                 UIBarButtonItem *item = items[0];
@@ -196,21 +196,6 @@ enum DownloadButton_Tag
     return _actionSheet;
 }
 
-- (UILabel *)alertLabel
-{
-    if (!_alertLabel) {
-        _alertLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-60, SCREEN_HEIGHT/2-60, 120, 60)];
-        _alertLabel.layer.cornerRadius = 10;
-        _alertLabel.layer.masksToBounds = YES;
-        _alertLabel.backgroundColor = [UIColor blackColor];
-        _alertLabel.alpha = 0.9;
-        _alertLabel.text = @"";
-        _alertLabel.textColor = [UIColor whiteColor];
-        [_alertLabel setTextAlignment:NSTextAlignmentCenter];
-        _alertLabel.font = [UIFont systemFontOfSize:13.0];
-    }
-    return _alertLabel;
-}
 
 - (NSMutableArray *)chapterOpenArray
 {
@@ -607,7 +592,7 @@ enum DownloadButton_Tag
                 //NSLog(@"%d",CVid);
             
                 CVideoPlayerController *player = [[CVideoPlayerController alloc] init];
-                [player playVideoWithVideoID:CVid andVideoTitle:[NSString stringWithFormat:@"%@ %@",dic[@"vSectionsNo"],dic[@"vSectionsName"]] andVideoUrlString:[NSString stringWithFormat:@"%@%@",kBaseURL,dic[@"vUrl"]]] ;
+                [player playVideoWithVideoID:CVid andVideoTitle:[NSString stringWithFormat:@"%@ %@",dic[@"vSectionsNo"],dic[@"vSectionsName"]] andVideoUrlString:[NSString stringWithFormat:@"%@%@",kBaseURL,dic[@"vUrl"]]];
                 [self presentMoviePlayerViewControllerAnimated:player];
                 
                 
@@ -615,6 +600,19 @@ enum DownloadButton_Tag
                 break;
             case SegementNote:
             {
+                if (indexPath.section > 1) {
+#warning 待获取视频url
+                
+                    NSString *vUrl = @"http://121.197.10.159:8080//videos/vid_0.mp4";
+                    
+                    NSArray *noteArray = self.courseNoteArray[indexPath.section-1][@"CCnote"];
+                    NSDictionary *noteDic = noteArray[indexPath.row];
+                    NSString *title = [NSString stringWithFormat:@"%@ %@",noteDic[@"vSectionsNo"],noteDic[@"vSectionsName"]];
+                    NSTimeInterval noteTime = [noteDic[@"Dtime"] doubleValue];
+                    CVideoPlayerController *player = [[CVideoPlayerController alloc] init];
+                    [player playVideoWithVideoID:[noteDic[@"videoID"] integerValue] andStartTime:noteTime andVideoUrlString:vUrl andVideoTitle:title];
+                    [self presentMoviePlayerViewControllerAnimated:player];
+                }
                 
             }
                 break;
@@ -725,36 +723,24 @@ enum DownloadButton_Tag
 #warning -  功能待实现
     switch (button.tag) {
         case ButtonTagPrivate:{
-            //[button setBackgroundImage:[UIImage imageNamed:@"已收藏"] forState:UIControlStateNormal];
             [self userCheck];
             if ([User sharedUser].info.isLogin) {
                 button.image = [UIImage imageNamed:@"cStarFull"];
                 NSInteger userID = [[User sharedUser].info.userId integerValue];
                 NSInteger result = [self.courseChapter privateWithCourseID:self.courseID andUserID:userID];
                 if (result == 1) {
-                    self.alertLabel.text = @"收藏成功!";
+                    CAlertLabel *alertLabel = [CAlertLabel alertLabelWithAdjustFrameForText:@"收藏成功"];
+                    [alertLabel showAlertLabel];
                     button.image = [UIImage imageNamed:@"cStarFull"];
                 }else if(result == 2){
-                    self.alertLabel.text = @"取消收藏成功!";
+                    CAlertLabel *alertLabel = [CAlertLabel alertLabelWithAdjustFrameForText:@"取消收藏成功"];
+                    [alertLabel showAlertLabel];
                     button.image = [UIImage imageNamed:@"cStar"];
                 }else{
-                    self.alertLabel.text = @"操作失败!";
+                    CAlertLabel *alertLabel = [CAlertLabel alertLabelWithAdjustFrameForText:@"操作失败!"];
+                    [alertLabel showAlertLabel];
                 }
-                
-                [[UIApplication sharedApplication].keyWindow addSubview:_alertLabel];
-                [UIView animateKeyframesWithDuration:0.8f delay:0.6f options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
-                    self.alertLabel.alpha = 0.0f;
-                } completion:^(BOOL finished) {
-                    [self.alertLabel removeFromSuperview];
-                    self.alertLabel = nil;
-                }];
-                
-//                [UIView animateWithDuration:3.5f animations:^{
-//                    self.alertLabel.alpha = 0.0f;
-//                } completion:^(BOOL finished) {
-//                    [self.alertLabel removeFromSuperview];
-//                    self.alertLabel = nil;
-//                }];
+              
             }
 
         }

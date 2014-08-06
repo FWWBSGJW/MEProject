@@ -15,6 +15,6 @@
 - (void)playVideoWithVideoID : (NSInteger)videoID andVideoTitle:(NSString *)videoTitle andVideoUrlString:(NSString *)urlString;
 
 //通过id以及 视频开始时间 构建弹幕
-//- (void)playVideoWithVideoID:(NSInteger)videoID andStartTime:(NSTimeInterval)time;
+- (void)playVideoWithVideoID:(NSInteger)videoID andStartTime:(NSTimeInterval)time andVideoUrlString:(NSString *)urlString andVideoTitle:(NSString *)title;
 
 @end
