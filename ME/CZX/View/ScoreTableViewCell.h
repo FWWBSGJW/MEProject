@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *timeLa;
 @property (strong, nonatomic) IBOutlet UILabel *rankingLa;
 @property (strong, nonatomic) IBOutlet UIButton *imageBtn;
+@property (strong, nonatomic) IBOutlet UIButton *dismissBtn;
 
 @end

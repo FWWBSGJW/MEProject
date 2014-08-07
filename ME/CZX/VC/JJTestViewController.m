@@ -15,7 +15,7 @@
 #import "JJDirectionModel.h"
 #import "UIImageView+WebCache.h"
 #import "JJTestDivideViewController.h"
-#import "ShakeViewController.h"
+#import "RankingViewController.h"
 #define ScrollViewHeight 126
 #define pages 3
 
@@ -39,7 +39,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    //    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBarHidden = NO;
     //    [JJTabBarViewController share].tabBar.hidden = NO;
     self.tabBarController.tabBar.hidden = NO;
 }
@@ -93,7 +93,8 @@
 
 - (void)pop
 {
-    [self.navigationController pushViewController:[[ShakeViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[RankingViewController alloc] init]
+                                         animated:YES];
 }
 
 - (void)adjustTableViewInsert

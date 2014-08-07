@@ -35,7 +35,7 @@
     [titleView addSubview:titleLa];
     titleView.userInteractionEnabled = YES;
     UIButton *dismissBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 20, 50, 44)];
-    [dismissBtn setTitle:@"返回" forState:UIControlStateNormal];
+    [dismissBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     dismissBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
     [dismissBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [dismissBtn addTarget:self action:@selector(back)
@@ -69,6 +69,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = YES;
+    self.tabBarController.tabBar.hidden = YES;
     [self resignFirstResponder];
     [super viewWillAppear:animated];
 }
