@@ -212,7 +212,7 @@
     UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareBtn];
     self.navigationItem.rightBarButtonItem = shareBarButton;
     
-    self.navigationItem.title = @"测试详情";
+//    self.navigationItem.title = @"测试详情";
 
     
     [self.likeBtn addTarget:self action:@selector(like) forControlEvents:UIControlEventTouchUpInside];
@@ -293,12 +293,13 @@
 - (void)loadModel
 {
     [self.imgView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseURL, self.myModel.tcPhotoUrl]]];
-    self.directionLa.text = [NSString stringWithFormat:@"方向：%d", self.myModel.tdirection];
-    self.timeLa.text = [NSString stringWithFormat:@"时长：%d", self.myModel.tcTime];
-    self.subjectNumLa.text = [NSString stringWithFormat:@"题数：%d", self.myModel.subjectnums];
-    self.scoreLa.text = [NSString stringWithFormat:@"总分：%d", self.myModel.tcScore];
+//    self.directionLa.text = [NSString stringWithFormat:@"方向：%@", self.direction];
+    self.timeLa.text = [NSString stringWithFormat:@"时长：%d分钟", self.myModel.tcTime];
+    self.subjectNumLa.text = [NSString stringWithFormat:@"题数：%d题", self.myModel.subjectnums];
+    self.scoreLa.text = [NSString stringWithFormat:@"总分：%d分", self.myModel.tcScore];
 //    self.priceLa.text = [NSString stringWithFormat:@"价格：%d", self.myModel.tcPrice];
-    self.testName.text = self.myModel.tcName;
+//    self.testName.text = self.myModel.tcName;
+    self.title = self.myModel.tcName;
     self.introduceView.text = self.myModel.tcIntro;
 }
 
@@ -359,7 +360,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.commentArray.count-1;
+    return self.commentArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -23,7 +23,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *timeLa;
 //@property (strong, nonatomic) IBOutlet UILabel *priceLa;
 @property (strong, nonatomic) IBOutlet UILabel *subjectNumLa;
-@property (strong, nonatomic) IBOutlet UILabel *directionLa;
+//@property (strong, nonatomic) IBOutlet UILabel *directionLa;
 
 @property (strong, nonatomic) IBOutlet UILabel *scoreLa;
 @property (strong, nonatomic) IBOutlet UIButton *introduceButton;
@@ -32,6 +32,8 @@
 @property(nonatomic, strong) JJTestModel *myModel;
 @property(nonatomic, strong) NSMutableArray *commentArray;
 @property(nonatomic, strong) NSString *nextPage;
+
+@property(nonatomic ,copy) NSString *direction;
 
 - (IBAction)writeComment:(id)sender;
 

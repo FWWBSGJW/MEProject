@@ -197,7 +197,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     JJTestModel *paramModel = [self.testArray objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:[[JJTestDetailViewController alloc] initWithModel:paramModel] animated:YES];
+    JJTestDetailViewController *vc = [[JJTestDetailViewController alloc] initWithModel:paramModel];
+    vc.direction = self.title;
+    [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 

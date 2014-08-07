@@ -15,6 +15,7 @@
 #import "JJDirectionModel.h"
 #import "UIImageView+WebCache.h"
 #import "JJTestDivideViewController.h"
+#import "ShakeViewController.h"
 #define ScrollViewHeight 126
 #define pages 3
 
@@ -47,11 +48,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
-//    [backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-//    [backBtn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-//    self.navigationItem.leftBarButtonItem = backBarButton;
+    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
+    [backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.leftBarButtonItem = backBarButton;
     
     
     self.navigationItem.title = @"技能测试";
@@ -88,6 +89,11 @@
         [self adjustTableViewInsert];
     }
     [self addTableViewTrag];
+}
+
+- (void)pop
+{
+    [self.navigationController pushViewController:[[ShakeViewController alloc] init] animated:YES];
 }
 
 - (void)adjustTableViewInsert
