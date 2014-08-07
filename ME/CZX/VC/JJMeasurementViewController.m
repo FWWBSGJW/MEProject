@@ -288,6 +288,7 @@
 {
     [timer invalidate];
     timer = nil;
+    
     int myMins = costTime/60;
     int mySeconds = costTime%60;
     int score = 0;
@@ -295,6 +296,7 @@
 //    [manage saveDirectionModel:[[NSArray alloc] init]];
     wrongSubjectArray = [[NSMutableArray alloc] init];
     [wrongSubjectArray addObjectsFromArray:[manage queryModels]];
+    int a = wrongSubjectArray.count;
     for (int i=0; i<numberOfCorrectAnArray.count; i++)
     {
         NSString *aStr = [numberOfCorrectAnArray objectAtIndex:i];
@@ -328,6 +330,13 @@
         }
     }
     [manage saveDirectionModel:wrongSubjectArray];
+    int b = wrongSubjectArray.count-a;
+    if (b>0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%d题加入错题本", b] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+    }
+    
     NSArray *abc = @[@"A", @"B", @"C", @"D", @"E"];
     for (int count=0; count<queArray.count; count++)
     {
