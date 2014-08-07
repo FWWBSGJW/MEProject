@@ -341,6 +341,7 @@
          else if (error != nil){
              NSLog(@"Error happened = %@", error);
          }
+        [[User sharedUser] refreshInfo];
     }
 }
 
