@@ -48,11 +48,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
-    [backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-    [backBtn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-    self.navigationItem.leftBarButtonItem = backBarButton;
+//    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
+//    [backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+//    [backBtn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+//    self.navigationItem.leftBarButtonItem = backBarButton;
     
     
     self.navigationItem.title = @"技能测试";
@@ -91,11 +91,11 @@
     [self addTableViewTrag];
 }
 
-- (void)pop
-{
-    [self.navigationController pushViewController:[[RankingViewController alloc] init]
-                                         animated:YES];
-}
+//- (void)pop
+//{
+//    [self.navigationController pushViewController:[[RankingViewController alloc] init]
+//                                         animated:YES];
+//}
 
 - (void)adjustTableViewInsert
 {

@@ -19,7 +19,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <segments>
                         <segment title="战斗力"/>
-                        <segment title="测试"/>
+                        <segment title="测试成绩"/>
                     </segments>
                     <connections>
                         <action selector="selectRanking:" destination="-1" eventType="valueChanged" id="Kkv-45-n8f"/>

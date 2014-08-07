@@ -9,6 +9,16 @@
 #import "RankingViewController.h"
 #import "ScoreTableViewCell.h"
 
+typedef NS_ENUM(NSInteger, pickerViewComponent) {
+    pickerViewComponentDirection = 0,
+    pickerViewComponentTest
+};
+
+typedef NS_ENUM(NSInteger, segmentControl) {
+    segmentControlCapacity = 0,
+    segmentControlTest
+};
+
 @interface RankingViewController ()
 
 @end
@@ -89,7 +99,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    NSLog(@"%d %d", component, row);
+    
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
@@ -97,6 +107,8 @@
     result = [NSString stringWithFormat:@"Row %ld", (long)row + 1];
     return result;
 }
+
+//- (void)reloadComponent:(NSInteger)component;
 
 #pragma mark tableView
 
@@ -141,7 +153,9 @@
 
 - (void)back
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (void)dismiss
@@ -176,7 +190,7 @@
 - (IBAction)selectRanking:(id)sender
 {
     NSInteger selectedSegmentIndex = [sender selectedSegmentIndex];
-    if (selectedSegmentIndex==0)
+    if (selectedSegmentIndex == segmentControlCapacity)
     {
         
     }

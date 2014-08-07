@@ -61,7 +61,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="touchButton:" destination="-1" eventType="touchUpInside" id="Pnk-aK-smu"/>
+                        <action selector="touchButton:" destination="-1" eventType="touchUpInside" id="uiM-6B-O4t"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTH-po-1pg">
@@ -72,7 +72,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="touchButton:" destination="-1" eventType="touchUpInside" id="am5-BX-TOl"/>
+                        <action selector="touchButton:" destination="-1" eventType="touchUpInside" id="GZw-fV-LSF"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DO5-Yi-uRp">

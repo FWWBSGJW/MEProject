@@ -7,6 +7,8 @@
 //
 
 #import "ExtendViewController.h"
+#import "ShakeViewController.h"
+#import "RankingViewController.h"
 
 @interface ExtendViewController ()
 
@@ -46,7 +48,17 @@
 - (IBAction)touchBack:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-- (IBAction)touchButton:(id)sender {
-    
+- (IBAction)touchButton:(UIButton *)sender
+{
+    switch (sender.tag) {
+        case 1:
+            [self presentViewController:[[ShakeViewController alloc] init] animated:YES completion:^{}];
+            break;
+        case 2:
+            [self presentViewController:[[RankingViewController alloc] init] animated:YES completion:^{}];
+            break;
+        default:
+            break;
+    }
 }
 @end

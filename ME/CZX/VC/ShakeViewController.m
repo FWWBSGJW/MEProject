@@ -51,7 +51,9 @@
 
 - (void)back
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+    
+    }];
 }
 
 #pragma mark 摇一摇
