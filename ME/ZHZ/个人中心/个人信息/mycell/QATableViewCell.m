@@ -33,6 +33,7 @@
 - (void)setUI{
 	_titleLabel.text = _title;
 	_dateLabel.text = _date;
+	[_dateLabel resizeToFit];
 	_contentLabel.text = _content;
 	[_contentLabel resizeToFit];
 }

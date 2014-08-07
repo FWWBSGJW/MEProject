@@ -8,7 +8,7 @@
 
 #import "UserInfo.h"
 #import "OLNetManager.h"
-#define Test
+//#define Test
 @interface UserInfo ()
 @end
 

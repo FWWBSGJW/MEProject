@@ -36,6 +36,12 @@
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+	self.tabBarController.tabBar.hidden = NO;
+	self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -71,11 +77,14 @@
 		}
 	NSDictionary *dic = [_testData objectAtIndex:indexPath.row];
     [lableSwitchCell.imgView setImageWithURL:[NSURL URLWithString:kUrl_image(dic[@"tcPhotoUrl"])]];
+	
     lableSwitchCell.nameLabel.text = [NSString stringWithFormat:@" %@", dic[@"tcName"]];
+	lableSwitchCell.detailLa.text = [NSString stringWithFormat:@"分数：%@",dic[@"userScore"]];
+	lableSwitchCell.detailLa.textColor = [UIColor blueColor];
+	lableSwitchCell.detailLa.font = [UIFont fontWithName:@"Helvetica-Bold" size:15	];
     lableSwitchCell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:11];
     lableSwitchCell.personNums.text = [NSString stringWithFormat:@"%@", dic[@"tcNum"]];
     [lableSwitchCell.nameLabel resizeToFit];
-    lableSwitchCell.detailLa.text = dic[@"tcIntro"];
     lableSwitchCell.myLabel2.text = @"题数:";
     lableSwitchCell.testNumLa.text = [NSString stringWithFormat:@"%@",dic[@"subjectnums"]];
 	

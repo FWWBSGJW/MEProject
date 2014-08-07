@@ -48,9 +48,15 @@
 	
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+	self.tabBarController.tabBar.hidden = YES;
+	self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)setUI{
 	if (_userData) {
-		[_portrait setImageWithURL:[NSURL URLWithString:_userData.imageUrl] placeholderImage:[UIImage imageNamed:kDefault_portrait]];
+		[_portrait setImageWithURL:[NSURL URLWithString:kUrl_image(_userData.imageUrl)] placeholderImage:[UIImage imageNamed:kDefault_portrait]];
 		_nameLabel.text = [NSString stringWithFormat:@"%@%@",_userData.name,_userData.sex?@"♂":@"♀"];
 		self.title = _userData.name;
 		if ([_userData.describe isEqualToString:NULL] || !_userData.describe) {

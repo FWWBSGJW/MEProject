@@ -45,6 +45,12 @@
 	 self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+	self.tabBarController.tabBar.hidden = NO;
+	self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -79,7 +85,7 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	NSDictionary *dic = [_data objectAtIndex:indexPath.row];
-	DetailViewController *dvc = [[DetailViewController alloc] initWithUserId:[dic objectForKey:@"url"]];
+	DetailViewController *dvc = [[DetailViewController alloc] initWithUserId:[dic objectForKey:@"userId"]];
 	[self.navigationController pushViewController:dvc animated:YES];
 }
 

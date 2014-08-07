@@ -12,7 +12,7 @@
 
 string GetTimestr(int pubdate)
 {
-	tm* pubDate = localtime((const time_t*)&pubdate);
+	tm *pubDate = localtime((const time_t*)&pubdate);
 	
 	tm stPubDate = *pubDate; // add by lucas 0531
 	

@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	if (_user.info.isLogin) {
 		[_uiCell setAImage:_user.info.imageUrl
 				andName:_user.info.name
-			  courseNum:[_user.info.testcollection count]
+			  courseNum:[_user.info.lcourses count]
 			   focusNum:[_user.info.focus count]
 			 focusedNum:[_user.info.focused count]];
 	}
@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 - (void)reloadData{
 	[_uiCell setAImage:_user.info.imageUrl
 			   andName:_user.info.name
-			 courseNum:[_user.info.testcollection count]
+			 courseNum:[_user.info.lcourses count]
 			  focusNum:[_user.info.focus count]
 			focusedNum:[_user.info.focused count]];
 	[self.tableView reloadData];
@@ -82,6 +82,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 
 - (void)viewWillAppear:(BOOL)animated{
 	self.tabBarController.tabBar.hidden = NO;
+	self.navigationController.navigationBarHidden = NO;
 	if (_user) {
 		[self reloadData];
 	}
@@ -97,10 +98,10 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 
 - (void)courseLabelTouchEvent{
 	//course table
-	NSLog(@"course label table");
 	CourseTableViewController *ctb = [[CourseTableViewController alloc] initWithStyle:UITableViewStylePlain];
 	ctb.courses = _user.info.lcourses;
 	ctb.navigationItem.title = @"最近浏览";
+	ctb.deletable = NO;
 	[self.navigationController pushViewController:ctb animated:YES];
 }
 
@@ -300,7 +301,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	}else if (indexPath.section == UserCenterSectionStyelBCcourse){
 		CourseTableViewController *ctb = [[CourseTableViewController alloc]initWithStyle:UITableViewStylePlain];
 		ctb.courses = (indexPath.row==0)?_user.info.bcourses:_user.info.ccourses;
-//		self.navigationController.title = (indexPath.row==0)?@"已购课程":@"已收藏课程";
+		ctb.deletable = (indexPath.row == 0) ? NO:YES;
 		[self.navigationController pushViewController:ctb animated:YES];
 		
 	}else if (indexPath.section == UserCenterSectionStyelLcourse){

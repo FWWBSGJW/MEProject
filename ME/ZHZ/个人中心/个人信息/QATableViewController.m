@@ -9,6 +9,7 @@
 #import "QATableViewController.h"
 #import "QATableViewCell.h"
 #import "QAViewController.h"
+#import "DataOC.h"
 @interface QATableViewController ()
 
 @end
@@ -33,6 +34,12 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+	self.tabBarController.tabBar.hidden = NO;
+	self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,9 +68,20 @@
 		cell = [[QATableViewCell alloc] init];
 	}
 	NSDictionary *qa = [_data objectAtIndex:indexPath.row];
+	NSDateFormatter *dateFormatter =[[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
 	if (self.style == QAStyleQuestion) {
 		cell.title = qa[@"qtitle"];
-		cell.date = qa[@"qdate"];
+//		cell.date = qa[@"qdate"];
+		NSTimeZone *zone = [NSTimeZone defaultTimeZone];//获得当前应用程序默认的时区
+		NSInteger interval = [zone secondsFromGMTForDate:[NSDate date]];//以秒为单位返回当前应用程序与世界标准时间（格林威尼时间）的时差
+//		NSDate *date = [dateFormatter dateFromString:@"2014-08-07 12:56:22"];
+		NSDate *date = [dateFormatter dateFromString:qa[@"qdate"]];
+		NSLog(@"%@",[NSDate dateWithTimeIntervalSinceNow:interval]);
+//		cell.date = [DataOC getTimeString:9997110000];
+//		NSLog(@"%lf",[[NSDate dateWithTimeIntervalSinceNow:interval] timeIntervalSinceDate:date]);
+//		NSLog(@"%lf",[[NSDate date] timeIntervalSince1970]);
+		cell.date = [DataOC getTimeString:[date timeIntervalSince1970]];
 		cell.content = qa[@"qcontent"];
 	}else {
 		cell.title = qa[@"qtitle"];

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegisterViewController : UIViewController
+@interface RegisterViewController : UIViewController<UITextFieldDelegate,UIAlertViewDelegate>
 @property (nonatomic,weak) IBOutlet UITextField *accountTF;
 @property (nonatomic,weak) IBOutlet UITextField	*nickNameTF;
 @property (nonatomic,weak) IBOutlet UITextField *pwdTF;

@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-
+#import "RegisterViewController.h"
 #import "UserCenterTableViewController.h"
 #import "User.h"
 @interface LoginViewController ()
@@ -47,6 +47,10 @@
 		self.navigationController.viewControllers = @[utc];
 	}
 	
+}
+- (IBAction)register:(id)sender {
+	RegisterViewController *rvc = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:[NSBundle mainBundle]];
+	[self.navigationController pushViewController:rvc animated:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

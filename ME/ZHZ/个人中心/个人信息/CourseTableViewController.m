@@ -24,6 +24,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+		_deletable = NO;
     }
     return self;
 }
@@ -36,11 +37,14 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	if (_deletable) {
+		self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated{
 	self.tabBarController.tabBar.hidden = YES;
+	self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,7 +91,7 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return _deletable;
 }
 
 
