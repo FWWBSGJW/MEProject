@@ -13,8 +13,11 @@
 
 @property (nonatomic, strong) NSString *userPortrait;
 @property (nonatomic, assign) double score;
-@property (nonatomic, assign) double time;
+@property (nonatomic, assign) double hmtime;
+@property (nonatomic, assign) double hstime;
+@property (nonatomic, assign) double userId;
 @property (nonatomic, strong) NSString *userName;
+
 
 //+ (instancetype)modelObjectWithDictionary:(NSDictionary *)dict;
 - (instancetype)initWithDictionary:(NSDictionary *)dict;

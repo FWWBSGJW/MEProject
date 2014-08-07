@@ -43,6 +43,7 @@
     NSDictionary *textViewAttribs;
     NSMutableArray *wrongSubjectArray;
 }
+@property(nonatomic, strong) UILabel *alertLabel;
 @end
 
 @implementation JJMeasurementViewController
@@ -341,16 +342,16 @@
                                   questionArray:queArray
                                   answerArray:anArray costMins:myMins costSeconds:mySeconds];
     vc.highScoreUrl = self.highScoreUrl;
-    vc.result = [self postGrade:score*20 withTCid:self.tcid time:myMins];
+    vc.result = [self postGrade:score*20 withTCid:self.tcid hmtime:myMins hstime:mySeconds];
     [self.navigationController pushViewController:vc
                                          animated:YES];
 }
 
-- (int)postGrade:(int)score withTCid:(int)tcid time:(int)time
+- (int)postGrade:(int)score withTCid:(int)tcid hmtime:(int)hmtime hstime:(int)hstime
 {
     User *user = [User sharedUser];
     NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/uploadScore";
-    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&hscore=%d&tcId=%d&time=%d",[user.info.userId intValue], score, tcid, time]];
+    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&hscore=%d&tcId=%d&hmtime=%d&hstime=%d",[user.info.userId intValue], score, tcid, hmtime, hstime]];
     NSURL *url = [NSURL URLWithString:urlAsString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
     NSURLResponse *response = nil;
@@ -361,7 +362,7 @@
         NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"HTML = %@", html);
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-        return [[dict objectForKey:@"sucess"] intValue];
+        return [[dict objectForKey:@"success"] intValue];
     }
     else if ([data length] == 0 &&
              error == nil){
@@ -484,7 +485,7 @@
 {
     if (page == 0)
     {
-        
+        [self createView];
     }
     else
     {
@@ -492,6 +493,35 @@
         [self reloadMyTable];
     }
 }
+
+- (UILabel *)alertLabel
+{
+    if (!_alertLabel) {
+        _alertLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-60, SCREEN_HEIGHT/2-60, 120, 60)];
+        _alertLabel.layer.cornerRadius = 10;
+        _alertLabel.layer.masksToBounds = YES;
+        _alertLabel.backgroundColor = [UIColor blackColor];
+        _alertLabel.textColor = [UIColor whiteColor];
+        _alertLabel.alpha = 0.9;
+        _alertLabel.text = @"";
+        [_alertLabel setTextAlignment:NSTextAlignmentCenter];
+        _alertLabel.font = [UIFont systemFontOfSize:13.0];
+        _alertLabel.text = @"已到第一页";
+    }
+    return _alertLabel;
+}
+
+- (void)createView
+{
+    [[UIApplication sharedApplication].keyWindow addSubview:[self alertLabel]];
+    [UIView animateKeyframesWithDuration:0.4f delay:0.6f options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+        self.alertLabel.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [self.alertLabel removeFromSuperview];
+        self.alertLabel = nil;
+    }];
+}
+
 
 - (void)downPage
 {

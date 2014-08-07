@@ -10,8 +10,10 @@
 
 NSString *const kRangkingModelUserPortrait = @"userPortrait";
 NSString *const kRangkingModelScore = @"score";
-NSString *const kRangkingModelTime = @"time";
+NSString *const kRangkingModelhmtime = @"hmtime";
 NSString *const kRangkingModelUserName = @"userName";
+NSString *const kRangkingModelhstime = @"hstime";
+NSString *const kRangkingModeluserId = @"userId";
 
 
 @interface RangkingModel ()
@@ -24,7 +26,7 @@ NSString *const kRangkingModelUserName = @"userName";
 
 @synthesize userPortrait = _userPortrait;
 @synthesize score = _score;
-@synthesize time = _time;
+//@synthesize time = _time;
 @synthesize userName = _userName;
 
 
@@ -43,9 +45,10 @@ NSString *const kRangkingModelUserName = @"userName";
     {
         self.userPortrait = [self objectOrNilForKey:kRangkingModelUserPortrait fromDictionary:dict];
         self.score = [[self objectOrNilForKey:kRangkingModelScore fromDictionary:dict] doubleValue];
-        self.time = [[self objectOrNilForKey:kRangkingModelTime fromDictionary:dict] doubleValue];
+        self.hmtime = [[self objectOrNilForKey:kRangkingModelhmtime fromDictionary:dict] doubleValue];
+        self.hstime = [[self objectOrNilForKey:kRangkingModelhstime fromDictionary:dict] doubleValue];
             self.userName = [self objectOrNilForKey:kRangkingModelUserName fromDictionary:dict];
-
+        self.userId = [[self objectOrNilForKey:kRangkingModeluserId fromDictionary:dict] doubleValue];
     }
     
     return self;

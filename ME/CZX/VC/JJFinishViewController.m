@@ -16,6 +16,7 @@
 #import "UIImageView+WebCache.h"
 #import "RankingManage.h"
 #import <ShareSDK/ShareSDK.h>
+#import "DetailViewController.h"
 
 @interface JJFinishViewController ()
 {
@@ -139,17 +140,29 @@
         [lableSwitchCell.headView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseURL, model.userPortrait]]];
         lableSwitchCell.nameLa.text = model.userName;
         lableSwitchCell.scoreLa.text = [NSString stringWithFormat:@"考%d分", (int)model.score];
-        lableSwitchCell.timeLa.text = [NSString stringWithFormat:@"时间%d", (int)model.time];
-        lableSwitchCell.tag = indexPath.row;
+        if (model.hmtime>0)
+        {
+            lableSwitchCell.timeLa.text = [NSString stringWithFormat:@"共%d分%d秒", (int)model.hmtime, (int)model.hstime];
+        }
+        else
+        {
+            lableSwitchCell.timeLa.text = [NSString stringWithFormat:@"共%d秒", (int)model.hstime];
+        }
+        
+        lableSwitchCell.imageBtn.tag = indexPath.row;
         [lableSwitchCell.imageBtn addTarget:self action:@selector(touchHeadImage:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return lableSwitchCell;
 }
 
-- (void)touchHeadImage:(id)sender
+- (void)touchHeadImage:(UIButton *)sender
 {
-    
+    RangkingModel *model = [self.scoreArray objectAtIndex:sender.tag];
+    DetailViewController *detailVC = [[DetailViewController alloc] initWithUserId:
+                                      [NSString stringWithFormat:@"%d", (int)model.userId]];
+    [self.navigationController pushViewController:detailVC animated:YES];
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
