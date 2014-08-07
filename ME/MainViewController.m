@@ -90,8 +90,10 @@
 #pragma mark - 模态工具试图
 - (void)modalAddView
 {
-    ExtendViewController *demoVC = [[ExtendViewController alloc] init];
-    demoVC.view.backgroundColor = [UIColor colorWithRed:88/255.0 green:246/255.0 blue:76/255.0 alpha:1.0];    [self presentViewController:demoVC animated:YES completion:nil];
+    ExtendViewController *exVC = [[ExtendViewController alloc] init];
+    
+    //exVC.view.backgroundColor = [UIColor colorWithRed:88/255.0 green:246/255.0 blue:76/255.0 alpha:1.0];
+    [self presentViewController:exVC animated:YES completion:nil];
 }
 
 - (BOOL)shouldAutorotate {

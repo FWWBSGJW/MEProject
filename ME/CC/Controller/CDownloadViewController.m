@@ -57,6 +57,8 @@
 {
     [super viewDidLoad];
 
+    UINib *nib = [UINib nibWithNibName:@"CdownloadCell" bundle:[NSBundle mainBundle]];
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"downloadCell"];
 }
 
 - (void)didReceiveMemoryWarning

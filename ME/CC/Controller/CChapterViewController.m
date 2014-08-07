@@ -19,6 +19,9 @@
 #import "DetailViewController.h"
 #import <ShareSDK/ShareSDK.h>
 #import "CAlertLabel.h"
+#import "CMoreActionView.h"
+#import "JJTestDetailViewController.h"
+
 #define headHeight 160
 enum Segement_Type
 {
@@ -49,6 +52,12 @@ enum DownloadButton_Tag
     DownloadConfirm //确认下载
 };
 
+enum MoreActionButton_Tag
+{
+    MoreButtonTagTest = 550,
+    MoreButtonTagPeople
+};
+
 @interface CChapterViewController ()
 {
     CChapterHead *_headView; //课程head
@@ -74,6 +83,7 @@ enum DownloadButton_Tag
 @property (weak, nonatomic) UIToolbar *toobar;
 @property (strong, nonatomic) UIActionSheet *actionSheet;
 @property (strong, nonatomic) UIView *downLoadBarView;
+@property (strong, nonatomic) CMoreActionView *moreActionView;
 @end
 
 @implementation CChapterViewController
@@ -98,6 +108,9 @@ enum DownloadButton_Tag
     self.title = self.courseInfoDic[@"cName"];
     
     
+    UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(moreAction)];
+    
+    [self.navigationItem setRightBarButtonItem:moreItem animated:YES];
     //设置底部功能按钮
     
     UIToolbar *toorBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-33, SCREEN_WIDTH, 33.0f)];
@@ -118,7 +131,6 @@ enum DownloadButton_Tag
     [self.view addSubview:toorBar];
     
     if ([User sharedUser].info.isLogin) {
-        //NSLog(@"收藏课程-----%@",[User sharedUser].info.ccourses);
         for (NSDictionary *dic in [User sharedUser].info.ccourses) {
             if ([dic[@"cid"] integerValue] == self.courseID) {
                 UIBarButtonItem *item = items[0];
@@ -187,6 +199,20 @@ enum DownloadButton_Tag
 }
 
 #pragma mark - getter and setter
+
+- (CMoreActionView *)moreActionView
+{
+    if (!_moreActionView) {
+        _moreActionView = [[CMoreActionView alloc] init];
+        [self.view addSubview:_moreActionView];
+        [_moreActionView.testButton addTarget:self action:@selector(moreActionTouched:) forControlEvents:UIControlEventTouchUpInside];
+        _moreActionView.testButton.tag = MoreButtonTagTest;
+        _moreActionView.peopleButton.tag = MoreButtonTagPeople;
+        [_moreActionView.peopleButton addTarget:self action:@selector(moreActionTouched:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _moreActionView;
+}
+
 
 - (UIActionSheet *)actionSheet
 {
@@ -846,10 +872,22 @@ enum DownloadButton_Tag
             [downChapterArray addObject:couseArray[indexPath.row]];
         }
         //NSLog(@"%@",downChapterArray);
+        NSString *aMessage = [NSString stringWithFormat:@"你选择的%d个视频已近开始下载",downChapterArray.count];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"开始下载" message:aMessage delegate:self cancelButtonTitle:@"知道啦" otherButtonTitles:@"去看看", nil];
+        [alertView show];
     }
     [self.tableView setEditing:NO animated:YES];
     [self.segmentControl setEnabled:YES];
     [self.downLoadBarView removeFromSuperview];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        CDownloadViewController *dVC = [[CDownloadViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        [self.navigationController pushViewController:dVC animated:YES];
+    }
 }
 
 #pragma sendView button action
@@ -872,7 +910,8 @@ enum DownloadButton_Tag
             NSLog(@"笔记---%@",_sendComNoteView.textView.text);
             [self.courseChapter sendCourseNoteWithCourseID:1 andUserID:self.courseID andContent:self.sendComNoteView.textView.text];
         }
-        
+        CAlertLabel *alertLabel = [CAlertLabel alertLabelWithAdjustFrameForText:@"发送成功"];
+        [alertLabel showAlertLabel];
         [self sendComNoteViewBack];
         //self.sendComNoteView.textView.text = nil;
     }
@@ -895,6 +934,33 @@ enum DownloadButton_Tag
         self.sendComNoteView.textView.text = nil;
     }];
 
+}
+
+#pragma mark - moreAction
+- (void)moreAction
+{
+    self.moreActionView.isShow ? [self.moreActionView disMissMoreActionView] : [self.moreActionView showMoreActionView];
+}
+
+- (void)moreActionTouched:(UIButton *)sender
+{
+    switch (sender.tag) {
+        case MoreButtonTagTest:
+        {
+            NSInteger testID = [self.courseInfoDic[@"tcId"] integerValue];
+            JJTestDetailViewController *testVC = [JJTestDetailViewController testDetailVCwithTestID:testID];
+            [self.navigationController pushViewController:testVC animated:YES];
+        }
+            break;
+        case MoreButtonTagPeople:
+        {
+#warning 待实现
+        }
+            break;
+        default:
+            break;
+    }
+    [self.moreActionView disMissMoreActionView];
 }
 
 #pragma mark - 用户登录相关

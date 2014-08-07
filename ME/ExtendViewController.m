@@ -2,7 +2,7 @@
 //  ExtendViewController.m
 //  ME
 //
-//  Created by yato_kami on 14-7-28.
+//  Created by yato_kami on 14-8-7.
 //  Copyright (c) 2014年 yatokami. All rights reserved.
 //
 
@@ -23,24 +23,19 @@
     return self;
 }
 
-- (void)viewDidLoad
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [button setTitle:@"返回" forState:UIControlStateNormal];
-    self.view.backgroundColor = [UIColor greenColor];
-    [button setFrame:CGRectMake(SCREEN_WIDTH/2-50, SCREEN_HEIGHT/2-50, 100, 100)];
-    [button addTarget:self action:@selector(backHome) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
+    [super viewDidAppear:YES];
     
 }
 
+- (void)viewDidLoad
 
-- (void)backHome
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [super viewDidLoad];
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -48,15 +43,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)touchBack:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-*/
-
+- (IBAction)touchButton:(id)sender {
+    
+}
 @end

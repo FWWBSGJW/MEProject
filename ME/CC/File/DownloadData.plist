@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<dict>
+			<key>dCNum</key>
+			<string>2.1</string>
+			<key>dcName</key>
+			<string>java简介</string>
+			<key>dcUrl</key>
+			<string></string>
+			<key>dcSize</key>
+			<string></string>
+			<key>dcNow</key>
+			<string></string>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>dCNum</key>
+			<string>2.2</string>
+			<key>dcName</key>
+			<string>java特点</string>
+			<key>dcDate</key>
+			<string>2014-08-07 13:57</string>
+			<key>dcSize</key>
+			<string>23.0M</string>
+			<key>dcUrl</key>
+			<string></string>
+		</dict>
+	</array>
+</array>
+</plist>
