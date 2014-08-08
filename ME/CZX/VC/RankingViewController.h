@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface RankingViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
-- (IBAction)selectRanking:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property(nonatomic, strong) UITableView *rankTableView;
-@property(nonatomic, strong) UIPickerView *myPickerView;
+@property(nonatomic, strong) UIPickerView *pickerView;
 @end

@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RankingViewController">
             <connections>
+                <outlet property="segmentedControl" destination="hP4-z8-JyG" id="SZ4-0B-uvH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,9 +22,6 @@
                         <segment title="战斗力"/>
                         <segment title="测试成绩"/>
                     </segments>
-                    <connections>
-                        <action selector="selectRanking:" destination="-1" eventType="valueChanged" id="Kkv-45-n8f"/>
-                    </connections>
                 </segmentedControl>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

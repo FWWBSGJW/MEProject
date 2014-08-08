@@ -425,7 +425,7 @@
     if ([User sharedUser].info.isLogin)
     {
         JJMeasurementViewController *measureVC = [[JJMeasurementViewController alloc] initWithSubjectDetailUrl:self.myModel.sublink time:self.myModel.tcTime];
-        measureVC.title = self.testName.text;
+        measureVC.title = self.title;
         measureVC.tcid = self.myModel.tcId;
         measureVC.highScoreUrl = self.myModel.highScoreUrl;
         [self.navigationController pushViewController:measureVC animated:YES];

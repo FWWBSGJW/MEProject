@@ -10,4 +10,6 @@
 
 @interface ShakeViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIImageView *phoneImageView;
+@property(nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @end

@@ -70,6 +70,11 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [self.segmentedControl addTarget:self
+                              action:@selector(selectRanking:)
+                    forControlEvents:UIControlEventValueChanged];
+    self.segmentedControl.selectedSegmentIndex = segmentControlCapacity;
+    
     self.rankTableView = [[UITableView alloc]
                           initWithFrame:CGRectMake(0, 100, 320, SCREEN_HEIGHT-100)];
     self.rankTableView.delegate = self;
@@ -77,38 +82,94 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     self.rankTableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:self.rankTableView];
     
-    self.myPickerView = [[UIPickerView alloc]
+    self.pickerView = [[UIPickerView alloc]
                          initWithFrame:CGRectMake(0, SCREEN_HEIGHT-160, 320, 160)];
-    self.myPickerView.backgroundColor = [UIColor blueColor];
-    self.myPickerView.dataSource = self;
-    self.myPickerView.delegate = self;
-    self.myPickerView.showsSelectionIndicator = YES;
-    [self.view addSubview:self.myPickerView];
+    self.pickerView.backgroundColor = [UIColor blueColor];
+    self.pickerView.dataSource = self;
+    self.pickerView.delegate = self;
+    self.pickerView.showsSelectionIndicator = YES;
+    [self.view addSubview:self.pickerView];
 }
 
 #pragma mark pickerView
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    return 2;
+    NSInteger selectedSegmentIndex = [self.segmentedControl selectedSegmentIndex];
+    if (selectedSegmentIndex == segmentControlCapacity)
+    {
+        return 1;
+    }
+    else
+    {
+        return 2;
+    }
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
+    NSInteger selectedSegmentIndex = [self.segmentedControl selectedSegmentIndex];
+    if (selectedSegmentIndex == segmentControlCapacity)
+    {
+        
+    }
+    else
+    {
+        if (component == pickerViewComponentDirection)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
+
     return 5;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    
+    NSInteger selectedSegmentIndex = [self.segmentedControl selectedSegmentIndex];
+    if (selectedSegmentIndex == segmentControlCapacity)
+    {
+        
+    }
+    else
+    {
+        if (component == pickerViewComponentDirection)
+        {
+            [self.pickerView reloadComponent:pickerViewComponentTest];
+        }
+        else
+        {
+            
+        }
+    }
+
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    NSInteger selectedSegmentIndex = [self.segmentedControl selectedSegmentIndex];
+    if (selectedSegmentIndex == segmentControlCapacity)
+    {
+        
+    }
+    else
+    {
+        if (component == pickerViewComponentDirection)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
+
     NSString *result = nil;
     result = [NSString stringWithFormat:@"Row %ld", (long)row + 1];
     return result;
 }
-
-//- (void)reloadComponent:(NSInteger)component;
 
 #pragma mark tableView
 
@@ -161,12 +222,12 @@ typedef NS_ENUM(NSInteger, segmentControl) {
 - (void)dismiss
 {
     [UIView animateWithDuration:0.2 animations:^{
-        CGRect frame = self.myPickerView.frame;
+        CGRect frame = self.pickerView.frame;
         if (frame.origin.y == SCREEN_HEIGHT-160)
         {
             frame.origin.y = SCREEN_HEIGHT;
         }
-        self.myPickerView.frame = frame;
+        self.pickerView.frame = frame;
     }];
 
 }
@@ -174,7 +235,7 @@ typedef NS_ENUM(NSInteger, segmentControl) {
 - (void)touch
 {
     [UIView animateWithDuration:0.2 animations:^{
-        CGRect frame = self.myPickerView.frame;
+        CGRect frame = self.pickerView.frame;
         if (frame.origin.y == SCREEN_HEIGHT-160)
         {
             frame.origin.y = SCREEN_HEIGHT;
@@ -183,20 +244,20 @@ typedef NS_ENUM(NSInteger, segmentControl) {
         {
             frame.origin.y = SCREEN_HEIGHT-160;
         }
-        self.myPickerView.frame = frame;
+        self.pickerView.frame = frame;
     }];
 }
 
-- (IBAction)selectRanking:(id)sender
+- (void)selectRanking:(UISegmentedControl *)sender
 {
     NSInteger selectedSegmentIndex = [sender selectedSegmentIndex];
     if (selectedSegmentIndex == segmentControlCapacity)
     {
-        
+        [self.pickerView reloadAllComponents];
     }
     else
     {
-        
+        [self.pickerView reloadAllComponents];
     }
 }
 
