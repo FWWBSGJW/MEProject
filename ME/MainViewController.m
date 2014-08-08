@@ -37,6 +37,7 @@
     
     CCourseViewController *couseViewController = [[CCourseViewController alloc] initWithStyle:UITableViewStyleGrouped];
     UINavigationController *couseNav = [[UINavigationController alloc] initWithRootViewController:couseViewController];
+    
     //[couseNav.navigationBar setBarTintColor:[UIColor greenColor]];
     //UITabBarItem *couseItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemContacts tag:1];
     //UIImage *image = [UIImage imageNamed:@"course"];
@@ -91,9 +92,10 @@
 - (void)modalAddView
 {
     ExtendViewController *exVC = [[ExtendViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:exVC];
     
     //exVC.view.backgroundColor = [UIColor colorWithRed:88/255.0 green:246/255.0 blue:76/255.0 alpha:1.0];
-    [self presentViewController:exVC animated:YES completion:nil];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (BOOL)shouldAutorotate {
