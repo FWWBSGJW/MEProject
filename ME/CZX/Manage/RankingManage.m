@@ -61,6 +61,32 @@ NSArray *rankingServerRespObj;
     });
 }
 
+- (void)getRankingForVC:(RankingViewController *)paramVC withUrl:(NSString *)paramurl
+{
+    NSString * url = [paramurl stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
+        NSURLResponse * resp;
+        NSError * error = nil;
+        NSData * data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]] returningResponse:&resp error:&error];
+        if (error)
+        {
+            printf("%s \n",[[error localizedDescription] UTF8String]);
+            return ;
+        }
+        
+        if ([data length] > 0)
+        {
+            rankingServerRespObj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                paramVC.rankShowArray = [self analyse];
+                [paramVC.activityView stopAnimating];
+                [paramVC.rankTableView reloadData];
+            });
+        }
+    });
+}
+
 
 
 @end

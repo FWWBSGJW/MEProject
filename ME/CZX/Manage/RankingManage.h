@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "RangkingModel.h"
 #import "JJFinishViewController.h"
+#import "RankingViewController.h"
 
 @interface RankingManage : NSObject
 
 - (NSMutableArray *)analyseRankingJsonForVC:(JJFinishViewController *)paramVC withUrl:(NSString *)paramurl;
+- (void)getRankingForVC:(RankingViewController *)paramVC withUrl:(NSString *)paramurl;
 @end

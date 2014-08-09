@@ -13,4 +13,9 @@
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property(nonatomic, strong) UITableView *rankTableView;
 @property(nonatomic, strong) UIPickerView *pickerView;
+@property(nonatomic, strong) NSArray *rankShowArray;
+@property(nonatomic, strong) UIActivityIndicatorView *activityView;
+@property(nonatomic, strong) NSArray *directionPowerArray;
+@property(nonatomic, strong) NSArray *directionTestArray;
+@property(nonatomic, strong) NSMutableArray *testArray;
 @end

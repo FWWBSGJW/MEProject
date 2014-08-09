@@ -8,6 +8,9 @@
 
 #import "RankingViewController.h"
 #import "ScoreTableViewCell.h"
+#import "RankingManage.h"
+#import "UIImageView+WebCache.h"
+#import "DetailViewController.h"
 
 typedef NS_ENUM(NSInteger, pickerViewComponent) {
     pickerViewComponentDirection = 0,
@@ -89,6 +92,13 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     self.pickerView.delegate = self;
     self.pickerView.showsSelectionIndicator = YES;
     [self.view addSubview:self.pickerView];
+    
+    self.activityView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(150, SCREEN_HEIGHT/2-10, 20, 20)];
+    [self.activityView startAnimating];
+    self.activityView.color = [UIColor blackColor];
+    [self.view addSubview:self.activityView];
+    
+    self.testArray = [NSMutableArray new];
 }
 
 #pragma mark pickerView
@@ -197,19 +207,29 @@ typedef NS_ENUM(NSInteger, segmentControl) {
         n= [UINib nibWithNibName:@"PlayScoreviewCell" bundle:[NSBundle mainBundle]];
         [tableView registerNib:n forCellReuseIdentifier:@"PlayScoreviewCell"];
     }
+    lableSwitchCell.timeLa.text = @"";
+    lableSwitchCell.scoreLa.text = @"";
+    lableSwitchCell.powerLa.text = @"";
     if (self.segmentedControl.selectedSegmentIndex == segmentControlCapacity)
     {
         lableSwitchCell.powerLa.text = [NSString stringWithFormat:@"战斗力高达：23089"];
-        lableSwitchCell.timeLa.text = @"";
-        lableSwitchCell.scoreLa.text = @"";
     }
     else
     {
-        lableSwitchCell.timeLa.text = [NSString stringWithFormat:@"共10分20秒"];
-        lableSwitchCell.scoreLa.text = [NSString stringWithFormat:@"考100分"];
-        lableSwitchCell.powerLa.text = @"";
+        if (self.rankShowArray.count > indexPath.row)
+        {
+            RangkingModel *model = [self.rankShowArray objectAtIndex:indexPath.row];
+            lableSwitchCell.nameLa.text = model.userName;
+            [lableSwitchCell.imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseURL, model.userPortrait]]];
+            lableSwitchCell.timeLa.text = [NSString stringWithFormat:@"共%d分%d秒", (int)model.hmtime, (int)model.hstime];
+            lableSwitchCell.scoreLa.text = [NSString stringWithFormat:@"考%d分", (int)model.score];
+        }
     }
     lableSwitchCell.rankingLa.text = [NSString stringWithFormat:@"%d", indexPath.row+1];
+    [lableSwitchCell.imageBtn addTarget:self
+                                 action:@selector(touchImage:)
+                       forControlEvents:UIControlEventTouchUpInside];
+    lableSwitchCell.imageBtn.tag = indexPath.row;
     if (indexPath.row>2)
     {
         lableSwitchCell.rankingLa.textColor = [UIColor blackColor];
@@ -247,6 +267,14 @@ typedef NS_ENUM(NSInteger, segmentControl) {
 
 }
 
+- (void)touchImage:(UIButton *)sender
+{
+    RangkingModel *model = [self.rankShowArray objectAtIndex:sender.tag];
+    DetailViewController *detailVC = [[DetailViewController alloc] initWithUserId:
+                                      [NSString stringWithFormat:@"%d", (int)model.userId]];
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
 - (void)touch
 {
     [UIView animateWithDuration:0.2 animations:^{
@@ -272,7 +300,8 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     }
     else
     {
-
+        [[[RankingManage alloc] init] getRankingForVC:self
+                                              withUrl:@"http://121.197.10.159:8080/MobileEducation/listScore?tcId=1"];
     }
     [self.pickerView reloadAllComponents];
     [self.rankTableView reloadData];

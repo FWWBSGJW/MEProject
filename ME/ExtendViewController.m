@@ -56,7 +56,8 @@
             [self presentViewController:[[ShakeViewController alloc] init] animated:YES completion:^{}];
             break;
         case 2:
-            [self presentViewController:[[RankingViewController alloc] init] animated:YES completion:^{}];
+            [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[RankingViewController alloc] init]] animated:YES completion:^{
+            }];
             break;
         default:
             break;
