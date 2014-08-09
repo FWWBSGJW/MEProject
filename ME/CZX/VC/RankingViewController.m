@@ -84,7 +84,7 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     
     self.pickerView = [[UIPickerView alloc]
                          initWithFrame:CGRectMake(0, SCREEN_HEIGHT-160, 320, 160)];
-    self.pickerView.backgroundColor = [UIColor blueColor];
+    self.pickerView.backgroundColor = RGBCOLOR(38, 130, 213);
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
     self.pickerView.showsSelectionIndicator = YES;
@@ -110,21 +110,20 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     NSInteger selectedSegmentIndex = [self.segmentedControl selectedSegmentIndex];
     if (selectedSegmentIndex == segmentControlCapacity)
     {
-        
+        return 6;
     }
     else
     {
         if (component == pickerViewComponentDirection)
         {
-            
+            return 4;
         }
         else
         {
-            
+            return 12;
         }
     }
 
-    return 5;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
@@ -132,7 +131,7 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     NSInteger selectedSegmentIndex = [self.segmentedControl selectedSegmentIndex];
     if (selectedSegmentIndex == segmentControlCapacity)
     {
-        
+
     }
     else
     {
@@ -152,23 +151,27 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     NSInteger selectedSegmentIndex = [self.segmentedControl selectedSegmentIndex];
     if (selectedSegmentIndex == segmentControlCapacity)
     {
-        
+        NSString *result = nil;
+        result = [NSString stringWithFormat:@"方向Row %ld", (long)row + 1];
+        return result;
     }
     else
     {
         if (component == pickerViewComponentDirection)
         {
-            
+            NSString *result = nil;
+            result = [NSString stringWithFormat:@"方向Row %ld", (long)row + 1];
+            return result;
         }
         else
         {
-            
+            NSString *result = nil;
+            result = [NSString stringWithFormat:@"测试Row %ld", (long)row + 1];
+            return result;
         }
     }
 
-    NSString *result = nil;
-    result = [NSString stringWithFormat:@"Row %ld", (long)row + 1];
-    return result;
+
 }
 
 #pragma mark tableView
