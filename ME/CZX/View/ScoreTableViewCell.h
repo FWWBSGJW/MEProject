@@ -16,5 +16,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *rankingLa;
 @property (strong, nonatomic) IBOutlet UIButton *imageBtn;
 @property (strong, nonatomic) IBOutlet UIButton *dismissBtn;
+@property (strong, nonatomic) IBOutlet UILabel *powerLa;
 
 @end

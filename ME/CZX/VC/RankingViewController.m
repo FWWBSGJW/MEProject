@@ -197,6 +197,18 @@ typedef NS_ENUM(NSInteger, segmentControl) {
         n= [UINib nibWithNibName:@"PlayScoreviewCell" bundle:[NSBundle mainBundle]];
         [tableView registerNib:n forCellReuseIdentifier:@"PlayScoreviewCell"];
     }
+    if (self.segmentedControl.selectedSegmentIndex == segmentControlCapacity)
+    {
+        lableSwitchCell.powerLa.text = [NSString stringWithFormat:@"战斗力高达：23089"];
+        lableSwitchCell.timeLa.text = @"";
+        lableSwitchCell.scoreLa.text = @"";
+    }
+    else
+    {
+        lableSwitchCell.timeLa.text = [NSString stringWithFormat:@"共10分20秒"];
+        lableSwitchCell.scoreLa.text = [NSString stringWithFormat:@"考100分"];
+        lableSwitchCell.powerLa.text = @"";
+    }
     lableSwitchCell.rankingLa.text = [NSString stringWithFormat:@"%d", indexPath.row+1];
     if (indexPath.row>2)
     {
@@ -256,12 +268,14 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     NSInteger selectedSegmentIndex = [sender selectedSegmentIndex];
     if (selectedSegmentIndex == segmentControlCapacity)
     {
-        [self.pickerView reloadAllComponents];
+        
     }
     else
     {
-        [self.pickerView reloadAllComponents];
+
     }
+    [self.pickerView reloadAllComponents];
+    [self.rankTableView reloadData];
 }
 
 
