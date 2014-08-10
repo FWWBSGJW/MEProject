@@ -50,6 +50,10 @@
 	[super viewWillAppear:animated];
 	self.tabBarController.tabBar.hidden = NO;
 	self.navigationController.navigationBarHidden = NO;
+	if (_list) {
+		[_list refreshLinkContent];
+		_data = _list.linkContent;
+	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,7 +91,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	NSDictionary *dic = [_data objectAtIndex:indexPath.row];
 //	DetailViewController *dvc = [[DetailViewController alloc] initWithUserId:[dic objectForKey:@"userId"]];
-	UserCenterTableViewController *usercenter = [[UserCenterTableViewController alloc] initWithUserId:[NSString stringWithFormat:@"%@",[dic objectForKey:@"userId"]] andStyle:UITableViewStyleGrouped];
+	UserCenterTableViewController *usercenter =[[UserCenterTableViewController alloc] initWithUserId:[NSString stringWithFormat:@"%@",[dic objectForKey:@"userId"]]];
 	[self.navigationController pushViewController:usercenter animated:YES];
 }
 

@@ -40,6 +40,10 @@
 	[super viewWillAppear:animated];
 	self.tabBarController.tabBar.hidden = NO;
 	self.navigationController.navigationBarHidden = NO;
+	if (_list) {
+		[_list refreshLinkContent];
+		_data = _list.linkContent;
+	}
 }
 
 - (void)didReceiveMemoryWarning

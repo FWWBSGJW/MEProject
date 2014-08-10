@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ListInfo.h"
 @interface CourseTableViewController : UITableViewController
 @property (nonatomic,strong) NSMutableArray *courses;
-@property (nonatomic,strong) NSString *link;
+@property (nonatomic,strong) ListInfo *list;
 @property (nonatomic) BOOL deletable;
 @end

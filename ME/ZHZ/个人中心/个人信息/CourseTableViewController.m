@@ -45,6 +45,10 @@
 - (void)viewWillAppear:(BOOL)animated{
 	self.tabBarController.tabBar.hidden = YES;
 	self.navigationController.navigationBarHidden = NO;
+	if (_list) {
+		[_list refreshLinkContent];
+		_courses = _list.linkContent;
+	}
 }
 
 - (void)didReceiveMemoryWarning

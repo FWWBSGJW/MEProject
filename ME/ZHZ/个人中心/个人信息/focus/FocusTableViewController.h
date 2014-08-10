@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ListInfo.h"
 
 /**
  *		关注人列表
@@ -16,5 +16,6 @@
 
 @interface FocusTableViewController : UITableViewController
 @property (nonatomic,strong) NSMutableArray *data;
+@property (nonatomic,strong) ListInfo *list;
 - (id)initWithData:(NSArray *)data;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ListInfo.h"
 typedef NS_ENUM(NSInteger, QAStyle){
 	QAStyleQuestion,
 	QAStyleAnswer
@@ -14,5 +15,6 @@ typedef NS_ENUM(NSInteger, QAStyle){
 
 @interface QATableViewController : UITableViewController
 @property (nonatomic,strong) NSMutableArray *data;
+@property (nonatomic,strong) ListInfo *list;
 @property (nonatomic) QAStyle style;
 @end

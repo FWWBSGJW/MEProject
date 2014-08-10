@@ -120,21 +120,24 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 - (void)courseLabelTouchEvent{
 	//course table
 	CourseTableViewController *ctb = [[CourseTableViewController alloc] initWithStyle:UITableViewStylePlain];
-	ctb.courses = [_user.info.lcourses linkContent];
+//	ctb.courses = [_user.info.lcourses linkContent];
+	ctb.list = _user.info.lcourses;
 	ctb.navigationItem.title = @"最近浏览";
 	ctb.deletable = NO;
 	[self.navigationController pushViewController:ctb animated:YES];
 }
 
 - (void)focusLabelTouchEvent{
-	FocusTableViewController *ftvc = [[FocusTableViewController alloc] initWithData:[_user.info.focus linkContent]];
+	FocusTableViewController *ftvc = [[FocusTableViewController alloc] initWithStyle:UITableViewStylePlain];
 //	ftvc.data = [_user.info.focus mutableCopy];
+	ftvc.list = _user.info.focus;
 	[self.navigationController pushViewController:ftvc animated:YES];
 }
 
 - (void)focusedLabelTouchEvent{
-		FocusTableViewController *ftvc = [[FocusTableViewController alloc] initWithData:[_user.info.focused linkContent]];
+		FocusTableViewController *ftvc = [[FocusTableViewController alloc] initWithStyle:UITableViewStylePlain];
 //	ftvc.data = [_user.info.focused mutableCopy];
+	ftvc.list = _user.info.focused;
 	[self.navigationController pushViewController:ftvc animated:YES];
 }
 #pragma mark - Table view data source
@@ -327,7 +330,8 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 			return;
 		}
 		CourseTableViewController *ctb = [[CourseTableViewController alloc]initWithStyle:UITableViewStylePlain];
-		ctb.courses = (indexPath.row==0)?[_user.info.bcourses linkContent]:[_user.info.ccourses linkContent];
+//		ctb.courses = (indexPath.row==0)?[_user.info.bcourses linkContent]:[_user.info.ccourses linkContent];
+		ctb.list = (indexPath.row == 0) ? _user.info.bcourses : _user.info.ccourses;
 		ctb.deletable = (indexPath.row == 0) ? NO:YES;
 		[self.navigationController pushViewController:ctb animated:YES];
 		
@@ -341,17 +345,20 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		if (indexPath.row == 0) {
 			QATableViewController *qavc = [[QATableViewController alloc] initWithStyle:UITableViewStylePlain];
 			qavc.style = QAStyleQuestion;
-			qavc.data = [_user.info.questions linkContent];
+//			qavc.data = [_user.info.questions linkContent];
+			qavc.list = _user.info.questions;
 			[self.navigationController pushViewController:qavc animated:YES];
 		}else if (indexPath.row == 1){
 			QATableViewController *qavc = [[QATableViewController alloc] initWithStyle:UITableViewStylePlain];
 			qavc.style = QAStyleAnswer;
-			qavc.data = [_user.info.answers linkContent];
+//			qavc.data = [_user.info.answers linkContent];
+			qavc.list = _user.info.answers;
 			[self.navigationController pushViewController:qavc animated:YES];
 		}
 	}else if (indexPath.section == UserCenterSectionStyelTest){
 		if (indexPath.row == 0) {
-			TestCollectionTableViewController *tctvc = [[TestCollectionTableViewController alloc] initWithStyle:UITableViewStylePlain withData:[_user.info.testcollection linkContent]];
+			TestCollectionTableViewController *tctvc = [[TestCollectionTableViewController alloc] initWithStyle:UITableViewStylePlain];
+			tctvc.list = _user.info.testcollection;
 			[self.navigationController pushViewController:tctvc animated:YES];
 		}else{
 			if (indexPath.row == 0 && ![_user isEqual:[User sharedUser]]) {

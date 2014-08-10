@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ListInfo.h"
 @interface TestCollectionTableViewController : UITableViewController
 @property (strong,nonatomic) NSMutableArray *testData;
+@property (strong,nonatomic) ListInfo *list;
 - (id)initWithStyle:(UITableViewStyle)style withData:(NSMutableArray *)data;
 @end
