@@ -7,6 +7,7 @@
 //
 
 #import "QAViewController.h"
+#import "User.h"
 @interface QAViewController ()
 @property (strong, nonatomic) UIWebView *webView;
 @end
@@ -37,7 +38,8 @@
     self.title = @"问答";
     UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.frame];
     webView.scalesPageToFit = YES;
-    NSString *urlStr =[NSString stringWithFormat:@"%@MobileEducation/qa",kBaseURL];
+	NSString *userid = [User sharedUser].info.userId;
+    NSString *urlStr =[NSString stringWithFormat:@"%@MobileEducation/qa?userId=%@",kBaseURL,userid];
     NSURL *url = [NSURL URLWithString:urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];

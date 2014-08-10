@@ -29,19 +29,6 @@ static classname *shared##classname = nil; \
 	return shared##classname; \
 } \
  \
-+ (id)allocWithZone:(NSZone *)zone \
-{ \
-	@synchronized(self) \
-	{ \
-		if (shared##classname == nil) \
-		{ \
-			shared##classname = [super allocWithZone:zone]; \
-			return shared##classname; \
-		} \
-	} \
-	 \
-	return nil; \
-} \
  \
 - (id)copyWithZone:(NSZone *)zone \
 { \

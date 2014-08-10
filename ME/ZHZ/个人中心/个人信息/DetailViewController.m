@@ -46,6 +46,12 @@
 	[self.view addSubview:_nameLabel];
 	[self.view addSubview:_portrait];
 	
+	UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editUserInfo)];
+	self.navigationItem.rightBarButtonItem = rightItem;
+}
+
+- (void)editUserInfo{
+	
 }
 
 - (void)viewWillAppear:(BOOL)animated{

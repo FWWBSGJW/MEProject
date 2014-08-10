@@ -24,6 +24,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(User);
 	return self;
 }
 
+-(id)initUserWithUserId:(NSString *)userid{
+	if (self = [super init]) {
+		_info = [[UserInfo alloc] initWithUserId:userid];
+	}
+	return self;
+}
 - (void)gotoUserLoginFrom:(UIViewController *)fromVC{
 	_lvc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
 	_lvc.showCencel = NO;
@@ -64,25 +70,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(User);
 	return NO;
 }
 
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-//	if (buttonIndex == 1) {
-//		UITextField *textfield1 = [alertView textFieldAtIndex:0];
-////		_userName = [alertView textFieldAtIndex:0].text;
-//		_userName = textfield1.text;
-//		NSLog(@" username is %@",_userName);
-//		UITextField *textfield2 = [alertView textFieldAtIndex:1];
-////		_passWord = [alertView textFieldAtIndex:1].text;
-//		_passWord = textfield2.text;
-//		if (![_info userLoginWith:_userName andPassword:_passWord]){
-//			UIAlertView *failure = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"登陆失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-//			[failure show];
-//		}else{
-//			UIAlertView *failure = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"登陆成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-//			[failure show];
-//		}
-//
-//	}
-//}
+
 
 
 

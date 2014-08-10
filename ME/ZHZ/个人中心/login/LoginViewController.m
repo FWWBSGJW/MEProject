@@ -43,12 +43,12 @@
 	}
 	if ([user loginWith:[_usernameText text] Password:[_userpwdText text]] && !user.currentVC){
 		
-		UserCenterTableViewController *utc = [[UserCenterTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-		self.navigationController.viewControllers = @[utc];
+//		UserCenterTableViewController *utc = [[UserCenterTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		[self.navigationController popViewControllerAnimated:YES];
 	}
 	
 }
-- (IBAction)register:(id)sender {
+- (IBAction)userRegister:(id)sender {
 	RegisterViewController *rvc = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:[NSBundle mainBundle]];
 	[self.navigationController pushViewController:rvc animated:YES];
 }

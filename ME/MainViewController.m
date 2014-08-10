@@ -8,7 +8,7 @@
 
 #import "MainViewController.h"
 #import "CCourseViewController.h"
-#import "UserViewController.h"
+#import "UserCenterTableViewController.h"
 #import "JJTestViewController.h"
 #import "ExtendViewController.h"
 #import "QAViewController.h"
@@ -51,7 +51,9 @@
     UITabBarItem *testItem = [[UITabBarItem alloc] initWithTitle:@"测试" image:[UIImage imageNamed:@"Test"] tag:2];
     testNav.tabBarItem = testItem;
     
-    UserViewController *userVC = [[UserViewController alloc] init];
+	UserCenterTableViewController *userCenter = [[UserCenterTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+	userCenter.user = [User sharedUser];
+	UINavigationController *userVC = [[UINavigationController alloc] initWithRootViewController:userCenter];
     //UITabBarItem *userItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFeatured tag:3];
     UITabBarItem *userItem = [[UITabBarItem alloc]initWithTitle:@"我" image:[UIImage imageNamed:@"User"] tag:5];
     userVC.tabBarItem = userItem;

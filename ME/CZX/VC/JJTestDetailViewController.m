@@ -221,7 +221,7 @@
     {
         for (int i=0; i<user.info.testcollection.count; i++)
         {
-            NSDictionary *dict = [user.info.testcollection objectAtIndex:i];
+            NSDictionary *dict = [[user.info.testcollection linkContent] objectAtIndex:i];
             int dictTCID = [[dict objectForKey:@"tcId"] intValue];
             int mymodelTCID = self.myModel.tcId;
             if (dictTCID == mymodelTCID)

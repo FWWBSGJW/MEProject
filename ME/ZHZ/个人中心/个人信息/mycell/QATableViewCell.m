@@ -35,7 +35,9 @@
 	_dateLabel.text = _date;
 	[_dateLabel resizeToFit];
 	_contentLabel.text = _content;
+	_contentLabel.textColor = [UIColor lightGrayColor];
 	[_contentLabel resizeToFit];
+	
 }
 
 - (void)awakeFromNib

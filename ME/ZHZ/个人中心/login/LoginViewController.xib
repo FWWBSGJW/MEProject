@@ -59,7 +59,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="register:" destination="-1" eventType="touchUpInside" id="Ms4-QM-EvZ"/>
+                        <action selector="userRegister:" destination="-1" eventType="touchUpInside" id="Tog-u0-mIs"/>
                     </connections>
                 </button>
                 <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDg-pE-MCN">

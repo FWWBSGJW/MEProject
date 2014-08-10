@@ -8,7 +8,6 @@
 
 #import "UserInfo.h"
 #import "OLNetManager.h"
-//#define Test
 @interface UserInfo ()
 @end
 
@@ -19,7 +18,7 @@
 - (id)init{
 	if (self = [super init]) {
 		_data		= nil;
-		_userId		= @"1";
+		_userId		= nil;
 		_isLogin	= NO;
 		_account	= nil;
 		_name		= nil;
@@ -27,14 +26,14 @@
 //		_image		= nil;
 		_imageUrl	= nil;
 		_describe	= nil;
-		_lcourses	= [[NSMutableArray alloc] initWithCapacity:42];
-		_ccourses	= [[NSMutableArray alloc] initWithCapacity:42];
-		_bcourses	= [[NSMutableArray alloc] initWithCapacity:42];
-		_focus		= [[NSMutableArray alloc] initWithCapacity:42];
-		_focused	= [[NSMutableArray alloc] initWithCapacity:42];
-		_questions	= [[NSMutableArray alloc] initWithCapacity:42];
-		_answers	= [[NSMutableArray alloc] initWithCapacity:42];
-		_testcollection	= [[NSMutableArray alloc] initWithCapacity:42];
+		_lcourses	= nil;
+		_ccourses	= nil;
+		_bcourses	= nil;
+		_focus		= nil;
+		_focused	= nil;
+		_questions	= nil;
+		_answers	= nil;
+		_testcollection = nil;
 		[self lastUserInfo];  //初始化时判断沙盒中是否存在数据 并设置数据
 	}
 	return self;
@@ -49,15 +48,14 @@
 		_sex		= NO;
 		_imageUrl	= nil;
 		_describe	= nil;
-		_lcourses	= [[NSMutableArray alloc] initWithCapacity:42];
-		_ccourses	= [[NSMutableArray alloc] initWithCapacity:42];
-		_bcourses	= [[NSMutableArray alloc] initWithCapacity:42];
-		_focus		= [[NSMutableArray alloc] initWithCapacity:42];
-		_focused	= [[NSMutableArray alloc] initWithCapacity:42];
-		_questions	= [[NSMutableArray alloc] initWithCapacity:42];
-		_answers	= [[NSMutableArray alloc] initWithCapacity:42];
-		_testcollection = [[NSMutableArray alloc] initWithCapacity:42];
-
+		_lcourses	= nil;
+		_ccourses	= nil;
+		_bcourses	= nil;
+		_focus		= nil;
+		_focused	= nil;
+		_questions	= nil;
+		_answers	= nil;
+		_testcollection = nil;
 		[self setAllData];
 	}
 	return self;
@@ -71,26 +69,27 @@
 		_sex		= [[_data objectForKey:@"userSex"] boolValue];
 		_imageUrl	= [_data objectForKey:@"userPortrait"];
 		_describe	= [_data objectForKey:@"userSign"];
-		[_lcourses	addObjectsFromArray:[_data objectForKey:@"lcourses"]];
-		[_ccourses  addObjectsFromArray:[_data objectForKey:@"ccourses"]];
-		[_bcourses  addObjectsFromArray:[_data objectForKey:@"bcourses"]];
-		[_focus		addObjectsFromArray:[_data objectForKey:@"focus"]];
-		[_focused	addObjectsFromArray:[_data objectForKey:@"focused"]];
-		[_questions addObjectsFromArray:[_data objectForKey:@"questions"]];
-		[_answers	addObjectsFromArray:[_data objectForKey:@"answers"]];
-		[_testcollection addObjectsFromArray:[_data objectForKey:@"testcollection"]];
+		
+		_lcourses	= [[ListInfo alloc] initWithDictionary:[_data objectForKey:@"lcourses"]];
+		_ccourses	= [[ListInfo alloc] initWithDictionary:[_data objectForKey:@"ccourses"]];
+		_bcourses	= [[ListInfo alloc] initWithDictionary:[_data objectForKey:@"bcourses"]];
+		_focus		= [[ListInfo alloc] initWithDictionary:[_data objectForKey:@"focus"]];
+		_focused	= [[ListInfo alloc] initWithDictionary:[_data objectForKey:@"focused"]];
+		_questions	= [[ListInfo alloc] initWithDictionary:[_data objectForKey:@"questions"]];
+		_answers	= [[ListInfo alloc] initWithDictionary:[_data objectForKey:@"answers"]];
+		_testcollection	= [[ListInfo alloc] initWithDictionary:[_data objectForKey:@"test"]];
 	}
 }
 
 - (void)removeArrayData{
-	[_lcourses removeAllObjects];
-	[_ccourses removeAllObjects];
-	[_bcourses removeAllObjects];
-	[_focus removeAllObjects];
-	[_focused removeAllObjects];
-	[_questions removeAllObjects];
-	[_answers removeAllObjects];
-	[_testcollection removeAllObjects];
+	_lcourses	= nil;
+	_ccourses	= nil;
+	_bcourses	= nil;
+	_focus		= nil;
+	_focused	= nil;
+	_questions	= nil;
+	_answers	= nil;
+	_testcollection = nil;
 }
 
 - (BOOL)userLogout{
@@ -105,9 +104,6 @@
 		_imageUrl	= nil;
 		_describe	= nil;
 		[self removeArrayData];
-#ifdef Test
-		return YES;
-#endif
 		[self saveUserStatus];
 		return YES;
 	}
@@ -117,19 +113,6 @@
 //登陆 进行网络请求
 - (BOOL)userLoginWith:(NSString *)userName andPassword:(NSString *)passWord{
 	/*test*/
-#ifdef Test
-	if ([userName isEqualToString:@"1"] && [passWord isEqualToString:@"1"]) {
-		[self lastUserInfo];
-		return YES;
-	}else if([userName length] == 1 && [userName intValue] != 0){
-		NSDictionary *dic = [[OLNetManager userDataWithId:userName] objectForKey:@"result"];
-		_data = dic;
-		[self setAllData];
-		_isLogin = YES;
-		[self saveInfoToDocument];
-		return YES;
-	}
-#endif
 //	NSDictionary *dic = [OLNetManager loginWith:userName andPassword:passWord succ:^(NSDictionary *successDict) {
 //	}];
 //	NSDictionary *dic = [OLNetManager userDataWithId:_userId];

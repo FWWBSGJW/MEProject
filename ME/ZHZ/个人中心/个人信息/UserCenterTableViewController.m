@@ -20,6 +20,8 @@
 #import "JJSubjectManage.h"
 #import "TestCollectionTableViewController.h"
 #import "QATableViewController.h"
+#import "LoginViewController.h"
+#import "CAlertLabel.h"
 typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 //    UserCenterSectionStyelInfo = 0,
     UserCenterSectionStyelDetail = 0,
@@ -33,17 +35,23 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 };
 
 
-@interface UserCenterTableViewController ()
-@property (nonatomic,strong) User *user;
+@interface UserCenterTableViewController (){
+	BOOL isLocalUser;
+}
 @property (nonatomic,strong) UserInfoTableViewCell *uiCell;
 @end
 
 @implementation UserCenterTableViewController
-
+- (id)initWithUserId:(NSString *)userId andStyle:(UITableViewStyle)style{
+	if (self = [super initWithStyle:style]) {
+		_user = [[User alloc] initUserWithUserId:userId];
+	}
+	return self;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _user = [User sharedUser];
+//    _user = [User sharedUser];
 	self.navigationItem.title = @"用户中心";
 	UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshUserInfo)];
 	self.navigationItem.rightBarButtonItem = rightItem;
@@ -59,6 +67,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	}
 	self.tableView.tableHeaderView = _uiCell;
 	self.tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
+	[self.tableView setContentOffset:CGPointMake(0, 0)];
 }
 
 - (void)reloadData{
@@ -72,7 +81,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 
 - (void)refreshUserInfo{
 	if ([_user refreshInfo]){
-		
+		[self.tableView setContentOffset:CGPointMake(0,-64)];
 		[self reloadData];
 	}else{
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"刷新失败" message:@"网络连接超时或用户账号异常" delegate:self cancelButtonTitle:@"Cancle" otherButtonTitles:nil, nil];
@@ -81,8 +90,20 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+//	static int count = 1;
+	if ([_user isEqual:[User sharedUser]] && _user.info.isLogin == NO) {
+		LoginViewController *login = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
+		[self.navigationController pushViewController:login animated:YES];
+		return;
+	}
 	self.tabBarController.tabBar.hidden = NO;
 	self.navigationController.navigationBarHidden = NO;
+	[_user refreshInfo];
+//	if (count) {
+//		[self.tableView setContentOffset:CGPointMake(0, 0)];
+//		count = 0;
+//	}else
+//		[self.tableView setContentOffset:CGPointMake(0, -64)];
 	if (_user) {
 		[self reloadData];
 	}
@@ -99,20 +120,20 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 - (void)courseLabelTouchEvent{
 	//course table
 	CourseTableViewController *ctb = [[CourseTableViewController alloc] initWithStyle:UITableViewStylePlain];
-	ctb.courses = _user.info.lcourses;
+	ctb.courses = [_user.info.lcourses linkContent];
 	ctb.navigationItem.title = @"最近浏览";
 	ctb.deletable = NO;
 	[self.navigationController pushViewController:ctb animated:YES];
 }
 
 - (void)focusLabelTouchEvent{
-	FocusTableViewController *ftvc = [[FocusTableViewController alloc] initWithData:[_user.info.focus mutableCopy]];
+	FocusTableViewController *ftvc = [[FocusTableViewController alloc] initWithData:[_user.info.focus linkContent]];
 //	ftvc.data = [_user.info.focus mutableCopy];
 	[self.navigationController pushViewController:ftvc animated:YES];
 }
 
 - (void)focusedLabelTouchEvent{
-		FocusTableViewController *ftvc = [[FocusTableViewController alloc] initWithData:[_user.info.focused mutableCopy]];
+		FocusTableViewController *ftvc = [[FocusTableViewController alloc] initWithData:[_user.info.focused linkContent]];
 //	ftvc.data = [_user.info.focused mutableCopy];
 	[self.navigationController pushViewController:ftvc animated:YES];
 }
@@ -136,7 +157,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	switch (section) {
-		case UserCenterSectionStyelLcourse: return MIN([_user.info.lcourses count], 3); break;
+		case UserCenterSectionStyelLcourse: return MIN([[_user.info.lcourses courses] count], 3); break;
 		case UserCenterSectionStyelQandA:	return 2; break;
 		case UserCenterSectionStyelBCcourse: return 2; break;
 		case UserCenterSectionStyelTest	:  return 2;break;
@@ -171,8 +192,9 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	}else if (indexPath.section == UserCenterSectionStyelLcourse){
 		//加载三门最近浏览的课程
 		ProgressTableViewCell * cell1 = [[ProgressTableViewCell alloc] initWithFrame:CGRectNull];
-		if (_user.info.isLogin) {
-			NSDictionary *course = [_user.info.lcourses objectAtIndex:indexPath.row];
+//		if (_user.info.isLogin)
+		{
+			NSDictionary *course = [[_user.info.lcourses courses] objectAtIndex:indexPath.row];
 			
 			[cell1 setSelectionStyle:UITableViewCellSelectionStyleNone];//取消被选中的高亮效果
 			[cell1 cellWithCourse:course];
@@ -290,7 +312,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		//推出登陆
 		[_user logout];
 		LoginViewController *login = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
-		self.navigationController.viewControllers = @[login];
+		[self.navigationController pushViewController:login animated:YES];
 	}else if (indexPath.section == UserCenterSectionStyelDetail){
 		//用户详情
 		DetailViewController *detail = [[DetailViewController alloc] init];
@@ -299,8 +321,13 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		[self.navigationController pushViewController:detail animated:YES];
 		
 	}else if (indexPath.section == UserCenterSectionStyelBCcourse){
+		if (indexPath.row == 0 && ![_user isEqual:[User sharedUser]]) {
+			CAlertLabel *alert = [CAlertLabel alertLabelWithAdjustFrameForText:@"无权查看"];
+			[alert showAlertLabel];
+			return;
+		}
 		CourseTableViewController *ctb = [[CourseTableViewController alloc]initWithStyle:UITableViewStylePlain];
-		ctb.courses = (indexPath.row==0)?_user.info.bcourses:_user.info.ccourses;
+		ctb.courses = (indexPath.row==0)?[_user.info.bcourses linkContent]:[_user.info.ccourses linkContent];
 		ctb.deletable = (indexPath.row == 0) ? NO:YES;
 		[self.navigationController pushViewController:ctb animated:YES];
 		
@@ -308,24 +335,30 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		ProgressTableViewCell *cell = (ProgressTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
 		[self.navigationController pushViewController:[CChapterViewController chapterVCwithCourseID:[cell.courseId integerValue]] animated:YES];
 	}else if (indexPath.section == UserCenterSectionStyelLink){
-		
+		CAlertLabel *alert = [CAlertLabel alertLabelWithAdjustFrameForText:@"该功能暂时无法使用"];
+		[alert showAlertLabel];
 	}else if (indexPath.section == UserCenterSectionStyelQandA){
 		if (indexPath.row == 0) {
 			QATableViewController *qavc = [[QATableViewController alloc] initWithStyle:UITableViewStylePlain];
 			qavc.style = QAStyleQuestion;
-			qavc.data = _user.info.questions;
+			qavc.data = [_user.info.questions linkContent];
 			[self.navigationController pushViewController:qavc animated:YES];
 		}else if (indexPath.row == 1){
 			QATableViewController *qavc = [[QATableViewController alloc] initWithStyle:UITableViewStylePlain];
 			qavc.style = QAStyleAnswer;
-			qavc.data = _user.info.answers;
+			qavc.data = [_user.info.answers linkContent];
 			[self.navigationController pushViewController:qavc animated:YES];
 		}
 	}else if (indexPath.section == UserCenterSectionStyelTest){
 		if (indexPath.row == 0) {
-			TestCollectionTableViewController *tctvc = [[TestCollectionTableViewController alloc] initWithStyle:UITableViewStylePlain withData:_user.info.testcollection];
+			TestCollectionTableViewController *tctvc = [[TestCollectionTableViewController alloc] initWithStyle:UITableViewStylePlain withData:[_user.info.testcollection linkContent]];
 			[self.navigationController pushViewController:tctvc animated:YES];
 		}else{
+			if (indexPath.row == 0 && ![_user isEqual:[User sharedUser]]) {
+				CAlertLabel *alert = [CAlertLabel alertLabelWithAdjustFrameForText:@"无法查看"];
+				[alert showAlertLabel];
+				return;
+			}
 			[self.navigationController pushViewController:[[WrongSubjectViewController alloc] initWithWrongSubjectArray:[[[JJSubjectManage alloc] init] queryModels]] animated:YES];
 		}
 	}

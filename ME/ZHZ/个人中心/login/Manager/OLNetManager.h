@@ -11,6 +11,7 @@
 #define SUCCESSBLOCK      void(^)(NSDictionary* successDict)
 #define FAILUREBLOCK      void(^)(NSDictionary *failDict, NSError *error)
 @interface OLNetManager : NSObject <NSURLConnectionDataDelegate>
++(NSData *)netRequestWithUrl:(NSString *)urlStr andPostBody:(NSString *)body;
 /**
  *  登录
  *
