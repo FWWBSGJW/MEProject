@@ -184,7 +184,7 @@ typedef NS_ENUM(NSInteger, segmentControl) {
             self.showTestArray = [self.testArray objectAtIndex:row];
             testModelBaseClass *model = [self.showTestArray objectAtIndex:0];
             [[[RankingManage alloc] init] getRankingForVC:self
-                                                  withUrl:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listScore?tcId=%d", (int)model.tcId+1]];
+                                                  withUrl:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listScore?tcId=%d", (int)model.tcId]];
             [self.pickerView selectRow:0 inComponent:1 animated:NO];
             [self.pickerView reloadComponent:pickerViewComponentTest];
         }
