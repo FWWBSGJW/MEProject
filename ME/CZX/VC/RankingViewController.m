@@ -14,6 +14,7 @@
 #import "TestDirectionManage.h"
 #import "TestDirectionBaseClass.h"
 #import "testModelBaseClass.h"
+#import "FightModelBaseClass.h"
 
 typedef NS_ENUM(NSInteger, pickerViewComponent) {
     pickerViewComponentDirection = 0,
@@ -101,7 +102,8 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     self.activityView.color = [UIColor blackColor];
     [self.view addSubview:self.activityView];
     
-//    self.segmentedControl.selectedSegmentIndex = segmentControlTest;
+    self.directionPowerArray = [[[TestDirectionManage alloc] init] analyseFightJson:@"http://121.197.10.159:8080/MobileEducation/listSdirection"];
+
     self.directionTestArray = [[[TestDirectionManage alloc] init] analyseJson:@"http://121.197.10.159:8080/MobileEducation/listStestDirection"];
     self.showTestArray = [[[TestDirectionManage alloc] init] analyseTestJson:
                           [NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listStest?tdirection=%d", 1]];
@@ -119,6 +121,9 @@ typedef NS_ENUM(NSInteger, segmentControl) {
             [self.testArray addObject:array];
         }
     }
+    
+    [[[RankingManage alloc] init] getRankingForVC:self
+                                          withUrl:@"http://121.197.10.159:8080/MobileEducation/listFight?did=1"];
 }
 
 #pragma mark pickerView
@@ -140,7 +145,7 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     NSInteger selectedSegmentIndex = [self.segmentedControl selectedSegmentIndex];
     if (selectedSegmentIndex == segmentControlCapacity)
     {
-        return 6;
+        return self.directionPowerArray.count;
     }
     else
     {
@@ -161,7 +166,9 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     NSInteger selectedSegmentIndex = [self.segmentedControl selectedSegmentIndex];
     if (selectedSegmentIndex == segmentControlCapacity)
     {
-
+        FightModelBaseClass *model = [self.directionPowerArray objectAtIndex:row];
+        [[[RankingManage alloc] init] getRankingForVC:self
+                                              withUrl:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listFight?did=%d", (int)model.cDid]];
     }
     else
     {
@@ -176,7 +183,6 @@ typedef NS_ENUM(NSInteger, segmentControl) {
             }
             self.showTestArray = [self.testArray objectAtIndex:row];
             testModelBaseClass *model = [self.showTestArray objectAtIndex:0];
-            [self.activityView startAnimating];
             [[[RankingManage alloc] init] getRankingForVC:self
                                                   withUrl:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listScore?tcId=%d", (int)model.tcId+1]];
             [self.pickerView selectRow:0 inComponent:1 animated:NO];
@@ -185,20 +191,20 @@ typedef NS_ENUM(NSInteger, segmentControl) {
         else
         {
             testModelBaseClass *model = [self.showTestArray objectAtIndex:row];
-            [self.activityView startAnimating];
             [[[RankingManage alloc] init] getRankingForVC:self
                                                   withUrl:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listScore?tcId=%d", (int)model.tcId]];
         }
     }
-
+    [self.activityView startAnimating];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     NSInteger selectedSegmentIndex = [self.segmentedControl selectedSegmentIndex];
     if (selectedSegmentIndex == segmentControlCapacity)
     {
+        FightModelBaseClass *model = [self.directionPowerArray objectAtIndex:row];
         NSString *result = nil;
-        result = [NSString stringWithFormat:@"方向Row %ld", (long)row + 1];
+        result = model.cDhead;
         return result;
     }
     else
@@ -248,13 +254,17 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     lableSwitchCell.timeLa.text = @"";
     lableSwitchCell.scoreLa.text = @"";
     lableSwitchCell.powerLa.text = @"";
-    if (self.segmentedControl.selectedSegmentIndex == segmentControlCapacity)
+    if (self.rankShowArray.count > indexPath.row)
     {
-        lableSwitchCell.powerLa.text = [NSString stringWithFormat:@"战斗力高达：23089"];
-    }
-    else
-    {
-        if (self.rankShowArray.count > indexPath.row)
+        if (self.segmentedControl.selectedSegmentIndex == segmentControlCapacity)
+        {
+
+            RangkingModel *model = [self.rankShowArray objectAtIndex:indexPath.row];
+            lableSwitchCell.nameLa.text = model.userName;
+            [lableSwitchCell.imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseURL, model.userPortrait]]];
+            lableSwitchCell.powerLa.text = [NSString stringWithFormat:@"战斗力高达：%d", (int)model.score];
+        }
+        else
         {
             RangkingModel *model = [self.rankShowArray objectAtIndex:indexPath.row];
             lableSwitchCell.nameLa.text = model.userName;
@@ -263,6 +273,7 @@ typedef NS_ENUM(NSInteger, segmentControl) {
             lableSwitchCell.scoreLa.text = [NSString stringWithFormat:@"考%d分", (int)model.score];
         }
     }
+
     lableSwitchCell.rankingLa.text = [NSString stringWithFormat:@"%d", indexPath.row+1];
     [lableSwitchCell.imageBtn addTarget:self
                                  action:@selector(touchImage:)
@@ -307,10 +318,13 @@ typedef NS_ENUM(NSInteger, segmentControl) {
 
 - (void)touchImage:(UIButton *)sender
 {
-    RangkingModel *model = [self.rankShowArray objectAtIndex:sender.tag];
-    DetailViewController *detailVC = [[DetailViewController alloc] initWithUserId:
-                                      [NSString stringWithFormat:@"%d", (int)model.userId]];
-    [self.navigationController pushViewController:detailVC animated:YES];
+    if (self.rankShowArray.count>sender.tag)
+    {
+        RangkingModel *model = [self.rankShowArray objectAtIndex:sender.tag];
+        DetailViewController *detailVC = [[DetailViewController alloc] initWithUserId:
+                                          [NSString stringWithFormat:@"%d", (int)model.userId]];
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
 }
 
 - (void)touch
@@ -334,13 +348,15 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     NSInteger selectedSegmentIndex = [sender selectedSegmentIndex];
     if (selectedSegmentIndex == segmentControlCapacity)
     {
-        
+        [[[RankingManage alloc] init] getRankingForVC:self
+                                              withUrl:@"http://121.197.10.159:8080/MobileEducation/listFight?did=1"];
     }
     else
     {
         [[[RankingManage alloc] init] getRankingForVC:self
                                               withUrl:@"http://121.197.10.159:8080/MobileEducation/listScore?tcId=1"];
     }
+    [self.activityView startAnimating];
     [self.pickerView selectRow:0 inComponent:0 animated:NO];
     [self.pickerView reloadAllComponents];
     [self.rankTableView reloadData];

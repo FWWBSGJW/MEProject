@@ -9,6 +9,7 @@
 #import "TestDirectionManage.h"
 #import "TestDirectionBaseClass.h"
 #import "testModelBaseClass.h"
+#import "FightModelBaseClass.h"
 NSArray *testDirectionServerRespObj;
 @implementation TestDirectionManage
 
@@ -51,6 +52,27 @@ NSArray *testDirectionServerRespObj;
     
     return mArray;
 }
+
+- (NSArray *)analyseFightJson:(NSString *)paramUrl
+{
+    [self getDataUrl:paramUrl];
+    
+    return [self fightAnalyse];
+}
+
+- (NSMutableArray *)fightAnalyse
+{
+    NSMutableArray *mArray = [[NSMutableArray alloc] init];
+    for (int i=0; i<testDirectionServerRespObj.count; i++)
+    {
+        NSDictionary *dict = [testDirectionServerRespObj objectAtIndex:i];
+        FightModelBaseClass *model = [[FightModelBaseClass alloc] initWithDictionary:dict];
+        [mArray addObject:model];
+    }
+    
+    return mArray;
+}
+
 
 
 

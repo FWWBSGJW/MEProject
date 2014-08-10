@@ -12,5 +12,5 @@
 
 - (NSArray *)analyseJson:(NSString *)paramUrl;
 - (NSArray *)analyseTestJson:(NSString *)paramUrl;
-
+- (NSArray *)analyseFightJson:(NSString *)paramUrl;
 @end
