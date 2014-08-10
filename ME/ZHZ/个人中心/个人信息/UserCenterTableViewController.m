@@ -42,8 +42,8 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 @end
 
 @implementation UserCenterTableViewController
-- (id)initWithUserId:(NSString *)userId andStyle:(UITableViewStyle)style{
-	if (self = [super initWithStyle:style]) {
+- (id)initWithUserId:(NSString *)userId{
+	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
 		_user = [[User alloc] initUserWithUserId:userId];
 	}
 	return self;

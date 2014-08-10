@@ -15,5 +15,5 @@
  */
 @interface UserCenterTableViewController : UITableViewController<UserInfoTableViewCellDelegate>
 @property (nonatomic,strong) User *user;
-- (id)initWithUserId:(NSString *)userId andStyle:(UITableViewStyle)style;
+- (id)initWithUserId:(NSString *)userId;
 @end
