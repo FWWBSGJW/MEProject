@@ -10,5 +10,6 @@
 
 @interface CourseTableViewController : UITableViewController
 @property (nonatomic,strong) NSMutableArray *courses;
+@property (nonatomic,strong) NSString *link;
 @property (nonatomic) BOOL deletable;
 @end

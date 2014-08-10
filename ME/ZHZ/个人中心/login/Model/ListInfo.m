@@ -27,8 +27,15 @@
     return self;
 }
 
+- (void)refreshLinkContent{
+	_linkContent = [[OLNetManager netRequestWithUrl:self.link andPostBody:nil] objectFromJSONData];
+}
+
 - (NSMutableArray *)linkContent{
-	return [[OLNetManager netRequestWithUrl:self.link andPostBody:nil] objectFromJSONData];
+	if (_linkContent) {
+		[self refreshLinkContent];
+	}
+	return _linkContent;
 }
 
 - (NSMutableArray *)courses{

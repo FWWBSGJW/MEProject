@@ -14,7 +14,7 @@
 @property (nonatomic) NSUInteger count;		//数目
 @property (nonatomic,strong) NSString *link;	//详细内容的链接
 @property (nonatomic,strong) NSMutableArray *courses;	//预览课程
-
+@property (nonatomic,strong) NSMutableArray *linkContent;
 - (instancetype)initWithDictionary:(NSDictionary *)dic;
-- (NSMutableArray *)linkContent;
+- (void)refreshLinkContent;
 @end
