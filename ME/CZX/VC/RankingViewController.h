@@ -18,4 +18,5 @@
 @property(nonatomic, strong) NSArray *directionPowerArray;
 @property(nonatomic, strong) NSArray *directionTestArray;
 @property(nonatomic, strong) NSMutableArray *testArray;
+@property(nonatomic, strong) NSArray *showTestArray;
 @end

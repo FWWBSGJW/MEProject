@@ -11,6 +11,9 @@
 #import "RankingManage.h"
 #import "UIImageView+WebCache.h"
 #import "DetailViewController.h"
+#import "TestDirectionManage.h"
+#import "TestDirectionBaseClass.h"
+#import "testModelBaseClass.h"
 
 typedef NS_ENUM(NSInteger, pickerViewComponent) {
     pickerViewComponentDirection = 0,
@@ -98,7 +101,24 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     self.activityView.color = [UIColor blackColor];
     [self.view addSubview:self.activityView];
     
+//    self.segmentedControl.selectedSegmentIndex = segmentControlTest;
+    self.directionTestArray = [[[TestDirectionManage alloc] init] analyseJson:@"http://121.197.10.159:8080/MobileEducation/listStestDirection"];
+    self.showTestArray = [[[TestDirectionManage alloc] init] analyseTestJson:
+                          [NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listStest?tdirection=%d", 1]];
+    
     self.testArray = [NSMutableArray new];
+    for (int i=0; i<self.directionTestArray.count; i++)
+    {
+        if (i==0)
+        {
+            [self.testArray addObject:self.showTestArray];
+        }
+        else
+        {
+            NSArray *array = [NSArray new];
+            [self.testArray addObject:array];
+        }
+    }
 }
 
 #pragma mark pickerView
@@ -126,11 +146,11 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     {
         if (component == pickerViewComponentDirection)
         {
-            return 4;
+            return self.directionTestArray.count;
         }
         else
         {
-            return 12;
+            return self.showTestArray.count;
         }
     }
 
@@ -147,11 +167,27 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     {
         if (component == pickerViewComponentDirection)
         {
+            NSArray *temArray = self.testArray[row];
+            if (temArray.count == 0)
+            {
+                NSArray *array = [[[TestDirectionManage alloc] init] analyseTestJson:
+                                  [NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listStest?tdirection=%d", row+1]];
+                [self.testArray replaceObjectAtIndex:row withObject:array];
+            }
+            self.showTestArray = [self.testArray objectAtIndex:row];
+            testModelBaseClass *model = [self.showTestArray objectAtIndex:0];
+            [self.activityView startAnimating];
+            [[[RankingManage alloc] init] getRankingForVC:self
+                                                  withUrl:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listScore?tcId=%d", (int)model.tcId+1]];
+            [self.pickerView selectRow:0 inComponent:1 animated:NO];
             [self.pickerView reloadComponent:pickerViewComponentTest];
         }
         else
         {
-            
+            testModelBaseClass *model = [self.showTestArray objectAtIndex:row];
+            [self.activityView startAnimating];
+            [[[RankingManage alloc] init] getRankingForVC:self
+                                                  withUrl:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listScore?tcId=%d", (int)model.tcId]];
         }
     }
 
@@ -170,13 +206,15 @@ typedef NS_ENUM(NSInteger, segmentControl) {
         if (component == pickerViewComponentDirection)
         {
             NSString *result = nil;
-            result = [NSString stringWithFormat:@"方向Row %ld", (long)row + 1];
+            TestDirectionBaseClass *model = [self.directionTestArray objectAtIndex:row];
+            result = model.tdName;
             return result;
         }
         else
         {
             NSString *result = nil;
-            result = [NSString stringWithFormat:@"测试Row %ld", (long)row + 1];
+            testModelBaseClass *model = [self.showTestArray objectAtIndex:row];
+            result = model.tcName;
             return result;
         }
     }
