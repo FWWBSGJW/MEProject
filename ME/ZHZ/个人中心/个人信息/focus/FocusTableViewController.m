@@ -91,7 +91,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	NSDictionary *dic = [_data objectAtIndex:indexPath.row];
 //	DetailViewController *dvc = [[DetailViewController alloc] initWithUserId:[dic objectForKey:@"userId"]];
+<<<<<<< HEAD
 	UserCenterTableViewController *usercenter =[[UserCenterTableViewController alloc] initWithUserId:[NSString stringWithFormat:@"%@",[dic objectForKey:@"userId"]]];
+=======
+	UserCenterTableViewController *usercenter = [[UserCenterTableViewController alloc] initWithUserId:[NSString stringWithFormat:@"%@",[dic objectForKey:@"userId"]]];
+>>>>>>> FETCH_HEAD
 	[self.navigationController pushViewController:usercenter animated:YES];
 }
 

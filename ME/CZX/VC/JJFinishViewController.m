@@ -16,7 +16,7 @@
 #import "UIImageView+WebCache.h"
 #import "RankingManage.h"
 #import <ShareSDK/ShareSDK.h>
-#import "DetailViewController.h"
+#import "UserCenterTableViewController.h"
 
 @interface JJFinishViewController ()
 {
@@ -159,10 +159,8 @@
 - (void)touchHeadImage:(UIButton *)sender
 {
     RangkingModel *model = [self.scoreArray objectAtIndex:sender.tag];
-    DetailViewController *detailVC = [[DetailViewController alloc] initWithUserId:
-                                      [NSString stringWithFormat:@"%d", (int)model.userId]];
+    UserCenterTableViewController *detailVC = [[UserCenterTableViewController alloc] initWithUserId:[NSString stringWithFormat:@"%d", (int)model.userId]];
     [self.navigationController pushViewController:detailVC animated:YES];
-
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

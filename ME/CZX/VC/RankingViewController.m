@@ -10,7 +10,7 @@
 #import "ScoreTableViewCell.h"
 #import "RankingManage.h"
 #import "UIImageView+WebCache.h"
-#import "DetailViewController.h"
+#import "UserCenterTableViewController.h"
 #import "TestDirectionManage.h"
 #import "TestDirectionBaseClass.h"
 #import "testModelBaseClass.h"
@@ -321,8 +321,7 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     if (self.rankShowArray.count>sender.tag)
     {
         RangkingModel *model = [self.rankShowArray objectAtIndex:sender.tag];
-        DetailViewController *detailVC = [[DetailViewController alloc] initWithUserId:
-                                          [NSString stringWithFormat:@"%d", (int)model.userId]];
+        UserCenterTableViewController *detailVC = [[UserCenterTableViewController alloc] initWithUserId:[NSString stringWithFormat:@"%d", (int)model.userId]];
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
