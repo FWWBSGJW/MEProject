@@ -9,6 +9,7 @@
 #import "ExtendViewController.h"
 #import "ShakeViewController.h"
 #import "RankingViewController.h"
+#import "CDownloadViewController.h"
 
 @interface ExtendViewController ()
 
@@ -25,10 +26,10 @@
     return self;
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:YES];
-    
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewDidLoad
@@ -59,6 +60,9 @@
             [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[RankingViewController alloc] init]] animated:YES completion:^{
             }];
             break;
+        case 3:
+            [self.navigationController pushViewController:[[CDownloadViewController alloc] init] animated:YES];
+            //[self presentViewController:[[CDownloadViewController alloc] init] animated:YES completion:nil];
         default:
             break;
     }

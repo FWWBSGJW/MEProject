@@ -73,7 +73,7 @@
     qaVC3.tabBarItem = qaItem;
     
     self.tabBar.barTintColor = [UIColor whiteColor];
-    self.tabBar.tintColor = [UIColor colorWithRed:88/255.0 green:246/255.0 blue:76/255.0 alpha:1.0];
+    //self.tabBar.tintColor = [UIColor colorWithRed:88/255.0 green:246/255.0 blue:76/255.0 alpha:1.0];
     
     NSArray *array = @[couseNav,testNav,extendNav,qaNav,userVC];
     

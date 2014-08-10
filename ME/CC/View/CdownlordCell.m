@@ -8,11 +8,14 @@
 
 #import "CdownlordCell.h"
 
+
+
 @implementation CdownlordCell
 
 - (void)awakeFromNib
 {
-    // Initialization code
+    [self.dDownloadButton addTarget:_cellDelegate action:@selector(touchStartorPauseButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self setSelectionStyle:UITableViewCellSelectionStyleBlue];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

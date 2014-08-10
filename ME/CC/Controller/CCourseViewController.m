@@ -226,6 +226,7 @@
     CourseDirection *CD = self.courseDirectionArray[indexPath.row];
  
     CDetailCourseViewController *detailCourseVC = [CDetailCourseViewController detailCourseVCwithCourseDirection:CD];
+    
     [self.tabBarController.tabBar setHidden:YES];
     [self.navigationController pushViewController:detailCourseVC animated:YES];
     

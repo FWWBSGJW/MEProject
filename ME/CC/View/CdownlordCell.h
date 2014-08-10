@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol dCelldelegate <NSObject>
+
+- (void)touchStartorPauseButton:(UIButton *)sender;
+
+@end
+
 @interface CdownlordCell : UITableViewCell
+
+@property (weak, nonatomic) id<dCelldelegate> cellDelegate;
+
 @property (weak, nonatomic) IBOutlet UIImageView *dFileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *dTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dhadDownNumber;

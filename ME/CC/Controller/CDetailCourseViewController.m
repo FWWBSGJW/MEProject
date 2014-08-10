@@ -38,7 +38,7 @@
 #pragma mark - 类构造方法
 + (instancetype)detailCourseVCwithCourseDirection:(CourseDirection *)courseDirection
 {
-    CDetailCourseViewController *CDCourseVC = [[CDetailCourseViewController alloc] initWithStyle:UITableViewStylePlain];
+    CDetailCourseViewController *CDCourseVC = [[CDetailCourseViewController alloc] initWithStyle:UITableViewStyleGrouped];
     CDCourseVC.courseDirection = courseDirection;
     CDCourseVC.title = courseDirection.CDhead; //设置标题
     return CDCourseVC;
@@ -67,6 +67,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   
     self.tableView.rowHeight = 60.0; //设置cell高度
    
 }
@@ -116,13 +117,23 @@
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section>0) {
+        CDSection *cdSection = self.cdAllSection.cdAllSectionArray[section-1];
+        NSString *text = [NSString stringWithFormat:@"学习阶段%d:%@",section,cdSection.csName];
+        return text;
+    }
+    return nil;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
         CDetailHead *headView = [[CDetailHead alloc] init];
         [self setFirstHeadUI:headView];
         return headView;
-    } else {
+    } /*else {
         static NSString *headIdentifier = @"myHead";
         UIView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headIdentifier];
     
@@ -131,10 +142,12 @@
             view.backgroundColor = [UIColor whiteColor];
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 20)];
             label.tag = 201;
-            view.backgroundColor = [UIColor colorWithRed:128/255.0 green:1.0 blue:0 alpha:1.0];
+            //view.backgroundColor = [UIColor colorWithRed:128/255.0 green:1.0 blue:0 alpha:1.0];
             //view.backgroundColor = [UIColor lightGrayColor];
             label.backgroundColor = [UIColor clearColor];
             //label.backgroundColor = [UIColor whiteColor];
+            view.layer.borderWidth = 1.0f;
+            view.layer.borderColor = [[UIColor lightGrayColor] CGColor];
             [view addSubview:label];
         }
         UILabel *label = (UILabel *)[view viewWithTag:201];
@@ -144,17 +157,22 @@
 
 
         return view;
-    }
+    } */
+    return nil;
+    
     
 }
 
+ 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 200;
+        return 220;
     } else
-        return 30;
+        return 10;
 }
+
+
 
 #pragma mark - 设置首个head的UI
 - (void)setFirstHeadUI:(CDetailHead *)headView

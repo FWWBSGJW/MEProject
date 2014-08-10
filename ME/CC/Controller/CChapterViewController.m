@@ -98,8 +98,14 @@ enum MoreActionButton_Tag
     
     _courseChapter = [[CourseChapter alloc] init];
     
-    //上拉更多
+    //下拉
     __weak CChapterViewController *weakSelf = self;
+    
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refreshView];
+    }];
+    
+    //上拉更多
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf insertRowAtBottom];
     }];
@@ -149,6 +155,20 @@ enum MoreActionButton_Tag
     
     UINib *nib2 = [UINib nibWithNibName:@"CNoteCell" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:nib2 forCellReuseIdentifier:@"noteCell"];
+    
+}
+#pragma mark - 页面数据刷新
+- (void)refreshView
+{
+    __weak CChapterViewController *weakSelf = self;
+    
+    int64_t delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^{
+        [weakSelf.tableView.pullToRefreshView stopAnimating];
+        [self.tableView reloadData];
+    });
+    
     
 }
 
@@ -627,12 +647,9 @@ enum MoreActionButton_Tag
             case SegementNote:
             {
                 if (indexPath.section > 1) {
-#warning 待获取视频url
-                
-                    NSString *vUrl = @"http://121.197.10.159:8080//videos/vid_0.mp4";
-                    
                     NSArray *noteArray = self.courseNoteArray[indexPath.section-1][@"CCnote"];
                     NSDictionary *noteDic = noteArray[indexPath.row];
+                    NSString *vUrl = noteDic[@"videoUrl"];
                     NSString *title = [NSString stringWithFormat:@"%@ %@",noteDic[@"vSectionsNo"],noteDic[@"vSectionsName"]];
                     NSTimeInterval noteTime = [noteDic[@"Dtime"] doubleValue];
                     CVideoPlayerController *player = [[CVideoPlayerController alloc] init];

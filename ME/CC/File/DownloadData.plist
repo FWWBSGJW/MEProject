@@ -4,21 +4,21 @@
 <array>
 	<array>
 		<dict>
-			<key>dCNum</key>
+			<key>dcNum</key>
 			<string>2.1</string>
 			<key>dcName</key>
 			<string>java简介</string>
 			<key>dcUrl</key>
-			<string></string>
+			<string>http://121.197.10.159:8080/videos/vid_0.mp4</string>
 			<key>dcSize</key>
-			<string></string>
+			<string>23.0M</string>
 			<key>dcNow</key>
-			<string></string>
+			<string>0M</string>
 		</dict>
 	</array>
 	<array>
 		<dict>
-			<key>dCNum</key>
+			<key>dcNum</key>
 			<string>2.2</string>
 			<key>dcName</key>
 			<string>java特点</string>
@@ -27,7 +27,7 @@
 			<key>dcSize</key>
 			<string>23.0M</string>
 			<key>dcUrl</key>
-			<string></string>
+			<string>promo_full.mp4</string>
 		</dict>
 	</array>
 </array>
