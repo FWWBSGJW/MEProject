@@ -303,6 +303,7 @@ typedef NS_ENUM(NSInteger, segmentControl) {
         [[[RankingManage alloc] init] getRankingForVC:self
                                               withUrl:@"http://121.197.10.159:8080/MobileEducation/listScore?tcId=1"];
     }
+    [self.pickerView selectRow:0 inComponent:0 animated:NO];
     [self.pickerView reloadAllComponents];
     [self.rankTableView reloadData];
 }
