@@ -87,7 +87,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	NSDictionary *dic = [_data objectAtIndex:indexPath.row];
 //	DetailViewController *dvc = [[DetailViewController alloc] initWithUserId:[dic objectForKey:@"userId"]];
-	UserCenterTableViewController *usercenter = [[UserCenterTableViewController alloc] initWithUserId:[NSString stringWithFormat:@"%@",[dic objectForKey:@"userId"]] andStyle:UITableViewStyleGrouped];
+	UserCenterTableViewController *usercenter = [[UserCenterTableViewController alloc] initWithUserId:[NSString stringWithFormat:@"%@",[dic objectForKey:@"userId"]]];
 	[self.navigationController pushViewController:usercenter animated:YES];
 }
 

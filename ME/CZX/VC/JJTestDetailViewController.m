@@ -15,7 +15,7 @@
 #import "User.h"
 #import "SendComNoteView.h"
 #import "SVPullToRefresh.h"
-#import "DetailViewController.h"
+#import "UserCenterTableViewController.h"
 #import <ShareSDK/ShareSDK.h>
 
 @interface JJTestDetailViewController ()
@@ -219,18 +219,18 @@
     User *user = [User sharedUser];
     if(user.info.isLogin == YES)
     {
-        for (int i=0; i<user.info.testcollection.count; i++)
-        {
-            NSDictionary *dict = [[user.info.testcollection linkContent] objectAtIndex:i];
-            int dictTCID = [[dict objectForKey:@"tcId"] intValue];
-            int mymodelTCID = self.myModel.tcId;
-            if (dictTCID == mymodelTCID)
-            {
-                [self.likeBtn setImage:[UIImage imageNamed:@"likeUp"] forState:UIControlStateNormal];
-                [self.likeBtn setTitle:@"已收藏" forState:UIControlStateNormal];
-                break;
-            }
-        }
+//        for (int i=0; i<[user.info.testcollection linkContent].count; i++)
+//        {
+//            NSDictionary *dict = [[user.info.testcollection linkContent] objectAtIndex:i];
+//            int dictTCID = [[dict objectForKey:@"tcId"] intValue];
+//            int mymodelTCID = self.myModel.tcId;
+//            if (dictTCID == mymodelTCID)
+//            {
+//                [self.likeBtn setImage:[UIImage imageNamed:@"likeUp"] forState:UIControlStateNormal];
+//                [self.likeBtn setTitle:@"已收藏" forState:UIControlStateNormal];
+//                break;
+//            }
+//        }
     }
     
     self.commentTableView = [[UITableView alloc]
@@ -342,7 +342,8 @@
          else if (error != nil){
              NSLog(@"Error happened = %@", error);
          }
-        [[User sharedUser] refreshInfo];
+//         [[User sharedUser].info.testcollection refreshLinkContent]
+//        [[User sharedUser] refreshInfo];
     }
 }
 
@@ -395,8 +396,7 @@
 - (void)touchHeadImage:(UIButton *)sender
 {
     JJCommentModel *model = [self.commentArray objectAtIndex:sender.tag];
-    DetailViewController *detailVC = [[DetailViewController alloc] initWithUserId:
-                                      [NSString stringWithFormat:@"%d", (int)model.userid]];
+    UserCenterTableViewController *detailVC = [[UserCenterTableViewController alloc] initWithUserId:[NSString stringWithFormat:@"%d", (int)model.userid]];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
