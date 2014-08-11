@@ -219,18 +219,18 @@
     User *user = [User sharedUser];
     if(user.info.isLogin == YES)
     {
-//        for (int i=0; i<[user.info.testcollection linkContent].count; i++)
-//        {
-//            NSDictionary *dict = [[user.info.testcollection linkContent] objectAtIndex:i];
-//            int dictTCID = [[dict objectForKey:@"tcId"] intValue];
-//            int mymodelTCID = self.myModel.tcId;
-//            if (dictTCID == mymodelTCID)
-//            {
-//                [self.likeBtn setImage:[UIImage imageNamed:@"likeUp"] forState:UIControlStateNormal];
-//                [self.likeBtn setTitle:@"已收藏" forState:UIControlStateNormal];
-//                break;
-//            }
-//        }
+        for (int i=0; i<[user.info.testcollection linkContent].count; i++)
+        {
+            NSDictionary *dict = [[user.info.testcollection linkContent] objectAtIndex:i];
+            int dictTCID = [[dict objectForKey:@"tcId"] intValue];
+            int mymodelTCID = self.myModel.tcId;
+            if (dictTCID == mymodelTCID)
+            {
+                [self.likeBtn setImage:[UIImage imageNamed:@"likeUp"] forState:UIControlStateNormal];
+                [self.likeBtn setTitle:@"已收藏" forState:UIControlStateNormal];
+                break;
+            }
+        }
     }
     
     self.commentTableView = [[UITableView alloc]
@@ -342,7 +342,7 @@
          else if (error != nil){
              NSLog(@"Error happened = %@", error);
          }
-//         [[User sharedUser].info.testcollection refreshLinkContent]
+        [[User sharedUser].info.testcollection refreshLinkContent];
 //        [[User sharedUser] refreshInfo];
     }
 }
