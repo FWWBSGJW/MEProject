@@ -2,20 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-	<array>
-		<dict>
-			<key>dcNum</key>
-			<string>2.1</string>
-			<key>dcName</key>
-			<string>java简介</string>
-			<key>dcUrl</key>
-			<string>http://121.197.10.159:8080/videos/vid_0.mp4</string>
-			<key>dcSize</key>
-			<string>23.0M</string>
-			<key>dcNow</key>
-			<string>0M</string>
-		</dict>
-	</array>
+	<array/>
 	<array>
 		<dict>
 			<key>dcNum</key>
@@ -28,6 +15,8 @@
 			<string>23.0M</string>
 			<key>dcUrl</key>
 			<string>promo_full.mp4</string>
+			<key>videoID</key>
+			<string>1000</string>
 		</dict>
 	</array>
 </array>

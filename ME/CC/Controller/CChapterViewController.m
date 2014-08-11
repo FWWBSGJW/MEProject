@@ -21,6 +21,7 @@
 #import "CAlertLabel.h"
 #import "CMoreActionView.h"
 #import "JJTestDetailViewController.h"
+#import "CDownloadModel.h"
 
 #define headHeight 160
 enum Segement_Type
@@ -84,6 +85,9 @@ enum MoreActionButton_Tag
 @property (strong, nonatomic) UIActionSheet *actionSheet;
 @property (strong, nonatomic) UIView *downLoadBarView;
 @property (strong, nonatomic) CMoreActionView *moreActionView;
+
+@property (strong, nonatomic) CDownloadModel *downloadModel;
+
 @end
 
 @implementation CChapterViewController
@@ -135,7 +139,8 @@ enum MoreActionButton_Tag
     [items removeLastObject];
     toorBar.items = items;
     [self.view addSubview:toorBar];
-    
+#warning 待注释回来
+    /*
     if ([User sharedUser].info.isLogin) {
         for (NSDictionary *dic in [User sharedUser].info.ccourses) {
             if ([dic[@"cid"] integerValue] == self.courseID) {
@@ -145,7 +150,7 @@ enum MoreActionButton_Tag
             }
         }
     }
-    
+    */
     self.toobar = toorBar;
     
     //注册cell
@@ -356,6 +361,13 @@ enum MoreActionButton_Tag
     return _courseNoteArray;
 }
 
+- (CDownloadModel *)downloadModel
+{
+    if (!_downloadModel) {
+        _downloadModel = [CDownloadModel sharedCDownloadModel];
+    }
+    return _downloadModel;
+}
 
 #pragma mark - 控制旋转
 -(BOOL)shouldAutorotate
@@ -679,6 +691,18 @@ enum MoreActionButton_Tag
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.segmentControl.selectedSegmentIndex == SegementChapter) {
+        
+        NSDictionary *dic = self.courseChapterArray[indexPath.section-1];
+        NSDictionary *videoDic = dic[@"CCvideo"][indexPath.row];
+        //判断是否已下载
+        for (NSInteger i = 0; i < self.downloadModel.downloadArray.count; i++) {
+            for (NSDictionary *dic in self.downloadModel.downloadArray[0]) {
+                if ([dic[@"videoID"] isEqualToString:[NSString stringWithFormat:@"%@",videoDic[@"vId"]]]) {
+                    return NO;
+                }
+            }
+        }
+
         return YES;
     } else
         return NO;
@@ -879,17 +903,22 @@ enum MoreActionButton_Tag
 #pragma mark download Action
 - (void)doDownload:(UIButton *)sender
 {
-    if (sender.tag == DownloadConfirm) {
-        NSArray *array = [self.tableView indexPathsForSelectedRows];
-        //NSLog(@"%@",array);
-        NSMutableArray *downChapterArray = [NSMutableArray arrayWithCapacity:array.count];
+    NSArray *array = [self.tableView indexPathsForSelectedRows];
+    if (sender.tag == DownloadConfirm && array.count > 0) {
+
+        //NSMutableArray *downChapterArray = [NSMutableArray arrayWithCapacity:array.count];
         for (NSIndexPath *indexPath in array) {
             NSDictionary *dic = self.courseChapterArray[indexPath.section-1];
-            NSArray *couseArray = dic[@"CCvideo"];
-            [downChapterArray addObject:couseArray[indexPath.row]];
+            NSDictionary *videoDic = dic[@"CCvideo"][indexPath.row];
+           
+            [self.downloadModel downLoadVideoWithUrlString:[NSString stringWithFormat:@"%@%@",kBaseURL,videoDic[@"vUrl"] ] andName:videoDic[@"vSectionsName"] andCNum:videoDic[@"vSectionsNo"] andVideoID:[NSString stringWithFormat:@"%d",[dic[@"vId"] integerValue]]];
         }
         //NSLog(@"%@",downChapterArray);
-        NSString *aMessage = [NSString stringWithFormat:@"你选择的%d个视频已近开始下载",downChapterArray.count];
+#warning 测试
+        
+        //[downloadModel downLoadVideoWithUrlString:@"http://121.197.10.159:8080/videos/vid_0.mp4" andName:@"测试" andCNum:@"1.0"];
+        
+        NSString *aMessage = [NSString stringWithFormat:@"你选择的%d个视频已近开始下载",array.count];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"开始下载" message:aMessage delegate:self cancelButtonTitle:@"知道啦" otherButtonTitles:@"去看看", nil];
         [alertView show];
     }

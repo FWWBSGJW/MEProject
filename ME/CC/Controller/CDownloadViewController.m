@@ -10,9 +10,12 @@
 #import "CourseChapter.h"
 #import "CdownlordCell.h"
 #import  <MediaPlayer/MediaPlayer.h>
-@interface CDownloadViewController ()<dCelldelegate>
+#import "CDownloadModel.h"
+@interface CDownloadViewController ()<dCelldelegate,downloadDelegate>
 
 @property (strong, nonatomic) NSMutableArray *downLoadArray;
+@property (strong, nonatomic) CDownloadModel *downloadModel;
+@property (strong, nonatomic) NSTimer *refreshTimer;
 
 @end
 
@@ -20,14 +23,25 @@
 
 #pragma mark - getter and setter
 
+- (CDownloadModel *)downloadModel
+{
+    if (!_downloadModel) {
+        _downloadModel = [CDownloadModel sharedCDownloadModel];
+        _downloadModel.myDelegate = self;
+    }
+    return _downloadModel;
+}
+
 - (NSMutableArray *)downLoadArray
 {
     if (!_downLoadArray) {
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"DownloadData.plist" ofType:nil];
-        _downLoadArray = [NSMutableArray arrayWithContentsOfFile:filePath];
+        //NSString *filePath = [[NSBundle mainBundle] pathForResource:@"DownloadData.plist" ofType:nil];
+        //_downLoadArray = [NSMutableArray arrayWithContentsOfFile:filePath];
+        _downLoadArray = self.downloadModel.downloadArray;
     }
     return _downLoadArray;
 }
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -61,6 +75,8 @@
     
     UINib *nib = [UINib nibWithNibName:@"CdownlordCell" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"downloadCell"];
+    
+    _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(reloadDowloadUI) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,24 +108,33 @@
         cell = [[CdownlordCell alloc] init];
     }
     NSDictionary *dic = [self.downLoadArray objectAtIndex:indexPath.section][indexPath.row];
-    cell.dFileImageView.image = [UIImage imageNamed:@"flv"];
+    
     cell.dShouldDownNumber.text = dic[@"dcSize"];
     
     cell.dTitleLabel.text = [NSString stringWithFormat:@"%@ %@",dic[@"dcNum"],dic[@"dcName"]];
     if (indexPath.section == 0) {
-        cell.dStateLabel.text = @"0.0kb/s";
+        cell.dhadDownNumber.text = [NSString stringWithFormat:@"%.1fM",[dic[@"dcNow"] doubleValue]];
+        cell.dShouldDownNumber.text = [NSString stringWithFormat:@"%.1fM",[dic[@"dcSize"] doubleValue]];
+        cell.dStateLabel.text = [dic[@"dcSpeed"] stringByAppendingString:@"kb/s"];
         if (cell.dDownloadButton.isHidden) {
-            cell.dhadDownNumber.text = dic[@"dcNow"];
-            cell.dShouldDownNumber.text = dic[@"dcSize"];
             cell.dDownloadButton.hidden = NO;
         }
+        
+        if ([dic[@"dcState"] integerValue]) {
+            [cell.dDownloadButton setTitle:@"暂停" forState:UIControlStateNormal];
+        } else {
+            [cell.dDownloadButton setTitle:@"开始" forState:UIControlStateNormal];
+        }
+        cell.dDownloadButton.tag = indexPath.row;
+        
     } else if(indexPath.section == 1){
         cell.dStateLabel.text = dic[@"dcDate"];
+        
         if (!cell.dDownloadButton.isHidden) {
             cell.dDownloadButton.hidden = YES;
-            cell.dhadDownNumber.text = dic[@"dcSize"];
-            cell.dShouldDownNumber.text = dic[@"dcSize"];
         }
+        cell.dhadDownNumber.text = [NSString stringWithFormat:@"%.1fM",[dic[@"dcSize"] doubleValue]];
+        cell.dShouldDownNumber.text = [NSString stringWithFormat:@"%.1fM",[dic[@"dcSize"] doubleValue]];
     }
     
     return cell;
@@ -141,13 +166,8 @@
     } else if(indexPath.section == 1){
     
         NSDictionary *dic = self.downLoadArray[indexPath.section][indexPath.row];
-        NSString *fileName = dic[@"dcUrl"];
-        NSArray *doc = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *filePath = [doc[0] stringByAppendingPathComponent:fileName];
-//        NSString *thePath = [[NSBundle mainBundle] pathForResource:fileName ofType:nil];
-//        NSData *data = [NSData dataWithContentsOfFile:thePath];
-//        [data writeToFile:filePath atomically:YES];
-        NSLog(@"%@",filePath);
+        NSString *filePath = dic[@"dcUrl"];
+        
         MPMoviePlayerViewController *playVC = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:filePath]];
         [self presentMoviePlayerViewControllerAnimated:playVC];
         
@@ -165,14 +185,49 @@
 
 - (void)touchStartorPauseButton:(UIButton *)sender
 {
-    
+    NSInteger vNumber = sender.tag;
+    NSMutableDictionary *dic = self.downloadModel.downloadArray[0][vNumber];
+    NSString *videoID = dic[@"videoID"];
+    if (![dic[@"dcState"] integerValue]) {
+        //开始下载
+        dic[@"dcState"] = @1;
+        [self.downloadModel continueWithVideoID:videoID];
+        [sender setTitle:@"暂停" forState:UIControlStateNormal];
+    } else{
+        //暂停
+        dic[@"dcState"] = @0;
+        [self.downloadModel pauseWithVideoID:videoID];
+        [sender setTitle:@"下载" forState:UIControlStateNormal];
+    }
+
 }
 
-#pragma mark delete
+#pragma mark - delegate
 
 - (void)startDeleteVideo
 {
     self.tableView.editing  = !self.tableView.editing;
+}
+
+- (void)upDateUI
+{
+    [self.tableView reloadData];
+    NSLog(@"%@",self.downLoadArray);
+}
+
+- (void)reloadDowloadUI
+{
+    //NSDictionary *dic = self.downLoadArray[0];
+    if (((NSArray *)self.downLoadArray[0]).count > 0) {
+        for (NSMutableDictionary *dic in self.downLoadArray[0] ) {
+            dic[@"dcSpeed"] = [NSString stringWithFormat:@"%d",(int)(([dic[@"dcNow"] floatValue] - [dic[@"dcLastSize"] floatValue])*1000) ];
+            dic[@"dcLastSize"] = dic[@"dcNow"];
+        }
+        
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+
+    }
 }
 
 /*

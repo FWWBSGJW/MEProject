@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>cName</key>
+	<string></string>
+	<key>cPic</key>
+	<string></string>
+	<key>cid</key>
+	<string></string>
+	<key>progress</key>
+	<string></string>
+	<key>cVideo</key>
+	<dict>
+		<key>latestVid</key>
+		<string>1</string>
+		<key>videoArray</key>
+		<array>
+			<dict>
+				<key>chapterNum/章节编号</key>
+				<string>1</string>
+				<key>watchedID</key>
+				<array>
+					<string>1</string>
+					<string>2</string>
+					<string>3</string>
+				</array>
+			</dict>
+			<dict>
+				<key>chapterNum/章节编号</key>
+				<string>2</string>
+				<key>watchedID</key>
+				<array>
+					<string>1</string>
+					<string>2</string>
+					<string>3</string>
+				</array>
+			</dict>
+			<dict>
+				<key>chapterNum/章节编号</key>
+				<string>5</string>
+				<key>watchedID</key>
+				<array>
+					<string>1</string>
+					<string>2</string>
+					<string>3</string>
+				</array>
+			</dict>
+		</array>
+	</dict>
+	<key>New item</key>
+	<dict>
+		<key>dcNum</key>
+		<string>2.1</string>
+		<key>dcName</key>
+		<string>java简介</string>
+		<key>dcUrl</key>
+		<string>http://121.197.10.159:8080/videos/vid_0.mp4</string>
+		<key>dcSize</key>
+		<string>23.0M</string>
+		<key>dcNow</key>
+		<string>0M</string>
+		<key>dcSpeed</key>
+		<string></string>
+		<key>videoID</key>
+		<string></string>
+	</dict>
+</dict>
+</plist>
