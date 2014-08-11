@@ -48,22 +48,5 @@
 			</dict>
 		</array>
 	</dict>
-	<key>New item</key>
-	<dict>
-		<key>dcNum</key>
-		<string>2.1</string>
-		<key>dcName</key>
-		<string>java简介</string>
-		<key>dcUrl</key>
-		<string>http://121.197.10.159:8080/videos/vid_0.mp4</string>
-		<key>dcSize</key>
-		<string>23.0M</string>
-		<key>dcNow</key>
-		<string>0M</string>
-		<key>dcSpeed</key>
-		<string></string>
-		<key>videoID</key>
-		<string></string>
-	</dict>
 </dict>
 </plist>

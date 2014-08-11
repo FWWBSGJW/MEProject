@@ -10,6 +10,7 @@
 #import "ShakeViewController.h"
 #import "RankingViewController.h"
 #import "CDownloadViewController.h"
+#import "JCRBlurView.h"
 
 @interface ExtendViewController ()
 
@@ -21,7 +22,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
@@ -36,6 +37,9 @@
 
 {
     [super viewDidLoad];
+//    JCRBlurView *blurView = [JCRBlurView new];
+//    [blurView setFrame:CGRectMake(0.0f, 0.0f, SCREEN_HEIGHT, SCREEN_WIDTH)];
+//    [self.view insertSubview:blurView atIndex:0];
     self.navigationController.navigationBarHidden = YES;
 }
 

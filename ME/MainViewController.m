@@ -83,6 +83,10 @@
     
     [self setViewControllers:array animated:YES];
     
+    UIView *clearView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/5.0f*2, 0, SCREEN_WIDTH/5.0f, 44.0)];
+    clearView.backgroundColor = [UIColor clearColor];
+    [self.tabBar addSubview:clearView];
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:CGRectMake(SCREEN_WIDTH*2/5.0+10,5,SCREEN_WIDTH/5.0-20,40)];
     [button setBackgroundImage:[UIImage imageNamed:@"Add"] forState:UIControlStateNormal];
@@ -95,7 +99,7 @@
 {
     ExtendViewController *exVC = [[ExtendViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:exVC];
-    
+
     //exVC.view.backgroundColor = [UIColor colorWithRed:88/255.0 green:246/255.0 blue:76/255.0 alpha:1.0];
     [self presentViewController:nav animated:YES completion:nil];
 }

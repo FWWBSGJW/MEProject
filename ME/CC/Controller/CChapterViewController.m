@@ -16,12 +16,12 @@
 #import "CVideoPlayerController.h"
 #import "CDownloadViewController.h"
 #import "CNoteCell.h"
-#import "DetailViewController.h"
 #import <ShareSDK/ShareSDK.h>
 #import "CAlertLabel.h"
 #import "CMoreActionView.h"
 #import "JJTestDetailViewController.h"
 #import "CDownloadModel.h"
+#import "UserCenterTableViewController.h"
 
 #define headHeight 160
 enum Segement_Type
@@ -139,10 +139,8 @@ enum MoreActionButton_Tag
     [items removeLastObject];
     toorBar.items = items;
     [self.view addSubview:toorBar];
-#warning 待注释回来
-    /*
     if ([User sharedUser].info.isLogin) {
-        for (NSDictionary *dic in [User sharedUser].info.ccourses) {
+        for (NSDictionary *dic in [[User sharedUser].info.ccourses linkContent]) {
             if ([dic[@"cid"] integerValue] == self.courseID) {
                 UIBarButtonItem *item = items[0];
                 item.image = [UIImage imageNamed:@"cStarFull"];
@@ -150,7 +148,7 @@ enum MoreActionButton_Tag
             }
         }
     }
-    */
+    
     self.toobar = toorBar;
     
     //注册cell
@@ -717,8 +715,8 @@ enum MoreActionButton_Tag
 {
     NSDictionary *dic = self.courseCommentArray[sender.tag];
     NSString *userID = dic[@"userid"];
-    DetailViewController *detailVC = [[DetailViewController alloc] initWithUserId:userID];
-    [self.navigationController pushViewController:detailVC animated:YES];
+    UserCenterTableViewController *userVC = [[UserCenterTableViewController alloc] initWithUserId:userID];
+    [self.navigationController pushViewController:userVC animated:YES];
 }
 
 #pragma mark  segement Changed 方法
@@ -787,7 +785,7 @@ enum MoreActionButton_Tag
 #pragma mark 功能button方法
 - (void)touchButton:(UIBarButtonItem *)button
 {
-#warning -  功能待实现
+
     switch (button.tag) {
         case ButtonTagPrivate:{
             [self userCheck];
@@ -913,10 +911,7 @@ enum MoreActionButton_Tag
            
             [self.downloadModel downLoadVideoWithUrlString:[NSString stringWithFormat:@"%@%@",kBaseURL,videoDic[@"vUrl"] ] andName:videoDic[@"vSectionsName"] andCNum:videoDic[@"vSectionsNo"] andVideoID:[NSString stringWithFormat:@"%d",[dic[@"vId"] integerValue]]];
         }
-        //NSLog(@"%@",downChapterArray);
-#warning 测试
-        
-        //[downloadModel downLoadVideoWithUrlString:@"http://121.197.10.159:8080/videos/vid_0.mp4" andName:@"测试" andCNum:@"1.0"];
+
         
         NSString *aMessage = [NSString stringWithFormat:@"你选择的%d个视频已近开始下载",array.count];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"开始下载" message:aMessage delegate:self cancelButtonTitle:@"知道啦" otherButtonTitles:@"去看看", nil];

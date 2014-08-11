@@ -392,7 +392,7 @@
     return lableSwitchCell;
 }
 
-#pragma mark touch headImageButton
+#pragma mark - 评论，点击头像查看用户
 - (void)touchHeadImage:(UIButton *)sender
 {
     JJCommentModel *model = [self.commentArray objectAtIndex:sender.tag];
