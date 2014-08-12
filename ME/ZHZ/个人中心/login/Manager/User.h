@@ -16,7 +16,7 @@
 /*	
 	
  */
-- (id)initUserWithUserId:(NSString *)userid;
+- (id)initUserWithUserId:(NSInteger)userid;
 - (void)gotoUserLoginFrom:(UIViewController *)currentViewController;
 - (BOOL)loginWith:(NSString *)username Password:(NSString *)pwd;//调出登陆界面
 - (void)logout;

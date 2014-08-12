@@ -24,7 +24,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(User);
 	return self;
 }
 
--(id)initUserWithUserId:(NSString *)userid{
+-(id)initUserWithUserId:(NSInteger)userid{
 	if (self = [super init]) {
 		_info = [[UserInfo alloc] initWithUserId:userid];
 	}

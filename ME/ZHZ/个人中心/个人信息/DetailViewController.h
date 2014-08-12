@@ -10,5 +10,5 @@
 #import "UserInfo.h"
 @interface DetailViewController : UIViewController
 @property (nonatomic,strong) UserInfo *userData;
-- (id)initWithUserId:(NSString *)userId;
+- (id)initWithUserId:(NSInteger)userId;
 @end

@@ -18,7 +18,7 @@
 - (id)init{
 	if (self = [super init]) {
 		_data		= nil;
-		_userId		= nil;
+		_userId		= 0;
 		_isLogin	= NO;
 		_account	= nil;
 		_name		= nil;
@@ -39,10 +39,10 @@
 	return self;
 }
 
-- (id)initWithUserId:(NSString *)userId{
+- (id)initWithUserId:(NSInteger)userId{
 	if (self = [super init]) {
 		_data		= [[OLNetManager userDataWithId:userId] objectForKey:@"result"];
-		_userId		= nil;
+		_userId		= 0;
 		_account	= nil;
 		_name		= nil;
 		_sex		= NO;
@@ -63,7 +63,7 @@
 
 - (void)setAllData{
 	if (_data) {
-		_userId		= [_data objectForKey:@"userId"];
+		_userId		= [[_data objectForKey:@"userId"] integerValue];
 		_account	= [_data objectForKey:@"userAccount"];
 		_name		= [_data objectForKey:@"userName"];
 		_sex		= [[_data objectForKey:@"userSex"] boolValue];

@@ -12,6 +12,7 @@
 #import "User.h"
 #import "CAlertLabel.h"
 #import "UserCenterTableViewController.h"
+#import "OLNetManager.h"
 #define kDefault_portrait @"CuserPhoto"
 @interface FocusTableViewController ()
 
@@ -43,7 +44,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-	 self.navigationItem.rightBarButtonItem = self.editButtonItem;
+//	 self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -91,7 +92,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	NSDictionary *dic = [_data objectAtIndex:indexPath.row];
 //	DetailViewController *dvc = [[DetailViewController alloc] initWithUserId:[dic objectForKey:@"userId"]];
-	UserCenterTableViewController *usercenter =[[UserCenterTableViewController alloc] initWithUserId:[NSString stringWithFormat:@"%@",[dic objectForKey:@"userId"]]];
+	UserCenterTableViewController *usercenter =[[UserCenterTableViewController alloc] initWithUserId:[[dic objectForKey:@"userId"] integerValue]];
 
 	[self.navigationController pushViewController:usercenter animated:YES];
 }
@@ -106,25 +107,26 @@
 
 
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-#warning 网络请求
-//		if (![OLNetManager deleteCollectionTestWithUserId:[User sharedUser].info.userId andTestId:[_testData[indexPath.row] objectForKey:@"tcId"]]){
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        // Delete the row from the data source
+//#warning 网络请求
+//		NSInteger result = [OLNetManager focusUserWithUserId:[[_data objectAtIndex:indexPath.row] objectForKey:@"userId"]];
+//		if (result != 2){
 //			//网络请求 结果错误 提示
 //			[[CAlertLabel alertLabelWithAdjustFrameForText:@"删除失败"] showAlertLabel];
 //			return ;
 //		}
-		[[CAlertLabel alertLabelWithAdjustFrameForText:@"删除成功"] showAlertLabel];
-		[_data removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-		[[User sharedUser] refreshInfo];
-
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
+//		[[CAlertLabel alertLabelWithAdjustFrameForText:@"删除成功"] showAlertLabel];
+//		[_data removeObjectAtIndex:indexPath.row];
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//		[[User sharedUser] refreshInfo];
+//
+//    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+//        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//    }   
+//}
 
 
 /*

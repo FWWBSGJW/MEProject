@@ -22,13 +22,21 @@
 + (NSDictionary *)loginWith:(NSString *)username
 	  andPassword:(NSString *)password;
 /**
+ *  关注
+ *
+ *  @param userid
+ *
+ *  @return 关注用户userid 为关注的人的id  -1;//要关注的用户不存在	  1;//关注用户成功 2;//取消关注成功 -2;//不能关注自己 -3;//用户没有输入要关注的人
+ */
++ (NSInteger)focusUserWithUserId:(NSInteger)userId;
+/**
  *  使用userid获取对应信息
  *
  *  @param userId
  *
  *  @return 用户信息dic
  */
-+ (NSDictionary *)userDataWithId:(NSString *)userId;
++ (NSDictionary *)userDataWithId:(NSInteger)userId;
 /**
  *  删除收藏的测试
  *
@@ -36,7 +44,7 @@
  *
  *  @return 返回bool结果
  */
-+ (BOOL)deleteCollectionTestWithUserId:(NSString *)userId andTestId:(NSString *)testId;
++ (BOOL)deleteCollectionTestWithUserId:(NSInteger)userId andTestId:(NSString *)testId;
 /**
  *  删除收藏的课程
  *
@@ -44,7 +52,7 @@
  *
  *  @return 返回bool结果
  */
-+ (NSInteger)privateWithCourseID:(NSInteger)courseID andUserID:(NSString *)userID;
++ (NSInteger)privateWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID;
 /**
  *  注册
  *

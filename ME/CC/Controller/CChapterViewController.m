@@ -791,7 +791,7 @@ enum MoreActionButton_Tag
             [self userCheck];
             if ([User sharedUser].info.isLogin) {
                 button.image = [UIImage imageNamed:@"cStarFull"];
-                NSInteger userID = [[User sharedUser].info.userId integerValue];
+                NSInteger userID = [User sharedUser].info.userId;
                 NSInteger result = [self.courseChapter privateWithCourseID:self.courseID andUserID:userID];
                 if (result == 1) {
                     CAlertLabel *alertLabel = [CAlertLabel alertLabelWithAdjustFrameForText:@"收藏成功"];
@@ -943,7 +943,7 @@ enum MoreActionButton_Tag
             NSLog(@"评论---%@",self.sendComNoteView.textView.text);
             User *user = [User sharedUser];
             if (user.info.isLogin) {
-                NSInteger userID = [user.info.userId integerValue];
+                NSInteger userID = user.info.userId;
                 [self.courseChapter sendCourseCommentWithCourseID:self.courseID andUserID:userID andContent:self.sendComNoteView.textView.text];
             }
             

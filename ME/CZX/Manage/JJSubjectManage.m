@@ -105,7 +105,7 @@ NSArray *subjectServerRespObj;
     User *user = [User sharedUser];
     NSString * dataBasePath = [[NSURL applicationDocumentsDirectory]
                                stringByAppendingPathComponent:
-                               [NSString stringWithFormat:@"wrongSubjectModelArray%d.arch", [user.info.userId intValue]]];
+                               [NSString stringWithFormat:@"wrongSubjectModelArray%li.arch", user.info.userId]];
     return dataBasePath;
 }
 

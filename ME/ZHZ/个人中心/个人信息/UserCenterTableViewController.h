@@ -13,7 +13,9 @@
  *			用户个人中心
  *			1.GroupTalbe
  */
+
+
 @interface UserCenterTableViewController : UITableViewController<UserInfoTableViewCellDelegate>
 @property (nonatomic,strong) User *user;
-- (id)initWithUserId:(NSString *)userId;
+- (id)initWithUserId:(NSInteger)userId;
 @end

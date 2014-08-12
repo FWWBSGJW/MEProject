@@ -38,8 +38,8 @@
     self.title = @"问答";
     UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.frame];
     webView.scalesPageToFit = YES;
-	NSString *userid = [User sharedUser].info.userId;
-    NSString *urlStr =[NSString stringWithFormat:@"%@MobileEducation/qa?userId=%@",kBaseURL,userid];
+	NSInteger userid = [User sharedUser].info.userId;
+    NSString *urlStr =[NSString stringWithFormat:@"%@MobileEducation/qa?userId=%li",kBaseURL,userid];
     NSURL *url = [NSURL URLWithString:urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];

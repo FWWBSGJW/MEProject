@@ -22,6 +22,13 @@
 #import "QATableViewController.h"
 #import "LoginViewController.h"
 #import "CAlertLabel.h"
+#import "OLNetManager.h"
+
+typedef NS_ENUM(NSInteger, UserStyle){
+	UserStyleUndefined,
+	UserStyleLocal,
+	UserStyleOther
+};
 typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 //    UserCenterSectionStyelInfo = 0,
     UserCenterSectionStyelDetail = 0,
@@ -37,14 +44,16 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 
 @interface UserCenterTableViewController (){
 	BOOL isLocalUser;
+	UserStyle userstyle;
 }
 @property (nonatomic,strong) UserInfoTableViewCell *uiCell;
 @end
 
 @implementation UserCenterTableViewController
-- (id)initWithUserId:(NSString *)userId{
+- (id)initWithUserId:(NSInteger)userId{
 	if (self = [super initWithStyle:UITableViewStyleGrouped]) {
 		_user = [[User alloc] initUserWithUserId:userId];
+		userstyle = UserStyleOther;
 	}
 	return self;
 }
@@ -52,9 +61,25 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 {
     [super viewDidLoad];
 //    _user = [User sharedUser];
-	self.navigationItem.title = @"用户中心";
-	UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshUserInfo)];
-	self.navigationItem.rightBarButtonItem = rightItem;
+	[self defineUserStyle];
+	if (userstyle != UserStyleOther) {
+		UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshUserInfo)];
+		self.navigationItem.rightBarButtonItem = rightItem;
+		self.navigationItem.title = @"我";
+	}else{
+//		UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemR target:self action:@selector(focusSomeOne)];
+		NSString *itemTitle = @"关注他/她";
+		for (NSDictionary *dic in [[User sharedUser].info.focus linkContent]) {
+			NSInteger userid = [[dic objectForKey:@"userId"] integerValue];
+			if (userid == _user.info.userId) {
+				itemTitle = @"取消关注";
+				break;
+			}
+		}
+		UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:itemTitle style:UIBarButtonItemStylePlain target:self action:@selector(focusSomeOne)];
+		self.navigationItem.rightBarButtonItem = rightItem;
+		self.navigationItem.title = _user.info.name;
+	}
 	
 	_uiCell = [[UserInfoTableViewCell alloc] initWithFrame:CGRectNull];
 	_uiCell.delegate = self;
@@ -68,6 +93,20 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	self.tableView.tableHeaderView = _uiCell;
 	self.tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
 	[self.tableView setContentOffset:CGPointMake(0, 0)];
+	
+}
+
+- (void)focusSomeOne{
+	NSInteger result = [OLNetManager focusUserWithUserId:_user.info.userId];
+	if (result == 1) {
+		CAlertLabel *alert = [CAlertLabel alertLabelWithAdjustFrameForText:@"关注成功"];
+		[alert showAlertLabel];
+		self.navigationItem.rightBarButtonItem.title = @"取消关注";
+	}else if(result == 2){
+		CAlertLabel *alert = [CAlertLabel alertLabelWithAdjustFrameForText:@"取消关注成功"];
+		[alert showAlertLabel];
+		self.navigationItem.rightBarButtonItem.title = @"关注他/她";
+	}
 }
 
 - (void)reloadData{
@@ -91,14 +130,17 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 
 - (void)viewWillAppear:(BOOL)animated{
 //	static int count = 1;
-	if ([_user isEqual:[User sharedUser]] && _user.info.isLogin == NO) {
+	if (userstyle == UserStyleLocal && _user.info.isLogin == NO) {
 		LoginViewController *login = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
 		[self.navigationController pushViewController:login animated:YES];
 		return;
 	}
 	self.tabBarController.tabBar.hidden = NO;
 	self.navigationController.navigationBarHidden = NO;
-	[_user refreshInfo];
+	if (userstyle == UserStyleLocal) {
+		//这里刷新的时候 会讲数据保存到本地 ， 其他用户就不进行刷新 避免冲突
+		[_user refreshInfo];
+	}
 //	if (count) {
 //		[self.tableView setContentOffset:CGPointMake(0, 0)];
 //		count = 0;
@@ -140,11 +182,26 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	ftvc.list = _user.info.focused;
 	[self.navigationController pushViewController:ftvc animated:YES];
 }
+
+- (void)defineUserStyle{
+	if (userstyle == UserStyleUndefined){
+		if ([_user isEqual:[User sharedUser]]) {
+			userstyle = UserStyleLocal;
+		}else{
+			userstyle = UserStyleOther;
+		}
+	}
+}
 #pragma mark - Table view data source
 #if 1
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return UserCenterSectionStyelCount;
+	[self defineUserStyle];
+	if (userstyle == UserStyleLocal) {
+		return UserCenterSectionStyelCount;
+	}else{
+		return UserCenterSectionStyelCount-1;
+	}
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -324,7 +381,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		[self.navigationController pushViewController:detail animated:YES];
 		
 	}else if (indexPath.section == UserCenterSectionStyelBCcourse){
-		if (indexPath.row == 0 && ![_user isEqual:[User sharedUser]]) {
+		if (indexPath.row == 0 && userstyle != UserStyleLocal) {
 			CAlertLabel *alert = [CAlertLabel alertLabelWithAdjustFrameForText:@"无权查看"];
 			[alert showAlertLabel];
 			return;
@@ -361,7 +418,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 			tctvc.list = _user.info.testcollection;
 			[self.navigationController pushViewController:tctvc animated:YES];
 		}else{
-			if (indexPath.row == 0 && ![_user isEqual:[User sharedUser]]) {
+			if (indexPath.row == 0 && userstyle != UserStyleLocal) {
 				CAlertLabel *alert = [CAlertLabel alertLabelWithAdjustFrameForText:@"无法查看"];
 				[alert showAlertLabel];
 				return;

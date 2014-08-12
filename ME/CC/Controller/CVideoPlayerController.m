@@ -98,7 +98,7 @@ enum SendType
 {
     if (!_userID) {
         User *user = [User sharedUser];
-        _userID = (user.info.isLogin ? [user.info.userId integerValue] : -1);
+        _userID = (user.info.isLogin ? user.info.userId : -1);
     }
     return _userID;
 }

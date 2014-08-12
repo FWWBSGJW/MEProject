@@ -32,7 +32,7 @@
 }
 
 - (NSMutableArray *)linkContent{
-	if (_linkContent) {
+	if (!_linkContent) {
 		[self refreshLinkContent];
 	}
 	return _linkContent;

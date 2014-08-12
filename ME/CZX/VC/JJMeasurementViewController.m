@@ -360,7 +360,7 @@
 {
     User *user = [User sharedUser];
     NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/uploadScore";
-    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&hscore=%d&tcId=%d&hmtime=%d&hstime=%d",[user.info.userId intValue], score, tcid, hmtime, hstime]];
+    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%li&hscore=%d&tcId=%d&hmtime=%d&hstime=%d",user.info.userId, score, tcid, hmtime, hstime]];
     NSURL *url = [NSURL URLWithString:urlAsString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
     NSURLResponse *response = nil;

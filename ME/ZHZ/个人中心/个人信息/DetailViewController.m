@@ -24,7 +24,7 @@
 
 @implementation DetailViewController
 
-- (id)initWithUserId:(NSString *)userId
+- (id)initWithUserId:(NSInteger)userId
 {
     self = [super init];
     if (self) {
