@@ -38,7 +38,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
-	self.tabBarController.tabBar.hidden = NO;
+	self.tabBarController.tabBar.hidden = YES;
 	self.navigationController.navigationBarHidden = NO;
 	if (_list) {
 		[_list refreshLinkContent];

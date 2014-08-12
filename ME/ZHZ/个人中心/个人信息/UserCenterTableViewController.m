@@ -83,7 +83,8 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	
 	_uiCell = [[UserInfoTableViewCell alloc] initWithFrame:CGRectNull];
 	_uiCell.delegate = self;
-	if (_user.info.isLogin) {
+//	if (_user.info.isLogin)
+	{
 		[_uiCell setAImage:_user.info.imageUrl
 				andName:_user.info.name
 			  courseNum:[_user.info.lcourses count]
@@ -135,19 +136,14 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		[self.navigationController pushViewController:login animated:YES];
 		return;
 	}
-	self.tabBarController.tabBar.hidden = NO;
 	self.navigationController.navigationBarHidden = NO;
 	if (userstyle == UserStyleLocal) {
 		//这里刷新的时候 会讲数据保存到本地 ， 其他用户就不进行刷新 避免冲突
 		[_user refreshInfo];
-	}
-//	if (count) {
-//		[self.tableView setContentOffset:CGPointMake(0, 0)];
-//		count = 0;
-//	}else
-//		[self.tableView setContentOffset:CGPointMake(0, -64)];
-	if (_user) {
 		[self reloadData];
+		self.tabBarController.tabBar.hidden = NO;
+	}else{
+		self.tabBarController.tabBar.hidden = YES;
 	}
 }
 
