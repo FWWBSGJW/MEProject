@@ -997,7 +997,7 @@ enum MoreActionButton_Tag
         case MoreButtonTagPeople:
         {
             [self userCheck];
-            RecommendViewController *rVC = [[RecommendViewController alloc] initWithUserID:[[User sharedUser].info.userId integerValue]  andCourseID:self.courseID];
+            RecommendViewController *rVC = [[RecommendViewController alloc] initWithUserID:[User sharedUser].info.userId  andCourseID:self.courseID];
             [self.navigationController pushViewController:rVC animated:YES];
         }
             break;
