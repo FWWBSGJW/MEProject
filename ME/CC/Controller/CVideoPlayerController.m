@@ -729,6 +729,19 @@ enum SendType
     //NSLog(@"播放完成,%f",self.moviePlayer.initialPlaybackTime);
     //[self dismissMoviePlayerViewControllerAnimated];
     //NSLog(@"%f",self.moviePlayer.duration);
+//发送视频观看记录请求
+    //http://121.197.10.159:8080/MobileEducation/uploadVideoHistory?userId=1&VId=10
+    if((self.userID > -1) &&(self.moviePlayer.currentPlaybackTime >= (9/10.0)*self.moviePlayer.duration)){
+        NSString *urlString = [NSString stringWithFormat:@"%@MobileEducation/uploadVideoHistory?userId=%d&VId=%d",kBaseURL,self.userID,self.videoID];
+        NSURL *url = [NSURL URLWithString:urlString];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.0f];
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            NSLog(@"观看记录上传");
+        }];
+
+    }
+    
+    
     [self.danmakuView setHidden:YES];
     if ([self.danmakuTimer isValid]) {
         [self.danmakuTimer invalidate];

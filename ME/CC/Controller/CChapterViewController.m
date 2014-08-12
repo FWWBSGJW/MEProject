@@ -22,6 +22,7 @@
 #import "JJTestDetailViewController.h"
 #import "CDownloadModel.h"
 #import "UserCenterTableViewController.h"
+#import "RecommendViewController.h"
 
 #define headHeight 160
 enum Segement_Type
@@ -995,7 +996,9 @@ enum MoreActionButton_Tag
             break;
         case MoreButtonTagPeople:
         {
-#warning 待实现
+            [self userCheck];
+            RecommendViewController *rVC = [[RecommendViewController alloc] initWithUserID:[[User sharedUser].info.userId integerValue]  andCourseID:self.courseID];
+            [self.navigationController pushViewController:rVC animated:YES];
         }
             break;
         default:
