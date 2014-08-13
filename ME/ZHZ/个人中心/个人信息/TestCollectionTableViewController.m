@@ -40,10 +40,12 @@
 	[super viewWillAppear:animated];
 	self.tabBarController.tabBar.hidden = YES;
 	self.navigationController.navigationBarHidden = NO;
-	if (_list) {
+	if (_list && [User sharedUser].havaChange) {
 		[_list refreshLinkContent];
 		_testData = _list.linkContent;
 		[self.tableView reloadData];
+		[User sharedUser].havaChange = NO;
+		[User sharedUser].refreshMe = YES;
 	}
 }
 

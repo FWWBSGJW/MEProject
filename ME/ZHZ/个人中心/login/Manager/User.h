@@ -12,6 +12,7 @@
 @property (nonatomic,strong) UserInfo *info;
 @property (nonatomic)		BOOL justLogin;
 @property (nonatomic)		BOOL havaChange;
+@property (nonatomic)		BOOL refreshMe;
 @property (nonatomic,strong) UIViewController *currentVC;
 
 /*	

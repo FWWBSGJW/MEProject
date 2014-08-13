@@ -146,10 +146,11 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	if (userstyle == UserStyleLocal) {
 		//这里刷新的时候 会讲数据保存到本地 ， 其他用户就不进行刷新 避免冲突
 		self.tabBarController.tabBar.hidden = NO;
-		if (_user.havaChange) {
+		if (_user.havaChange || _user.refreshMe) {
 			[_user refreshInfo];
 			[self reloadData];
 			_user.havaChange = NO;
+			_user.refreshMe = NO;
 		}
 	}else{
 		self.tabBarController.tabBar.hidden = YES;

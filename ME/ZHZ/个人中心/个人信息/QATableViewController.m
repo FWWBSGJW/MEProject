@@ -10,6 +10,7 @@
 #import "QATableViewCell.h"
 #import "QAViewController.h"
 #import "DataOC.h"
+#import "User.h"
 @interface QATableViewController ()
 
 @end
@@ -40,10 +41,12 @@
 	[super viewWillAppear:animated];
 	self.tabBarController.tabBar.hidden = YES;
 	self.navigationController.navigationBarHidden = NO;
-	if (_list) {
+	if (_list && [User sharedUser].havaChange) {
 		[_list refreshLinkContent];
 		_data = _list.linkContent;
 		[self.tableView reloadData];
+		[User sharedUser].havaChange = NO;
+		[User sharedUser].refreshMe = YES;
 	}
 }
 
