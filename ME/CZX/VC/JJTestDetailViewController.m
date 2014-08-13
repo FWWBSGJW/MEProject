@@ -343,8 +343,8 @@
              NSLog(@"Error happened = %@", error);
          }
         [[User sharedUser].info.testcollection refreshLinkContent];
-//        ［user shareduser].haveChange = yes;
-//        [[User sharedUser] refreshInfo];
+        [User sharedUser].havaChange = YES;
+        //        [[User sharedUser] refreshInfo];
     }
 }
 
