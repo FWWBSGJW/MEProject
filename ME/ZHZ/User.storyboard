@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Edit Table View Controller-->
+        <!--Edit Table View Controller - test-->
         <scene sceneID="5w7-se-Ign">
             <objects>
-                <tableViewController id="75K-ck-TnV" customClass="EditTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EditTable" id="75K-ck-TnV" customClass="EditTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="hBG-DB-TMr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,6 +28,9 @@
                                                     <state key="normal" backgroundImage="CuserPhoto.png">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="getPic:" destination="75K-ck-TnV" eventType="touchUpInside" id="zng-Zy-hij"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -91,7 +94,7 @@
                             <outlet property="delegate" destination="75K-ck-TnV" id="6i0-TU-ujh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="sbJ-kW-0L3"/>
+                    <navigationItem key="navigationItem" title="test" id="sbJ-kW-0L3"/>
                     <connections>
                         <outlet property="describtion" destination="ZHk-Tc-KM7" id="19k-fc-ZnV"/>
                         <outlet property="userName" destination="YCe-8B-LRs" id="HDw-5h-i5b"/>

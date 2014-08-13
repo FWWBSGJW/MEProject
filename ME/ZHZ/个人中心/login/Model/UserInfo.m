@@ -93,14 +93,14 @@
 }
 
 - (BOOL)userLogout{
-	if (_isLogin == YES) {
+	NSDictionary *result = [OLNetManager logout];
+	if ([[result objectForKey:@"success"] integerValue] == 1) {
 		_data		= nil;
 		
 		_isLogin	= NO;
 		_account	= nil;
 		_name		= nil;
 		_sex		= NO;
-//		_image		= nil;
 		_imageUrl	= nil;
 		_describe	= nil;
 		[self removeArrayData];

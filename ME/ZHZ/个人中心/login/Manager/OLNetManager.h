@@ -21,6 +21,8 @@
  */
 + (NSDictionary *)loginWith:(NSString *)username
 	  andPassword:(NSString *)password;
+//退出登录
++ (NSDictionary *)logout;
 /**
  *  关注
  *

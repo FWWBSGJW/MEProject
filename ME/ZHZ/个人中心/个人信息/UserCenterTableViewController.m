@@ -108,6 +108,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		[alert showAlertLabel];
 		self.navigationItem.rightBarButtonItem.title = @"关注他/她";
 	}
+	[User sharedUser].havaChange = YES;
 }
 
 - (void)reloadData{
@@ -121,6 +122,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 
 - (void)refreshUserInfo{
 	if ([_user refreshInfo]){
+		//回到顶部
 		[self.tableView setContentOffset:CGPointMake(0,-64)];
 		[self reloadData];
 	}else{
@@ -137,14 +139,23 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		return;
 	}
 	self.navigationController.navigationBarHidden = NO;
+	if (_user.justLogin) {	//在登录后tableview推到顶部
+		[self.tableView setContentOffset:CGPointMake(0,0)];
+		_user.justLogin = NO;
+	}
 	if (userstyle == UserStyleLocal) {
 		//这里刷新的时候 会讲数据保存到本地 ， 其他用户就不进行刷新 避免冲突
-		[_user refreshInfo];
-		[self reloadData];
 		self.tabBarController.tabBar.hidden = NO;
+		if (_user.havaChange) {
+			[_user refreshInfo];
+			[self reloadData];
+			_user.havaChange = NO;
+		}
 	}else{
 		self.tabBarController.tabBar.hidden = YES;
 	}
+	
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -366,7 +377,9 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 {
 	if (indexPath.section == UserCenterSectionStyelLogout) {
 		//推出登陆
-		[_user logout];
+		if ([_user logout]){
+			NSLog(@"退出成功！");
+		}
 		LoginViewController *login = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
 		[self.navigationController pushViewController:login animated:YES];
 	}else if (indexPath.section == UserCenterSectionStyelDetail){

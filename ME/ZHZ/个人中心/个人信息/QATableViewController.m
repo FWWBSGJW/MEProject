@@ -43,6 +43,7 @@
 	if (_list) {
 		[_list refreshLinkContent];
 		_data = _list.linkContent;
+		[self.tableView reloadData];
 	}
 }
 

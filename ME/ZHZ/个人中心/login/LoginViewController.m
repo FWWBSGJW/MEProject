@@ -45,6 +45,7 @@
 		
 //		UserCenterTableViewController *utc = [[UserCenterTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController popViewControllerAnimated:YES];
+		user.justLogin = YES;
 	}
 	
 }

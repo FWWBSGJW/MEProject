@@ -45,8 +45,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(User);
 	return [_info refresh];
 }
 
-- (void)logout{
-	[_info userLogout];	//用户登出
+- (BOOL)logout{
+	return [_info userLogout];	//用户登出
 }
 
 - (BOOL)loginWith:(NSString *)username Password:(NSString *)pwd {

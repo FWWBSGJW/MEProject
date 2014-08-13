@@ -11,7 +11,7 @@
 #import "UILabel+dynamicSizeMe.h"
 #import "UIViewAdditions.h"
 #import "UserInfo.h"
-
+#import "EditTableViewController.h"
 #define kDefault_portrait @"CuserPhoto"
 
 @interface DetailViewController ()
@@ -51,7 +51,9 @@
 }
 
 - (void)editUserInfo{
-	
+	UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"User" bundle:[NSBundle mainBundle]];
+	EditTableViewController *editVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"EditTable"];
+	[self.navigationController pushViewController:editVC animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

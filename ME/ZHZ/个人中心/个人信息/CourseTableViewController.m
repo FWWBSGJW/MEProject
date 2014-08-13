@@ -48,6 +48,7 @@
 	if (_list) {
 		[_list refreshLinkContent];
 		_courses = _list.linkContent;
+		[self.tableView reloadData];
 	}
 }
 

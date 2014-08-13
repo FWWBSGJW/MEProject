@@ -10,13 +10,13 @@
 
 #define NetworkTimeout 30
 #define kURL_login @"http://121.197.10.159:8080/MobileEducation/userAction"
+#define kURL_logout @"http://121.197.10.159:8080/MobileEducation/logout"
 #define kURL_test @"http://172.16.54.199:8080/MobileEducation/userAction"
 @interface OLNetManager(){
 }
 @end
 
 @implementation OLNetManager
-
 
 
 +(NSData *)netRequestWithUrl:(NSString *)urlStr andPostBody:(NSString *)body{
@@ -41,7 +41,7 @@
 }
 
 + (NSInteger)focusUserWithUserId:(NSInteger)userId{
-	NSString *urlStr = [NSString stringWithFormat:@"%@MobileEducation/listCollection?userId=%li",kBaseURL,userId];
+	NSString *urlStr = [NSString stringWithFormat:@"%@MobileEducation/concernUser?userId=%li",kBaseURL,userId];
 	NSDictionary *dic = [[OLNetManager netRequestWithUrl:urlStr andPostBody:nil] objectFromJSONData];
 	return [[dic objectForKey:@"success"] integerValue];
 }
@@ -59,6 +59,11 @@
 + (NSDictionary *)userDataWithId:(NSInteger)userId{
 	NSString *urlStr = [NSString stringWithFormat:@"%@?userId=%li",kURL_login,userId];
 	NSDictionary *dic = [[OLNetManager netRequestWithUrl:urlStr andPostBody:nil] objectFromJSONData];
+	return dic;
+}
+
++ (NSDictionary *)logout{
+	NSDictionary *dic = [[OLNetManager netRequestWithUrl:kURL_logout andPostBody:nil] objectFromJSONData];
 	return dic;
 }
 

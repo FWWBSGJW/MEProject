@@ -10,7 +10,8 @@
 #import "UserInfo.h"
 @interface User : NSObject<UIAlertViewDelegate>
 @property (nonatomic,strong) UserInfo *info;
-
+@property (nonatomic)		BOOL justLogin;
+@property (nonatomic)		BOOL havaChange;
 @property (nonatomic,strong) UIViewController *currentVC;
 
 /*	
@@ -19,7 +20,7 @@
 - (id)initUserWithUserId:(NSInteger)userid;
 - (void)gotoUserLoginFrom:(UIViewController *)currentViewController;
 - (BOOL)loginWith:(NSString *)username Password:(NSString *)pwd;//调出登陆界面
-- (void)logout;
+- (BOOL)logout;
 + (User *)sharedUser;
 - (BOOL)refreshInfo;
 @end
