@@ -53,8 +53,6 @@
 //    [backBtn addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
 //    UIBarButtonItem *backBarButton = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
 //    self.navigationItem.leftBarButtonItem = backBarButton;
-    
-    
     self.navigationItem.title = @"技能测试";
     self.view.backgroundColor = [UIColor whiteColor];
     

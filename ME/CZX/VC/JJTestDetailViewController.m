@@ -323,7 +323,7 @@
         [UIView commitAnimations];
 
         NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/collecteTest";
-        urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%li&CId=%d", [User sharedUser].info.userId , self.myModel.tcId]];
+        urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&CId=%d", [User sharedUser].info.userId , self.myModel.tcId]];
 //        urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=1&CId=%d", self.myModel.tcId]];
         NSURL *url = [NSURL URLWithString:urlAsString];
         NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
@@ -343,6 +343,7 @@
              NSLog(@"Error happened = %@", error);
          }
         [[User sharedUser].info.testcollection refreshLinkContent];
+//        ［user shareduser].haveChange = yes;
 //        [[User sharedUser] refreshInfo];
     }
 }

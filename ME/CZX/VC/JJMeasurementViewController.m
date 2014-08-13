@@ -11,6 +11,7 @@
 #import "JJFinishViewController.h"
 #import "JJSubjectModel.h"
 #import "JJSubjectManage.h"
+#import "UserIntegralModel.h"
 
 #define KColor RGBCOLOR(222, 255, 170)
 //#define KColor [UIColor orangeColor]
@@ -343,24 +344,120 @@
         int a = [[personNumAnswerArray objectAtIndex:count] intValue];
         [personRealArray replaceObjectAtIndex:count withObject:[abc objectAtIndex:a]];
     }
+    
+    float rate = score/queArray.count;
+    int intergral = 0;
+    if (rate>=0.6 && rate<0.8)
+    {
+        intergral = 3;
+    }
+    else if (rate>=0.8 && rate<0.9)
+    {
+        intergral = 5;
+    }
+    else if(rate>=0.9 && rate<1.0)
+    {
+        intergral = 6;
+    }
+    else if(rate==1.0)
+    {
+        intergral = 7;
+    }
+    else
+    {
+        intergral = 1;
+    }
+    
+    //现在的时间
+    NSDate *  senddate=[NSDate date];
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"YYYYMMdd"];
+    NSString *  nowTime = [dateformatter stringFromDate:senddate];
+    
+    UserIntegralModel *model = [[[UserIntegralModel alloc] init] queryModels];
+    if (model)
+    {
+        if (model.testCount)
+        {
+            if ([model.uTime isEqualToString:nowTime])
+            {
+                if (model.testCount<5)
+                {
+                    [self postIntergral:intergral];
+                    model.testCount++;
+                    [[[UserIntegralModel alloc] init] saveDirectionModel:model];
+                }
+            }
+            else
+            {
+                model.uTime = nowTime;
+                model.testCount = 1;
+                [self postIntergral:intergral];
+                [[[UserIntegralModel alloc] init] saveDirectionModel:model];
+            }
+        }
+        else
+        {
+            model.uTime = nowTime;
+            model.testCount = 1;
+            [self postIntergral:intergral];
+            [[[UserIntegralModel alloc] init] saveDirectionModel:model];
+        }
+    }
+    else
+    {
+        UserIntegralModel *model = [[UserIntegralModel alloc] init];
+        model.uTime = nowTime;
+        model.testCount = 1;
+        model.userId = [User sharedUser].info.userId;
+        [self postIntergral:intergral];
+        [[[UserIntegralModel alloc] init] saveDirectionModel:model];
+    }
+    
 //    NSLog(@"%@", personRealArray);
     JJFinishViewController *vc = [[JJFinishViewController alloc]
-                                  initWithScore:[NSString stringWithFormat:@"%d", score*20]
+                                  initWithScore:[NSString stringWithFormat:@"%d", score*10]
                                   correctAnswer:numberOfCorrectAnArray
                                   personAnswer:personNumAnswerArray
                                   questionArray:queArray
                                   answerArray:anArray costMins:myMins costSeconds:mySeconds];
     vc.highScoreUrl = self.highScoreUrl;
-    vc.result = [self postGrade:score*20 withTCid:self.tcid hmtime:myMins hstime:mySeconds];
+    vc.result = [self postGrade:score*10 withTCid:self.tcid hmtime:myMins hstime:mySeconds];
     [self.navigationController pushViewController:vc
                                          animated:YES];
+}
+
+- (void)postIntergral:(int)paramIntergral
+{
+    NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/collecteTest";
+    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&upoints=%d", [User sharedUser].info.userId, paramIntergral]];
+    NSURL *url = [NSURL URLWithString:urlAsString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if ([data length] >0 &&
+        error == nil){
+        NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"HTML = %@", html);
+    }
+    else if ([data length] == 0 &&
+             error == nil){
+        NSLog(@"Nothing was downloaded.");
+    }
+    else if (error != nil){
+        NSLog(@"Error happened = %@", error);
+    }
+    
+    UIAlertView *aalert = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"恭喜你获得%d积分", paramIntergral] delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil];
+    [aalert show];
 }
 
 - (int)postGrade:(int)score withTCid:(int)tcid hmtime:(int)hmtime hstime:(int)hstime
 {
     User *user = [User sharedUser];
     NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/uploadScore";
-    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%li&hscore=%d&tcId=%d&hmtime=%d&hstime=%d",user.info.userId, score, tcid, hmtime, hstime]];
+    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&hscore=%d&tcId=%d&hmtime=%d&hstime=%d",user.info.userId, score, tcid, hmtime, hstime]];
     NSURL *url = [NSURL URLWithString:urlAsString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
     NSURLResponse *response = nil;

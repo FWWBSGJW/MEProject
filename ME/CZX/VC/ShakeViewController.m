@@ -8,6 +8,7 @@
 
 #import "ShakeViewController.h"
 #import "User.h"
+#import "UserIntegralModel.h"
 
 @interface ShakeViewController ()
 {
@@ -69,10 +70,78 @@
 - (void)shake
 {
     [self userCheck];
+    NSDate *  senddate=[NSDate date];
+    
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    
+    [dateformatter setDateFormat:@"YYYYMMdd"];
+    
+    NSString *  locationString=[dateformatter stringFromDate:senddate];
+    
+//    NSLog(@"locationString:%@",locationString);
+
     if ([[User sharedUser].info isLogin]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"恭喜赢得5积分" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert show];
+        UserIntegralModel *model = [[[UserIntegralModel alloc] init] queryModels];
+        if (model)
+        {
+            if ([model.uTime isEqualToString:locationString])
+            {
+                if (model.isSign == NO)
+                {
+                    [self signUp];
+                    model.isSign = YES;
+                }
+                else
+                {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"你今天已经签到过了" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                }
+            }
+            else
+            {
+                model.isSign = YES;
+                model.uTime = locationString;
+                [self signUp];
+            }
+            [[[UserIntegralModel alloc] init] saveDirectionModel:model];
+        }
+        else
+        {
+            UserIntegralModel *temModel = [[UserIntegralModel alloc] init];
+            temModel.userId = [User sharedUser].info.userId;
+            temModel.uTime = locationString;
+            temModel.isSign = YES;
+            temModel.testCount = 0;
+            [[[UserIntegralModel alloc] init] saveDirectionModel:temModel];
+            [self signUp];
+        }
     }
+}
+
+- (void)signUp
+{
+    NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/collecteTest";
+    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?userId=%d&upoints=5", [User sharedUser].info.userId]];
+    NSURL *url = [NSURL URLWithString:urlAsString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if ([data length] >0 &&
+        error == nil){
+        NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"HTML = %@", html);
+    }
+    else if ([data length] == 0 &&
+             error == nil){
+        NSLog(@"Nothing was downloaded.");
+    }
+    else if (error != nil){
+        NSLog(@"Error happened = %@", error);
+    }
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"恭喜赢得5积分" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [alert show];
 }
 
 
