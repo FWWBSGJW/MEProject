@@ -164,6 +164,14 @@ enum MoreActionButton_Tag
     [self.tableView registerNib:nib2 forCellReuseIdentifier:@"noteCell"];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    if (!self.tabBarController.tabBar.hidden) {
+        self.tabBarController.tabBar.hidden = YES;
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
