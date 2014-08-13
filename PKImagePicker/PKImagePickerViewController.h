@@ -18,5 +18,5 @@
 @interface PKImagePickerViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property(nonatomic,strong) id<PKImagePickerViewControllerDelegate> delegate;
-
+-(IBAction)showalbum:(id)sender;
 @end

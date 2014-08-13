@@ -45,6 +45,10 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 //	 self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	if (_list) {
+		[_list refreshLinkContent];
+		_data = _list.linkContent;
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated{

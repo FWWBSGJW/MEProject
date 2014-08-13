@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditTableViewController : UITableViewController
+@interface EditTableViewController : UITableViewController <UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *describtion;
 

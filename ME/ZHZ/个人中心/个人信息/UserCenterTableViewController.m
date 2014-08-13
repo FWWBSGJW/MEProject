@@ -125,6 +125,8 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		//回到顶部
 		[self.tableView setContentOffset:CGPointMake(0,-64)];
 		[self reloadData];
+		CAlertLabel *label = [CAlertLabel alertLabelWithAdjustFrameForText:@"刷新成功"];
+		[label showAlertLabel];
 	}else{
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"刷新失败" message:@"网络连接超时或用户账号异常" delegate:self cancelButtonTitle:@"Cancle" otherButtonTitles:nil, nil];
 		[alert show];
@@ -403,8 +405,9 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		[self.navigationController pushViewController:ctb animated:YES];
 		
 	}else if (indexPath.section == UserCenterSectionStyelLcourse){
+		NSDictionary *course = [[_user.info.lcourses courses] objectAtIndex:indexPath.row];
 		ProgressTableViewCell *cell = (ProgressTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-		[self.navigationController pushViewController:[CChapterViewController chapterVCwithCourseID:[cell.courseId integerValue]] animated:YES];
+		[self.navigationController pushViewController:[CChapterViewController chapterVCwithCourseID:[cell.courseId integerValue] andVideoHistoryDic:[course objectForKey:@"maptChapter"]] animated:YES];
 	}else if (indexPath.section == UserCenterSectionStyelLink){
 		CAlertLabel *alert = [CAlertLabel alertLabelWithAdjustFrameForText:@"该功能暂时无法使用"];
 		[alert showAlertLabel];

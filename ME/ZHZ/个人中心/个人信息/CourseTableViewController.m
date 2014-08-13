@@ -40,6 +40,10 @@
 	if (_deletable) {
 		self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	}
+	if (_list) {
+		[_list refreshLinkContent];
+		_courses = _list.linkContent;
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated{

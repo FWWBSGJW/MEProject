@@ -34,6 +34,10 @@
     
     // self.clearsSelectionOnViewWillAppear = NO;
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	if (_list) {
+		[_list refreshLinkContent];
+		_testData = _list.linkContent;
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated{
