@@ -321,7 +321,7 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     if (self.rankShowArray.count>sender.tag)
     {
         RangkingModel *model = [self.rankShowArray objectAtIndex:sender.tag];
-        UserCenterTableViewController *detailVC = [[UserCenterTableViewController alloc] initWithUserId:[NSString stringWithFormat:@"%d", (int)model.userId]];
+        UserCenterTableViewController *detailVC = [[UserCenterTableViewController alloc] initWithUserId:(int)model.userId];
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }

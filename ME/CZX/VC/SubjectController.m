@@ -26,6 +26,7 @@
 }
 @end
 #define KColor RGBCOLOR(222, 255, 170)
+//#define KColor RGBCOLOR(50, 126, 254)
 
 @implementation SubjectController
 @synthesize myTableView;
@@ -174,12 +175,12 @@
     //    [self.downBtn setImage:[UIImage imageNamed:@"downUp"] forState:UIControlStateHighlighted];
     [self.upBtn setTitle:@"上一题" forState:UIControlStateNormal];
     [self.downBtn setTitle:@"下一题" forState:UIControlStateNormal];
-    self.upBtn.backgroundColor = KColor;
-    self.downBtn.backgroundColor = KColor;
+    self.upBtn.backgroundColor = RGBCOLOR(50, 126, 254);
+    self.downBtn.backgroundColor = RGBCOLOR(50, 126, 254);
     [self.upBtn addTarget:self action:@selector(upPage) forControlEvents:UIControlEventTouchUpInside];
     [self.downBtn addTarget:self action:@selector(downPage) forControlEvents:UIControlEventTouchUpInside];
     pageLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 440, 80, 40)];
-    pageLabel.backgroundColor = KColor;
+    pageLabel.backgroundColor = RGBCOLOR(50, 126, 254);
     pageLabel.textAlignment = NSTextAlignmentCenter;
     pageLabel.text = [NSString stringWithFormat:@"%d/%d", page+1, myQuestionArray.count];
     [self.view addSubview:pageLabel];

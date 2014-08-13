@@ -159,7 +159,7 @@
 - (void)touchHeadImage:(UIButton *)sender
 {
     RangkingModel *model = [self.scoreArray objectAtIndex:sender.tag];
-    UserCenterTableViewController *detailVC = [[UserCenterTableViewController alloc] initWithUserId:[NSString stringWithFormat:@"%d", (int)model.userId]];
+    UserCenterTableViewController *detailVC = [[UserCenterTableViewController alloc] initWithUserId:(int)model.userId];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 

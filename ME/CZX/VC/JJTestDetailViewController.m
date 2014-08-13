@@ -397,7 +397,7 @@
 - (void)touchHeadImage:(UIButton *)sender
 {
     JJCommentModel *model = [self.commentArray objectAtIndex:sender.tag];
-    UserCenterTableViewController *detailVC = [[UserCenterTableViewController alloc] initWithUserId:[NSString stringWithFormat:@"%d", (int)model.userid]];
+    UserCenterTableViewController *detailVC = [[UserCenterTableViewController alloc] initWithUserId:(int)model.userid];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 

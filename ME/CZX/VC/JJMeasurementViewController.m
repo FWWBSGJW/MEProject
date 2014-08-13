@@ -13,7 +13,8 @@
 #import "JJSubjectManage.h"
 #import "UserIntegralModel.h"
 
-#define KColor RGBCOLOR(222, 255, 170)
+//#define KColor RGBCOLOR(222, 255, 170)
+#define KColor RGBCOLOR(50, 126, 254)
 //#define KColor [UIColor orangeColor]
 
 
