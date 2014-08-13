@@ -11,6 +11,8 @@
 @interface CMoreActionView : UIView
 @property (weak, nonatomic) IBOutlet UIButton *testButton;
 @property (weak, nonatomic) IBOutlet UIButton *peopleButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+
 @property (assign, nonatomic) BOOL isShow;
 
 - (void)showMoreActionView;

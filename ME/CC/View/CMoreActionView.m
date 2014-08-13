@@ -8,7 +8,7 @@
 
 #import "CMoreActionView.h"
 
-#define myHeight 70.0
+#define myHeight 35.0*3
 #define myWidth 100.0
 
 @implementation CMoreActionView

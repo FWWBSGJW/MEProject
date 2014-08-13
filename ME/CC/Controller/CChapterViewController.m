@@ -25,6 +25,12 @@
 #import "RecommendViewController.h"
 
 #define headHeight 160
+enum ActionSheet_Type
+{
+    ActionSheetLogin = 550,
+    ActionSheetBuy
+};
+
 enum Segement_Type
 {
     SegementDiscription, //课程介绍
@@ -43,8 +49,9 @@ enum Button_Tag
 {
     ButtonTagPrivate = 400, //收藏按钮TAG
     ButtonTagDownLoad, //下载
+    ButtonTagBuy,   //购买
     ButtonTagComment,//评论
-    ButtonTagShare,//分享
+    //ButtonTagShare,//分享
     ButtonTagNote//笔记
 };
 
@@ -57,7 +64,8 @@ enum DownloadButton_Tag
 enum MoreActionButton_Tag
 {
     MoreButtonTagTest = 550,
-    MoreButtonTagPeople
+    MoreButtonTagPeople,
+    MoreButtonTagShare
 };
 
 @interface CChapterViewController ()
@@ -130,9 +138,9 @@ enum MoreActionButton_Tag
     UIToolbar *toorBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-33, SCREEN_WIDTH, 33.0f)];
     
     NSMutableArray *items = [NSMutableArray arrayWithCapacity:12];
-    NSArray *array = [NSArray arrayWithObjects:@"cStar",@"cDownload",@"cMessage",@"share",@"cNote",nil];
+    NSArray *array = [NSArray arrayWithObjects:@"cStar",@"cDownload",@"Cbuy",@"cMessage",@"cNote",nil];
 
-    for (NSInteger i =0; i<5; i++) {
+    for (NSInteger i =0; i<array.count; i++) {
         
         UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:array[i]] style:UIBarButtonItemStyleBordered target:self action:@selector(touchButton:)];
         item.tag = 400+i;
@@ -269,10 +277,12 @@ enum MoreActionButton_Tag
     if (!_moreActionView) {
         _moreActionView = [[CMoreActionView alloc] init];
         [self.view addSubview:_moreActionView];
-        [_moreActionView.testButton addTarget:self action:@selector(moreActionTouched:) forControlEvents:UIControlEventTouchUpInside];
         _moreActionView.testButton.tag = MoreButtonTagTest;
         _moreActionView.peopleButton.tag = MoreButtonTagPeople;
+        _moreActionView.shareButton.tag = MoreButtonTagShare;
+        [_moreActionView.testButton addTarget:self action:@selector(moreActionTouched:) forControlEvents:UIControlEventTouchUpInside];
         [_moreActionView.peopleButton addTarget:self action:@selector(moreActionTouched:) forControlEvents:UIControlEventTouchUpInside];
+        [_moreActionView.shareButton addTarget:self action:@selector(moreActionTouched:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _moreActionView;
 }
@@ -282,18 +292,10 @@ enum MoreActionButton_Tag
 {
     if (!_actionSheet) {
         _actionSheet = [[UIActionSheet alloc] initWithTitle:@"登陆才能使用此功能哦~" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"登陆" otherButtonTitles:nil, nil];
+        _actionSheet.tag = ActionSheetBuy;
     }
     return _actionSheet;
 }
-/*
- if(self.isNeedHistory){
- NSArray *array = self.videoHDic[@"chapter"];
- for(NSDictionary *dic in array){
- NSInteger chapterNum = [dic[@"chChapterNo"] integerValue] - 1;
- _chapterOpenArray[chapterNum] = @1;
- }
- }
- */
 
 - (NSMutableArray *)chapterOpenArray
 {
@@ -508,9 +510,21 @@ enum MoreActionButton_Tag
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kBaseURL,self.courseInfoDic[@"cPic"]]];
             [_headView.CCImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"directionDefault"]];
             _headView.CCtypeLabel.text = self.courseInfoDic[@"type"];
-            _headView.CCpriceLaebl.text = [NSString stringWithFormat:@"%d元",[self.courseInfoDic[@"cPrice"] integerValue]];
             _headView.CCteacherLabel.text = self.courseInfoDic[@"cTeacher"];
             _headView.CCtimeLabel.text = [NSString stringWithFormat:@"%d分钟",[self.courseInfoDic[@"cTime"] integerValue]];
+            if ([User sharedUser].info.isLogin) {
+                NSArray *purchaseArray = [[User sharedUser].info.bcourses linkContent];
+                for (NSDictionary *dic in purchaseArray) {
+                    if ([dic[@"cid"] integerValue] == self.courseID) {
+                        _headView.CCpriceLaebl.text = @"已购买";
+                        //_headView.CCpointLabel.text = @"已购买";
+                        break;
+                    }
+                }
+            }else{
+                _headView.CCpriceLaebl.text = [NSString stringWithFormat:@"%d元",[self.courseInfoDic[@"cPrice"] integerValue]];
+#warning 待补全积分价格
+            }
         }
         return _headView;
     } else {
@@ -580,7 +594,7 @@ enum MoreActionButton_Tag
             if (!cell) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:disCellIdentifier];
                 cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - headHeight-33);
-                UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(5, 5, SCREEN_WIDTH-10, SCREEN_HEIGHT - 64-33 - headHeight)];
+                UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(5, 0, SCREEN_WIDTH-10, SCREEN_HEIGHT - 64-33 - headHeight)];
                 [textView setEditable:NO];
                 [textView setFont:[UIFont systemFontOfSize:13.0f]];
                 [cell.contentView addSubview:textView];
@@ -893,36 +907,6 @@ enum MoreActionButton_Tag
             [self.view addSubview:self.downLoadBarView];
         }
             break;
-        case ButtonTagShare:{
-            NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK"  ofType:@"jpg"];
-            
-            //构造分享内容
-            id<ISSContent> publishContent = [ShareSDK content:@"我正在使用ME手机app学习java，c++等，你们也来学习吧"
-                                               defaultContent:@"我正在使用ME手机app学习java，c++等，你们也来学习吧"
-                                                        image:[ShareSDK imageWithPath:imagePath]
-                                                        title:@"分享"
-                                                          url:nil
-                                                  description:@"这是一条测试信息"
-                                                    mediaType:SSPublishContentMediaTypeNews];
-            
-            [ShareSDK showShareActionSheet:nil
-                                 shareList:nil
-                                   content:publishContent
-                             statusBarTips:YES
-                               authOptions:nil
-                              shareOptions: nil
-                                    result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                        if (state == SSResponseStateSuccess)
-                                        {
-                                            NSLog(@"分享成功");
-                                        }
-                                        else if (state == SSResponseStateFail)
-                                        {
-                                            NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
-                                        }
-                                    }];
-        }
-            break;
         case ButtonTagComment:{
             [self userCheck];
             if ([User sharedUser].info.isLogin) {
@@ -962,6 +946,31 @@ enum MoreActionButton_Tag
             }
             
         }
+            break;
+        case ButtonTagBuy:{
+#warning 待实现购买
+            [self userCheck];
+            if ([User sharedUser].info.isLogin) {
+                BOOL hadBuyed = NO;
+                NSArray *purchaseArray = [[User sharedUser].info.bcourses linkContent];
+                for (NSDictionary *dic in purchaseArray) {
+                    if ([dic[@"cid"] integerValue] == self.courseID) {
+                        hadBuyed = YES;
+                        break;
+                    }
+                }
+                if (!hadBuyed) {
+                    UIActionSheet *buyActionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择购买方式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"支付宝购买" otherButtonTitles:@"积分购买", nil];
+                    buyActionSheet.tag = ActionSheetBuy;
+                    [buyActionSheet showFromToolbar:self.toobar];
+
+                }else{
+                    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"你已经购买了此课程" delegate:nil cancelButtonTitle:nil destructiveButtonTitle:@"知道啦" otherButtonTitles:nil, nil];
+                    [actionSheet showFromToolbar:self.toobar];
+                }
+            }
+        }
+            break;
         default:
             break;
     }
@@ -1069,6 +1078,37 @@ enum MoreActionButton_Tag
             [self.navigationController pushViewController:rVC animated:YES];
         }
             break;
+        case MoreButtonTagShare:
+        {
+            NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK"  ofType:@"jpg"];
+            
+            //构造分享内容
+            id<ISSContent> publishContent = [ShareSDK content:@"我正在使用ME手机app学习java，c++等，你们也来学习吧"
+                                               defaultContent:@"我正在使用ME手机app学习java，c++等，你们也来学习吧"
+                                                        image:[ShareSDK imageWithPath:imagePath]
+                                                        title:@"分享"
+                                                          url:nil
+                                                  description:@"这是一条测试信息"
+                                                    mediaType:SSPublishContentMediaTypeNews];
+            
+            [ShareSDK showShareActionSheet:nil
+                                 shareList:nil
+                                   content:publishContent
+                             statusBarTips:YES
+                               authOptions:nil
+                              shareOptions: nil
+                                    result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                                        if (state == SSResponseStateSuccess)
+                                        {
+                                            NSLog(@"分享成功");
+                                        }
+                                        else if (state == SSResponseStateFail)
+                                        {
+                                            NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
+                                        }
+                                    }];
+        }
+            break;
         default:
             break;
     }
@@ -1105,8 +1145,27 @@ enum MoreActionButton_Tag
 #pragma mark - delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0) {
-        [[User sharedUser] gotoUserLoginFrom:self];
+    switch (actionSheet.tag) {
+        case ActionSheetLogin:
+        {
+            if (buttonIndex == 0) {
+                [[User sharedUser] gotoUserLoginFrom:self];
+            }
+        }
+            break;
+        case ActionSheetBuy:{
+#warning 待实现支付
+            if (buttonIndex == 0) {
+                //支付宝支付
+                NSLog(@"支付宝支付");
+            }else if (buttonIndex == 1){
+                //积分支付
+                NSLog(@"积分支付");
+            }
+        }
+            break;
+        default:
+            break;
     }
 }
 

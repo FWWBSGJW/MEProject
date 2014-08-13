@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *CCtypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *CCteacherLabel;
 @property (weak, nonatomic) IBOutlet UILabel *CCpriceLaebl;
+@property (weak, nonatomic) IBOutlet UILabel *CCpointLabel;
 
 //segementControl
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControl;
