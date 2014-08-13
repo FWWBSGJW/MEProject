@@ -90,7 +90,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	ProgressTableViewCell *cell = (ProgressTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-	[self.navigationController pushViewController:[CChapterViewController chapterVCwithCourseID:[cell.courseId integerValue]] animated:YES];
+	[self.navigationController pushViewController:[CChapterViewController chapterVCwithCourseID:[cell.courseId integerValue] andVideoHistoryDic:[[_courses objectAtIndex:indexPath.row] objectForKey:@"maptChapter"]] animated:YES];
 }
 
 
