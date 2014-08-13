@@ -9,10 +9,9 @@
 #import "CouseAllDirection.h"
 
 @implementation CouseAllDirection
-
+//http://121.197.10.159:8080/MobileEducation/listCollection?userId=1
 - (void)loadData
 {
-    
     NSLog(@"加载课程方向简述数据");
     NSString *str = [kBaseURL stringByAppendingString:@"MobileEducation/directionAction"];
     
@@ -31,6 +30,7 @@
     }
   
 }
+
 
 - (void)handleJSONData:(NSData *)datda
 {

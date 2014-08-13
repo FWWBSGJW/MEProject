@@ -68,6 +68,9 @@ enum MoreActionButton_Tag
 
 @property (strong, nonatomic) CourseChapter *courseChapter;//课程模型
 
+@property (assign, nonatomic) BOOL isNeedHistory;//区别正常进入还是历史记录进入
+@property (strong, nonatomic) NSDictionary *videoHDic;//视频观看记录字典
+
 @property (assign, nonatomic) NSInteger courseID;//课程id
 
 @property (strong, nonatomic) UITableView *tableView;
@@ -213,13 +216,24 @@ enum MoreActionButton_Tag
 + (instancetype)chapterVCwithCourseID:(NSInteger)courseID
 {
     CChapterViewController *VC = [[CChapterViewController alloc] init];
+    VC.isNeedHistory = NO;
     VC.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-33-64) style:UITableViewStylePlain];
     
     VC.courseID = courseID;
     
     [VC.view addSubview:VC.tableView];
     return VC;
-    
+}
+
++ (instancetype)chapterVCwithCourseID:(NSInteger)courseID andVideoHistoryDic:(NSDictionary *)videoHDic
+{
+    CChapterViewController *VC = [CChapterViewController chapterVCwithCourseID:courseID];
+    if(videoHDic.count>0){
+        VC.isNeedHistory = YES;
+        VC.videoHDic = videoHDic;
+
+    }
+    return VC;
 }
 
 #pragma mark - getter and setter
@@ -245,7 +259,15 @@ enum MoreActionButton_Tag
     }
     return _actionSheet;
 }
-
+/*
+ if(self.isNeedHistory){
+ NSArray *array = self.videoHDic[@"chapter"];
+ for(NSDictionary *dic in array){
+ NSInteger chapterNum = [dic[@"chChapterNo"] integerValue] - 1;
+ _chapterOpenArray[chapterNum] = @1;
+ }
+ }
+ */
 
 - (NSMutableArray *)chapterOpenArray
 {
@@ -253,6 +275,11 @@ enum MoreActionButton_Tag
         _chapterOpenArray = [NSMutableArray arrayWithCapacity:self.courseChapterArray.count];
         for (NSInteger i = 0; i < self.courseChapterArray.count; i++) {
             [_chapterOpenArray addObject:@0];
+        }
+        if(self.isNeedHistory){
+            NSDictionary *dic = self.videoHDic[@"lastVideo"];
+            NSInteger chapterNum = (NSInteger)[dic[@"vSectionNo"] doubleValue];
+            _chapterOpenArray[chapterNum-1] = @1;
         }
     }
     return _chapterOpenArray;
@@ -573,17 +600,36 @@ enum MoreActionButton_Tag
             if (!cell) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:chapterCellIdentifier];
                 UIImageView *timeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 12, 20, 20)];
-                [timeImageView setImage:[UIImage imageNamed:@"CtimeNum"]];
+                //[timeImageView setImage:[UIImage imageNamed:@"CtimeNum"]];
+                timeImageView.tag = 121;
                 [cell.contentView addSubview:timeImageView];
                 UILabel *timeLable = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-45, 6, 45, 30)];
                 [timeLable setFont:[UIFont systemFontOfSize:12.0]];
                 [cell.contentView addSubview:timeLable];
                 timeLable.tag = 120; //
             }
+            UIImageView *imageView = (UIImageView *)[cell viewWithTag:121];
+            imageView.image = [UIImage imageNamed:@"CtimeNum"];
+            
             NSArray *chapter = self.courseChapterArray[indexPath.section -1][@"CCvideo"];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@",chapter[indexPath.row][@"vSectionsNo"],chapter[indexPath.row][@"vSectionsName"]];
             UILabel *label = (UILabel *)[cell viewWithTag:120];
             label.text = [NSString stringWithFormat:@"%@分钟",chapter[indexPath.row][@"vTime"]];
+            
+            if(self.isNeedHistory){
+                NSArray *array = self.videoHDic[@"chapter"];
+                for(NSDictionary *dic in array){
+                    NSInteger chapterNum = [dic[@"chChapterNo"] integerValue];
+                    if(chapterNum == indexPath.section){
+                        NSArray *vArray = dic[@"listVideo"];
+                        for(NSDictionary *dic in vArray){
+                            if([chapter[indexPath.row][@"vSectionsNo"] isEqualToString:dic[@"vSectionsNo"]])
+                               [imageView setImage:[UIImage imageNamed:@"CtimeNum_full"]];
+                        }
+                    }
+                }
+            }
+            
             return cell;
         }
             break;
@@ -715,7 +761,7 @@ enum MoreActionButton_Tag
 - (void)touchHeadImage:(UIButton *)sender
 {
     NSDictionary *dic = self.courseCommentArray[sender.tag];
-    NSString *userID = dic[@"userid"];
+    NSInteger userID = [dic[@"userid"] integerValue];
     UserCenterTableViewController *userVC = [[UserCenterTableViewController alloc] initWithUserId:userID];
     [self.navigationController pushViewController:userVC animated:YES];
 }

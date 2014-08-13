@@ -133,31 +133,7 @@
         CDetailHead *headView = [[CDetailHead alloc] init];
         [self setFirstHeadUI:headView];
         return headView;
-    } /*else {
-        static NSString *headIdentifier = @"myHead";
-        UIView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headIdentifier];
-    
-        if (!view) {
-            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30)];
-            view.backgroundColor = [UIColor whiteColor];
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 20)];
-            label.tag = 201;
-            //view.backgroundColor = [UIColor colorWithRed:128/255.0 green:1.0 blue:0 alpha:1.0];
-            //view.backgroundColor = [UIColor lightGrayColor];
-            label.backgroundColor = [UIColor clearColor];
-            //label.backgroundColor = [UIColor whiteColor];
-            view.layer.borderWidth = 1.0f;
-            view.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-            [view addSubview:label];
-        }
-        UILabel *label = (UILabel *)[view viewWithTag:201];
-        
-        CDSection *cdSection = self.cdAllSection.cdAllSectionArray[section-1];
-        label.text = [NSString stringWithFormat:@"学习阶段%d:%@",section,cdSection.csName];
-
-
-        return view;
-    } */
+    } 
     return nil;
     
     

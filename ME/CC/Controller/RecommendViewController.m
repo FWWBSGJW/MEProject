@@ -88,7 +88,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *infoDic = self.personListArray[indexPath.row];
-    UserCenterTableViewController *user = [[UserCenterTableViewController alloc] initWithUserId:infoDic[@"userId"]];
+    UserCenterTableViewController *user = [[UserCenterTableViewController alloc] initWithUserId:[infoDic[@"userId"] integerValue]];
     [self.navigationController pushViewController:user animated:YES];
 }
 

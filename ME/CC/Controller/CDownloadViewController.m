@@ -77,6 +77,8 @@
     [self.tableView registerNib:nib forCellReuseIdentifier:@"downloadCell"];
     
     _refreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(reloadDowloadUI) userInfo:nil repeats:YES];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>chapter</key>
+	<array>
+		<dict>
+			<key>chChapterName</key>
+			<string>项目引导</string>
+			<key>chChapterNo</key>
+			<string>1</string>
+			<key>listVideo</key>
+			<array>
+				<dict>
+					<key>vSectionsName</key>
+					<string>信用卡幸运卡号自动组编筛选项目介绍</string>
+					<key>vSectionsNo</key>
+					<string>1.1</string>
+					<key>vUrl</key>
+					<string>/videos/vid_0.mp4</string>
+					<key>watchDate</key>
+					<string>2014-07-15 17:14</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>chChapterName</key>
+			<string>认识java</string>
+			<key>chChapterNo</key>
+			<string>2</string>
+			<key>listVideo</key>
+			<array>
+				<dict>
+					<key>vSectionsName</key>
+					<string>Java简介</string>
+					<key>vSectionsNo</key>
+					<string>2.1</string>
+					<key>vUrl</key>
+					<string>/videos/vid_0.mp4</string>
+					<key>watchDate</key>
+					<string>2014-08-11 21:19</string>
+				</dict>
+				<dict>
+					<key>vSectionsName</key>
+					<string>Java特点</string>
+					<key>vSectionsNo</key>
+					<string>2.2</string>
+					<key>vUrl</key>
+					<string>/videos/vid_0.mp4</string>
+					<key>watchDate</key>
+					<string>2014-08-11 18:03</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>chChapterName</key>
+			<string>变量及运算符</string>
+			<key>chChapterNo</key>
+			<string>3</string>
+			<key>listVideo</key>
+			<array>
+				<dict>
+					<key>vSectionsName</key>
+					<string>数据类型转换</string>
+					<key>vSectionsNo</key>
+					<string>3.4</string>
+					<key>vUrl</key>
+					<string>/videos/vid_0.mp4</string>
+					<key>watchDate</key>
+					<string>2014-08-12 19:27</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>chChapterName</key>
+			<string>异常处理</string>
+			<key>chChapterNo</key>
+			<string>9</string>
+			<key>listVideo</key>
+			<array>
+				<dict>
+					<key>vSectionsName</key>
+					<string>异常处理机制try、catch、fina</string>
+					<key>vSectionsNo</key>
+					<string>9.3</string>
+					<key>vUrl</key>
+					<string>/videos/vid_0.mp4</string>
+					<key>watchDate</key>
+					<string>2014-07-16 12:50</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>lastVideo</key>
+	<dict>
+		<key>vSectionsName</key>
+		<string>数据类型转换</string>
+		<key>vSectionsNo</key>
+		<string>3.4</string>
+		<key>vUrl</key>
+		<string>/videos/vid_0.mp4</string>
+		<key>watchDate</key>
+		<string>2014-08-12 19:27</string>
+	</dict>
+</dict>
+</plist>

@@ -12,5 +12,6 @@
 
 + (instancetype)chapterVCwithCourseID:(NSInteger)courseID; //以课程id实例化方法
 
++ (instancetype)chapterVCwithCourseID:(NSInteger)courseID andVideoHistoryDic:(NSDictionary *)videoHDic;
 
 @end

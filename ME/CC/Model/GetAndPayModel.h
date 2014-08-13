@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) NSMutableArray *userCoinArray;
 
-- (void)getCoinWithNumber:(NSInteger)number andUserID:(NSInteger *)userID;
+//或得积分，异步请求
+- (void)getCoinWithCount:(NSInteger)count andUserID:(NSInteger)userID;
 
 @end
