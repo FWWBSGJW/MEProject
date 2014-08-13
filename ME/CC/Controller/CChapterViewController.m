@@ -162,8 +162,27 @@ enum MoreActionButton_Tag
     
     UINib *nib2 = [UINib nibWithNibName:@"CNoteCell" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:nib2 forCellReuseIdentifier:@"noteCell"];
-    
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    if (self.isNeedHistory) {
+        self.segmentControl.selectedSegmentIndex = SegementChapter;
+        [self.tableView reloadData];
+        NSDictionary *dic = self.videoHDic[@"lastVideo"];
+        NSArray *array = [dic[@"vSectionsNo"] componentsSeparatedByString:@"."];
+        //NSLog(@"%@",array);
+        NSInteger sectionNum = [array[0] integerValue];
+        NSInteger cellNum = [array[1] integerValue]-1;
+        [self openChapterWithSection:sectionNum];
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:cellNum inSection:sectionNum] animated:YES  scrollPosition:UITableViewScrollPositionMiddle];
+        CAlertLabel *alertLabel = [CAlertLabel alertLabelInHeadForText:@"已为你定位到上次观看的视频" andIsHaveNavigationBar:YES];
+        [alertLabel showAlertLabelForHead];
+        //[[UIApplication sharedApplication].keyWindow addSubview:alertLabel];
+    }
+}
+
 #pragma mark - 页面数据刷新
 - (void)refreshView
 {
@@ -231,7 +250,6 @@ enum MoreActionButton_Tag
     if(videoHDic.count>0){
         VC.isNeedHistory = YES;
         VC.videoHDic = videoHDic;
-
     }
     return VC;
 }
@@ -275,11 +293,6 @@ enum MoreActionButton_Tag
         _chapterOpenArray = [NSMutableArray arrayWithCapacity:self.courseChapterArray.count];
         for (NSInteger i = 0; i < self.courseChapterArray.count; i++) {
             [_chapterOpenArray addObject:@0];
-        }
-        if(self.isNeedHistory){
-            NSDictionary *dic = self.videoHDic[@"lastVideo"];
-            NSInteger chapterNum = (NSInteger)[dic[@"vSectionNo"] doubleValue];
-            _chapterOpenArray[chapterNum-1] = @1;
         }
     }
     return _chapterOpenArray;
@@ -852,6 +865,7 @@ enum MoreActionButton_Tag
                     CAlertLabel *alertLabel = [CAlertLabel alertLabelWithAdjustFrameForText:@"操作失败!"];
                     [alertLabel showAlertLabel];
                 }
+                [User sharedUser].havaChange = YES;
               
             }
 

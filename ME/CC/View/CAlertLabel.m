@@ -65,6 +65,29 @@
 {
     [self showWithShowSecond:0.8f andDisappearSecond:0.6f];
 }
+
++ (instancetype)alertLabelInHeadForText:(NSString *)text andIsHaveNavigationBar:(BOOL)isHave{
+    CAlertLabel *alertLabel = [[CAlertLabel alloc] initWithFrame:CGRectMake(0, isHave?64.0:20.0, SCREEN_WIDTH, 30)];
+    alertLabel.backgroundColor = System_BlueColor;
+    alertLabel.alpha = 0.9f;
+    alertLabel.textColor = [UIColor whiteColor];
+    [alertLabel setTextAlignment:NSTextAlignmentCenter];
+    alertLabel.numberOfLines = 1;
+    alertLabel.font = [UIFont systemFontOfSize:13.0];
+    alertLabel.text = text;
+    return alertLabel;
+}
+
+- (void)showAlertLabelForHead
+{
+    [[UIApplication sharedApplication].keyWindow addSubview:self];
+    
+    [UIView animateWithDuration:0.9f delay:1.2f options:UIViewAnimationOptionLayoutSubviews animations:^{
+        self.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -159,7 +159,15 @@
     headView.videoNumLabel.text = [NSString stringWithFormat:@"%d",self.courseDirection.CDvideoNum];
     headView.practiceNumLabel.text = [NSString stringWithFormat:@"%d",self.courseDirection.CDpracticeNum];
 }
-
+/*
+#warning 测试
+- (NSDictionary *)videoInfoDic
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"TestList.plist" ofType:nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:path];
+    return dic;
+}
+*/
 #pragma mark - 选择 进行页面跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -168,7 +176,7 @@
         
         NSDictionary *content = cdSection.csContent[indexPath.row];
         CChapterViewController *headVC = [CChapterViewController chapterVCwithCourseID:[content[@"courseID"] integerValue]];
-        
+        //CChapterViewController *headVC = [CChapterViewController chapterVCwithCourseID:[content[@"courseID"]integerValue] andVideoHistoryDic:[self videoInfoDic]];
         [self.navigationController pushViewController:headVC animated:YES];
         
     }

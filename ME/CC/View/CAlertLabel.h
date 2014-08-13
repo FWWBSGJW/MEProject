@@ -42,4 +42,16 @@
  */
 - (void)showWithShowSecond:(CGFloat)showSecond andDisappearSecond:(CGFloat)disSecond;
 
+/**
+ *  顶部横条提示
+ *
+ *  @param text   提示内容
+ *  @param isHave ViewController是否有navigationBar
+ *
+ *  @return 实例
+ */
++ (instancetype)alertLabelInHeadForText:(NSString *)text andIsHaveNavigationBar:(BOOL)isHave;
+//与上个配套使用
+- (void)showAlertLabelForHead;
+
 @end

@@ -11,7 +11,7 @@
 @interface CChapterViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UIAlertViewDelegate>
 
 + (instancetype)chapterVCwithCourseID:(NSInteger)courseID; //以课程id实例化方法
-
+//有视频观看信息dic的定制接口
 + (instancetype)chapterVCwithCourseID:(NSInteger)courseID andVideoHistoryDic:(NSDictionary *)videoHDic;
 
 @end
