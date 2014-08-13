@@ -58,7 +58,8 @@
 {
     switch (sender.tag) {
         case 1:
-            [self presentViewController:[[ShakeViewController alloc] init] animated:YES completion:^{}];
+            [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[ShakeViewController alloc] init]] animated:YES completion:^{
+            }];
             break;
         case 2:
             [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[RankingViewController alloc] init]] animated:YES completion:^{

@@ -130,7 +130,9 @@
 {
     User *user = [User sharedUser];
     if (!user.info.isLogin) {
-        [user gotoUserLoginFrom:self];
+//        [user gotoUserLoginFrom:self];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"请登录后再签到" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alertView show];
     }
 }
 
