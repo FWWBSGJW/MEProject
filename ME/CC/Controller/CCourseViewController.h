@@ -4,7 +4,7 @@
 //
 //  Created by yato_kami on 14-7-4.
 //  Copyright (c) 2014年 yatokami. All rights reserved.
-//  同步3
+//  同步 4
 #import <UIKit/UIKit.h>
 #import "SVPullToRefresh.h"
 #import "CouseAllDirection.h"
