@@ -27,8 +27,9 @@
                     <rect key="frame" x="0.0" y="190" width="160" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" title="测试介绍">
-                        <color key="titleColor" red="0.0090650475540000001" green="0.0086398190730000001" blue="0.0089953937349999992" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
@@ -36,8 +37,9 @@
                     <rect key="frame" x="160" y="190" width="160" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" title="测试评论">
-                        <color key="titleColor" red="0.0090650475540000001" green="0.0086398190730000001" blue="0.0089953937349999992" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
