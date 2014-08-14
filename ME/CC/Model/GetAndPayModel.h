@@ -12,7 +12,18 @@
 
 @property (strong, nonatomic) NSMutableArray *userCoinArray;
 
+- (NSInteger)getCoinForNoteWithUserID:(NSInteger)userID; //笔记
+
+- (NSInteger)getCoinForCommentWithUserID:(NSInteger)userID; //评论
+
+- (void)getCoinForVideoWithUserID:(NSInteger)userID; //观看视频
+
+- (void)getCoinForDanmakuWithUserID:(NSInteger)userID WithSendedNum:(NSInteger)sendNum;//发弹幕
+
+- (void)getCoinForShareWithUserID:(NSInteger)userID; //分享
+
 //或得积分，异步请求
 - (void)getCoinWithCount:(NSInteger)count andUserID:(NSInteger)userID;
+
 
 @end

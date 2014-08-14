@@ -63,7 +63,7 @@
 
 - (void)showAlertLabel
 {
-    [self showWithShowSecond:0.8f andDisappearSecond:0.6f];
+    [self showWithShowSecond:1.0f andDisappearSecond:0.6f];
 }
 
 + (instancetype)alertLabelInHeadForText:(NSString *)text andIsHaveNavigationBar:(BOOL)isHave{

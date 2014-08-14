@@ -11,6 +11,7 @@
 #import "DanmakuView.h"
 #import "DanmakuModel.h"
 #import "User.h"
+#import "GetAndPayModel.h"
 
 enum SendType
 {
@@ -24,7 +25,7 @@ enum SendType
     NSInteger _lastArrayNum ; //弹幕内容数组控制
     UIButton *_playButton;//播放按钮
     UITextField *_dmTextField; //发送弹幕文本框
-
+    NSInteger _sendDMNum; //用户发送弹幕数量 用以积分增加
 }
 @property (strong, nonatomic) NSOperationQueue *dmQueue;
 
@@ -87,7 +88,6 @@ enum SendType
 
 @property (strong, nonatomic) NSTimer *myTimer;
 @property (strong, nonatomic) UIAlertView *alertView;
-
 @end
 
 @implementation CVideoPlayerController
@@ -204,6 +204,7 @@ enum SendType
     self.danmakuModel.danmakuView = self.danmakuView;
     
     self.dmQueue = [[NSOperationQueue alloc] init];
+    _sendDMNum = 0;
 }
 
 
@@ -541,6 +542,7 @@ enum SendType
     [self.danmakuModel.danmakuArray insertObject:dic atIndex:_lastArrayNum];
     NSLog(@"%@",danmaku);
     [self hidSendDanmakuView];
+    _sendDMNum++;
 }
 
 - (void)hidSendDanmakuView
@@ -738,6 +740,12 @@ enum SendType
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
             NSLog(@"观看记录上传");
         }];
+        //异步加积分
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            GetAndPayModel *gpModel = [[GetAndPayModel alloc] init];
+            [gpModel getCoinForDanmakuWithUserID:self.userID WithSendedNum:_sendDMNum];
+        });
 
     }
     

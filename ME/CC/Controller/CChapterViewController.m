@@ -23,6 +23,7 @@
 #import "CDownloadModel.h"
 #import "UserCenterTableViewController.h"
 #import "RecommendViewController.h"
+#import "GetAndPayModel.h"
 
 #define headHeight 160
 enum ActionSheet_Type
@@ -99,7 +100,7 @@ enum MoreActionButton_Tag
 @property (strong, nonatomic) CMoreActionView *moreActionView;
 
 @property (strong, nonatomic) CDownloadModel *downloadModel;
-
+@property (strong, nonatomic) GetAndPayModel *getAndPayModel;
 @end
 
 @implementation CChapterViewController
@@ -271,6 +272,14 @@ enum MoreActionButton_Tag
 }
 
 #pragma mark - getter and setter
+
+- (GetAndPayModel *)getAndPayModel
+{
+    if (!_getAndPayModel) {
+        _getAndPayModel = [[GetAndPayModel alloc] init];
+    }
+    return _getAndPayModel;
+}
 
 - (CMoreActionView *)moreActionView
 {
@@ -733,6 +742,11 @@ enum MoreActionButton_Tag
                 [player playVideoWithVideoID:CVid andVideoTitle:[NSString stringWithFormat:@"%@ %@",dic[@"vSectionsNo"],dic[@"vSectionsName"]] andVideoUrlString:[NSString stringWithFormat:@"%@%@",kBaseURL,dic[@"vUrl"]]];
                 [self presentMoviePlayerViewControllerAnimated:player];
                 
+                //异步处理看视频获得积分事件
+                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                dispatch_async(queue, ^{
+                    [self.getAndPayModel getCoinForVideoWithUserID:[User sharedUser].info.userId];
+                });
                 
             }
                 break;
@@ -864,7 +878,7 @@ enum MoreActionButton_Tag
     }
 }
 
-#pragma mark 功能button方法
+#pragma mark toolBar Buttion事件
 - (void)touchButton:(UIBarButtonItem *)button
 {
 
@@ -1012,8 +1026,6 @@ enum MoreActionButton_Tag
 #pragma sendView button action
 - (void)sendComNote
 {
-#pragma waring 此处待实现上传评论，笔记 ,刷新数据
-    
     [self userCheck];
     //评论
     if ([User sharedUser].info.isLogin) {
@@ -1029,9 +1041,11 @@ enum MoreActionButton_Tag
             NSLog(@"笔记---%@",_sendComNoteView.textView.text);
             [self.courseChapter sendCourseNoteWithCourseID:1 andUserID:self.courseID andContent:self.sendComNoteView.textView.text];
         }
-        CAlertLabel *alertLabel = [CAlertLabel alertLabelWithAdjustFrameForText:@"发送成功"];
-        [alertLabel showAlertLabel];
+        
         [self sendComNoteViewBack];
+        NSInteger isGetCoin = (self.sendComNoteView.tag == TextViewComment ? [self.getAndPayModel getCoinForCommentWithUserID:[User sharedUser].info.userId] : [self.getAndPayModel getCoinForNoteWithUserID:[User sharedUser].info.userId]);
+        CAlertLabel *alertLabel = [CAlertLabel alertLabelWithAdjustFrameForText:[NSString stringWithFormat:@"发送成功%@",isGetCoin?@"，积分+1":@""]];
+        [alertLabel showAlertLabel];
         //self.sendComNoteView.textView.text = nil;
     }
 }
@@ -1055,7 +1069,7 @@ enum MoreActionButton_Tag
 
 }
 
-#pragma mark - moreAction
+#pragma mark - moreAction，下拉菜单事件
 - (void)moreAction
 {
     self.moreActionView.isShow ? [self.moreActionView disMissMoreActionView] : [self.moreActionView showMoreActionView];
@@ -1100,6 +1114,7 @@ enum MoreActionButton_Tag
                                     result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
                                         if (state == SSResponseStateSuccess)
                                         {
+                                            [self.getAndPayModel getCoinForShareWithUserID:[User sharedUser].info.userId];
                                             NSLog(@"分享成功");
                                         }
                                         else if (state == SSResponseStateFail)
