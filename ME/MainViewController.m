@@ -71,7 +71,7 @@
     QAViewController *qaVC3 = [QAViewController shareQA];
     UINavigationController *qaNav = [[UINavigationController alloc] initWithRootViewController:qaVC3];
     //UITabBarItem *demoItem3 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostRecent tag:4];
-    UITabBarItem *qaItem = [[UITabBarItem alloc] initWithTitle:@"问答" image:[UIImage imageNamed:@"Q&A"] tag:4];
+    UITabBarItem *qaItem = [[UITabBarItem alloc] initWithTitle:@"交流" image:[UIImage imageNamed:@"Q&A"] tag:4];
     qaVC3.tabBarItem = qaItem;
     
     self.tabBar.barTintColor = [UIColor whiteColor];
