@@ -20,13 +20,15 @@
     NSString *str = [kBaseURL stringByAppendingString:string];
     
     NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:6.5f];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
     
     //NSURLResponse *response = nil;
     //NSError *error = nil;
     //NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (data != nil) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             [self handleJSONData:data];
             [self.delegate upDateUI];
         } else if (data == nil && connectionError == nil) {

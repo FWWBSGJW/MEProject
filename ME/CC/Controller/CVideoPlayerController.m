@@ -12,6 +12,7 @@
 #import "DanmakuModel.h"
 #import "User.h"
 #import "GetAndPayModel.h"
+#import "JCRBlurView.h"
 
 enum SendType
 {
@@ -88,11 +89,33 @@ enum SendType
 
 @property (strong, nonatomic) NSTimer *myTimer;
 @property (strong, nonatomic) UIAlertView *alertView;
+
+@property (strong, nonatomic) JCRBlurView *loadingView; // 视频加载界面
 @end
 
 @implementation CVideoPlayerController
 
 #pragma getter and setter
+
+- (JCRBlurView *)loadingView
+{
+    if (!_loadingView) {
+        _loadingView = [[JCRBlurView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_HEIGHT/2-70, SCREEN_WIDTH/2 + 20, 140, 40)];
+        _loadingView.blurTintColor = [UIColor blackColor];
+        label.text = @"视频正在拼命加载中....";
+        label.textColor = [UIColor whiteColor];
+        [label setFont:[UIFont systemFontOfSize:13.0f]];
+        [_loadingView addSubview:label];
+        
+        UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        indicatorView.center = CGPointMake(SCREEN_HEIGHT/2.0f, SCREEN_WIDTH/2.0F);
+        [_loadingView addSubview:indicatorView];
+        [indicatorView startAnimating];
+        
+    }
+    return _loadingView;
+}
 
 - (NSInteger)userID
 {
@@ -193,7 +216,7 @@ enum SendType
     
     self.gestureStatus = -1;
     //监听视频文件预加载完成时
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(movieStart) name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
+    //[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(movieStart) name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
     //监听播放状态
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(stateChange) name:MPMoviePlayerPlaybackStateDidChangeNotification object:nil];
     //监听结束
@@ -205,6 +228,7 @@ enum SendType
     
     self.dmQueue = [[NSOperationQueue alloc] init];
     _sendDMNum = 0;
+    
 }
 
 
@@ -371,7 +395,7 @@ enum SendType
     [self.controlBar addSubview:self.sliderBar];
     
     
-    
+    [self.moviePlayer.view addSubview:self.loadingView];
     
     
     /*
@@ -698,6 +722,11 @@ enum SendType
             NSLog(@"zanting---------");
             break;
         case MPMoviePlaybackStatePlaying:
+            [self movieStart];
+            if (_loadingView) {
+                [self.loadingView removeFromSuperview];
+                _loadingView = nil;
+            }
             [self.timer setFireDate:[NSDate date]];
         default:
             break;
@@ -707,6 +736,8 @@ enum SendType
 #pragma mark 视频开始播放
 - (void)movieStart
 {
+    //[self.loadingView removeFromSuperview];
+    
     if (!self.timer) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerClicked) userInfo:nil repeats:YES];
     }
@@ -714,9 +745,6 @@ enum SendType
         self.hiddenBgTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(hiddenControlView) userInfo:nil repeats:NO];
     }
 
-//    if (!self.danmakuTimer) {
-//        self.danmakuTimer = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(selectDanmuku) userInfo:nil repeats:YES];
-//    }
 }
 
 

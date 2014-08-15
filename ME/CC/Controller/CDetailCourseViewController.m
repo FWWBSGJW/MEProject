@@ -177,6 +177,7 @@
         NSDictionary *content = cdSection.csContent[indexPath.row];
         CChapterViewController *headVC = [CChapterViewController chapterVCwithCourseID:[content[@"courseID"] integerValue]];
         //CChapterViewController *headVC = [CChapterViewController chapterVCwithCourseID:[content[@"courseID"]integerValue] andVideoHistoryDic:[self videoInfoDic]];
+        headVC.title = content[@"courseName"];
         [self.navigationController pushViewController:headVC animated:YES];
         
     }

@@ -22,8 +22,10 @@
 {
     NSString *str = [kBaseURL stringByAppendingString:[NSString stringWithFormat:@"MobileEducation/courseIdAction?Cid=%d",courseID]];
     NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.5f];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if (data != nil) {
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
             self.courseInfoDic = dic;
@@ -42,8 +44,27 @@
 {
     NSString *str = [kBaseURL stringByAppendingString:[NSString stringWithFormat:@"MobileEducation/chapterAction?CId=%d",courseID]];
     NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.5f];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:4.0f];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    NSError *connectionError;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&connectionError];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    if (data != nil) {
+        NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
+        for (NSDictionary *dic in array) {
+            NSMutableDictionary *muDic = [NSMutableDictionary dictionaryWithDictionary:dic];
+            [muArray addObject:muDic];
+        }
+        self.courseChapterArray = muArray;
+    } else if (data == nil && connectionError == nil) {
+        NSLog(@"空数据");
+    } else {
+        NSLog(@"%@",connectionError.localizedDescription);
+    }
+    /*
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if (data != nil) {
             NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
             NSMutableArray *muArray = [NSMutableArray arrayWithCapacity:array.count];
@@ -59,16 +80,19 @@
             NSLog(@"%@",connectionError.localizedDescription);
         }
     }];
+     */
 }
 
 - (NSArray *)loadCourseDetailChapterWithChapterID:(NSInteger)chapterID
 {
     NSString *str = [kBaseURL stringByAppendingString:[NSString stringWithFormat:@"MobileEducation/videoAction?chapter=%d",chapterID]];
     NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
     NSURLResponse *response = nil;
     NSError *error = nil;
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     NSArray *array;
     if (data != nil) {
         array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
@@ -85,9 +109,10 @@
     //http://121.197.10.159:8080/MobileEducation/commentAction?page=1&CId=1
     NSString *str = [kBaseURL stringByAppendingString:[NSString stringWithFormat:@"MobileEducation/commentAction?page=%d&CId=%d",pageNum,courseID]];
     NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
-   
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if (data != nil) {
             NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
             
@@ -116,14 +141,14 @@
 {
     if (self.nextCommentPageUrl) {
         NSURL *url = [NSURL URLWithString:self.nextCommentPageUrl];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
         NSURLResponse *response = nil;
         NSError *error = nil;
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if (data != nil) {
             NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            
-            //self.courseCommentArray = array;
             if (self.courseCommentArray) {
                 [self.courseCommentArray addObjectsFromArray:array];
             } else {
@@ -149,7 +174,7 @@
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@MobileEducation/uploadCComment",kBaseURL]];
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
     //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
 
@@ -160,11 +185,14 @@
     NSData *body = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
     
     [request setHTTPBody:body];
-    //NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
-    //[connection start];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"评论结果返回dic：%@",dic);
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        if (data) {
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"评论结果返回dic：%@",dic);
+        }
+        
     }];
     
 }
@@ -174,10 +202,12 @@
 {
     NSString *str = [kBaseURL stringByAppendingString:[NSString stringWithFormat:@"MobileEducation/collectionAction?userId=%d&CId=%d",userID,courseID]];
     NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
     NSURLResponse *response = nil;
     NSError *error = nil;
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     if (data != nil) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
         return [dic[@"success"] integerValue];
@@ -195,8 +225,10 @@
 {
     NSString *str = [kBaseURL stringByAppendingString:[NSString stringWithFormat:@"MobileEducation/chapterNote?cid=%d&userId=%d",courseID,userID]];
     NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.5f];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if (data != nil) {
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
             NSMutableDictionary *normalDic = [NSMutableDictionary dictionaryWithDictionary:dic[@"normalNote"]];
@@ -220,10 +252,12 @@
 - (NSMutableArray *)loadCourseDetailNoteWithUrl:(NSString *)urlStr
 {
     NSURL *url = [NSURL URLWithString:urlStr];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
     NSURLResponse *response = nil;
     NSError *error = nil;
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     NSArray *array;
     if (data != nil) {
         array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
@@ -240,7 +274,7 @@
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@MobileEducation/uploadCNote",kBaseURL]];
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
     //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     
@@ -251,9 +285,14 @@
     NSData *body = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
     
     [request setHTTPBody:body];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"笔记结果返回dic：%@",dic);
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        if (data) {
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"笔记结果返回dic：%@",dic);
+        }
+        
     }];
     
 }

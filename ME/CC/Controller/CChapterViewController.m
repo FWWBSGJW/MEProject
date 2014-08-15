@@ -105,7 +105,6 @@ enum MoreActionButton_Tag
 
 @implementation CChapterViewController
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -115,7 +114,7 @@ enum MoreActionButton_Tag
     
     
     _courseChapter = [[CourseChapter alloc] init];
-    
+    self.courseChapter.delegate = self;
     //下拉
     __weak CChapterViewController *weakSelf = self;
     
@@ -171,9 +170,10 @@ enum MoreActionButton_Tag
     
     UINib *nib2 = [UINib nibWithNibName:@"CNoteCell" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:nib2 forCellReuseIdentifier:@"noteCell"];
-    self.title = @"";
-
-    self.courseChapter.delegate = self;
+    //self.title = @"";
+    if (!self.title) {
+        self.title = self.courseInfoDic[@"cName"];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -184,9 +184,11 @@ enum MoreActionButton_Tag
     }
 }
 
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
+    self.title = self.courseInfoDic[@"cName"];
     if (self.isNeedHistory) {
         self.segmentControl.selectedSegmentIndex = SegementChapter;
         [self.tableView reloadData];
@@ -913,9 +915,11 @@ enum MoreActionButton_Tag
                 [self.tableView reloadData];
             }
             [self.segmentControl setEnabled:NO];
+        
             if ([self.chapterOpenArray[0] integerValue] == 0) {
                 [self openChapterWithSection:1]; //展开第一行 提示可下载
             }
+            
             [self.tableView setEditing:YES animated:YES];
             [self.view addSubview:self.downLoadBarView];
         }
@@ -1161,7 +1165,7 @@ enum MoreActionButton_Tag
 - (void)updateUI
 {
     //self.courseInfoDic = self.courseChapter.courseInfoDic;
-    if ([self.title isEqualToString:@""]) {
+    if (!self.title) {
         self.title = self.courseInfoDic[@"cName"];
     }
     [self.tableView reloadData];
