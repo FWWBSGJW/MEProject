@@ -35,7 +35,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"问答";
+    self.title = @"交流";
     UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.frame];
     webView.scalesPageToFit = YES;
 	NSInteger userid = [User sharedUser].info.userId;
