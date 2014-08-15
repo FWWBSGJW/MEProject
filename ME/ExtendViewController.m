@@ -11,6 +11,8 @@
 #import "RankingViewController.h"
 #import "CDownloadViewController.h"
 #import "JCRBlurView.h"
+#import "FindJobViewController.h"
+#import "SearchViewController.h"
 
 @interface ExtendViewController ()
 
@@ -68,6 +70,12 @@
         case 3:
             [self.navigationController pushViewController:[[CDownloadViewController alloc] init] animated:YES];
             //[self presentViewController:[[CDownloadViewController alloc] init] animated:YES completion:nil];
+            break;
+        case 4:
+            [self.navigationController pushViewController:[[FindJobViewController alloc] init] animated:YES];
+            break;
+        case 5:
+            [self.navigationController pushViewController:[[SearchViewController alloc] init] animated:YES];
         default:
             break;
     }
