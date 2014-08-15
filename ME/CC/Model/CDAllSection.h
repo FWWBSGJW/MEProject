@@ -9,7 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "CDSection.h"
 
+@protocol cdAllSectionDelegate <NSObject>
+- (void)upDateUI;
+@end
+
 @interface CDAllSection : NSObject
+@property (weak, nonatomic) id<cdAllSectionDelegate> delegate;
 //课程方向id
 @property (assign, nonatomic) NSInteger cdID;
 //课程方向阶段类数组

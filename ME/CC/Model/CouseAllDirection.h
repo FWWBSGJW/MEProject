@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "CourseDirection.h"
 
-@interface CouseAllDirection : NSObject
+@protocol CourseDirectionDelegate <NSObject>
+- (void)upDateUI;
+@end
 
+@interface CouseAllDirection : NSObject
 //存储所有课程方向数据
 @property (strong, nonatomic) NSMutableArray *allCourseDirectionArray;
-
+@property (weak, nonatomic) id<CourseDirectionDelegate> delegate;
 
 - (void)loadData;
 

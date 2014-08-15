@@ -16,11 +16,22 @@
     NSString *str = [kBaseURL stringByAppendingString:@"MobileEducation/directionAction"];
     
     NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.5f];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:9.5f];
 
-    NSURLResponse *response = nil;
-    NSError *error = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    //NSURLResponse *response = nil;
+    //NSError *error = nil;
+    //NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (data != nil) {
+            [self handleJSONData:data];
+            [self.delegate upDateUI];
+        } else if (data == nil && connectionError == nil) {
+            NSLog(@"空数据");
+        } else {
+            NSLog(@"%@",connectionError.localizedDescription);
+        }
+    }];
+    /*
     if (data != nil) {
         [self handleJSONData:data];
     } else if (data == nil && error == nil) {
@@ -28,7 +39,7 @@
     } else {
         NSLog(@"%@",error.localizedDescription);
     }
-  
+  */
 }
 
 

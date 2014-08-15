@@ -12,7 +12,7 @@
 #import "CDAllSection.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface CDetailCourseViewController ()
+@interface CDetailCourseViewController ()<cdAllSectionDelegate>
 
 @property (strong, nonatomic) CDAllSection *cdAllSection;//课程数组阶段模型
 
@@ -67,7 +67,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   
+    self.cdAllSection.delegate = self;
     self.tableView.rowHeight = 60.0; //设置cell高度
    
 }
@@ -182,6 +182,9 @@
     }
 }
 
-
-
+#pragma mark - delegate
+- (void)upDateUI
+{
+    [self.tableView reloadData];
+}
 @end

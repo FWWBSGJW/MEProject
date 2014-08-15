@@ -20,22 +20,23 @@
     NSString *str = [kBaseURL stringByAppendingString:string];
     
     NSURL *url = [NSURL URLWithString:str];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:2.5f];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:6.5f];
     
-    NSURLResponse *response = nil;
-    NSError *error = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
+    //NSURLResponse *response = nil;
+    //NSError *error = nil;
+    //NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (data != nil) {
+            [self handleJSONData:data];
+            [self.delegate upDateUI];
+        } else if (data == nil && connectionError == nil) {
+            NSLog(@"空数据");
+        } else {
+            NSLog(@"%@",connectionError.localizedDescription);
+        }
+
+    }];
     //NSLog(@"%@",data);
-    
-    if (data != nil) {
-        [self handleJSONData:data];
-    } else if (data == nil && error == nil) {
-        NSLog(@"空数据");
-    } else {
-        NSLog(@"%@",error.localizedDescription);
-    }
-    
 }
 
 - (void)handleJSONData:(NSData *)datda

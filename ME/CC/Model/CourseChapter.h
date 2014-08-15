@@ -7,11 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFNetworking.h"
 
+@protocol CourseChapterDelegate <NSObject>
+
+- (void)updateUI;
+
+@end
 
 @interface CourseChapter : NSObject
 
+@property (weak,nonatomic) id<CourseChapterDelegate> delegate;
 @property (strong, nonatomic) NSDictionary *courseInfoDic;//课程信息字典
 @property (strong, nonatomic) NSMutableArray *courseChapterArray;//课程章节数组
 @property (strong, nonatomic) NSMutableArray *courseCommentArray;//课程评论数组

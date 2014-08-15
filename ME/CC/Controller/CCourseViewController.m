@@ -14,7 +14,7 @@
 #import "CDetailCourseViewController.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface CCourseViewController ()
+@interface CCourseViewController ()<CourseDirectionDelegate>
 
 @property (strong, nonatomic) NSArray *courseDirectionArray; //课程方向内容数组
 
@@ -112,6 +112,8 @@
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refreshView];
     }];
+    
+    self.courseAllDirection.delegate = self;
 //    [self.tableView addInfiniteScrollingWithActionHandler:^{
 //        NSLog(@"上拉");
 //    }];
@@ -242,19 +244,23 @@
     int64_t delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^{
-        self.courseAllDirection = nil;
-        _courseDirectionArray = nil;
+        //self.courseAllDirection = nil;
+        //_courseDirectionArray = nil;
         
-        //[self.courseAllDirection loadData];
-        _courseDirectionArray = self.courseAllDirection.allCourseDirectionArray;
+        [self.courseAllDirection loadData];
+        //_courseDirectionArray = self.courseAllDirection.allCourseDirectionArray;
         
         [weakSelf.tableView.pullToRefreshView stopAnimating];
-        [self.tableView reloadData];
+        //[self.tableView reloadData];
     });
-    
-    
 }
 
+#pragma mark - delegate
+- (void)upDateUI
+{
+    self.courseDirectionArray = self.courseAllDirection.allCourseDirectionArray;
+    [self.tableView reloadData];
+}
 
 
 @end

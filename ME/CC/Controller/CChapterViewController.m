@@ -24,7 +24,7 @@
 #import "UserCenterTableViewController.h"
 #import "RecommendViewController.h"
 #import "GetAndPayModel.h"
-
+#import "UIImageView+AFNetworking.h"
 #define headHeight 160
 enum ActionSheet_Type
 {
@@ -69,7 +69,7 @@ enum MoreActionButton_Tag
     MoreButtonTagShare
 };
 
-@interface CChapterViewController ()
+@interface CChapterViewController () <CourseChapterDelegate>
 {
     CChapterHead *_headView; //课程head
     //UITextView *_textView; //课程介绍textview
@@ -113,6 +113,7 @@ enum MoreActionButton_Tag
     self.tableView.dataSource = self;
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
     
+    
     _courseChapter = [[CourseChapter alloc] init];
     
     //下拉
@@ -128,8 +129,6 @@ enum MoreActionButton_Tag
     }];
     self.tableView.showsInfiniteScrolling = NO;
     [self setExtraCellLineHidden:self.tableView]; //隐藏多需的cell线
-    self.title = self.courseInfoDic[@"cName"];
-    
     
     UIBarButtonItem *moreItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(moreAction)];
     
@@ -153,8 +152,9 @@ enum MoreActionButton_Tag
     toorBar.items = items;
     [self.view addSubview:toorBar];
     if ([User sharedUser].info.isLogin) {
+        
         for (NSDictionary *dic in [[User sharedUser].info.ccourses linkContent]) {
-            if ([dic[@"cid"] integerValue] == self.courseID) {
+            if ( [dic[@"cid"] integerValue] == self.courseID) {
                 UIBarButtonItem *item = items[0];
                 item.image = [UIImage imageNamed:@"cStarFull"];
                 break;
@@ -171,6 +171,9 @@ enum MoreActionButton_Tag
     
     UINib *nib2 = [UINib nibWithNibName:@"CNoteCell" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:nib2 forCellReuseIdentifier:@"noteCell"];
+    self.title = @"";
+
+    self.courseChapter.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -301,7 +304,7 @@ enum MoreActionButton_Tag
 {
     if (!_actionSheet) {
         _actionSheet = [[UIActionSheet alloc] initWithTitle:@"登陆才能使用此功能哦~" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"登陆" otherButtonTitles:nil, nil];
-        _actionSheet.tag = ActionSheetBuy;
+        _actionSheet.tag = ActionSheetLogin;
     }
     return _actionSheet;
 }
@@ -512,15 +515,14 @@ enum MoreActionButton_Tag
             _headView = [[CChapterHead alloc] init];
             _segmentControl = _headView.segmentControl;
             [self.segmentControl addTarget:self action:@selector(selectSegemnt) forControlEvents:UIControlEventValueChanged];
-            
-            //NSLog(@"%@",self.courseInfoDic);
-            
-            //UIImage *image = [UIImage imageNamed:self.courseInfoDic[@"courseImageUrl"]];
+        }else{
+#warning 待补全积分价格
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kBaseURL,self.courseInfoDic[@"cPic"]]];
             [_headView.CCImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"directionDefault"]];
             _headView.CCtypeLabel.text = self.courseInfoDic[@"type"];
             _headView.CCteacherLabel.text = self.courseInfoDic[@"cTeacher"];
             _headView.CCtimeLabel.text = [NSString stringWithFormat:@"%d分钟",[self.courseInfoDic[@"cTime"] integerValue]];
+            _headView.CCpriceLaebl.text = [NSString stringWithFormat:@"%d元",[self.courseInfoDic[@"cPrice"] integerValue]];
             if ([User sharedUser].info.isLogin) {
                 NSArray *purchaseArray = [[User sharedUser].info.bcourses linkContent];
                 for (NSDictionary *dic in purchaseArray) {
@@ -530,9 +532,6 @@ enum MoreActionButton_Tag
                         break;
                     }
                 }
-            }else{
-                _headView.CCpriceLaebl.text = [NSString stringWithFormat:@"%d元",[self.courseInfoDic[@"cPrice"] integerValue]];
-#warning 待补全积分价格
             }
         }
         return _headView;
@@ -605,13 +604,13 @@ enum MoreActionButton_Tag
                 cell.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - headHeight-33);
                 UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(5, 0, SCREEN_WIDTH-10, SCREEN_HEIGHT - 64-33 - headHeight)];
                 [textView setEditable:NO];
+                textView.tag = 601;
                 [textView setFont:[UIFont systemFontOfSize:13.0f]];
                 [cell.contentView addSubview:textView];
-                //_textView = textView;
-                
-                [textView setText:self.courseInfoDic[@"cDetail"]];
                 [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             }
+            UITextView *textView = (UITextView *)[cell viewWithTag:601];
+            [textView setText:self.courseInfoDic[@"cDetail"]];
             return cell;
         }
             break;
@@ -1158,6 +1157,18 @@ enum MoreActionButton_Tag
 }
 
 #pragma mark - delegate
+
+- (void)updateUI
+{
+    //self.courseInfoDic = self.courseChapter.courseInfoDic;
+    if ([self.title isEqualToString:@""]) {
+        self.title = self.courseInfoDic[@"cName"];
+    }
+    [self.tableView reloadData];
+
+}
+
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch (actionSheet.tag) {
