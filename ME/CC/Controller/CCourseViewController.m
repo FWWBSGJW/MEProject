@@ -156,7 +156,8 @@
     cd = self.courseDirectionArray[indexPath.row];
     
     //设置cell内容
-    
+    cell.courseImageView.layer.borderWidth = 1.0f;
+    cell.courseImageView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     cell.tag = cd.CDid;
     cell.courseHeadLabel.text = cd.CDhead;
     cell.courseDetailLabel.text = cd.CDdescription;

@@ -691,10 +691,12 @@ enum MoreActionButton_Tag
                 cell.noteLabel.text = noteDic[@"cnContext"];
                 cell.chapterLabel.text = noteDic[@"cnDate"];
                 cell.timeLabel.text = @"无";
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             } else{
                 cell.noteLabel.text = noteDic[@"Dcomponent"];
                 cell.chapterLabel.text = [NSString stringWithFormat:@"%@ %@",noteDic[@"vSectionsNo"],noteDic[@"vSectionsName"]];
                 cell.timeLabel.text = [NSString stringWithFormat:@"%@",[self chageTime:[noteDic[@"Dtime"] integerValue]]];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleDefault];
             }
             
             

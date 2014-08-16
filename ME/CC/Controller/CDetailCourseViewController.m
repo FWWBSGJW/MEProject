@@ -11,10 +11,16 @@
 #import "CChapterViewController.h"
 #import "CDAllSection.h"
 #import "UIImageView+AFNetworking.h"
+#import "JCRBlurView.h"
 
+#define headHeight 170.0
 @interface CDetailCourseViewController ()<cdAllSectionDelegate>
 
 @property (strong, nonatomic) CDAllSection *cdAllSection;//课程数组阶段模型
+@property (strong, nonatomic) UIButton *backViewButton;
+@property (strong, nonatomic) UIView *dimView;
+@property (strong, nonatomic) JCRBlurView *backView;
+@property (strong, nonatomic) UITextView *textView;
 
 @end
 
@@ -33,8 +39,39 @@
     return _cdAllSection;
 }
 
+- (UIView *)dimView
+{
+    if (!_dimView) {
+        _dimView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
+        _dimView.backgroundColor = [UIColor blackColor];
+        _dimView.alpha = 0.4f;
+    }
+    return _dimView;
+}
 
-
+- (UIButton *)backViewButton
+{
+    if (!_backViewButton) {
+        _backViewButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backViewButton setFrame:[UIApplication sharedApplication].keyWindow.frame];
+        [_backViewButton addTarget:self action:@selector(hidMoreView) forControlEvents:UIControlEventTouchUpInside];
+        
+        _backView = [[JCRBlurView alloc] initWithFrame:CGRectMake(0, 175, SCREEN_WIDTH, 0.0)];
+        _textView = [[UITextView alloc] initWithFrame:CGRectMake(5, 10, SCREEN_WIDTH-10, 160.0-34-10)];
+        _textView.editable = NO;
+        [_backViewButton addSubview:_backView];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [button setTitle:@"返回" forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(hidMoreView) forControlEvents:UIControlEventTouchUpInside];
+        button.frame = CGRectMake(0, 160-34, SCREEN_WIDTH, 34);
+        [_backView addSubview:button];
+        _textView.backgroundColor = [UIColor clearColor];
+        _textView.textColor = [UIColor blackColor];
+        _textView.text = self.courseDirection.CDdetail;
+        [_backView addSubview:_textView];
+    }
+    return _backViewButton;
+}
 #pragma mark - 类构造方法
 + (instancetype)detailCourseVCwithCourseDirection:(CourseDirection *)courseDirection
 {
@@ -131,6 +168,8 @@
 {
     if (section == 0) {
         CDetailHead *headView = [[CDetailHead alloc] init];
+        headView.imageView.layer.borderWidth = 1.0f;
+        headView.imageView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         [self setFirstHeadUI:headView];
         return headView;
     } 
@@ -143,7 +182,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 220;
+        return headHeight;
     } else
         return 10;
 }
@@ -154,20 +193,14 @@
 - (void)setFirstHeadUI:(CDetailHead *)headView
 {
     [headView.imageView setImageWithURL:[NSURL URLWithString:self.courseDirection.CDimageUrlString] placeholderImage:[UIImage imageNamed:@"directionDefault"]];
-    headView.detailTextView.text = self.courseDirection.CDdetail;
+    //headView.detailTextView.text = self.courseDirection.CDdetail;
+    [headView.showMoreButton addTarget:self action:@selector(showMore:) forControlEvents:UIControlEventTouchUpInside];
+    headView.detailTextLabel.text = self.courseDirection.CDdetail;
     headView.courseNumLabel.text = [NSString stringWithFormat:@"%d",self.courseDirection.CDcourseNum];
     headView.videoNumLabel.text = [NSString stringWithFormat:@"%d",self.courseDirection.CDvideoNum];
     headView.practiceNumLabel.text = [NSString stringWithFormat:@"%d",self.courseDirection.CDpracticeNum];
 }
-/*
-#warning 测试
-- (NSDictionary *)videoInfoDic
-{
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"TestList.plist" ofType:nil];
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:path];
-    return dic;
-}
-*/
+
 #pragma mark - 选择 进行页面跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -181,6 +214,27 @@
         [self.navigationController pushViewController:headVC animated:YES];
         
     }
+}
+
+
+- (void)showMore:(UIButton *)sender
+{
+    [[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.backViewButton];
+    [UIView animateWithDuration:0.6f animations:^{
+        self.backView.frame = CGRectMake(0, 175.0, SCREEN_WIDTH, 160.0);
+        
+    } completion:^(BOOL finished) {
+    }];
+    //[[UIApplication sharedApplication].keyWindow addSubview:backView];
+}
+
+- (void)hidMoreView
+{
+    
+    [self.backViewButton removeFromSuperview];
+    [self.dimView removeFromSuperview];
+    self.backView.frame = CGRectMake(0, 175.0, SCREEN_WIDTH, 0);
 }
 
 #pragma mark - delegate

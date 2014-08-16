@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *videoNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *courseNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *practiceNumLabel;
-@property (weak, nonatomic) IBOutlet UITextView *detailTextView;
-
+@property (weak, nonatomic) IBOutlet UILabel *detailTextLabel;
+@property (weak, nonatomic) IBOutlet UIButton *showMoreButton;
 
 @end
