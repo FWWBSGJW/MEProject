@@ -114,7 +114,7 @@
         timeLabel.font = [UIFont systemFontOfSize:20];
         
         self.measureTableView = [[UITableView alloc]
-                            initWithFrame:self.view.bounds
+                            initWithFrame:CGRectMake(0, 5, 320, SCREEN_HEIGHT-5)
                             style:UITableViewStylePlain];
         self.measureTableView.delegate = self;
         self.measureTableView.dataSource = self;
@@ -559,6 +559,12 @@
     {
         cell.backgroundColor = KColor;
     }
+    if (indexPath.row == 0)
+    {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1)];
+        view.backgroundColor = [UIColor lightGrayColor];
+        [cell addSubview:view];
+    }
     return cell;
 }
 
@@ -661,6 +667,9 @@
 //    NSMutableAttributedString *textViewString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d.%@",page+1 ,[queArray objectAtIndex:page]] attributes:textViewAttribs];
 //    textView.attributedText = textViewString;
     [textView resizeToFit];
+    CGRect frame = textView.frame;
+    frame.size.height += 15;
+    textView.frame = frame;
 
     self.measureTableView.tableHeaderView = textView;
     [self.measureTableView reloadData];

@@ -243,7 +243,7 @@
     
     [self.introduceButton addTarget:self action:@selector(introduceButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.commentButton addTarget:self action:@selector(commentButton:) forControlEvents:UIControlEventTouchUpInside];
-//    self.commentButton.backgroundColor = RGBCOLOR(227, 227, 227);
+    self.introduceButton.backgroundColor = RGBCOLOR(0, 69, 155);
 }
 
 - (void)addTableViewTrag
@@ -408,15 +408,15 @@
 
 - (void)introduceButton:(id)sender
 {
-//    self.commentButton.backgroundColor = RGBCOLOR(227, 227, 227);
-//    self.introduceButton.backgroundColor = [UIColor whiteColor];
+    self.commentButton.backgroundColor = RGBCOLOR(50, 126, 254);
+    self.introduceButton.backgroundColor = RGBCOLOR(0, 69, 155);
     [self.view bringSubviewToFront:self.introduceView];
 }
 
 - (void)commentButton:(id)sender
 {
-//    self.commentButton.backgroundColor = [UIColor whiteColor];
-//    self.introduceButton.backgroundColor = RGBCOLOR(227, 227, 227);
+    self.introduceButton.backgroundColor = RGBCOLOR(50, 126, 254);
+    self.commentButton.backgroundColor = RGBCOLOR(0, 69, 155);
     [self.view bringSubviewToFront:self.commentView];
 }
 

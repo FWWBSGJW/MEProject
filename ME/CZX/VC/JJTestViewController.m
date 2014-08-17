@@ -57,11 +57,20 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.newsView = [[XLCycleScrollView alloc]
-                     initWithFrame:CGRectMake(0, 0, 320, ScrollViewHeight)];
+                     initWithFrame:CGRectMake(0, 0.5, 320, ScrollViewHeight)];
     self.newsView.delegate = self;
     self.newsView.datasource = self;
     
-    self.newsBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, ScrollViewHeight)];
+    self.newsBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, ScrollViewHeight+1)];
+    UIView *view111 = [[UIView alloc]
+                       initWithFrame:CGRectMake(0, ScrollViewHeight+0.5, 320, 0.5)];
+    view111.backgroundColor = [UIColor blackColor];
+    [self.newsBG addSubview:view111];
+    UIView *view222 = [[UIView alloc]
+                       initWithFrame:CGRectMake(0, 0, 320, 0.5)];
+    view111.backgroundColor = [UIColor blackColor];
+    [self.newsBG addSubview:view222];
+
     [self.newsBG addSubview:self.newsView];
     
     self.testTableView = [[UITableView alloc]

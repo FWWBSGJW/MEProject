@@ -72,7 +72,7 @@
     
     currentAnArray = [myAnswerArray objectAtIndex:page];
     
-    myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, 320, 440)];
+    myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, 320, 430)];
     myTableView.delegate = self;
     myTableView.dataSource = self;
     myTableView.tableFooterView = [[UIView alloc] init];
@@ -126,6 +126,12 @@
     }
     if (indexPath.row == [[myCorrectArray objectAtIndex:page] intValue]) {
         cell.backgroundColor = KColor;
+    }
+    if (indexPath.row == 0)
+    {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1)];
+        view.backgroundColor = [UIColor lightGrayColor];
+        [cell addSubview:view];
     }
     cell.textLabel.font = [UIFont systemFontOfSize:16.0];
 
@@ -210,6 +216,9 @@
 {
     textView.text = [NSString stringWithFormat:@"%d.%@", page+1, [myQuestionArray objectAtIndex:page]];
     [textView resizeToFit];
+    CGRect frame = textView.frame;
+    frame.size.height += 15;
+    textView.frame = frame;
     myTableView.tableHeaderView = textView;
     pageLabel.text = [NSString stringWithFormat:@"%d/%d", page+1, myQuestionArray.count];
     currentAnArray = [myAnswerArray objectAtIndex:page];
