@@ -14,11 +14,11 @@
 @property (nonatomic,strong) NSDictionary *data;
 @property (nonatomic,strong) NSString	*account;	//账号
 @property (nonatomic,strong) NSString	*name;		//昵称
-@property (nonatomic,readonly)	BOOL	sex;		//性别
+@property (nonatomic)			BOOL	sex;		//性别 1 男 0 女
 @property (nonatomic,strong) NSString	*imageUrl;	//头像
 @property (nonatomic,strong) NSString	*describe;	//个性签名
 @property (nonatomic,readonly)	BOOL	isLogin;	//登陆状态
-
+@property (nonatomic,strong) UIImage    *portrait;
 @property (nonatomic,strong) ListInfo		*lcourses;  //正在学习的课程 （有进度的)
 
 @property (nonatomic,strong) ListInfo		*ccourses;	//收藏的课程

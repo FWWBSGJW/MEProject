@@ -19,15 +19,20 @@
 @implementation OLNetManager
 
 
-+(NSData *)netRequestWithUrl:(NSString *)urlStr andPostBody:(NSString *)body{
++(NSData *)netRequestWithUrl:(NSString *)urlStr andPostBody:(NSString *)strbody{
+
+	NSData *bodyData = [strbody dataUsingEncoding:NSUTF8StringEncoding];
+	return [OLNetManager netRequestWithUrl:urlStr andPostDataBody:bodyData];
+}
+
++(NSData *)netRequestWithUrl:(NSString *)urlStr andPostDataBody:(NSData *)body{
 	NSURL *url = [NSURL URLWithString:urlStr];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	[request setTimeoutInterval:5];
 	
 	if (body) {
 		[request setHTTPMethod:@"POST"];
-		NSData *bodyData = [body dataUsingEncoding:NSUTF8StringEncoding];
-		[request setHTTPBody:bodyData];
+		[request setHTTPBody:body];
 	}
 	NSURLResponse *response = nil;
 	NSError *error = nil;
@@ -36,7 +41,7 @@
 		NSLog(@"%@",error);
 		return nil;
 	}
-//	NSLog(@"result = %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+	NSLog(@"result = %@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 	return data;
 }
 
@@ -57,7 +62,7 @@
 }
 
 + (NSDictionary *)userDataWithId:(NSInteger)userId{
-	NSString *urlStr = [NSString stringWithFormat:@"%@?userId=%li",kURL_login,userId];
+	NSString *urlStr = [NSString stringWithFormat:@"%@?userId=%li",kURL_login,(long)userId];
 	NSDictionary *dic = [[OLNetManager netRequestWithUrl:urlStr andPostBody:nil] objectFromJSONData];
 	return dic;
 }
@@ -84,12 +89,12 @@
     NSString *body = @"bodyParam1=BodyValue1&bodyParam2=BodyValue2";
 	
 	NSDictionary *dic = [[OLNetManager netRequestWithUrl:urlAsString andPostBody:body] objectFromJSONData];
-	return [dic objectForKey:@"success"];
+	return [[dic objectForKey:@"success"] boolValue];
 }
 
 + (NSInteger)privateWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID
 {
-    NSString *str = [kBaseURL stringByAppendingString:[NSString stringWithFormat:@"MobileEducation/collectionAction?userId=%li&CId=%ld",userID,(long)courseID]];
+    NSString *str = [kBaseURL stringByAppendingString:[NSString stringWithFormat:@"MobileEducation/collectionAction?userId=%i&CId=%ld",userID,(long)courseID]];
 	NSData *data = [OLNetManager netRequestWithUrl:str andPostBody:nil];
     if (data != nil) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];

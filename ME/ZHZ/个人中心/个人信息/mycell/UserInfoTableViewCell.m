@@ -9,6 +9,12 @@
 #import "UserInfoTableViewCell.h"
 #import "FocusTableViewController.h"
 #import "UIImageView+WebCache.h"
+#import "User.h"
+
+@interface UserInfoTableViewCell ()
+@property (nonatomic) User *user;
+@end
+
 @implementation UserInfoTableViewCell
 
 - (void)awakeFromNib
@@ -45,6 +51,14 @@
 	}
 }
 
+- (void)setUser:(User *)user{
+	_user = user;
+	[self setAImage:_user.info.imageUrl
+			   andName:_user.info.name
+			 courseNum:[_user.info.lcourses count]
+			  focusNum:[_user.info.focus count]
+		 focusedNum:[_user.info.focused count]];
+}
 
 - (void)setAImage:(NSString *)imageUrl
 		 andName:(NSString *)name
@@ -52,7 +66,9 @@
 		focusNum:(NSUInteger)num2
 	  focusedNum:(NSUInteger)num3{
 	
-	[_portrait setImageWithURL:[NSURL URLWithString:kUrl_image(imageUrl)]];
+	[_portrait setImageWithURL:[NSURL URLWithString:kUrl_image(imageUrl)] placeholderImage:[UIImage imageNamed:kDefault_portrait] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+		_user.info.portrait = image;
+	}];
 	_nameLabel.text = name;
 	_courseNumLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num1];
 	_focusNumLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num2];

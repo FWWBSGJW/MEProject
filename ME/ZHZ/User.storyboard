@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Edit Table View Controller - test-->
+        <!--Edit Table View Controller-->
         <scene sceneID="5w7-se-Ign">
             <objects>
                 <tableViewController storyboardIdentifier="EditTable" id="75K-ck-TnV" customClass="EditTableViewController" sceneMemberID="viewController">
@@ -22,16 +22,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MmL-cb-3Zm">
+                                                <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xZR-EF-NJ2">
                                                     <rect key="frame" x="104" y="0.0" width="100" height="100"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" backgroundImage="CuserPhoto.png">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="getPic:" destination="75K-ck-TnV" eventType="touchUpInside" id="zng-Zy-hij"/>
-                                                    </connections>
-                                                </button>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
@@ -40,20 +34,22 @@
                             </tableViewSection>
                             <tableViewSection id="K2o-D0-U8x">
                                 <cells>
-                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="YCe-8B-LRs" rowHeight="46" style="IBUITableViewCellStyleDefault" id="D54-VK-hgW">
+                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="46" id="D54-VK-hgW">
                                         <rect key="frame" x="0.0" y="219" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D54-VK-hgW" id="VXE-2O-xgo">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="UserName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YCe-8B-LRs">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="45"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <textField appearanceType="aqua" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="UserName" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dsD-NO-jJY">
+                                                    <rect key="frame" x="20" y="8" width="280" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="75K-ck-TnV" id="bSU-jc-BzB"/>
+                                                    </connections>
+                                                </textField>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -63,21 +59,53 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nkM-jT-SdW" id="wBj-5q-UHp">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RmU-Wo-VXm">
+                                                    <rect key="frame" x="59" y="6" width="67" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal">
+                                                        <color key="titleColor" red="0.49803921580314636" green="0.49803921580314636" blue="0.49803921580314636" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="selectMale:" destination="75K-ck-TnV" eventType="touchUpInside" id="pAa-0B-5kw"/>
+                                                    </connections>
+                                                </button>
+                                                <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snI-EB-HBr">
+                                                    <rect key="frame" x="184" y="0.0" width="67" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal">
+                                                        <color key="titleColor" red="0.50196081399917603" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="selectFemale:" destination="75K-ck-TnV" eventType="touchUpInside" id="z4O-xg-nKG"/>
+                                                    </connections>
+                                                </button>
+                                                <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="male.png" highlightedImage="maleSelect.png" translatesAutoresizingMaskIntoConstraints="NO" id="sNW-bD-4vU">
+                                                    <rect key="frame" x="59" y="6" width="67" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="female.png" highlightedImage="femaleSelect.png" translatesAutoresizingMaskIntoConstraints="NO" id="FOy-K3-Ndm">
+                                                    <rect key="frame" x="184" y="6" width="67" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="7zc-fQ-D5m">
+                            <tableViewSection headerTitle="个人简介" id="7zc-fQ-D5m">
                                 <cells>
-                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ZHk-Tc-KM7" rowHeight="46" style="IBUITableViewCellStyleDefault" id="hRr-TU-51h">
-                                        <rect key="frame" x="0.0" y="329" width="320" height="46"/>
+                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ZHk-Tc-KM7" rowHeight="125" style="IBUITableViewCellStyleDefault" id="hRr-TU-51h">
+                                        <rect key="frame" x="0.0" y="357" width="320" height="125"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hRr-TU-51h" id="GdA-p4-wqN">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="124"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Describtion" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZHk-Tc-KM7">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="45"/>
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="124"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -94,33 +122,24 @@
                             <outlet property="delegate" destination="75K-ck-TnV" id="6i0-TU-ujh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="test" id="sbJ-kW-0L3"/>
+                    <navigationItem key="navigationItem" id="sbJ-kW-0L3">
+                        <barButtonItem key="rightBarButtonItem" title="提交" id="oJP-rI-Km8">
+                            <connections>
+                                <action selector="commitChange:" destination="75K-ck-TnV" id="hUQ-E3-PE2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="describtion" destination="ZHk-Tc-KM7" id="19k-fc-ZnV"/>
-                        <outlet property="userName" destination="YCe-8B-LRs" id="HDw-5h-i5b"/>
+                        <outlet property="femaleImage" destination="FOy-K3-Ndm" id="WE3-eO-dzH"/>
+                        <outlet property="maleImage" destination="sNW-bD-4vU" id="jRo-Yp-fTR"/>
+                        <outlet property="portraitView" destination="xZR-EF-NJ2" id="8IB-io-fiG"/>
+                        <outlet property="userNameTextFied" destination="dsD-NO-jJY" id="I3F-dg-LfJ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ll-CV-VoH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="361" y="62"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="pG1-vC-TKH">
-            <objects>
-                <viewController id="34g-AQ-CWo" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ZaK-rp-YhE"/>
-                        <viewControllerLayoutGuide type="bottom" id="qZw-y8-9oh"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ddn-d1-q2J">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bSA-0r-bMp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="904" y="62"/>
+            <point key="canvasLocation" x="341" y="62"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JJ3-Gh-pfS">
@@ -142,7 +161,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CuserPhoto.png" width="80" height="80"/>
+        <image name="female.png" width="134" height="63"/>
+        <image name="femaleSelect.png" width="136" height="64"/>
+        <image name="male.png" width="136" height="64"/>
+        <image name="maleSelect.png" width="136" height="64"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

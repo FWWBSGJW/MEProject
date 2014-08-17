@@ -23,6 +23,7 @@
 #import "LoginViewController.h"
 #import "CAlertLabel.h"
 #import "OLNetManager.h"
+#import "EditTableViewController.h"
 
 typedef NS_ENUM(NSInteger, UserStyle){
 	UserStyleUndefined,
@@ -85,11 +86,12 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	_uiCell.delegate = self;
 //	if (_user.info.isLogin)
 	{
-		[_uiCell setAImage:_user.info.imageUrl
-				andName:_user.info.name
-			  courseNum:[_user.info.lcourses count]
-			   focusNum:[_user.info.focus count]
-			 focusedNum:[_user.info.focused count]];
+//		[_uiCell setAImage:_user.info.imageUrl
+//				andName:_user.info.name
+//			  courseNum:[_user.info.lcourses count]
+//			   focusNum:[_user.info.focus count]
+//			 focusedNum:[_user.info.focused count]];
+		[_uiCell setUser:_user];
 	}
 	self.tableView.tableHeaderView = _uiCell;
 	self.tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
@@ -112,11 +114,12 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 }
 
 - (void)reloadData{
-	[_uiCell setAImage:_user.info.imageUrl
-			   andName:_user.info.name
-			 courseNum:[_user.info.lcourses count]
-			  focusNum:[_user.info.focus count]
-			focusedNum:[_user.info.focused count]];
+//	[_uiCell setAImage:_user.info.imageUrl
+//			   andName:_user.info.name
+//			 courseNum:[_user.info.lcourses count]
+//			  focusNum:[_user.info.focus count]
+//			focusedNum:[_user.info.focused count]];
+	[_uiCell setUser:_user];
 	[self.tableView reloadData];
 }
 
@@ -157,8 +160,6 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	}else{
 		self.tabBarController.tabBar.hidden = YES;
 	}
-	
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -378,6 +379,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	if (indexPath.section == UserCenterSectionStyelLogout) {
 		//推出登陆
 		if ([_user logout]){
@@ -387,10 +389,18 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		[self.navigationController pushViewController:login animated:YES];
 	}else if (indexPath.section == UserCenterSectionStyelDetail){
 		//用户详情
-		DetailViewController *detail = [[DetailViewController alloc] init];
-		detail.userData = _user.info;
-		detail.title = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
-		[self.navigationController pushViewController:detail animated:YES];
+//		DetailViewController *detail = [[DetailViewController alloc] init];
+//		detail.userData = _user.info;
+//		detail.title = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
+//		[self.navigationController pushViewController:detail animated:YES];
+//		- (void)editUserInfo
+		{
+			UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"User" bundle:[NSBundle mainBundle]];
+			EditTableViewController *editVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"EditTable"];
+			editVC.user = _user;
+			[self.navigationController pushViewController:editVC animated:YES];
+			
+		}
 		
 	}else if (indexPath.section == UserCenterSectionStyelBCcourse){
 		if (indexPath.row == 0 && userstyle != UserStyleLocal) {

@@ -12,9 +12,10 @@
 #import "UIViewAdditions.h"
 #import "UserInfo.h"
 #import "EditTableViewController.h"
-#define kDefault_portrait @"CuserPhoto"
-
-@interface DetailViewController ()
+#import "User.h"
+@interface DetailViewController (){
+	BOOL isOther;
+}
 @property (nonatomic,strong) UIImageView *portrait;
 @property (nonatomic,strong) UILabel *nameLabel;
 @property (nonatomic,strong) UILabel *describleLabel;
@@ -36,6 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	self.view.backgroundColor = [UIColor whiteColor];
 	_portrait = [[UIImageView alloc] initWithFrame:CGRectMake(110, 64, 100, 100)];
 	_nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 164, 100, 30)];
 	_nameLabel.textAlignment = NSTextAlignmentCenter;
@@ -45,15 +47,18 @@
 	[self.view addSubview:_describleLabel];
 	[self.view addSubview:_nameLabel];
 	[self.view addSubview:_portrait];
+	if ([_userData isEqual:[User sharedUser].info]) {
+		UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editUserInfo)];
+		self.navigationItem.rightBarButtonItem = rightItem;
+	}
 	
-	UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editUserInfo)];
-	self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 - (void)editUserInfo{
 	UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"User" bundle:[NSBundle mainBundle]];
 	EditTableViewController *editVC = [mainStoryboard instantiateViewControllerWithIdentifier:@"EditTable"];
 	[self.navigationController pushViewController:editVC animated:YES];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{

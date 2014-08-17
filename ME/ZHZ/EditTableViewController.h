@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface EditTableViewController : UITableViewController <UIActionSheetDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *userName;
+#import "User.h"
+@interface EditTableViewController : UITableViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *describtion;
-
+@property (weak, nonatomic) IBOutlet UITextField *userNameTextFied;
+@property (weak, nonatomic) IBOutlet UIImageView *portraitView;
+@property (weak, nonatomic) IBOutlet UIImageView *maleImage;
+@property (weak, nonatomic) IBOutlet UIImageView *femaleImage;
+@property (nonatomic,strong) User *user;
 @end

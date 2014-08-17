@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User.h"
 @protocol UserInfoTableViewCellDelegate <NSObject>
 - (void)courseLabelTouchEvent;
 - (void)focusLabelTouchEvent;
@@ -25,5 +26,6 @@
 	   courseNum:(NSUInteger)num1
 		focusNum:(NSUInteger)num2
 	  focusedNum:(NSUInteger)num3;
+- (void)setUser:(User *)_user;
 @end
 
