@@ -525,6 +525,7 @@ enum MoreActionButton_Tag
             _headView.CCteacherLabel.text = self.courseInfoDic[@"cTeacher"];
             _headView.CCtimeLabel.text = [NSString stringWithFormat:@"%d分钟",[self.courseInfoDic[@"cTime"] integerValue]];
             _headView.CCpriceLaebl.text = [NSString stringWithFormat:@"%d元",[self.courseInfoDic[@"cPrice"] integerValue]];
+            _headView.CCpointLabel.text = [NSString stringWithFormat:@"%d", [self.courseInfoDic[@"point"] integerValue]];
             if ([User sharedUser].info.isLogin) {
                 NSArray *purchaseArray = [[User sharedUser].info.bcourses linkContent];
                 for (NSDictionary *dic in purchaseArray) {
