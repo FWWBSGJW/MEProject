@@ -10,9 +10,7 @@
 #import "OLNetManager.h"
 #import "JSONKit.h"
 @interface ListInfo (){
-	
 }
-
 
 @end
 
@@ -43,6 +41,13 @@
 		_courses = [_data objectForKey:@"courses"];
 	}
 	return _courses;
+}
+
+- (NSMutableArray *)values{
+	if (!_values) {
+		_values = [_data objectForKey:@"value"];
+	}
+	return _values;
 }
 
 - (NSUInteger)count{

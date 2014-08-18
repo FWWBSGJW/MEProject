@@ -39,7 +39,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -50,6 +51,7 @@
 		_data = _list.linkContent;
 	}
 }
+
 
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
@@ -78,6 +80,10 @@
     return [_data count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+	return 44;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -90,10 +96,16 @@
     // Configure the cell...
 	NSDictionary *focusDic = [_data objectAtIndex:indexPath.row];
     [cell.imageView setImageWithURL:[NSURL URLWithString:kUrl_image([focusDic objectForKey:@"userPortrait"])] placeholderImage:[UIImage imageNamed:kDefault_portrait]];
+	[cell.imageView.layer setBorderWidth:1];
+	[cell.imageView.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
 	cell.textLabel.text = [focusDic objectForKey:@"userName"];
 	cell.detailTextLabel.text = [focusDic objectForKey:@"userSign"];
+//	UIView *view = [[UIView alloc] initWithFrame:CGRectMake(70, 43, 235, 1)];
+//	view.backgroundColor = [UIColor lightGrayColor];
+//	[cell.contentView addSubview:view];
     return cell;
 }
+
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

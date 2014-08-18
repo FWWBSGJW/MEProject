@@ -16,9 +16,9 @@
 
     CGSize maximumLabelSize = CGSizeMake(self.frame.size.width,9999);
     
-    CGSize expectedLabelSize = [[self text] sizeWithFont:[self font] 
-                                            constrainedToSize:maximumLabelSize
-                                            lineBreakMode:[self lineBreakMode]]; 
+    CGSize expectedLabelSize = [[self text] sizeWithFont:[self font]
+									   constrainedToSize:maximumLabelSize
+										   lineBreakMode:[self lineBreakMode]];
     return expectedLabelSize.height;
 }
 

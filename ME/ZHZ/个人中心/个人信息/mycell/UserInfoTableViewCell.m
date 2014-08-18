@@ -12,7 +12,7 @@
 #import "User.h"
 
 @interface UserInfoTableViewCell ()
-@property (nonatomic) User *user;
+@property (nonatomic,strong) User *user;
 @end
 
 @implementation UserInfoTableViewCell
@@ -57,18 +57,20 @@
 			   andName:_user.info.name
 			 courseNum:[_user.info.lcourses count]
 			  focusNum:[_user.info.focus count]
-		 focusedNum:[_user.info.focused count]];
+		 focusedNum:[_user.info.focused count]points:_user.info.points];
 }
 
 - (void)setAImage:(NSString *)imageUrl
 		 andName:(NSString *)name
 	   courseNum:(NSUInteger)num1
 		focusNum:(NSUInteger)num2
-	  focusedNum:(NSUInteger)num3{
+	  focusedNum:(NSUInteger)num3
+		   points:(NSInteger)num4{
 	
 	[_portrait setImageWithURL:[NSURL URLWithString:kUrl_image(imageUrl)] placeholderImage:[UIImage imageNamed:kDefault_portrait] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
 		_user.info.portrait = image;
 	}];
+	_pointsLabel.text = [NSString stringWithFormat:@"%i积分",num4];
 	_nameLabel.text = name;
 	_courseNumLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num1];
 	_focusNumLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)num2];

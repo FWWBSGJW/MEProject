@@ -20,12 +20,14 @@
 @property (nonatomic,weak) IBOutlet UILabel *courseNumLabel;
 @property (nonatomic,weak) IBOutlet UILabel *focusNumLabel; //关注
 @property (nonatomic,weak) IBOutlet UILabel *focusedNumLabel;//被关注
+@property (nonatomic,weak) IBOutlet UILabel	*pointsLabel;	//积分
 @property (nonatomic,weak) id<UserInfoTableViewCellDelegate> delegate;
 - (void)setAImage:(NSString *)imageUrl
 		 andName:(NSString *)name
 	   courseNum:(NSUInteger)num1
 		focusNum:(NSUInteger)num2
-	  focusedNum:(NSUInteger)num3;
+	  focusedNum:(NSUInteger)num3
+		   points:(NSInteger) num4;
 - (void)setUser:(User *)_user;
 @end
 

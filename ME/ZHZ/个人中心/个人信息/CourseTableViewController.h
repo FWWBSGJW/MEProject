@@ -12,4 +12,5 @@
 @property (nonatomic,strong) NSMutableArray *courses;
 @property (nonatomic,strong) ListInfo *list;
 @property (nonatomic) BOOL deletable;
+@property (nonatomic,strong) NSString *headTitle;
 @end

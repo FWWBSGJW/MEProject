@@ -51,6 +51,14 @@
 	self.courseId = [course objectForKey:@"cid"];
 }
 
+- (void)cellWithFightvalue:(NSDictionary *)fight{
+	self.nameLabel.text = [fight objectForKey:@"focusTime"];
+	[self.courseImage setImageWithURL:[NSURL URLWithString:kUrl_image([fight objectForKey:@"url"])]];
+	self.progressView.prsColor = RGBCOLOR(68, 160, 243);
+	self.progressView.progress = [[fight objectForKey:@"score"] integerValue] / 2500.0;
+	self.progressView.text     = [NSString stringWithFormat:@"战斗力:%i",[[fight objectForKey:@"score"] integerValue]];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

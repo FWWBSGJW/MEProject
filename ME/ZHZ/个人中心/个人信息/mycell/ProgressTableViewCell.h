@@ -15,4 +15,5 @@
 @property (nonatomic,weak) IBOutlet UIImageView *courseImage;
 @property (nonatomic,strong) NSString *courseId;
 - (void)cellWithCourse:(NSDictionary *)course;
+- (void)cellWithFightvalue:(NSDictionary *)fight;
 @end

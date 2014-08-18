@@ -19,7 +19,10 @@
 @property (nonatomic,strong) NSString	*describe;	//个性签名
 @property (nonatomic,readonly)	BOOL	isLogin;	//登陆状态
 @property (nonatomic,strong) UIImage    *portrait;
+@property (nonatomic)		NSInteger	points;		//积分
 @property (nonatomic,strong) ListInfo		*lcourses;  //正在学习的课程 （有进度的)
+
+@property (nonatomic,strong) ListInfo		*fightvalue;//战斗力
 
 @property (nonatomic,strong) ListInfo		*ccourses;	//收藏的课程
 

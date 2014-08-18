@@ -15,6 +15,8 @@
 @property (nonatomic,strong) NSString *link;	//详细内容的链接
 @property (nonatomic,strong) NSMutableArray *courses;	//预览课程
 @property (nonatomic,strong) NSMutableArray *linkContent;
+@property (nonatomic,strong)	NSMutableArray *values;
+
 - (instancetype)initWithDictionary:(NSDictionary *)dic;
 - (void)refreshLinkContent;
 @end

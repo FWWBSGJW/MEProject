@@ -22,7 +22,7 @@
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 #define kBaseURL @"http://121.197.10.159:8080/"
-#define kUrl_image(image) [NSString stringWithFormat:@"http://121.197.10.159:8080%@",image]
+#define kUrl_image(image) [NSString stringWithFormat:@"http://121.197.10.159:8080/%@",image]
 #define System_BlueColor [UIColor colorWithRed:0 green:122/255.0 blue:1.0 alpha:1.0]
 #define kDefault_portrait @"CuserPhoto"
 #import <MobileCoreServices/MobileCoreServices.h>

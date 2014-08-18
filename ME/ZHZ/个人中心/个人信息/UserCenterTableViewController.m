@@ -24,7 +24,8 @@
 #import "CAlertLabel.h"
 #import "OLNetManager.h"
 #import "EditTableViewController.h"
-
+#import "ValueTableViewCell.h"
+#import "FightValueTableViewController.h"
 typedef NS_ENUM(NSInteger, UserStyle){
 	UserStyleUndefined,
 	UserStyleLocal,
@@ -34,6 +35,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 //    UserCenterSectionStyelInfo = 0,
     UserCenterSectionStyelDetail = 0,
 	UserCenterSectionStyelLcourse,
+	UserCenterSectionStyelFightvalue,
 	UserCenterSectionStyelQandA,
 	UserCenterSectionStyelBCcourse,
 	UserCenterSectionStyelTest,
@@ -86,12 +88,13 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	_uiCell.delegate = self;
 //	if (_user.info.isLogin)
 	{
-//		[_uiCell setAImage:_user.info.imageUrl
-//				andName:_user.info.name
-//			  courseNum:[_user.info.lcourses count]
-//			   focusNum:[_user.info.focus count]
-//			 focusedNum:[_user.info.focused count]];
-		[_uiCell setUser:_user];
+		[_uiCell setAImage:_user.info.imageUrl
+				andName:_user.info.name
+			  courseNum:[_user.info.lcourses count]
+			   focusNum:[_user.info.focus count]
+			 focusedNum:[_user.info.focused count]
+		 points:_user.info.points];
+//		[_uiCell setUser:_user];
 	}
 	self.tableView.tableHeaderView = _uiCell;
 	self.tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
@@ -109,17 +112,22 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		CAlertLabel *alert = [CAlertLabel alertLabelWithAdjustFrameForText:@"取消关注成功"];
 		[alert showAlertLabel];
 		self.navigationItem.rightBarButtonItem.title = @"关注他/她";
+	}else if(result == -2){
+		CAlertLabel *alert = [CAlertLabel alertLabelWithAdjustFrameForText:@"不能关注自己"];
+		[alert showAlertLabel];
+		return;
 	}
 	[User sharedUser].havaChange = YES;
 }
 
 - (void)reloadData{
-//	[_uiCell setAImage:_user.info.imageUrl
-//			   andName:_user.info.name
-//			 courseNum:[_user.info.lcourses count]
-//			  focusNum:[_user.info.focus count]
-//			focusedNum:[_user.info.focused count]];
-	[_uiCell setUser:_user];
+	[_uiCell setAImage:_user.info.imageUrl
+			   andName:_user.info.name
+			 courseNum:[_user.info.lcourses count]
+			  focusNum:[_user.info.focus count]
+			focusedNum:[_user.info.focused count]
+	 points:_user.info.points];
+//	[_uiCell setUser:[_user copy]];
 	[self.tableView reloadData];
 }
 
@@ -141,12 +149,14 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	if (userstyle == UserStyleLocal && _user.info.isLogin == NO) {
 		LoginViewController *login = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
 		[self.navigationController pushViewController:login animated:YES];
+//		[self presentViewController:login animated:NO completion:nil];
 		return;
 	}
 	self.navigationController.navigationBarHidden = NO;
 	if (_user.justLogin) {	//在登录后tableview推到顶部
 		[self.tableView setContentOffset:CGPointMake(0,0)];
 		_user.justLogin = NO;
+		[self reloadData];
 	}
 	if (userstyle == UserStyleLocal) {
 		//这里刷新的时候 会讲数据保存到本地 ， 其他用户就不进行刷新 避免冲突
@@ -177,6 +187,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 	ctb.list = _user.info.lcourses;
 	ctb.navigationItem.title = @"最近浏览";
 	ctb.deletable = NO;
+	ctb.headTitle = @"只显示最近七天的课程记录";
 	[self.navigationController pushViewController:ctb animated:YES];
 }
 
@@ -219,7 +230,8 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 //	if (indexPath.section == UserCenterSectionStyelInfo) {
 //		return 90;
 //	}else
-		if(indexPath.section == UserCenterSectionStyelLcourse){
+		if(indexPath.section == UserCenterSectionStyelLcourse ||
+		   (indexPath.section == UserCenterSectionStyelFightvalue && indexPath.row < [_user.info.fightvalue.values count])){
 		return 61;
 	}
 	return 44;
@@ -232,6 +244,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		case UserCenterSectionStyelQandA:	return 2; break;
 		case UserCenterSectionStyelBCcourse: return 2; break;
 		case UserCenterSectionStyelTest	:  return 2;break;
+        case UserCenterSectionStyelFightvalue: return MIN([_user.info.fightvalue.values count], 3) + 1;break;
 		default:
 			break;
 	}
@@ -315,21 +328,36 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 			NumTableViewCell *numCell = [[NumTableViewCell alloc] initWithFrame:CGRectNull];
 			numCell.textLabel.text = @"收藏的测试";
 			numCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			numCell.numLabel.text = [NSString stringWithFormat:@"%lu",[_user.info.testcollection count]];
+			numCell.numLabel.text = [NSString stringWithFormat:@"%d",[_user.info.testcollection count]];
 			cell = numCell;
 		}else{
 			cell = [[UITableViewCell alloc] init];
 			cell.textLabel.text = @"错题集";
 			cell.textLabel.textColor = [UIColor redColor];
 		}
+	}else if (indexPath.section == UserCenterSectionStyelFightvalue){
+		if (indexPath.row < [_user.info.fightvalue.values count]) {
+			NSDictionary *dic = [_user.info.fightvalue.values objectAtIndex:indexPath.row];
+			ProgressTableViewCell * cell1 = [[ProgressTableViewCell alloc] initWithFrame:CGRectNull];
+			[cell1 setSelectionStyle:UITableViewCellSelectionStyleNone];//取消被选中的高亮效果
+			[cell1 cellWithFightvalue:dic];
+			[cell1 setSelectionStyle:UITableViewCellSelectionStyleNone];
+			return cell1;
+		}else{
+			cell = [[UITableViewCell alloc] init];
+			cell.textLabel.text = @"更多..";
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		}
 	}
-	[cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+//	[cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
     return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
 	if (section == UserCenterSectionStyelLcourse) {
 		return @"最近课程";
+	}else if (section == UserCenterSectionStyelFightvalue){
+		return @"战斗力";
 	}
 	return nil;
 }
@@ -385,6 +413,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		if ([_user logout]){
 			NSLog(@"退出成功！");
 		}
+		_user.justLogin = YES;
 		LoginViewController *login = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
 		[self.navigationController pushViewController:login animated:YES];
 	}else if (indexPath.section == UserCenterSectionStyelDetail){
@@ -447,6 +476,12 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 				return;
 			}
 			[self.navigationController pushViewController:[[WrongSubjectViewController alloc] initWithWrongSubjectArray:[[[JJSubjectManage alloc] init] queryModels]] animated:YES];
+		}
+	}else if(indexPath.section == UserCenterSectionStyelFightvalue){
+		if (indexPath.row == [_user.info.fightvalue.values count]) {
+			FightValueTableViewController *fv = [[FightValueTableViewController alloc] initWithStyle:UITableViewStylePlain];
+			fv.list = _user.info.fightvalue;
+			[self.navigationController pushViewController:fv animated:YES];
 		}
 	}
 }

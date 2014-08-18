@@ -49,7 +49,6 @@
     [super viewDidLoad];
 	
 	self.navigationItem.rightBarButtonItem.title = @"编辑";
-	[self.portraitView setImage:_user.info.portrait];
 //	UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(getPic:)];
 //    [self.portraitView addGestureRecognizer:singleTap];
 	self.userNameTextFied.text = _user.info.name;
@@ -77,7 +76,7 @@
         _portraitView.userInteractionEnabled = YES;
         _portraitView.backgroundColor		= [UIColor blackColor];
 	}
-	
+	[self.portraitView setImageWithURL:[NSURL URLWithString:kUrl_image(_user.info.imageUrl)]];
 	portraitHaveChange	= NO;
 	nameHaveChange		= NO;
 	sexHaveChange		= NO;
@@ -161,12 +160,12 @@
 		NSDictionary *dic = [[OLNetManager netRequestWithUrl:kCommit_info andPostBody:body] objectFromJSONData];
 		infoResult = [[dic objectForKey:@"success"] boolValue];
 	}
-#warning  if success [user sharedUser].havechange = yes
 	//判断结果给出提示
 	if (infoResult) {
 		CAlertLabel *alert = [CAlertLabel alertLabelWithAdjustFrameForText:@"修改成功"];
 		[alert showAlertLabel];
 		[self editSet];
+		[User sharedUser].havaChange = YES;
 	}else{
 		CAlertLabel *alert = [CAlertLabel alertLabelWithAdjustFrameForText:@"修改失败"];
 		[alert showAlertLabel];
@@ -212,7 +211,7 @@
 		ed.delegate = self;
 		UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ed];
 
-			[self presentViewController:nav animated:YES completion:^{
+			[self presentViewController:nav animated:NO completion:^{
 				
 			}];
 		}

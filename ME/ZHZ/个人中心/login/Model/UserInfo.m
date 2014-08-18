@@ -9,6 +9,7 @@
 #import "UserInfo.h"
 #import "OLNetManager.h"
 @interface UserInfo ()
+@property (nonatomic,strong) NSString *userPass;
 @end
 
 @implementation UserInfo
@@ -19,6 +20,7 @@
 	if (self = [super init]) {
 		_data		= nil;
 		_userId		= 0;
+		_points		= 0;
 		_isLogin	= NO;
 		_account	= nil;
 		_name		= nil;
@@ -27,6 +29,7 @@
 		_imageUrl	= nil;
 		_describe	= nil;
 		_lcourses	= nil;
+		_fightvalue = nil;
 		_ccourses	= nil;
 		_bcourses	= nil;
 		_focus		= nil;
@@ -43,12 +46,14 @@
 	if (self = [super init]) {
 		_data		= [[OLNetManager userDataWithId:userId] objectForKey:@"result"];
 		_userId		= 0;
+		_points		= 0;
 		_account	= nil;
 		_name		= nil;
 		_sex		= NO;
 		_imageUrl	= nil;
 		_describe	= nil;
 		_lcourses	= nil;
+		_fightvalue = nil;
 		_ccourses	= nil;
 		_bcourses	= nil;
 		_focus		= nil;
@@ -69,7 +74,8 @@
 		_sex		= [[_data objectForKey:@"userSex"] boolValue];
 		_imageUrl	= [_data objectForKey:@"userPortrait"];
 		_describe	= [_data objectForKey:@"userSign"];
-		
+		_points		= [[_data objectForKey:@"points"] integerValue];
+		_fightvalue = [[ListInfo alloc] initWithDictionary:[_data objectForKey:@"fightvalue"]];
 		_lcourses	= [[ListInfo alloc] initWithDictionary:[_data objectForKey:@"lcourses"]];
 		_ccourses	= [[ListInfo alloc] initWithDictionary:[_data objectForKey:@"ccourses"]];
 		_bcourses	= [[ListInfo alloc] initWithDictionary:[_data objectForKey:@"bcourses"]];
@@ -89,6 +95,7 @@
 	_focused	= nil;
 	_questions	= nil;
 	_answers	= nil;
+	_fightvalue = nil;
 	_testcollection = nil;
 }
 
@@ -123,6 +130,7 @@
 		_data = [dic objectForKey:@"result"];
 		[self setAllData];
 		_isLogin = YES;
+		_userPass = passWord;
 		[self saveInfoToDocument];
 		return YES;
 	}else if([suc isEqualToString:@"no link"]){
@@ -141,9 +149,11 @@
 	
 	if ([suc isEqualToString:@"true"]) {
 		_data = dic[@"result"];
-		[self removeArrayData];
-		[self setAllData];
-		[self saveInfoToDocument];
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+			[self removeArrayData];
+			[self setAllData];
+			[self saveInfoToDocument];
+		});
 		return YES;
 	}else {
 		NSLog(@"user refresh is faliuser by %@",self);
@@ -152,14 +162,17 @@
 }
 
 - (void)update{
-	[OLNetManager userDataWithId:_userId];
+	_data = [OLNetManager userDataWithId:_userId];
 }
 
 - (BOOL)lastUserInfo{	//判断沙盒中是否存在用户信息
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[self userFilePath]]) {
 		NSDictionary *userDic = [NSDictionary dictionaryWithContentsOfFile:[self userFilePath]];
-		if ([[[userDic objectForKey:@"lastLogin"] objectForKey:@"isLogin"] isEqualToString:@"YES"]) {
-			_data = [userDic objectForKey:@"userInfo"];
+		NSDictionary *status = [userDic objectForKey:@"lastLogin"];
+		NSDictionary *userInfo = [userDic objectForKey:@"userInfo"];
+		if (status && [[status objectForKey:@"isLogin"] isEqualToString:@"YES"]) {
+			_userPass = [status objectForKey:@"password"];
+			_data = [[OLNetManager loginWith:[userInfo objectForKey:@"userAccount"] andPassword:_userPass] objectForKey:@"result"];
 			[self setAllData];
 			_isLogin = YES;
 			return YES;
@@ -183,10 +196,11 @@
 	NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithContentsOfFile:[self userFilePath]];
 	NSMutableDictionary *status = [dic objectForKey:statusKey];
 	if (!status) {
-		status = [[NSMutableDictionary alloc] initWithDictionary:@{@"isLogin":_isLogin?@"YES":@"NO"}];
+		status = [[NSMutableDictionary alloc] initWithDictionary:@{@"isLogin":_isLogin?@"YES":@"NO",@"password":_userPass,@"account":_account}];
 		[dic setObject:status forKey:statusKey];
 	}else{
-		status[@"isLogin"] = _isLogin?@"YES":@"NO";
+		status[@"isLogin"]	= _isLogin?@"YES":@"NO";
+		status[@"password"] = _userPass;
 		dic[statusKey] = status;
 	}
 	[dic writeToFile:[self userFilePath] atomically:YES];

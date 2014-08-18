@@ -39,7 +39,7 @@
     UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.frame];
     webView.scalesPageToFit = YES;
 	NSInteger userid = [User sharedUser].info.userId;
-    NSString *urlStr =[NSString stringWithFormat:@"%@MobileEducation/qa?userId=%li",kBaseURL,userid];
+    NSString *urlStr =[NSString stringWithFormat:@"%@MobileEducation/qa?userId=%i&key=1",kBaseURL,userid];
     NSURL *url = [NSURL URLWithString:urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
