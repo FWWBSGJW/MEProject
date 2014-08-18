@@ -153,8 +153,12 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		return;
 	}
 	self.navigationController.navigationBarHidden = NO;
-	if (_user.justLogin) {	//在登录后tableview推到顶部
-		[self.tableView setContentOffset:CGPointMake(0,0)];
+	if (_user.justLogout) {	//在登录后tableview推到顶部
+		[self.tableView setContentOffset:CGPointMake(0,-64)];
+		_user.justLogout = NO;
+		[self reloadData];
+	}
+	if (_user.justLogin) {
 		_user.justLogin = NO;
 		[self reloadData];
 	}
@@ -413,7 +417,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		if ([_user logout]){
 			NSLog(@"退出成功！");
 		}
-		_user.justLogin = YES;
+		_user.justLogout = YES;
 		LoginViewController *login = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:[NSBundle mainBundle]];
 		[self.navigationController pushViewController:login animated:YES];
 	}else if (indexPath.section == UserCenterSectionStyelDetail){

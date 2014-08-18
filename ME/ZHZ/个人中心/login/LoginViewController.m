@@ -44,6 +44,7 @@
 	if ([user loginWith:[_usernameText text] Password:[_userpwdText text]] && !user.currentVC){
 		
 //		UserCenterTableViewController *utc = [[UserCenterTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		user.justLogin = YES;
 		[self.navigationController popViewControllerAnimated:NO];
 	}
 	

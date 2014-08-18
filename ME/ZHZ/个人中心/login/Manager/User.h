@@ -11,6 +11,7 @@
 @interface User : NSObject<UIAlertViewDelegate>
 @property (nonatomic,strong) UserInfo *info;
 @property (nonatomic)		BOOL justLogin;
+@property (nonatomic)		BOOL justLogout;
 @property (nonatomic)		BOOL havaChange;
 @property (nonatomic)		BOOL refreshMe;
 @property (nonatomic,strong) UIViewController *currentVC;
