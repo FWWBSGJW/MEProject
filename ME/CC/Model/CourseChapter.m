@@ -296,6 +296,25 @@
     }];
     
 }
-
-
+//http://121.197.10.159:8080/MobileEducation/payCourse?Cid=5
+- (NSInteger)buyCourseUseCoinWithCourseID:(NSInteger)courseID
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@MobileEducation/payCourse?Cid=%d",kBaseURL,courseID]];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    NSDictionary *dic;
+    if (data != nil) {
+        dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    } else if (data == nil && error == nil) {
+        NSLog(@"空数据");
+    } else {
+        NSLog(@"%@",error.localizedDescription);
+    }
+    return [dic[@"success"] integerValue];
+}
 @end

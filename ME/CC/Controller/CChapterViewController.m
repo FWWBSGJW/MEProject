@@ -26,6 +26,12 @@
 #import "GetAndPayModel.h"
 #import "UIImageView+AFNetworking.h"
 #define headHeight 160
+enum AlertView_Type
+{
+    AlertView_buy = 510,
+    AlertView_download
+};
+
 enum ActionSheet_Type
 {
     ActionSheetLogin = 550,
@@ -934,7 +940,7 @@ enum MoreActionButton_Tag
                 [[UIApplication sharedApplication].keyWindow addSubview:self.dimView];
                 [[UIApplication sharedApplication].keyWindow addSubview:self.sendComNoteView];
                 [self.sendComNoteView.textView becomeFirstResponder];
-                //self.sendComNoteView.titleLabel.text = @"发送评论";
+                self.sendComNoteView.titleLabel.text = @"发送评论";
                 self.sendComNoteView.titleLabel.backgroundColor = [UIColor greenColor];
                 self.sendComNoteView.tag = TextViewComment;
                 [UIView animateWithDuration:0.4f animations:^{
@@ -1013,6 +1019,7 @@ enum MoreActionButton_Tag
         
         NSString *aMessage = [NSString stringWithFormat:@"你选择的%d个视频已近开始下载",array.count];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"开始下载" message:aMessage delegate:self cancelButtonTitle:@"知道啦" otherButtonTitles:@"去看看", nil];
+        alertView.tag = AlertView_download;
         [alertView show];
     }
     [self.tableView setEditing:NO animated:YES];
@@ -1021,13 +1028,6 @@ enum MoreActionButton_Tag
     
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1) {
-        CDownloadViewController *dVC = [[CDownloadViewController alloc] initWithStyle:UITableViewStyleGrouped];
-        [self.navigationController pushViewController:dVC animated:YES];
-    }
-}
 
 #pragma sendView button action
 - (void)sendComNote
@@ -1175,6 +1175,37 @@ enum MoreActionButton_Tag
 
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (alertView.tag) {
+        case AlertView_download:
+            if (buttonIndex == 1) {
+                CDownloadViewController *dVC = [[CDownloadViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                [self.navigationController pushViewController:dVC animated:YES];
+            }
+            break;
+        case AlertView_buy:
+            if (buttonIndex == 1) {
+#warning 待检验密码
+                NSInteger result = [self.courseChapter buyCourseUseCoinWithCourseID:self.courseID];
+                CAlertLabel *label;
+                if (result == 1) {
+                    label = [CAlertLabel alertLabelWithAdjustFrameForText:@"购买成功"];
+                    [label showAlertLabel];
+                } else if (result == 0) {
+                    label = [CAlertLabel alertLabelWithAdjustFrameForText:@"购买失败，请重新尝试"];
+                    [label showAlertLabel];
+                } else if(result == -1){
+                    label = [CAlertLabel alertLabelWithAdjustFrameForText:@"你已经购买过此课程"];
+                    [label showAlertLabel];
+                }
+            }
+        default:
+            break;
+    }
+    
+}
+
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -1194,6 +1225,10 @@ enum MoreActionButton_Tag
             }else if (buttonIndex == 1){
                 //积分支付
                 NSLog(@"积分支付");
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"积分购买" message:@"请输入您的密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                alertView.tag = AlertView_buy;
+                [alertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+                [alertView show];
             }
         }
             break;

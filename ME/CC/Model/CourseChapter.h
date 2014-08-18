@@ -41,4 +41,6 @@
 //笔记
 - (void)loadCourseNoteArrayWithCourseID:(NSInteger)courseID andUserID:(NSInteger)userID;
 - (NSMutableArray *)loadCourseDetailNoteWithUrl:(NSString *)urlStr;
+- (NSInteger)buyCourseUseCoinWithCourseID:(NSInteger)courseID;
+
 @end
