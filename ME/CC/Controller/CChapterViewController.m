@@ -28,14 +28,14 @@
 #define headHeight 160
 enum AlertView_Type
 {
-    AlertView_buy = 510,
-    AlertView_download
+    AlertView_buy = 510, //购买
+    AlertView_download  //下载
 };
 
 enum ActionSheet_Type
 {
-    ActionSheetLogin = 550,
-    ActionSheetBuy
+    ActionSheetLogin = 550, //登陆actionSheet
+    ActionSheetBuy  //购买actionsheet
 };
 
 enum Segement_Type
@@ -1218,9 +1218,16 @@ enum MoreActionButton_Tag
         }
             break;
         case ActionSheetBuy:{
-#warning 待实现支付
             if (buttonIndex == 0) {
                 //支付宝支付
+                UIViewController *vc = [[UIViewController alloc] init];
+                UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+                NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@MobileEducation/paycheck?userId=%d&cid=%d",kBaseURL,[User sharedUser].info.userId,self.courseID]];
+                [vc.view addSubview:webView];
+                vc.title = @"支付宝支付";
+                [webView loadRequest:[NSURLRequest requestWithURL:url]];
+                [self.navigationController pushViewController:vc animated:YES];
+                
                 NSLog(@"支付宝支付");
             }else if (buttonIndex == 1){
                 //积分支付
@@ -1230,6 +1237,7 @@ enum MoreActionButton_Tag
                 [alertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
                 [alertView show];
             }
+            [User sharedUser].havaChange = YES;
         }
             break;
         default:
