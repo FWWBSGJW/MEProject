@@ -159,7 +159,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		[self reloadData];
 	}
 	if (_user.justLogin) {
-		_user.justLogin = NO;
+		_user.justLogin = NO;	
 		[self reloadData];
 	}
 	if (userstyle == UserStyleLocal) {
