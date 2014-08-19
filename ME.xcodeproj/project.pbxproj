@@ -500,20 +500,20 @@
 		5B345B0119A22F4A008FC104 /* cDNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cDNote@2x.png"; path = "../../../../../Desktop/cDNote@2x.png"; sourceTree = "<group>"; };
 		5B47C64A1990B8AA00BEF436 /* CAlertLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAlertLabel.h; sourceTree = "<group>"; };
 		5B47C64B1990B8AA00BEF436 /* CAlertLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAlertLabel.m; sourceTree = "<group>"; };
-		5B717E931978FD9600F1359C /* I Learning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "I Learning.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B717E931978FD9600F1359C /* ME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ME.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B717E961978FD9600F1359C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5B717E981978FD9600F1359C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5B717E9A1978FD9600F1359C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		5B717E9E1978FD9600F1359C /* I Learning-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "I Learning-Info.plist"; sourceTree = "<group>"; };
+		5B717E9E1978FD9600F1359C /* ME-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ME-Info.plist"; sourceTree = "<group>"; };
 		5B717EA01978FD9600F1359C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5B717EA21978FD9600F1359C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5B717EA41978FD9600F1359C /* I Learning-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "I Learning-Prefix.pch"; sourceTree = "<group>"; };
+		5B717EA41978FD9600F1359C /* ME-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ME-Prefix.pch"; sourceTree = "<group>"; };
 		5B717EA51978FD9600F1359C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5B717EA61978FD9600F1359C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5B717EAE1978FD9600F1359C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5B717EB41978FD9600F1359C /* I LearningTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "I LearningTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B717EB41978FD9600F1359C /* METests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = METests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B717EB51978FD9600F1359C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		5B717EBD1978FD9600F1359C /* I LearningTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "I LearningTests-Info.plist"; sourceTree = "<group>"; };
+		5B717EBD1978FD9600F1359C /* METests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "METests-Info.plist"; sourceTree = "<group>"; };
 		5B717EBF1978FD9600F1359C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5B717EC11978FD9600F1359C /* METests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = METests.m; sourceTree = "<group>"; };
 		5B717ED11978FE2600F1359C /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
@@ -1116,8 +1116,8 @@
 		5B717E941978FD9600F1359C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5B717E931978FD9600F1359C /* I Learning.app */,
-				5B717EB41978FD9600F1359C /* I LearningTests.xctest */,
+				5B717E931978FD9600F1359C /* ME.app */,
+				5B717EB41978FD9600F1359C /* METests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1169,10 +1169,10 @@
 				5B718122197905FD00F1359C /* MainViewController.m */,
 				5B7181241979069500F1359C /* QAViewController.h */,
 				5B7181251979069500F1359C /* QAViewController.m */,
-				5B717E9E1978FD9600F1359C /* I Learning-Info.plist */,
+				5B717E9E1978FD9600F1359C /* ME-Info.plist */,
 				5B717E9F1978FD9600F1359C /* InfoPlist.strings */,
 				5B717EA21978FD9600F1359C /* main.m */,
-				5B717EA41978FD9600F1359C /* I Learning-Prefix.pch */,
+				5B717EA41978FD9600F1359C /* ME-Prefix.pch */,
 				5B231E7919934F51005A1BA4 /* ExtendViewController.h */,
 				5B231E7A19934F52005A1BA4 /* ExtendViewController.m */,
 				5B231E7B19934F52005A1BA4 /* ExtendViewController.xib */,
@@ -1194,7 +1194,7 @@
 		5B717EBC1978FD9600F1359C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5B717EBD1978FD9600F1359C /* I LearningTests-Info.plist */,
+				5B717EBD1978FD9600F1359C /* METests-Info.plist */,
 				5B717EBE1978FD9600F1359C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -1731,9 +1731,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5B717E921978FD9600F1359C /* I Learning */ = {
+		5B717E921978FD9600F1359C /* ME */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5B717EC51978FD9600F1359C /* Build configuration list for PBXNativeTarget "I Learning" */;
+			buildConfigurationList = 5B717EC51978FD9600F1359C /* Build configuration list for PBXNativeTarget "ME" */;
 			buildPhases = (
 				5B717E8F1978FD9600F1359C /* Sources */,
 				5B717E901978FD9600F1359C /* Frameworks */,
@@ -1743,14 +1743,14 @@
 			);
 			dependencies = (
 			);
-			name = "I Learning";
+			name = ME;
 			productName = ME;
-			productReference = 5B717E931978FD9600F1359C /* I Learning.app */;
+			productReference = 5B717E931978FD9600F1359C /* ME.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5B717EB31978FD9600F1359C /* I LearningTests */ = {
+		5B717EB31978FD9600F1359C /* METests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5B717EC81978FD9600F1359C /* Build configuration list for PBXNativeTarget "I LearningTests" */;
+			buildConfigurationList = 5B717EC81978FD9600F1359C /* Build configuration list for PBXNativeTarget "METests" */;
 			buildPhases = (
 				5B717EB01978FD9600F1359C /* Sources */,
 				5B717EB11978FD9600F1359C /* Frameworks */,
@@ -1761,9 +1761,9 @@
 			dependencies = (
 				5B717EBA1978FD9600F1359C /* PBXTargetDependency */,
 			);
-			name = "I LearningTests";
+			name = METests;
 			productName = METests;
-			productReference = 5B717EB41978FD9600F1359C /* I LearningTests.xctest */;
+			productReference = 5B717EB41978FD9600F1359C /* METests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1780,7 +1780,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5B717E8E1978FD9600F1359C /* Build configuration list for PBXProject "I Learning" */;
+			buildConfigurationList = 5B717E8E1978FD9600F1359C /* Build configuration list for PBXProject "ME" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1794,8 +1794,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5B717E921978FD9600F1359C /* I Learning */,
-				5B717EB31978FD9600F1359C /* I LearningTests */,
+				5B717E921978FD9600F1359C /* ME */,
+				5B717EB31978FD9600F1359C /* METests */,
 			);
 		};
 /* End PBXProject section */
@@ -2124,7 +2124,7 @@
 /* Begin PBXTargetDependency section */
 		5B717EBA1978FD9600F1359C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5B717E921978FD9600F1359C /* I Learning */;
+			target = 5B717E921978FD9600F1359C /* ME */;
 			targetProxy = 5B717EB91978FD9600F1359C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -2249,8 +2249,8 @@
 					"$(PROJECT_DIR)/ShareSDK/UI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ME/I Learning-Prefix.pch";
-				INFOPLIST_FILE = "ME/I Learning-Info.plist";
+				GCC_PREFIX_HEADER = "ME/ME-Prefix.pch";
+				INFOPLIST_FILE = "ME/ME-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/chenpingguo/Downloads/ShareSDK-iOS-v2.9.2/ShareSDK/Extend/SinaWeiboSDK",
@@ -2260,7 +2260,7 @@
 					"$(PROJECT_DIR)/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/ShareSDK/Extend/WeChatSDK",
 				);
-				PRODUCT_NAME = "I Learning";
+				PRODUCT_NAME = ME;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2284,8 +2284,8 @@
 					"$(PROJECT_DIR)/ShareSDK/UI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ME/I Learning-Prefix.pch";
-				INFOPLIST_FILE = "ME/I Learning-Info.plist";
+				GCC_PREFIX_HEADER = "ME/ME-Prefix.pch";
+				INFOPLIST_FILE = "ME/ME-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/chenpingguo/Downloads/ShareSDK-iOS-v2.9.2/ShareSDK/Extend/SinaWeiboSDK",
@@ -2295,7 +2295,7 @@
 					"$(PROJECT_DIR)/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/ShareSDK/Extend/WeChatSDK",
 				);
-				PRODUCT_NAME = "I Learning";
+				PRODUCT_NAME = ME;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2315,8 +2315,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "METests/I LearningTests-Info.plist";
-				PRODUCT_NAME = "I LearningTests";
+				INFOPLIST_FILE = "METests/METests-Info.plist";
+				PRODUCT_NAME = METests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -2333,8 +2333,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ME/ME-Prefix.pch";
-				INFOPLIST_FILE = "METests/I LearningTests-Info.plist";
-				PRODUCT_NAME = "I LearningTests";
+				INFOPLIST_FILE = "METests/METests-Info.plist";
+				PRODUCT_NAME = METests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -2343,7 +2343,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5B717E8E1978FD9600F1359C /* Build configuration list for PBXProject "I Learning" */ = {
+		5B717E8E1978FD9600F1359C /* Build configuration list for PBXProject "ME" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5B717EC31978FD9600F1359C /* Debug */,
@@ -2352,7 +2352,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5B717EC51978FD9600F1359C /* Build configuration list for PBXNativeTarget "I Learning" */ = {
+		5B717EC51978FD9600F1359C /* Build configuration list for PBXNativeTarget "ME" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5B717EC61978FD9600F1359C /* Debug */,
@@ -2361,7 +2361,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5B717EC81978FD9600F1359C /* Build configuration list for PBXNativeTarget "I LearningTests" */ = {
+		5B717EC81978FD9600F1359C /* Build configuration list for PBXNativeTarget "METests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5B717EC91978FD9600F1359C /* Debug */,

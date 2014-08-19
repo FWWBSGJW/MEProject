@@ -180,6 +180,28 @@ enum MoreActionButton_Tag
     if (!self.title) {
         self.title = self.courseInfoDic[@"cName"];
     }
+    
+
+    
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        switch (weakSelf.segmentControl.selectedSegmentIndex) {
+            case SegementComment:{
+                weakSelf.courseCommentArray = nil;
+                [weakSelf.tableView  reloadData];
+            }
+                
+                break;
+            case SegementNote:{
+                weakSelf.courseNoteArray = nil;
+                weakSelf.noteOpenArray = nil;
+                [weakSelf.tableView  reloadData];
+            }
+                
+            default:
+                [weakSelf.tableView reloadData];
+                break;
+        }
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated

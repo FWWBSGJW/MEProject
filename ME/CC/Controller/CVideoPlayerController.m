@@ -202,7 +202,7 @@ enum SendType
 - (void)playVideoWithVideoID:(NSInteger)videoID andStartTime:(NSTimeInterval)time andVideoUrlString:(NSString *)urlString andVideoTitle:(NSString *)title
 {
     [self playVideoWithVideoID:videoID andVideoTitle:title andVideoUrlString:urlString];
-    self.moviePlayer.initialPlaybackTime = time;
+    self.moviePlayer.initialPlaybackTime = time -1;
 }
 
 
