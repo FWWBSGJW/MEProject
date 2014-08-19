@@ -108,6 +108,7 @@
     NSString *urlString = [NSString stringWithFormat:@"%@MobileEducation/C_VideoAction?Vid=%d&userId=%d",kBaseURL,self.videoID,self.userID];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    /*
     AFJSONRequestOperation *op = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         //self.danmakuArray = JSON;
         self.danmakuArray = [NSMutableArray arrayWithArray:JSON];
@@ -115,6 +116,19 @@
         NSLog(@"%@,%@",error.localizedDescription,JSON);
     }];
     [op start];
+     */
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    if (data != nil) {
+        self.danmakuArray =[NSMutableArray arrayWithArray:[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil]];
+    } else if (data == nil && error == nil) {
+        NSLog(@"空数据");
+    } else {
+        NSLog(@"%@",error.localizedDescription);
+    }
 }
 
 #pragma mark - 上传弹幕
@@ -140,6 +154,7 @@
 #pragma mark - 选择实现实现弹幕
 - (void)selectDanmukuWithCurrentTime:(NSTimeInterval)currentPlaybackTime
 {
+    NSLog(@"%@",self.danmakuArray);
     for (NSInteger i = _lastArrayNum; i < self.danmakuArray.count; i++) {
         if ((int)(currentPlaybackTime) == [self.danmakuArray[i][@"Dtime"] integerValue]) {
             
@@ -155,11 +170,14 @@
                         //NSLog(@"nil");
                         danmakuView = [[DanmakuView alloc] initMoveDM];
                     }
-                    
+                    [self.danmakuView addSubview:danmakuView];
                     [danmakuView setSizeWithComponent:self.danmakuArray[i][@"Dcomponent"]];
                     CGSize dmSize = danmakuView.frame.size;
-                    [danmakuView setFrame:CGRectMake(SCREEN_HEIGHT, self.moveDanmukuY, dmSize.width, dmSize.height)];
-                    [self.danmakuView addSubview:danmakuView];
+                    [danmakuView setFrame:CGRectMake(SCREEN_HEIGHT, self.moveDanmukuY, danmakuView.frame.size.width, danmakuView.frame.size.height)];
+                    //self.danmakuView.backgroundColor = [UIColor whiteColor];
+                    //danmakuView.backgroundColor = [UIColor whiteColor];
+                    //danmakuView.backgroundColor = [UIColor whiteColor];
+                    //danmakuView.frame = CGRectMake(100, 100, 100, 100);
                     //设置弹幕动画
 //                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
 //                        NSLog(@"%f    %f",danmakuView.frame.origin.x,danmakuView.frame.origin.y);
@@ -168,12 +186,19 @@
 //                        [self moveDM:danmakuView];
 //                    }];
                     
+//                    [self.danmakuView addSubview:danmakuView];
+                    [self danmakuChannelOpen:dmChaennel WithDMwith:dmSize.width];
+                    [self moveDM:danmakuView];
+                    /*
                     dispatch_sync(dispatch_get_main_queue(), ^{
                         
                         [self danmakuChannelOpen:dmChaennel WithDMwith:dmSize.width];
                         [self moveDM:danmakuView];
                     });
+                     */
+ 
                 }
+                    
                     break;
                 case 1:   //静态弹幕
                 {
@@ -189,11 +214,16 @@
                     NSLog(@"%f %f",danmakuView.frame.origin.x,danmakuView.frame.origin.y);
                     _staticDanmakuY -= dmSize.height;
                     [self.danmakuView addSubview:danmakuView];
+                    
+                    
+                    [self performSelector:@selector(hidSDM:) withObject:danmakuView afterDelay:3.0f];
                     //主线程跟新ui
+                    /*
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        
+                        //self.danmakuView.backgroundColor = [UIColor whiteColor];
                         [self performSelector:@selector(hidSDM:) withObject:danmakuView afterDelay:3.0f];
                     }];
+                     */
                     
                 }
                 default:

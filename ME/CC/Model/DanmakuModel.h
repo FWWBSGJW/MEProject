@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, DanmakuType) {
 @property (assign, nonatomic) NSInteger videoID;
 
 @property (strong, nonatomic) NSMutableArray *dmChannel; //弹幕通道,1可用 0不可用
-@property (strong, nonatomic) UIView *danmakuView;
+@property (weak, nonatomic) UIView *danmakuView;
 //寻找可复用弹幕
 - (DanmakuView *)dequeueReusableDanmakuWithDanmakuType:(DanmakuType)type;
 //添加复用弹幕

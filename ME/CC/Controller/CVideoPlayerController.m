@@ -265,8 +265,8 @@ enum SendType
     UIView *danmakuView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH)];
     self.danmakuView = danmakuView;
     [self.moviePlayer.view addSubview:self.danmakuView];
-    
-    
+    self.danmakuModel.danmakuView = self.danmakuView;
+    //self.danmakuView.backgroundColor = [UIColor whiteColor];
     
     /*
     //添加背景按钮
@@ -651,19 +651,25 @@ enum SendType
 - (void)timerClicked
 {
     if (self.dmSwitch.isOn) {
-        
+        NSLog(@"%d",self.dmSwitch.isOn);
+        [self.danmakuModel selectDanmukuWithCurrentTime:self.moviePlayer.currentPlaybackTime];
+        /*
         NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
-            @autoreleasepool {
-                [self.danmakuModel selectDanmukuWithCurrentTime:self.moviePlayer.currentPlaybackTime];
-            }
+            [self.danmakuModel selectDanmukuWithCurrentTime:self.moviePlayer.currentPlaybackTime];
+            
         }];
+        
         [self.dmQueue addOperation:op];
+         */
         //异步加载弹幕
-//        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//        dispatch_async(queue, ^{
-//            //[self selectDanmuku];
-//            [self.danmakuModel selectDanmukuWithCurrentTime:self.moviePlayer.currentPlaybackTime];
-//        });
+        /*
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            //[self selectDanmuku];
+            [self.danmakuModel selectDanmukuWithCurrentTime:self.moviePlayer.currentPlaybackTime];
+        });
+         */
+        
     }
     
     //设置开始时间
