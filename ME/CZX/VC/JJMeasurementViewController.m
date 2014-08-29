@@ -570,6 +570,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.measureTableView setUserInteractionEnabled:NO];
     int newRow = [indexPath row];
     for (int index=0; index<4; index++)
     {
@@ -590,6 +591,12 @@
     [self searchVoidSubject];
     [rightButton setTitle:[NSString stringWithFormat:@"%d/%d", queArray.count-voidArray.count, queArray.count]
                  forState:UIControlStateNormal];
+    [self performSelector:@selector(tableViewUserEnabled) withObject:nil afterDelay:0.8];
+}
+
+- (void)tableViewUserEnabled
+{
+    [self.measureTableView setUserInteractionEnabled:YES];
 }
 
 
