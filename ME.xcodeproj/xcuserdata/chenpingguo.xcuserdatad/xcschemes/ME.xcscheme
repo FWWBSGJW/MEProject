@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5B717E921978FD9600F1359C"
-               BuildableName = "I Learning.app"
+               BuildableName = "ME.app"
                BlueprintName = "ME"
                ReferencedContainer = "container:ME.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5B717EB31978FD9600F1359C"
-               BuildableName = "I LearningTests.xctest"
+               BuildableName = "METests.xctest"
                BlueprintName = "METests"
                ReferencedContainer = "container:ME.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5B717E921978FD9600F1359C"
-            BuildableName = "I Learning.app"
+            BuildableName = "ME.app"
             BlueprintName = "ME"
             ReferencedContainer = "container:ME.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5B717E921978FD9600F1359C"
-            BuildableName = "I Learning.app"
+            BuildableName = "ME.app"
             BlueprintName = "ME"
             ReferencedContainer = "container:ME.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5B717E921978FD9600F1359C"
-            BuildableName = "I Learning.app"
+            BuildableName = "ME.app"
             BlueprintName = "ME"
             ReferencedContainer = "container:ME.xcodeproj">
          </BuildableReference>

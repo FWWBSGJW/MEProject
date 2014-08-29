@@ -202,7 +202,10 @@ enum SendType
 - (void)playVideoWithVideoID:(NSInteger)videoID andStartTime:(NSTimeInterval)time andVideoUrlString:(NSString *)urlString andVideoTitle:(NSString *)title
 {
     [self playVideoWithVideoID:videoID andVideoTitle:title andVideoUrlString:urlString];
-    self.moviePlayer.initialPlaybackTime = time -1;
+    self.moviePlayer.initialPlaybackTime = time;
+    
+    NSLog(@"%f",time);
+    NSLog(@"%@",self.danmakuModel.danmakuArray);
 }
 
 
@@ -559,7 +562,8 @@ enum SendType
     NSString *danmaku = _dmTextField.text;
 
     NSInteger theType = (sender.tag == Send_Comment)?0:1;
-    [self.danmakuModel sendDanmakuWithUserID:1 andVideoTime:self.moviePlayer.currentPlaybackTime+1 andvideoID:self.videoID andContent:danmaku andType:theType];
+    NSInteger nowTime = self.moviePlayer.currentPlaybackTime;
+    [self.danmakuModel sendDanmakuWithUserID:[User sharedUser].info.userId andVideoTime:nowTime andvideoID:self.videoID andContent:danmaku andType:theType];
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjects:@[danmaku,[NSNumber numberWithInteger:self.moviePlayer.currentPlaybackTime],[NSNumber numberWithInteger:theType]] forKeys:@[@"Dcomponent",@"Dtime",@"Dtype"]];
     
@@ -580,6 +584,7 @@ enum SendType
     } completion:^(BOOL finished) {
         [self.sendDanmakuView removeFromSuperview];
         [self.dimView removeFromSuperview];
+        [self playButtonClicked:_playButton];
         _dmTextField.text = nil;
     }];
 }

@@ -140,7 +140,6 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
-    
     NSString *bodyStr = [NSString stringWithFormat:@"cvContent=%@&userId=%d&vid=%d&cvType=%s&cvTime=%d",content,userID,videoID,cvType?"true":"false",cvTime];
     NSLog(@"%@",bodyStr);
     
