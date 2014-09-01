@@ -109,8 +109,6 @@
 		5B345AFD19A2153F008FC104 /* QATableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B345AD619A2153F008FC104 /* QATableViewController.m */; };
 		5B345AFE19A2153F008FC104 /* TestCollectionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B345AD819A2153F008FC104 /* TestCollectionTableViewController.m */; };
 		5B345AFF19A2153F008FC104 /* UserCenterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B345ADA19A2153F008FC104 /* UserCenterTableViewController.m */; };
-		5B345B0219A22F4A008FC104 /* cDMessage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B345B0019A22F4A008FC104 /* cDMessage@2x.png */; };
-		5B345B0319A22F4A008FC104 /* cDNote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B345B0119A22F4A008FC104 /* cDNote@2x.png */; };
 		5B47C64C1990B8AA00BEF436 /* CAlertLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B47C64B1990B8AA00BEF436 /* CAlertLabel.m */; };
 		5B717E971978FD9600F1359C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B717E961978FD9600F1359C /* Foundation.framework */; };
 		5B717E991978FD9600F1359C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B717E981978FD9600F1359C /* CoreGraphics.framework */; };
@@ -496,8 +494,6 @@
 		5B345AD819A2153F008FC104 /* TestCollectionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestCollectionTableViewController.m; sourceTree = "<group>"; };
 		5B345AD919A2153F008FC104 /* UserCenterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterTableViewController.h; sourceTree = "<group>"; };
 		5B345ADA19A2153F008FC104 /* UserCenterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterTableViewController.m; sourceTree = "<group>"; };
-		5B345B0019A22F4A008FC104 /* cDMessage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cDMessage@2x.png"; path = "../../../../../Desktop/cDMessage@2x.png"; sourceTree = "<group>"; };
-		5B345B0119A22F4A008FC104 /* cDNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cDNote@2x.png"; path = "../../../../../Desktop/cDNote@2x.png"; sourceTree = "<group>"; };
 		5B47C64A1990B8AA00BEF436 /* CAlertLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAlertLabel.h; sourceTree = "<group>"; };
 		5B47C64B1990B8AA00BEF436 /* CAlertLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAlertLabel.m; sourceTree = "<group>"; };
 		5B717E931978FD9600F1359C /* ME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ME.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1436,8 +1432,6 @@
 		5B717FEF197905C800F1359C /* File */ = {
 			isa = PBXGroup;
 			children = (
-				5B345B0019A22F4A008FC104 /* cDMessage@2x.png */,
-				5B345B0119A22F4A008FC104 /* cDNote@2x.png */,
 				5B772A76199BB891000BB61E /* Cbuy@2x.png */,
 				5B718002197905C800F1359C /* directionDefault.png */,
 				5B718000197905C800F1359C /* CuserPhoto.png */,
@@ -1828,7 +1822,6 @@
 				5B345A0819A1C1ED008FC104 /* JJFinishViewController.xib in Resources */,
 				5B7180A2197905C900F1359C /* details_down.png in Resources */,
 				5B7180C8197905C900F1359C /* details_up.png in Resources */,
-				5B345B0319A22F4A008FC104 /* cDNote@2x.png in Resources */,
 				5B7180BA197905C900F1359C /* details_progress_select.png in Resources */,
 				5B7180CD197905C900F1359C /* promo_full.mp4 in Resources */,
 				5B71809F197905C900F1359C /* details_definition_bg_line@2x.png in Resources */,
@@ -1909,7 +1902,6 @@
 				5B832DC019933B0D003DFF8B /* friends-list.png in Resources */,
 				5B345A0C19A1C1ED008FC104 /* JJTestDetailViewController.xib in Resources */,
 				5B7180C9197905C900F1359C /* details_up@2x.png in Resources */,
-				5B345B0219A22F4A008FC104 /* cDMessage@2x.png in Resources */,
 				5B71809E197905C900F1359C /* details_definition_bg_line.png in Resources */,
 				5B7180CC197905C900F1359C /* Thumbs.db in Resources */,
 				5B832D9F19924260003DFF8B /* ShareSDKLocalizable.strings in Resources */,
