@@ -130,7 +130,7 @@
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^{
             [weakself.testTableView.infiniteScrollingView stopAnimating];
-            if (self.linkModel.nextPage) {
+            if (self.linkModel.nextPage.length>0) {
                 NSArray *temArray = [[[JJTestModelManage alloc] init] analyseTestJson:self.linkModel.nextPage];
                 [self.testArray addObjectsFromArray:temArray];
                 if (temArray.count == 7) {
@@ -143,9 +143,34 @@
                 }
                 [self.testTableView reloadData];
             }
+            else
+            {
+                [self showNoMore];
+            }
         });
     }];
     
+}
+
+- (void)showNoMore
+{
+    UILabel *noMoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 220, 80, 40)];
+    noMoreLabel.text = @"已无更多";
+    noMoreLabel.textAlignment = NSTextAlignmentCenter;
+    noMoreLabel.textColor = [UIColor whiteColor];
+    noMoreLabel.tag = 1000;
+    noMoreLabel.backgroundColor = [UIColor blackColor];
+    noMoreLabel.alpha = 0.8;
+    [self.view addSubview:noMoreLabel];
+    [UIView animateWithDuration:1.2 animations:^{
+        noMoreLabel.alpha = 0;
+    }];
+    [self performSelector:@selector(removeLabel) withObject:nil afterDelay:1.2];
+}
+
+- (void)removeLabel
+{
+    [[self.view viewWithTag:1000] removeFromSuperview];
 }
 
 - (void)pop
