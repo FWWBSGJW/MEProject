@@ -61,7 +61,7 @@
     if (self.wrongSubjectArray.count == 0)
     {
         UILabel *la = [[UILabel alloc] initWithFrame:CGRectMake(130, 220, 60, 40)];
-        la.text = @"无错题";
+        la.text = @"还没有错题哦~";
         [self.view addSubview:la];
     }
     else

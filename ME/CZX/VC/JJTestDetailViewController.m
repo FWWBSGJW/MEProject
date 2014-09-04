@@ -300,13 +300,13 @@
     noMoreLabel.textAlignment = NSTextAlignmentCenter;
     noMoreLabel.textColor = [UIColor whiteColor];
     noMoreLabel.tag = 1000;
-    noMoreLabel.backgroundColor = [UIColor blackColor];
+    noMoreLabel.backgroundColor = [UIColor grayColor];
     noMoreLabel.alpha = 0.8;
     [self.view addSubview:noMoreLabel];
-    [UIView animateWithDuration:1.2 animations:^{
-        noMoreLabel.alpha = 0;
+    [UIView animateWithDuration:1.5 animations:^{
+        noMoreLabel.alpha = 0.3;
     }];
-    [self performSelector:@selector(removeLabel) withObject:nil afterDelay:1.2];
+    [self performSelector:@selector(removeLabel) withObject:nil afterDelay:1.5];
 }
 
 - (void)removeLabel
