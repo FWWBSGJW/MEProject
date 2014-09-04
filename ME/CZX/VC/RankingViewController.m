@@ -262,6 +262,7 @@ typedef NS_ENUM(NSInteger, segmentControl) {
             RangkingModel *model = [self.rankShowArray objectAtIndex:indexPath.row];
             lableSwitchCell.nameLa.text = model.userName;
             [lableSwitchCell.imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseURL, model.userPortrait]]];
+//            lableSwitchCell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseURL, model.userPortrait]]]];
             lableSwitchCell.powerLa.text = [NSString stringWithFormat:@"战斗力高达：%d", (int)model.score];
         }
         else
@@ -269,6 +270,7 @@ typedef NS_ENUM(NSInteger, segmentControl) {
             RangkingModel *model = [self.rankShowArray objectAtIndex:indexPath.row];
             lableSwitchCell.nameLa.text = model.userName;
             [lableSwitchCell.imageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseURL, model.userPortrait]]];
+//            lableSwitchCell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kBaseURL, model.userPortrait]]]];
             lableSwitchCell.timeLa.text = [NSString stringWithFormat:@"共%d分%d秒", (int)model.hmtime, (int)model.hstime];
             lableSwitchCell.scoreLa.text = [NSString stringWithFormat:@"考%d分", (int)model.score];
         }
@@ -345,6 +347,7 @@ typedef NS_ENUM(NSInteger, segmentControl) {
 - (void)selectRanking:(UISegmentedControl *)sender
 {
     NSInteger selectedSegmentIndex = [sender selectedSegmentIndex];
+    [self.activityView startAnimating];
     if (selectedSegmentIndex == segmentControlCapacity)
     {
         [[[RankingManage alloc] init] getRankingForVC:self
@@ -355,7 +358,6 @@ typedef NS_ENUM(NSInteger, segmentControl) {
         [[[RankingManage alloc] init] getRankingForVC:self
                                               withUrl:@"http://121.197.10.159:8080/MobileEducation/listScore?tcId=1"];
     }
-    [self.activityView startAnimating];
     [self.pickerView selectRow:0 inComponent:0 animated:NO];
     [self.pickerView reloadAllComponents];
     [self.rankTableView reloadData];
