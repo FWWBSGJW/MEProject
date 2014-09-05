@@ -25,13 +25,6 @@
                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="动态" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="248" translatesAutoresizingMaskIntoConstraints="NO" id="Clp-2a-5ln">
-                        <rect key="frame" x="52" y="30" width="248" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1分钟前" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uuo-LQ-T8U">
                         <rect key="frame" x="250" y="5" width="60" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -43,7 +36,6 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="timeLabel" destination="Uuo-LQ-T8U" id="e3k-nt-rkZ"/>
-                <outlet property="trendLabel" destination="Clp-2a-5ln" id="UZc-3C-aF3"/>
                 <outlet property="userHeadImage" destination="q8D-h8-MA5" id="dog-mf-NiS"/>
                 <outlet property="userName" destination="0hT-Nc-Lhl" id="v85-eg-8e0"/>
             </connections>

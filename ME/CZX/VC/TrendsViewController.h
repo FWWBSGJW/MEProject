@@ -11,4 +11,7 @@
 @interface TrendsViewController : UIViewController
 
 @property(nonatomic, strong) UITableView *trendsTableView;
+@property(nonatomic, strong) NSMutableArray *trendsArray;
+@property(nonatomic, strong) UIActivityIndicatorView *activityView;
+@property(nonatomic) int page;
 @end
