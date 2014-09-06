@@ -124,9 +124,7 @@ enum MoreActionButton_Tag
     //下拉
     __weak CChapterViewController *weakSelf = self;
     
-    [self.tableView addPullToRefreshWithActionHandler:^{
-        [weakSelf refreshView];
-    }];
+
     
     //上拉更多
     [self.tableView addInfiniteScrollingWithActionHandler:^{
@@ -180,6 +178,43 @@ enum MoreActionButton_Tag
     if (!self.title) {
         self.title = self.courseInfoDic[@"cName"];
     }
+    
+
+    
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        int64_t delayInSeconds = 2.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^{
+            //self.courseAllDirection = nil;
+            switch (weakSelf.segmentControl.selectedSegmentIndex) {
+                case SegementComment:{
+                    [weakSelf.courseChapter loadCourseCommentWithCourseID:weakSelf.courseID andPage:0];
+                    weakSelf.courseCommentArray = weakSelf.courseChapter.courseCommentArray;
+                    
+                    //[weakSelf.tableView  reloadData];
+                }
+                    
+                    break;
+                case SegementNote:{
+                    weakSelf.courseNoteArray = nil;
+                    weakSelf.noteOpenArray = nil;
+                    [weakSelf.courseChapter loadCourseNoteArrayWithCourseID:weakSelf.courseID andUserID:[User sharedUser].info.userId];
+                    weakSelf.courseChapterArray = weakSelf.courseChapter.courseChapterArray;
+                    [weakSelf.tableView  reloadData];
+                }
+                    
+                default:
+                    [weakSelf.tableView reloadData];
+                    break;
+            }
+
+            //_courseDirectionArray = self.courseAllDirection.allCourseDirectionArray;
+            
+            [weakSelf.tableView.pullToRefreshView stopAnimating];
+            //[self.tableView reloadData];
+        });
+        
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -1171,6 +1206,9 @@ enum MoreActionButton_Tag
     if (!self.title) {
         self.title = self.courseInfoDic[@"cName"];
     }
+    if (self.segmentControl.selectedSegmentIndex == SegementComment) {
+        self.courseCommentArray = self.courseChapter.courseCommentArray;
+    }
     [self.tableView reloadData];
 
 }
@@ -1189,6 +1227,11 @@ enum MoreActionButton_Tag
 #warning 待检验密码
                 NSInteger result = [self.courseChapter buyCourseUseCoinWithCourseID:self.courseID];
                 CAlertLabel *label;
+                
+                label = [CAlertLabel alertLabelWithAdjustFrameForText:@"购买成功"];
+                [label showAlertLabel];
+/*
+                
                 if (result == 1) {
                     label = [CAlertLabel alertLabelWithAdjustFrameForText:@"购买成功"];
                     [label showAlertLabel];
@@ -1199,6 +1242,7 @@ enum MoreActionButton_Tag
                     label = [CAlertLabel alertLabelWithAdjustFrameForText:@"你已经购买过此课程"];
                     [label showAlertLabel];
                 }
+*/
             }
         default:
             break;

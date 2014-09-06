@@ -13,6 +13,7 @@
 #import "JCRBlurView.h"
 #import "FindJobViewController.h"
 #import "SearchViewController.h"
+#import "TrendsViewController.h"
 
 @interface ExtendViewController ()
 
@@ -76,6 +77,8 @@
             break;
         case 5:
             [self.navigationController pushViewController:[[SearchViewController alloc] init] animated:YES];
+        case 6:
+            [self.navigationController pushViewController:[[TrendsViewController alloc] init] animated:YES];
         default:
             break;
     }
