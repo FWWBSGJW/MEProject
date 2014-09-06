@@ -141,8 +141,8 @@
 {
 #pragma waring 此处待实现上传评论，笔记 ,刷新数据
     NSLog(@"动态---%@",self.sendComNoteView.textView.text);
-//    [self sendTrendWithUserID:[User sharedUser].info.userId andContent:self.sendComNoteView.textView.text];
-    [self sendTrendWithUserID:2 andContent:self.sendComNoteView.textView.text];
+    [self sendTrendWithUserID:[User sharedUser].info.userId andContent:self.sendComNoteView.textView.text];
+//    [self sendTrendWithUserID:2 andContent:self.sendComNoteView.textView.text];
     [self sendComNoteViewBack];
     //self.sendComNoteView.textView.text = nil;
 }
@@ -157,7 +157,7 @@
 {
 //    [self.activityView startAnimating];
     NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/uploadMove";
-    //    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?CId=%d&userid=%d&ccContent=#%@#",testID,userID,content]];
+//    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?CId=%d&userid=%d&ccContent=#%@#",testID,userID,content]];
     NSURL *url = [NSURL URLWithString:urlAsString];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     [urlRequest setTimeoutInterval:30.0f];
@@ -222,7 +222,7 @@
             [weakself.trendsTableView.infiniteScrollingView stopAnimating];
             if (_page!=0)
             {
-                NSArray *temArray = [[[TrendManage alloc] init] getUrlTrends:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listMove?userId=%d&score=%d", 1, _page]];//[User sharedUser].info.userId];
+                NSArray *temArray = [[[TrendManage alloc] init] getUrlTrends:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listMove?userId=%d&score=%d",[User sharedUser].info.userId, _page]];
                 if (temArray.count<10)
                 {
                     _page = 0;
@@ -279,7 +279,28 @@
     TrendModel *model = [self.trendsArray objectAtIndex:[indexPath row]];
     
     lableSwitchCell.userName.text = model.userName;
-    lableSwitchCell.timeLabel.text = [NSString stringWithFormat:@"%.f分钟前", model.hmtime];
+    if (model.hmtime<=60)
+    {
+        if (model.hmtime<1)
+        {
+            lableSwitchCell.timeLabel.text = @"刚刚";
+        }
+        else
+        {
+            lableSwitchCell.timeLabel.text = [NSString stringWithFormat:@"%.f分钟前", model.hmtime];
+        }
+    }
+    else if (model.hmtime<=60*24 && model.hmtime>60)
+    {
+        int hour = model.hmtime/60;
+        lableSwitchCell.timeLabel.text = [NSString stringWithFormat:@"%.d小时前", hour];
+    }
+    else if(model.hmtime>60*24)
+    {
+        int day = model.hmtime/(60*24);
+        lableSwitchCell.timeLabel.text = [NSString stringWithFormat:@"%.d天前", day];
+    }
+    lableSwitchCell.timeLabel.textAlignment = NSTextAlignmentRight;
     [lableSwitchCell.userHeadImage setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://121.197.10.159:8080/images/user/%@", model.userPortrait]]];
     lableSwitchCell.userHeadImage.layer.cornerRadius = 20;
     [lableSwitchCell.headBtn addTarget:self action:@selector(touchHead) forControlEvents:UIControlEventTouchUpInside];
