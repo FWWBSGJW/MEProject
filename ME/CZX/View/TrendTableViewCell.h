@@ -10,6 +10,7 @@
 
 @interface TrendTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
+@property (strong, nonatomic) IBOutlet UIButton *headBtn;
 
 @property (strong, nonatomic) IBOutlet UILabel *userName;
 @property (strong, nonatomic) IBOutlet UIImageView *userHeadImage;

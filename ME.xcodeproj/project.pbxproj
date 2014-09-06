@@ -13,65 +13,6 @@
 		5B2376D81988C15500805500 /* CDownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2376D71988C15500805500 /* CDownloadViewController.m */; };
 		5B2376DC198B60CD00805500 /* CNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B2376DA198B60CD00805500 /* CNoteCell.m */; };
 		5B2376DD198B60CD00805500 /* CNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B2376DB198B60CD00805500 /* CNoteCell.xib */; };
-		5B3459F519A1C1ED008FC104 /* JJCommentManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B34599A19A1C1ED008FC104 /* JJCommentManage.m */; };
-		5B3459F619A1C1ED008FC104 /* JJDirectionManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B34599C19A1C1ED008FC104 /* JJDirectionManage.m */; };
-		5B3459F719A1C1ED008FC104 /* JJSubjectManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B34599E19A1C1ED008FC104 /* JJSubjectManage.m */; };
-		5B3459F819A1C1ED008FC104 /* JJTestModelManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459A019A1C1ED008FC104 /* JJTestModelManage.m */; };
-		5B3459F919A1C1ED008FC104 /* RankingManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459A219A1C1ED008FC104 /* RankingManage.m */; };
-		5B3459FA19A1C1ED008FC104 /* SingleTestManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459A419A1C1ED008FC104 /* SingleTestManage.m */; };
-		5B3459FB19A1C1ED008FC104 /* TestDirectionManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459A619A1C1ED008FC104 /* TestDirectionManage.m */; };
-		5B3459FC19A1C1ED008FC104 /* FightModelBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459A919A1C1ED008FC104 /* FightModelBaseClass.m */; };
-		5B3459FD19A1C1ED008FC104 /* JJCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459AB19A1C1ED008FC104 /* JJCommentModel.m */; };
-		5B3459FE19A1C1ED008FC104 /* JJDirectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459AD19A1C1ED008FC104 /* JJDirectionModel.m */; };
-		5B3459FF19A1C1ED008FC104 /* JJSubjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459AF19A1C1ED008FC104 /* JJSubjectModel.m */; };
-		5B345A0019A1C1ED008FC104 /* JJTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459B119A1C1ED008FC104 /* JJTestModel.m */; };
-		5B345A0119A1C1ED008FC104 /* RangkingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459B319A1C1ED008FC104 /* RangkingModel.m */; };
-		5B345A0219A1C1ED008FC104 /* TestDirectionBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459B519A1C1ED008FC104 /* TestDirectionBaseClass.m */; };
-		5B345A0319A1C1ED008FC104 /* testModelBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459B719A1C1ED008FC104 /* testModelBaseClass.m */; };
-		5B345A0419A1C1ED008FC104 /* UserIntegralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459B919A1C1ED008FC104 /* UserIntegralModel.m */; };
-		5B345A0519A1C1ED008FC104 /* JJBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459BC19A1C1ED008FC104 /* JJBaseViewController.m */; };
-		5B345A0619A1C1ED008FC104 /* JJBaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459BD19A1C1ED008FC104 /* JJBaseViewController.xib */; };
-		5B345A0719A1C1ED008FC104 /* JJFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459BF19A1C1ED008FC104 /* JJFinishViewController.m */; };
-		5B345A0819A1C1ED008FC104 /* JJFinishViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459C019A1C1ED008FC104 /* JJFinishViewController.xib */; };
-		5B345A0919A1C1ED008FC104 /* JJMeasurementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459C219A1C1ED008FC104 /* JJMeasurementViewController.m */; };
-		5B345A0A19A1C1ED008FC104 /* JJMeasurementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459C319A1C1ED008FC104 /* JJMeasurementViewController.xib */; };
-		5B345A0B19A1C1ED008FC104 /* JJTestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459C519A1C1ED008FC104 /* JJTestDetailViewController.m */; };
-		5B345A0C19A1C1ED008FC104 /* JJTestDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459C619A1C1ED008FC104 /* JJTestDetailViewController.xib */; };
-		5B345A0D19A1C1ED008FC104 /* JJTestDivideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459C819A1C1ED008FC104 /* JJTestDivideViewController.m */; };
-		5B345A0E19A1C1ED008FC104 /* JJTestDivideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459C919A1C1ED008FC104 /* JJTestDivideViewController.xib */; };
-		5B345A0F19A1C1ED008FC104 /* JJTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459CB19A1C1ED008FC104 /* JJTestViewController.m */; };
-		5B345A1019A1C1ED008FC104 /* JJTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459CC19A1C1ED008FC104 /* JJTestViewController.xib */; };
-		5B345A1119A1C1ED008FC104 /* RankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459CE19A1C1ED008FC104 /* RankingViewController.m */; };
-		5B345A1219A1C1ED008FC104 /* RankingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459CF19A1C1ED008FC104 /* RankingViewController.xib */; };
-		5B345A1319A1C1ED008FC104 /* ReviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459D119A1C1ED008FC104 /* ReviewController.m */; };
-		5B345A1419A1C1ED008FC104 /* ShakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459D319A1C1ED008FC104 /* ShakeViewController.m */; };
-		5B345A1519A1C1ED008FC104 /* ShakeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459D419A1C1ED008FC104 /* ShakeViewController.xib */; };
-		5B345A1619A1C1ED008FC104 /* SubjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459D619A1C1ED008FC104 /* SubjectController.m */; };
-		5B345A1719A1C1ED008FC104 /* WrongSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459D819A1C1ED008FC104 /* WrongSubjectViewController.m */; };
-		5B345A1819A1C1ED008FC104 /* JJTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459DB19A1C1ED008FC104 /* JJTestTableViewCell.m */; };
-		5B345A1919A1C1ED008FC104 /* JJTestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459DC19A1C1ED008FC104 /* JJTestTableViewCell.xib */; };
-		5B345A1A19A1C1ED008FC104 /* ScoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3459DE19A1C1ED008FC104 /* ScoreTableViewCell.m */; };
-		5B345A1B19A1C1ED008FC104 /* ScoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459DF19A1C1ED008FC104 /* ScoreTableViewCell.xib */; };
-		5B345A1C19A1C1ED008FC104 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459E119A1C1ED008FC104 /* back@2x.png */; };
-		5B345A1D19A1C1ED008FC104 /* buy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459E219A1C1ED008FC104 /* buy@2x.png */; };
-		5B345A1E19A1C1ED008FC104 /* buyUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459E319A1C1ED008FC104 /* buyUp@2x.png */; };
-		5B345A1F19A1C1ED008FC104 /* cmt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459E419A1C1ED008FC104 /* cmt@2x.png */; };
-		5B345A2019A1C1ED008FC104 /* comment.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459E519A1C1ED008FC104 /* comment.plist */; };
-		5B345A2119A1C1ED008FC104 /* commentUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459E619A1C1ED008FC104 /* commentUp@2x.png */; };
-		5B345A2219A1C1ED008FC104 /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459E719A1C1ED008FC104 /* down@2x.png */; };
-		5B345A2319A1C1ED008FC104 /* downUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459E819A1C1ED008FC104 /* downUp@2x.png */; };
-		5B345A2419A1C1ED008FC104 /* like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459E919A1C1ED008FC104 /* like@2x.png */; };
-		5B345A2519A1C1ED008FC104 /* likeUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459EA19A1C1ED008FC104 /* likeUp@2x.png */; };
-		5B345A2619A1C1ED008FC104 /* phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459EB19A1C1ED008FC104 /* phone@2x.png */; };
-		5B345A2719A1C1ED008FC104 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459EC19A1C1ED008FC104 /* share@2x.png */; };
-		5B345A2819A1C1ED008FC104 /* shareUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459ED19A1C1ED008FC104 /* shareUp@2x.png */; };
-		5B345A2919A1C1ED008FC104 /* test@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459EE19A1C1ED008FC104 /* test@2x.png */; };
-		5B345A2A19A1C1ED008FC104 /* testImg0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459EF19A1C1ED008FC104 /* testImg0@2x.png */; };
-		5B345A2B19A1C1ED008FC104 /* testImg1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459F019A1C1ED008FC104 /* testImg1@2x.png */; };
-		5B345A2C19A1C1ED008FC104 /* testImg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459F119A1C1ED008FC104 /* testImg2@2x.png */; };
-		5B345A2D19A1C1ED008FC104 /* testUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459F219A1C1ED008FC104 /* testUp@2x.png */; };
-		5B345A2E19A1C1ED008FC104 /* up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459F319A1C1ED008FC104 /* up@2x.png */; };
-		5B345A2F19A1C1ED008FC104 /* upUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B3459F419A1C1ED008FC104 /* upUp@2x.png */; };
 		5B345ADB19A2153F008FC104 /* EditDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B345A9619A2153F008FC104 /* EditDescriptionViewController.m */; };
 		5B345ADC19A2153F008FC104 /* EditTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B345A9819A2153F008FC104 /* EditTableViewController.m */; };
 		5B345ADD19A2153F008FC104 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B345A9919A2153F008FC104 /* female.png */; };
@@ -319,6 +260,75 @@
 		5BFDD7C2198606870034CE0B /* cNote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFDD7BD198606870034CE0B /* cNote@2x.png */; };
 		5BFDD7C3198606870034CE0B /* cStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFDD7BE198606870034CE0B /* cStar@2x.png */; };
 		5BFDD7C4198606870034CE0B /* cStarFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFDD7BF198606870034CE0B /* cStarFull@2x.png */; };
+		ABCB4BD019B9DAC30052C3DF /* JJCommentManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B6619B9DAC30052C3DF /* JJCommentManage.m */; };
+		ABCB4BD119B9DAC30052C3DF /* JJDirectionManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B6819B9DAC30052C3DF /* JJDirectionManage.m */; };
+		ABCB4BD219B9DAC30052C3DF /* JJSubjectManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B6A19B9DAC30052C3DF /* JJSubjectManage.m */; };
+		ABCB4BD319B9DAC30052C3DF /* JJTestModelManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B6C19B9DAC30052C3DF /* JJTestModelManage.m */; };
+		ABCB4BD419B9DAC30052C3DF /* RankingManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B6E19B9DAC30052C3DF /* RankingManage.m */; };
+		ABCB4BD519B9DAC30052C3DF /* SingleTestManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B7019B9DAC30052C3DF /* SingleTestManage.m */; };
+		ABCB4BD619B9DAC30052C3DF /* TestDirectionManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B7219B9DAC30052C3DF /* TestDirectionManage.m */; };
+		ABCB4BD719B9DAC30052C3DF /* TrendManage.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B7419B9DAC30052C3DF /* TrendManage.m */; };
+		ABCB4BD819B9DAC30052C3DF /* FightModelBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B7719B9DAC30052C3DF /* FightModelBaseClass.m */; };
+		ABCB4BD919B9DAC30052C3DF /* JJCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B7919B9DAC30052C3DF /* JJCommentModel.m */; };
+		ABCB4BDA19B9DAC30052C3DF /* JJDirectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B7B19B9DAC30052C3DF /* JJDirectionModel.m */; };
+		ABCB4BDB19B9DAC30052C3DF /* JJSubjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B7D19B9DAC30052C3DF /* JJSubjectModel.m */; };
+		ABCB4BDC19B9DAC30052C3DF /* JJTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B7F19B9DAC30052C3DF /* JJTestModel.m */; };
+		ABCB4BDD19B9DAC30052C3DF /* RangkingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B8119B9DAC30052C3DF /* RangkingModel.m */; };
+		ABCB4BDE19B9DAC30052C3DF /* TestDirectionBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B8319B9DAC30052C3DF /* TestDirectionBaseClass.m */; };
+		ABCB4BDF19B9DAC30052C3DF /* testModelBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B8519B9DAC30052C3DF /* testModelBaseClass.m */; };
+		ABCB4BE019B9DAC30052C3DF /* TrendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B8719B9DAC30052C3DF /* TrendModel.m */; };
+		ABCB4BE119B9DAC30052C3DF /* UserIntegralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B8919B9DAC30052C3DF /* UserIntegralModel.m */; };
+		ABCB4BE219B9DAC30052C3DF /* JJBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B8C19B9DAC30052C3DF /* JJBaseViewController.m */; };
+		ABCB4BE319B9DAC30052C3DF /* JJBaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4B8D19B9DAC30052C3DF /* JJBaseViewController.xib */; };
+		ABCB4BE419B9DAC30052C3DF /* JJFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B8F19B9DAC30052C3DF /* JJFinishViewController.m */; };
+		ABCB4BE519B9DAC30052C3DF /* JJFinishViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4B9019B9DAC30052C3DF /* JJFinishViewController.xib */; };
+		ABCB4BE619B9DAC30052C3DF /* JJMeasurementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B9219B9DAC30052C3DF /* JJMeasurementViewController.m */; };
+		ABCB4BE719B9DAC30052C3DF /* JJMeasurementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4B9319B9DAC30052C3DF /* JJMeasurementViewController.xib */; };
+		ABCB4BE819B9DAC30052C3DF /* JJTestDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B9519B9DAC30052C3DF /* JJTestDetailViewController.m */; };
+		ABCB4BE919B9DAC30052C3DF /* JJTestDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4B9619B9DAC30052C3DF /* JJTestDetailViewController.xib */; };
+		ABCB4BEA19B9DAC30052C3DF /* JJTestDivideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B9819B9DAC30052C3DF /* JJTestDivideViewController.m */; };
+		ABCB4BEB19B9DAC30052C3DF /* JJTestDivideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4B9919B9DAC30052C3DF /* JJTestDivideViewController.xib */; };
+		ABCB4BEC19B9DAC30052C3DF /* JJTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B9B19B9DAC30052C3DF /* JJTestViewController.m */; };
+		ABCB4BED19B9DAC30052C3DF /* JJTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4B9C19B9DAC30052C3DF /* JJTestViewController.xib */; };
+		ABCB4BEE19B9DAC30052C3DF /* RankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4B9E19B9DAC30052C3DF /* RankingViewController.m */; };
+		ABCB4BEF19B9DAC30052C3DF /* RankingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4B9F19B9DAC30052C3DF /* RankingViewController.xib */; };
+		ABCB4BF019B9DAC30052C3DF /* ReviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4BA119B9DAC30052C3DF /* ReviewController.m */; };
+		ABCB4BF119B9DAC30052C3DF /* ShakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4BA319B9DAC30052C3DF /* ShakeViewController.m */; };
+		ABCB4BF219B9DAC30052C3DF /* ShakeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BA419B9DAC30052C3DF /* ShakeViewController.xib */; };
+		ABCB4BF319B9DAC30052C3DF /* SubjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4BA619B9DAC30052C3DF /* SubjectController.m */; };
+		ABCB4BF419B9DAC30052C3DF /* TrendDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4BA819B9DAC30052C3DF /* TrendDetailViewController.m */; };
+		ABCB4BF519B9DAC30052C3DF /* TrendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4BAA19B9DAC30052C3DF /* TrendsViewController.m */; };
+		ABCB4BF619B9DAC30052C3DF /* WrongSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4BAC19B9DAC30052C3DF /* WrongSubjectViewController.m */; };
+		ABCB4BF719B9DAC30052C3DF /* JJTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4BAF19B9DAC30052C3DF /* JJTestTableViewCell.m */; };
+		ABCB4BF819B9DAC30052C3DF /* JJTestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BB019B9DAC30052C3DF /* JJTestTableViewCell.xib */; };
+		ABCB4BF919B9DAC30052C3DF /* ScoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4BB219B9DAC30052C3DF /* ScoreTableViewCell.m */; };
+		ABCB4BFA19B9DAC30052C3DF /* ScoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BB319B9DAC30052C3DF /* ScoreTableViewCell.xib */; };
+		ABCB4BFB19B9DAC30052C3DF /* TrendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCB4BB519B9DAC30052C3DF /* TrendTableViewCell.m */; };
+		ABCB4BFC19B9DAC30052C3DF /* TrendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BB619B9DAC30052C3DF /* TrendTableViewCell.xib */; };
+		ABCB4BFD19B9DAC30052C3DF /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BB819B9DAC30052C3DF /* back@2x.png */; };
+		ABCB4BFE19B9DAC30052C3DF /* buy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BB919B9DAC30052C3DF /* buy@2x.png */; };
+		ABCB4BFF19B9DAC30052C3DF /* buyUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BBA19B9DAC30052C3DF /* buyUp@2x.png */; };
+		ABCB4C0019B9DAC30052C3DF /* cmt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BBB19B9DAC30052C3DF /* cmt@2x.png */; };
+		ABCB4C0119B9DAC30052C3DF /* comment.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BBC19B9DAC30052C3DF /* comment.plist */; };
+		ABCB4C0219B9DAC30052C3DF /* commentUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BBD19B9DAC30052C3DF /* commentUp@2x.png */; };
+		ABCB4C0319B9DAC30052C3DF /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BBE19B9DAC30052C3DF /* down@2x.png */; };
+		ABCB4C0419B9DAC30052C3DF /* downUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BBF19B9DAC30052C3DF /* downUp@2x.png */; };
+		ABCB4C0519B9DAC30052C3DF /* Ilike@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BC019B9DAC30052C3DF /* Ilike@2x.png */; };
+		ABCB4C0619B9DAC30052C3DF /* IlikeUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BC119B9DAC30052C3DF /* IlikeUp@2x.png */; };
+		ABCB4C0719B9DAC30052C3DF /* like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BC219B9DAC30052C3DF /* like@2x.png */; };
+		ABCB4C0819B9DAC30052C3DF /* likeUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BC319B9DAC30052C3DF /* likeUp@2x.png */; };
+		ABCB4C0919B9DAC30052C3DF /* phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BC419B9DAC30052C3DF /* phone@2x.png */; };
+		ABCB4C0A19B9DAC30052C3DF /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BC519B9DAC30052C3DF /* share@2x.png */; };
+		ABCB4C0B19B9DAC30052C3DF /* shareUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BC619B9DAC30052C3DF /* shareUp@2x.png */; };
+		ABCB4C0C19B9DAC30052C3DF /* test@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BC719B9DAC30052C3DF /* test@2x.png */; };
+		ABCB4C0D19B9DAC30052C3DF /* testImg0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BC819B9DAC30052C3DF /* testImg0@2x.png */; };
+		ABCB4C0E19B9DAC30052C3DF /* testImg1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BC919B9DAC30052C3DF /* testImg1@2x.png */; };
+		ABCB4C0F19B9DAC30052C3DF /* testImg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BCA19B9DAC30052C3DF /* testImg2@2x.png */; };
+		ABCB4C1019B9DAC30052C3DF /* testUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BCB19B9DAC30052C3DF /* testUp@2x.png */; };
+		ABCB4C1119B9DAC30052C3DF /* up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BCC19B9DAC30052C3DF /* up@2x.png */; };
+		ABCB4C1219B9DAC30052C3DF /* upUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BCD19B9DAC30052C3DF /* upUp@2x.png */; };
+		ABCB4C1319B9DAC30052C3DF /* write@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BCE19B9DAC30052C3DF /* write@2x.png */; };
+		ABCB4C1419B9DAC30052C3DF /* writeUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ABCB4BCF19B9DAC30052C3DF /* writeUp@2x.png */; };
 		B0B0AD1E197D525300B29458 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B0AD1D197D525300B29458 /* UIViewAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
@@ -343,94 +353,6 @@
 		5B2376D9198B60CD00805500 /* CNoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNoteCell.h; sourceTree = "<group>"; };
 		5B2376DA198B60CD00805500 /* CNoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNoteCell.m; sourceTree = "<group>"; };
 		5B2376DB198B60CD00805500 /* CNoteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNoteCell.xib; sourceTree = "<group>"; };
-		5B34599919A1C1ED008FC104 /* JJCommentManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJCommentManage.h; sourceTree = "<group>"; };
-		5B34599A19A1C1ED008FC104 /* JJCommentManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJCommentManage.m; sourceTree = "<group>"; };
-		5B34599B19A1C1ED008FC104 /* JJDirectionManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJDirectionManage.h; sourceTree = "<group>"; };
-		5B34599C19A1C1ED008FC104 /* JJDirectionManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJDirectionManage.m; sourceTree = "<group>"; };
-		5B34599D19A1C1ED008FC104 /* JJSubjectManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJSubjectManage.h; sourceTree = "<group>"; };
-		5B34599E19A1C1ED008FC104 /* JJSubjectManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJSubjectManage.m; sourceTree = "<group>"; };
-		5B34599F19A1C1ED008FC104 /* JJTestModelManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestModelManage.h; sourceTree = "<group>"; };
-		5B3459A019A1C1ED008FC104 /* JJTestModelManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestModelManage.m; sourceTree = "<group>"; };
-		5B3459A119A1C1ED008FC104 /* RankingManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingManage.h; sourceTree = "<group>"; };
-		5B3459A219A1C1ED008FC104 /* RankingManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingManage.m; sourceTree = "<group>"; };
-		5B3459A319A1C1ED008FC104 /* SingleTestManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTestManage.h; sourceTree = "<group>"; };
-		5B3459A419A1C1ED008FC104 /* SingleTestManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleTestManage.m; sourceTree = "<group>"; };
-		5B3459A519A1C1ED008FC104 /* TestDirectionManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDirectionManage.h; sourceTree = "<group>"; };
-		5B3459A619A1C1ED008FC104 /* TestDirectionManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDirectionManage.m; sourceTree = "<group>"; };
-		5B3459A819A1C1ED008FC104 /* FightModelBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FightModelBaseClass.h; sourceTree = "<group>"; };
-		5B3459A919A1C1ED008FC104 /* FightModelBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FightModelBaseClass.m; sourceTree = "<group>"; };
-		5B3459AA19A1C1ED008FC104 /* JJCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJCommentModel.h; sourceTree = "<group>"; };
-		5B3459AB19A1C1ED008FC104 /* JJCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJCommentModel.m; sourceTree = "<group>"; };
-		5B3459AC19A1C1ED008FC104 /* JJDirectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJDirectionModel.h; sourceTree = "<group>"; };
-		5B3459AD19A1C1ED008FC104 /* JJDirectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJDirectionModel.m; sourceTree = "<group>"; };
-		5B3459AE19A1C1ED008FC104 /* JJSubjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJSubjectModel.h; sourceTree = "<group>"; };
-		5B3459AF19A1C1ED008FC104 /* JJSubjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJSubjectModel.m; sourceTree = "<group>"; };
-		5B3459B019A1C1ED008FC104 /* JJTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestModel.h; sourceTree = "<group>"; };
-		5B3459B119A1C1ED008FC104 /* JJTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestModel.m; sourceTree = "<group>"; };
-		5B3459B219A1C1ED008FC104 /* RangkingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangkingModel.h; sourceTree = "<group>"; };
-		5B3459B319A1C1ED008FC104 /* RangkingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangkingModel.m; sourceTree = "<group>"; };
-		5B3459B419A1C1ED008FC104 /* TestDirectionBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDirectionBaseClass.h; sourceTree = "<group>"; };
-		5B3459B519A1C1ED008FC104 /* TestDirectionBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDirectionBaseClass.m; sourceTree = "<group>"; };
-		5B3459B619A1C1ED008FC104 /* testModelBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testModelBaseClass.h; sourceTree = "<group>"; };
-		5B3459B719A1C1ED008FC104 /* testModelBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testModelBaseClass.m; sourceTree = "<group>"; };
-		5B3459B819A1C1ED008FC104 /* UserIntegralModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserIntegralModel.h; sourceTree = "<group>"; };
-		5B3459B919A1C1ED008FC104 /* UserIntegralModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserIntegralModel.m; sourceTree = "<group>"; };
-		5B3459BB19A1C1ED008FC104 /* JJBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJBaseViewController.h; sourceTree = "<group>"; };
-		5B3459BC19A1C1ED008FC104 /* JJBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJBaseViewController.m; sourceTree = "<group>"; };
-		5B3459BD19A1C1ED008FC104 /* JJBaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJBaseViewController.xib; sourceTree = "<group>"; };
-		5B3459BE19A1C1ED008FC104 /* JJFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJFinishViewController.h; sourceTree = "<group>"; };
-		5B3459BF19A1C1ED008FC104 /* JJFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJFinishViewController.m; sourceTree = "<group>"; };
-		5B3459C019A1C1ED008FC104 /* JJFinishViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJFinishViewController.xib; sourceTree = "<group>"; };
-		5B3459C119A1C1ED008FC104 /* JJMeasurementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJMeasurementViewController.h; sourceTree = "<group>"; };
-		5B3459C219A1C1ED008FC104 /* JJMeasurementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJMeasurementViewController.m; sourceTree = "<group>"; };
-		5B3459C319A1C1ED008FC104 /* JJMeasurementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJMeasurementViewController.xib; sourceTree = "<group>"; };
-		5B3459C419A1C1ED008FC104 /* JJTestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestDetailViewController.h; sourceTree = "<group>"; };
-		5B3459C519A1C1ED008FC104 /* JJTestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestDetailViewController.m; sourceTree = "<group>"; };
-		5B3459C619A1C1ED008FC104 /* JJTestDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestDetailViewController.xib; sourceTree = "<group>"; };
-		5B3459C719A1C1ED008FC104 /* JJTestDivideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestDivideViewController.h; sourceTree = "<group>"; };
-		5B3459C819A1C1ED008FC104 /* JJTestDivideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestDivideViewController.m; sourceTree = "<group>"; };
-		5B3459C919A1C1ED008FC104 /* JJTestDivideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestDivideViewController.xib; sourceTree = "<group>"; };
-		5B3459CA19A1C1ED008FC104 /* JJTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestViewController.h; sourceTree = "<group>"; };
-		5B3459CB19A1C1ED008FC104 /* JJTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestViewController.m; sourceTree = "<group>"; };
-		5B3459CC19A1C1ED008FC104 /* JJTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestViewController.xib; sourceTree = "<group>"; };
-		5B3459CD19A1C1ED008FC104 /* RankingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingViewController.h; sourceTree = "<group>"; };
-		5B3459CE19A1C1ED008FC104 /* RankingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingViewController.m; sourceTree = "<group>"; };
-		5B3459CF19A1C1ED008FC104 /* RankingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingViewController.xib; sourceTree = "<group>"; };
-		5B3459D019A1C1ED008FC104 /* ReviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewController.h; sourceTree = "<group>"; };
-		5B3459D119A1C1ED008FC104 /* ReviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewController.m; sourceTree = "<group>"; };
-		5B3459D219A1C1ED008FC104 /* ShakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShakeViewController.h; sourceTree = "<group>"; };
-		5B3459D319A1C1ED008FC104 /* ShakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShakeViewController.m; sourceTree = "<group>"; };
-		5B3459D419A1C1ED008FC104 /* ShakeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShakeViewController.xib; sourceTree = "<group>"; };
-		5B3459D519A1C1ED008FC104 /* SubjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectController.h; sourceTree = "<group>"; };
-		5B3459D619A1C1ED008FC104 /* SubjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectController.m; sourceTree = "<group>"; };
-		5B3459D719A1C1ED008FC104 /* WrongSubjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WrongSubjectViewController.h; sourceTree = "<group>"; };
-		5B3459D819A1C1ED008FC104 /* WrongSubjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WrongSubjectViewController.m; sourceTree = "<group>"; };
-		5B3459DA19A1C1ED008FC104 /* JJTestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestTableViewCell.h; sourceTree = "<group>"; };
-		5B3459DB19A1C1ED008FC104 /* JJTestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestTableViewCell.m; sourceTree = "<group>"; };
-		5B3459DC19A1C1ED008FC104 /* JJTestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestTableViewCell.xib; sourceTree = "<group>"; };
-		5B3459DD19A1C1ED008FC104 /* ScoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreTableViewCell.h; sourceTree = "<group>"; };
-		5B3459DE19A1C1ED008FC104 /* ScoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreTableViewCell.m; sourceTree = "<group>"; };
-		5B3459DF19A1C1ED008FC104 /* ScoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreTableViewCell.xib; sourceTree = "<group>"; };
-		5B3459E119A1C1ED008FC104 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
-		5B3459E219A1C1ED008FC104 /* buy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy@2x.png"; sourceTree = "<group>"; };
-		5B3459E319A1C1ED008FC104 /* buyUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buyUp@2x.png"; sourceTree = "<group>"; };
-		5B3459E419A1C1ED008FC104 /* cmt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cmt@2x.png"; sourceTree = "<group>"; };
-		5B3459E519A1C1ED008FC104 /* comment.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = comment.plist; sourceTree = "<group>"; };
-		5B3459E619A1C1ED008FC104 /* commentUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "commentUp@2x.png"; sourceTree = "<group>"; };
-		5B3459E719A1C1ED008FC104 /* down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@2x.png"; sourceTree = "<group>"; };
-		5B3459E819A1C1ED008FC104 /* downUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downUp@2x.png"; sourceTree = "<group>"; };
-		5B3459E919A1C1ED008FC104 /* like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like@2x.png"; sourceTree = "<group>"; };
-		5B3459EA19A1C1ED008FC104 /* likeUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "likeUp@2x.png"; sourceTree = "<group>"; };
-		5B3459EB19A1C1ED008FC104 /* phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone@2x.png"; sourceTree = "<group>"; };
-		5B3459EC19A1C1ED008FC104 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
-		5B3459ED19A1C1ED008FC104 /* shareUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareUp@2x.png"; sourceTree = "<group>"; };
-		5B3459EE19A1C1ED008FC104 /* test@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test@2x.png"; sourceTree = "<group>"; };
-		5B3459EF19A1C1ED008FC104 /* testImg0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "testImg0@2x.png"; sourceTree = "<group>"; };
-		5B3459F019A1C1ED008FC104 /* testImg1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "testImg1@2x.png"; sourceTree = "<group>"; };
-		5B3459F119A1C1ED008FC104 /* testImg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "testImg2@2x.png"; sourceTree = "<group>"; };
-		5B3459F219A1C1ED008FC104 /* testUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "testUp@2x.png"; sourceTree = "<group>"; };
-		5B3459F319A1C1ED008FC104 /* up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up@2x.png"; sourceTree = "<group>"; };
-		5B3459F419A1C1ED008FC104 /* upUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upUp@2x.png"; sourceTree = "<group>"; };
 		5B345A9519A2153F008FC104 /* EditDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditDescriptionViewController.h; sourceTree = "<group>"; };
 		5B345A9619A2153F008FC104 /* EditDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditDescriptionViewController.m; sourceTree = "<group>"; };
 		5B345A9719A2153F008FC104 /* EditTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTableViewController.h; sourceTree = "<group>"; };
@@ -787,6 +709,109 @@
 		5BFDD7BD198606870034CE0B /* cNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cNote@2x.png"; sourceTree = "<group>"; };
 		5BFDD7BE198606870034CE0B /* cStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cStar@2x.png"; sourceTree = "<group>"; };
 		5BFDD7BF198606870034CE0B /* cStarFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cStarFull@2x.png"; sourceTree = "<group>"; };
+		ABCB4B6519B9DAC30052C3DF /* JJCommentManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJCommentManage.h; sourceTree = "<group>"; };
+		ABCB4B6619B9DAC30052C3DF /* JJCommentManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJCommentManage.m; sourceTree = "<group>"; };
+		ABCB4B6719B9DAC30052C3DF /* JJDirectionManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJDirectionManage.h; sourceTree = "<group>"; };
+		ABCB4B6819B9DAC30052C3DF /* JJDirectionManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJDirectionManage.m; sourceTree = "<group>"; };
+		ABCB4B6919B9DAC30052C3DF /* JJSubjectManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJSubjectManage.h; sourceTree = "<group>"; };
+		ABCB4B6A19B9DAC30052C3DF /* JJSubjectManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJSubjectManage.m; sourceTree = "<group>"; };
+		ABCB4B6B19B9DAC30052C3DF /* JJTestModelManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestModelManage.h; sourceTree = "<group>"; };
+		ABCB4B6C19B9DAC30052C3DF /* JJTestModelManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestModelManage.m; sourceTree = "<group>"; };
+		ABCB4B6D19B9DAC30052C3DF /* RankingManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingManage.h; sourceTree = "<group>"; };
+		ABCB4B6E19B9DAC30052C3DF /* RankingManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingManage.m; sourceTree = "<group>"; };
+		ABCB4B6F19B9DAC30052C3DF /* SingleTestManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTestManage.h; sourceTree = "<group>"; };
+		ABCB4B7019B9DAC30052C3DF /* SingleTestManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleTestManage.m; sourceTree = "<group>"; };
+		ABCB4B7119B9DAC30052C3DF /* TestDirectionManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDirectionManage.h; sourceTree = "<group>"; };
+		ABCB4B7219B9DAC30052C3DF /* TestDirectionManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDirectionManage.m; sourceTree = "<group>"; };
+		ABCB4B7319B9DAC30052C3DF /* TrendManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendManage.h; sourceTree = "<group>"; };
+		ABCB4B7419B9DAC30052C3DF /* TrendManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendManage.m; sourceTree = "<group>"; };
+		ABCB4B7619B9DAC30052C3DF /* FightModelBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FightModelBaseClass.h; sourceTree = "<group>"; };
+		ABCB4B7719B9DAC30052C3DF /* FightModelBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FightModelBaseClass.m; sourceTree = "<group>"; };
+		ABCB4B7819B9DAC30052C3DF /* JJCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJCommentModel.h; sourceTree = "<group>"; };
+		ABCB4B7919B9DAC30052C3DF /* JJCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJCommentModel.m; sourceTree = "<group>"; };
+		ABCB4B7A19B9DAC30052C3DF /* JJDirectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJDirectionModel.h; sourceTree = "<group>"; };
+		ABCB4B7B19B9DAC30052C3DF /* JJDirectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJDirectionModel.m; sourceTree = "<group>"; };
+		ABCB4B7C19B9DAC30052C3DF /* JJSubjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJSubjectModel.h; sourceTree = "<group>"; };
+		ABCB4B7D19B9DAC30052C3DF /* JJSubjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJSubjectModel.m; sourceTree = "<group>"; };
+		ABCB4B7E19B9DAC30052C3DF /* JJTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestModel.h; sourceTree = "<group>"; };
+		ABCB4B7F19B9DAC30052C3DF /* JJTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestModel.m; sourceTree = "<group>"; };
+		ABCB4B8019B9DAC30052C3DF /* RangkingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangkingModel.h; sourceTree = "<group>"; };
+		ABCB4B8119B9DAC30052C3DF /* RangkingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangkingModel.m; sourceTree = "<group>"; };
+		ABCB4B8219B9DAC30052C3DF /* TestDirectionBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDirectionBaseClass.h; sourceTree = "<group>"; };
+		ABCB4B8319B9DAC30052C3DF /* TestDirectionBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDirectionBaseClass.m; sourceTree = "<group>"; };
+		ABCB4B8419B9DAC30052C3DF /* testModelBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testModelBaseClass.h; sourceTree = "<group>"; };
+		ABCB4B8519B9DAC30052C3DF /* testModelBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testModelBaseClass.m; sourceTree = "<group>"; };
+		ABCB4B8619B9DAC30052C3DF /* TrendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendModel.h; sourceTree = "<group>"; };
+		ABCB4B8719B9DAC30052C3DF /* TrendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendModel.m; sourceTree = "<group>"; };
+		ABCB4B8819B9DAC30052C3DF /* UserIntegralModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserIntegralModel.h; sourceTree = "<group>"; };
+		ABCB4B8919B9DAC30052C3DF /* UserIntegralModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserIntegralModel.m; sourceTree = "<group>"; };
+		ABCB4B8B19B9DAC30052C3DF /* JJBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJBaseViewController.h; sourceTree = "<group>"; };
+		ABCB4B8C19B9DAC30052C3DF /* JJBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJBaseViewController.m; sourceTree = "<group>"; };
+		ABCB4B8D19B9DAC30052C3DF /* JJBaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJBaseViewController.xib; sourceTree = "<group>"; };
+		ABCB4B8E19B9DAC30052C3DF /* JJFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJFinishViewController.h; sourceTree = "<group>"; };
+		ABCB4B8F19B9DAC30052C3DF /* JJFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJFinishViewController.m; sourceTree = "<group>"; };
+		ABCB4B9019B9DAC30052C3DF /* JJFinishViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJFinishViewController.xib; sourceTree = "<group>"; };
+		ABCB4B9119B9DAC30052C3DF /* JJMeasurementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJMeasurementViewController.h; sourceTree = "<group>"; };
+		ABCB4B9219B9DAC30052C3DF /* JJMeasurementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJMeasurementViewController.m; sourceTree = "<group>"; };
+		ABCB4B9319B9DAC30052C3DF /* JJMeasurementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJMeasurementViewController.xib; sourceTree = "<group>"; };
+		ABCB4B9419B9DAC30052C3DF /* JJTestDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestDetailViewController.h; sourceTree = "<group>"; };
+		ABCB4B9519B9DAC30052C3DF /* JJTestDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestDetailViewController.m; sourceTree = "<group>"; };
+		ABCB4B9619B9DAC30052C3DF /* JJTestDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestDetailViewController.xib; sourceTree = "<group>"; };
+		ABCB4B9719B9DAC30052C3DF /* JJTestDivideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestDivideViewController.h; sourceTree = "<group>"; };
+		ABCB4B9819B9DAC30052C3DF /* JJTestDivideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestDivideViewController.m; sourceTree = "<group>"; };
+		ABCB4B9919B9DAC30052C3DF /* JJTestDivideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestDivideViewController.xib; sourceTree = "<group>"; };
+		ABCB4B9A19B9DAC30052C3DF /* JJTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestViewController.h; sourceTree = "<group>"; };
+		ABCB4B9B19B9DAC30052C3DF /* JJTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestViewController.m; sourceTree = "<group>"; };
+		ABCB4B9C19B9DAC30052C3DF /* JJTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestViewController.xib; sourceTree = "<group>"; };
+		ABCB4B9D19B9DAC30052C3DF /* RankingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingViewController.h; sourceTree = "<group>"; };
+		ABCB4B9E19B9DAC30052C3DF /* RankingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingViewController.m; sourceTree = "<group>"; };
+		ABCB4B9F19B9DAC30052C3DF /* RankingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingViewController.xib; sourceTree = "<group>"; };
+		ABCB4BA019B9DAC30052C3DF /* ReviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewController.h; sourceTree = "<group>"; };
+		ABCB4BA119B9DAC30052C3DF /* ReviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewController.m; sourceTree = "<group>"; };
+		ABCB4BA219B9DAC30052C3DF /* ShakeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShakeViewController.h; sourceTree = "<group>"; };
+		ABCB4BA319B9DAC30052C3DF /* ShakeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShakeViewController.m; sourceTree = "<group>"; };
+		ABCB4BA419B9DAC30052C3DF /* ShakeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShakeViewController.xib; sourceTree = "<group>"; };
+		ABCB4BA519B9DAC30052C3DF /* SubjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectController.h; sourceTree = "<group>"; };
+		ABCB4BA619B9DAC30052C3DF /* SubjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectController.m; sourceTree = "<group>"; };
+		ABCB4BA719B9DAC30052C3DF /* TrendDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendDetailViewController.h; sourceTree = "<group>"; };
+		ABCB4BA819B9DAC30052C3DF /* TrendDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendDetailViewController.m; sourceTree = "<group>"; };
+		ABCB4BA919B9DAC30052C3DF /* TrendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendsViewController.h; sourceTree = "<group>"; };
+		ABCB4BAA19B9DAC30052C3DF /* TrendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendsViewController.m; sourceTree = "<group>"; };
+		ABCB4BAB19B9DAC30052C3DF /* WrongSubjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WrongSubjectViewController.h; sourceTree = "<group>"; };
+		ABCB4BAC19B9DAC30052C3DF /* WrongSubjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WrongSubjectViewController.m; sourceTree = "<group>"; };
+		ABCB4BAE19B9DAC30052C3DF /* JJTestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJTestTableViewCell.h; sourceTree = "<group>"; };
+		ABCB4BAF19B9DAC30052C3DF /* JJTestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJTestTableViewCell.m; sourceTree = "<group>"; };
+		ABCB4BB019B9DAC30052C3DF /* JJTestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JJTestTableViewCell.xib; sourceTree = "<group>"; };
+		ABCB4BB119B9DAC30052C3DF /* ScoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreTableViewCell.h; sourceTree = "<group>"; };
+		ABCB4BB219B9DAC30052C3DF /* ScoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreTableViewCell.m; sourceTree = "<group>"; };
+		ABCB4BB319B9DAC30052C3DF /* ScoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreTableViewCell.xib; sourceTree = "<group>"; };
+		ABCB4BB419B9DAC30052C3DF /* TrendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendTableViewCell.h; sourceTree = "<group>"; };
+		ABCB4BB519B9DAC30052C3DF /* TrendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendTableViewCell.m; sourceTree = "<group>"; };
+		ABCB4BB619B9DAC30052C3DF /* TrendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrendTableViewCell.xib; sourceTree = "<group>"; };
+		ABCB4BB819B9DAC30052C3DF /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
+		ABCB4BB919B9DAC30052C3DF /* buy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy@2x.png"; sourceTree = "<group>"; };
+		ABCB4BBA19B9DAC30052C3DF /* buyUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buyUp@2x.png"; sourceTree = "<group>"; };
+		ABCB4BBB19B9DAC30052C3DF /* cmt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cmt@2x.png"; sourceTree = "<group>"; };
+		ABCB4BBC19B9DAC30052C3DF /* comment.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = comment.plist; sourceTree = "<group>"; };
+		ABCB4BBD19B9DAC30052C3DF /* commentUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "commentUp@2x.png"; sourceTree = "<group>"; };
+		ABCB4BBE19B9DAC30052C3DF /* down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@2x.png"; sourceTree = "<group>"; };
+		ABCB4BBF19B9DAC30052C3DF /* downUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downUp@2x.png"; sourceTree = "<group>"; };
+		ABCB4BC019B9DAC30052C3DF /* Ilike@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ilike@2x.png"; sourceTree = "<group>"; };
+		ABCB4BC119B9DAC30052C3DF /* IlikeUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IlikeUp@2x.png"; sourceTree = "<group>"; };
+		ABCB4BC219B9DAC30052C3DF /* like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like@2x.png"; sourceTree = "<group>"; };
+		ABCB4BC319B9DAC30052C3DF /* likeUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "likeUp@2x.png"; sourceTree = "<group>"; };
+		ABCB4BC419B9DAC30052C3DF /* phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone@2x.png"; sourceTree = "<group>"; };
+		ABCB4BC519B9DAC30052C3DF /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
+		ABCB4BC619B9DAC30052C3DF /* shareUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareUp@2x.png"; sourceTree = "<group>"; };
+		ABCB4BC719B9DAC30052C3DF /* test@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test@2x.png"; sourceTree = "<group>"; };
+		ABCB4BC819B9DAC30052C3DF /* testImg0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "testImg0@2x.png"; sourceTree = "<group>"; };
+		ABCB4BC919B9DAC30052C3DF /* testImg1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "testImg1@2x.png"; sourceTree = "<group>"; };
+		ABCB4BCA19B9DAC30052C3DF /* testImg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "testImg2@2x.png"; sourceTree = "<group>"; };
+		ABCB4BCB19B9DAC30052C3DF /* testUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "testUp@2x.png"; sourceTree = "<group>"; };
+		ABCB4BCC19B9DAC30052C3DF /* up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up@2x.png"; sourceTree = "<group>"; };
+		ABCB4BCD19B9DAC30052C3DF /* upUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upUp@2x.png"; sourceTree = "<group>"; };
+		ABCB4BCE19B9DAC30052C3DF /* write@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write@2x.png"; sourceTree = "<group>"; };
+		ABCB4BCF19B9DAC30052C3DF /* writeUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "writeUp@2x.png"; sourceTree = "<group>"; };
 		B0B0AD1C197D525300B29458 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
 		B0B0AD1D197D525300B29458 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -837,141 +862,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5B34599719A1C1ED008FC104 /* CZX */ = {
-			isa = PBXGroup;
-			children = (
-				5B34599819A1C1ED008FC104 /* Manage */,
-				5B3459A719A1C1ED008FC104 /* Model */,
-				5B3459BA19A1C1ED008FC104 /* VC */,
-				5B3459D919A1C1ED008FC104 /* View */,
-				5B3459E019A1C1ED008FC104 /* 素材 */,
-			);
-			path = CZX;
-			sourceTree = "<group>";
-		};
-		5B34599819A1C1ED008FC104 /* Manage */ = {
-			isa = PBXGroup;
-			children = (
-				5B34599919A1C1ED008FC104 /* JJCommentManage.h */,
-				5B34599A19A1C1ED008FC104 /* JJCommentManage.m */,
-				5B34599B19A1C1ED008FC104 /* JJDirectionManage.h */,
-				5B34599C19A1C1ED008FC104 /* JJDirectionManage.m */,
-				5B34599D19A1C1ED008FC104 /* JJSubjectManage.h */,
-				5B34599E19A1C1ED008FC104 /* JJSubjectManage.m */,
-				5B34599F19A1C1ED008FC104 /* JJTestModelManage.h */,
-				5B3459A019A1C1ED008FC104 /* JJTestModelManage.m */,
-				5B3459A119A1C1ED008FC104 /* RankingManage.h */,
-				5B3459A219A1C1ED008FC104 /* RankingManage.m */,
-				5B3459A319A1C1ED008FC104 /* SingleTestManage.h */,
-				5B3459A419A1C1ED008FC104 /* SingleTestManage.m */,
-				5B3459A519A1C1ED008FC104 /* TestDirectionManage.h */,
-				5B3459A619A1C1ED008FC104 /* TestDirectionManage.m */,
-			);
-			path = Manage;
-			sourceTree = "<group>";
-		};
-		5B3459A719A1C1ED008FC104 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				5B3459A819A1C1ED008FC104 /* FightModelBaseClass.h */,
-				5B3459A919A1C1ED008FC104 /* FightModelBaseClass.m */,
-				5B3459AA19A1C1ED008FC104 /* JJCommentModel.h */,
-				5B3459AB19A1C1ED008FC104 /* JJCommentModel.m */,
-				5B3459AC19A1C1ED008FC104 /* JJDirectionModel.h */,
-				5B3459AD19A1C1ED008FC104 /* JJDirectionModel.m */,
-				5B3459AE19A1C1ED008FC104 /* JJSubjectModel.h */,
-				5B3459AF19A1C1ED008FC104 /* JJSubjectModel.m */,
-				5B3459B019A1C1ED008FC104 /* JJTestModel.h */,
-				5B3459B119A1C1ED008FC104 /* JJTestModel.m */,
-				5B3459B219A1C1ED008FC104 /* RangkingModel.h */,
-				5B3459B319A1C1ED008FC104 /* RangkingModel.m */,
-				5B3459B419A1C1ED008FC104 /* TestDirectionBaseClass.h */,
-				5B3459B519A1C1ED008FC104 /* TestDirectionBaseClass.m */,
-				5B3459B619A1C1ED008FC104 /* testModelBaseClass.h */,
-				5B3459B719A1C1ED008FC104 /* testModelBaseClass.m */,
-				5B3459B819A1C1ED008FC104 /* UserIntegralModel.h */,
-				5B3459B919A1C1ED008FC104 /* UserIntegralModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		5B3459BA19A1C1ED008FC104 /* VC */ = {
-			isa = PBXGroup;
-			children = (
-				5B3459BB19A1C1ED008FC104 /* JJBaseViewController.h */,
-				5B3459BC19A1C1ED008FC104 /* JJBaseViewController.m */,
-				5B3459BD19A1C1ED008FC104 /* JJBaseViewController.xib */,
-				5B3459BE19A1C1ED008FC104 /* JJFinishViewController.h */,
-				5B3459BF19A1C1ED008FC104 /* JJFinishViewController.m */,
-				5B3459C019A1C1ED008FC104 /* JJFinishViewController.xib */,
-				5B3459C119A1C1ED008FC104 /* JJMeasurementViewController.h */,
-				5B3459C219A1C1ED008FC104 /* JJMeasurementViewController.m */,
-				5B3459C319A1C1ED008FC104 /* JJMeasurementViewController.xib */,
-				5B3459C419A1C1ED008FC104 /* JJTestDetailViewController.h */,
-				5B3459C519A1C1ED008FC104 /* JJTestDetailViewController.m */,
-				5B3459C619A1C1ED008FC104 /* JJTestDetailViewController.xib */,
-				5B3459C719A1C1ED008FC104 /* JJTestDivideViewController.h */,
-				5B3459C819A1C1ED008FC104 /* JJTestDivideViewController.m */,
-				5B3459C919A1C1ED008FC104 /* JJTestDivideViewController.xib */,
-				5B3459CA19A1C1ED008FC104 /* JJTestViewController.h */,
-				5B3459CB19A1C1ED008FC104 /* JJTestViewController.m */,
-				5B3459CC19A1C1ED008FC104 /* JJTestViewController.xib */,
-				5B3459CD19A1C1ED008FC104 /* RankingViewController.h */,
-				5B3459CE19A1C1ED008FC104 /* RankingViewController.m */,
-				5B3459CF19A1C1ED008FC104 /* RankingViewController.xib */,
-				5B3459D019A1C1ED008FC104 /* ReviewController.h */,
-				5B3459D119A1C1ED008FC104 /* ReviewController.m */,
-				5B3459D219A1C1ED008FC104 /* ShakeViewController.h */,
-				5B3459D319A1C1ED008FC104 /* ShakeViewController.m */,
-				5B3459D419A1C1ED008FC104 /* ShakeViewController.xib */,
-				5B3459D519A1C1ED008FC104 /* SubjectController.h */,
-				5B3459D619A1C1ED008FC104 /* SubjectController.m */,
-				5B3459D719A1C1ED008FC104 /* WrongSubjectViewController.h */,
-				5B3459D819A1C1ED008FC104 /* WrongSubjectViewController.m */,
-			);
-			path = VC;
-			sourceTree = "<group>";
-		};
-		5B3459D919A1C1ED008FC104 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				5B3459DA19A1C1ED008FC104 /* JJTestTableViewCell.h */,
-				5B3459DB19A1C1ED008FC104 /* JJTestTableViewCell.m */,
-				5B3459DC19A1C1ED008FC104 /* JJTestTableViewCell.xib */,
-				5B3459DD19A1C1ED008FC104 /* ScoreTableViewCell.h */,
-				5B3459DE19A1C1ED008FC104 /* ScoreTableViewCell.m */,
-				5B3459DF19A1C1ED008FC104 /* ScoreTableViewCell.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		5B3459E019A1C1ED008FC104 /* 素材 */ = {
-			isa = PBXGroup;
-			children = (
-				5B3459E119A1C1ED008FC104 /* back@2x.png */,
-				5B3459E219A1C1ED008FC104 /* buy@2x.png */,
-				5B3459E319A1C1ED008FC104 /* buyUp@2x.png */,
-				5B3459E419A1C1ED008FC104 /* cmt@2x.png */,
-				5B3459E519A1C1ED008FC104 /* comment.plist */,
-				5B3459E619A1C1ED008FC104 /* commentUp@2x.png */,
-				5B3459E719A1C1ED008FC104 /* down@2x.png */,
-				5B3459E819A1C1ED008FC104 /* downUp@2x.png */,
-				5B3459E919A1C1ED008FC104 /* like@2x.png */,
-				5B3459EA19A1C1ED008FC104 /* likeUp@2x.png */,
-				5B3459EB19A1C1ED008FC104 /* phone@2x.png */,
-				5B3459EC19A1C1ED008FC104 /* share@2x.png */,
-				5B3459ED19A1C1ED008FC104 /* shareUp@2x.png */,
-				5B3459EE19A1C1ED008FC104 /* test@2x.png */,
-				5B3459EF19A1C1ED008FC104 /* testImg0@2x.png */,
-				5B3459F019A1C1ED008FC104 /* testImg1@2x.png */,
-				5B3459F119A1C1ED008FC104 /* testImg2@2x.png */,
-				5B3459F219A1C1ED008FC104 /* testUp@2x.png */,
-				5B3459F319A1C1ED008FC104 /* up@2x.png */,
-				5B3459F419A1C1ED008FC104 /* upUp@2x.png */,
-			);
-			path = "素材";
-			sourceTree = "<group>";
-		};
 		5B345A9419A2153F008FC104 /* ZHZ */ = {
 			isa = PBXGroup;
 			children = (
@@ -1141,9 +1031,9 @@
 		5B717E9C1978FD9600F1359C /* ME */ = {
 			isa = PBXGroup;
 			children = (
+				ABCB4B6319B9DAC30052C3DF /* CZX */,
 				5B345A9419A2153F008FC104 /* ZHZ */,
 				5B717FE5197905C800F1359C /* CC */,
-				5B34599719A1C1ED008FC104 /* CZX */,
 				5B717EAE1978FD9600F1359C /* Images.xcassets */,
 				5B717E9D1978FD9600F1359C /* Supporting Files */,
 			);
@@ -1713,6 +1603,156 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		ABCB4B6319B9DAC30052C3DF /* CZX */ = {
+			isa = PBXGroup;
+			children = (
+				ABCB4B6419B9DAC30052C3DF /* Manage */,
+				ABCB4B7519B9DAC30052C3DF /* Model */,
+				ABCB4B8A19B9DAC30052C3DF /* VC */,
+				ABCB4BAD19B9DAC30052C3DF /* View */,
+				ABCB4BB719B9DAC30052C3DF /* 素材 */,
+			);
+			path = CZX;
+			sourceTree = "<group>";
+		};
+		ABCB4B6419B9DAC30052C3DF /* Manage */ = {
+			isa = PBXGroup;
+			children = (
+				ABCB4B6519B9DAC30052C3DF /* JJCommentManage.h */,
+				ABCB4B6619B9DAC30052C3DF /* JJCommentManage.m */,
+				ABCB4B6719B9DAC30052C3DF /* JJDirectionManage.h */,
+				ABCB4B6819B9DAC30052C3DF /* JJDirectionManage.m */,
+				ABCB4B6919B9DAC30052C3DF /* JJSubjectManage.h */,
+				ABCB4B6A19B9DAC30052C3DF /* JJSubjectManage.m */,
+				ABCB4B6B19B9DAC30052C3DF /* JJTestModelManage.h */,
+				ABCB4B6C19B9DAC30052C3DF /* JJTestModelManage.m */,
+				ABCB4B6D19B9DAC30052C3DF /* RankingManage.h */,
+				ABCB4B6E19B9DAC30052C3DF /* RankingManage.m */,
+				ABCB4B6F19B9DAC30052C3DF /* SingleTestManage.h */,
+				ABCB4B7019B9DAC30052C3DF /* SingleTestManage.m */,
+				ABCB4B7119B9DAC30052C3DF /* TestDirectionManage.h */,
+				ABCB4B7219B9DAC30052C3DF /* TestDirectionManage.m */,
+				ABCB4B7319B9DAC30052C3DF /* TrendManage.h */,
+				ABCB4B7419B9DAC30052C3DF /* TrendManage.m */,
+			);
+			path = Manage;
+			sourceTree = "<group>";
+		};
+		ABCB4B7519B9DAC30052C3DF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ABCB4B7619B9DAC30052C3DF /* FightModelBaseClass.h */,
+				ABCB4B7719B9DAC30052C3DF /* FightModelBaseClass.m */,
+				ABCB4B7819B9DAC30052C3DF /* JJCommentModel.h */,
+				ABCB4B7919B9DAC30052C3DF /* JJCommentModel.m */,
+				ABCB4B7A19B9DAC30052C3DF /* JJDirectionModel.h */,
+				ABCB4B7B19B9DAC30052C3DF /* JJDirectionModel.m */,
+				ABCB4B7C19B9DAC30052C3DF /* JJSubjectModel.h */,
+				ABCB4B7D19B9DAC30052C3DF /* JJSubjectModel.m */,
+				ABCB4B7E19B9DAC30052C3DF /* JJTestModel.h */,
+				ABCB4B7F19B9DAC30052C3DF /* JJTestModel.m */,
+				ABCB4B8019B9DAC30052C3DF /* RangkingModel.h */,
+				ABCB4B8119B9DAC30052C3DF /* RangkingModel.m */,
+				ABCB4B8219B9DAC30052C3DF /* TestDirectionBaseClass.h */,
+				ABCB4B8319B9DAC30052C3DF /* TestDirectionBaseClass.m */,
+				ABCB4B8419B9DAC30052C3DF /* testModelBaseClass.h */,
+				ABCB4B8519B9DAC30052C3DF /* testModelBaseClass.m */,
+				ABCB4B8619B9DAC30052C3DF /* TrendModel.h */,
+				ABCB4B8719B9DAC30052C3DF /* TrendModel.m */,
+				ABCB4B8819B9DAC30052C3DF /* UserIntegralModel.h */,
+				ABCB4B8919B9DAC30052C3DF /* UserIntegralModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ABCB4B8A19B9DAC30052C3DF /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				ABCB4B8B19B9DAC30052C3DF /* JJBaseViewController.h */,
+				ABCB4B8C19B9DAC30052C3DF /* JJBaseViewController.m */,
+				ABCB4B8D19B9DAC30052C3DF /* JJBaseViewController.xib */,
+				ABCB4B8E19B9DAC30052C3DF /* JJFinishViewController.h */,
+				ABCB4B8F19B9DAC30052C3DF /* JJFinishViewController.m */,
+				ABCB4B9019B9DAC30052C3DF /* JJFinishViewController.xib */,
+				ABCB4B9119B9DAC30052C3DF /* JJMeasurementViewController.h */,
+				ABCB4B9219B9DAC30052C3DF /* JJMeasurementViewController.m */,
+				ABCB4B9319B9DAC30052C3DF /* JJMeasurementViewController.xib */,
+				ABCB4B9419B9DAC30052C3DF /* JJTestDetailViewController.h */,
+				ABCB4B9519B9DAC30052C3DF /* JJTestDetailViewController.m */,
+				ABCB4B9619B9DAC30052C3DF /* JJTestDetailViewController.xib */,
+				ABCB4B9719B9DAC30052C3DF /* JJTestDivideViewController.h */,
+				ABCB4B9819B9DAC30052C3DF /* JJTestDivideViewController.m */,
+				ABCB4B9919B9DAC30052C3DF /* JJTestDivideViewController.xib */,
+				ABCB4B9A19B9DAC30052C3DF /* JJTestViewController.h */,
+				ABCB4B9B19B9DAC30052C3DF /* JJTestViewController.m */,
+				ABCB4B9C19B9DAC30052C3DF /* JJTestViewController.xib */,
+				ABCB4B9D19B9DAC30052C3DF /* RankingViewController.h */,
+				ABCB4B9E19B9DAC30052C3DF /* RankingViewController.m */,
+				ABCB4B9F19B9DAC30052C3DF /* RankingViewController.xib */,
+				ABCB4BA019B9DAC30052C3DF /* ReviewController.h */,
+				ABCB4BA119B9DAC30052C3DF /* ReviewController.m */,
+				ABCB4BA219B9DAC30052C3DF /* ShakeViewController.h */,
+				ABCB4BA319B9DAC30052C3DF /* ShakeViewController.m */,
+				ABCB4BA419B9DAC30052C3DF /* ShakeViewController.xib */,
+				ABCB4BA519B9DAC30052C3DF /* SubjectController.h */,
+				ABCB4BA619B9DAC30052C3DF /* SubjectController.m */,
+				ABCB4BA719B9DAC30052C3DF /* TrendDetailViewController.h */,
+				ABCB4BA819B9DAC30052C3DF /* TrendDetailViewController.m */,
+				ABCB4BA919B9DAC30052C3DF /* TrendsViewController.h */,
+				ABCB4BAA19B9DAC30052C3DF /* TrendsViewController.m */,
+				ABCB4BAB19B9DAC30052C3DF /* WrongSubjectViewController.h */,
+				ABCB4BAC19B9DAC30052C3DF /* WrongSubjectViewController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		ABCB4BAD19B9DAC30052C3DF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ABCB4BAE19B9DAC30052C3DF /* JJTestTableViewCell.h */,
+				ABCB4BAF19B9DAC30052C3DF /* JJTestTableViewCell.m */,
+				ABCB4BB019B9DAC30052C3DF /* JJTestTableViewCell.xib */,
+				ABCB4BB119B9DAC30052C3DF /* ScoreTableViewCell.h */,
+				ABCB4BB219B9DAC30052C3DF /* ScoreTableViewCell.m */,
+				ABCB4BB319B9DAC30052C3DF /* ScoreTableViewCell.xib */,
+				ABCB4BB419B9DAC30052C3DF /* TrendTableViewCell.h */,
+				ABCB4BB519B9DAC30052C3DF /* TrendTableViewCell.m */,
+				ABCB4BB619B9DAC30052C3DF /* TrendTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ABCB4BB719B9DAC30052C3DF /* 素材 */ = {
+			isa = PBXGroup;
+			children = (
+				ABCB4BB819B9DAC30052C3DF /* back@2x.png */,
+				ABCB4BB919B9DAC30052C3DF /* buy@2x.png */,
+				ABCB4BBA19B9DAC30052C3DF /* buyUp@2x.png */,
+				ABCB4BBB19B9DAC30052C3DF /* cmt@2x.png */,
+				ABCB4BBC19B9DAC30052C3DF /* comment.plist */,
+				ABCB4BBD19B9DAC30052C3DF /* commentUp@2x.png */,
+				ABCB4BBE19B9DAC30052C3DF /* down@2x.png */,
+				ABCB4BBF19B9DAC30052C3DF /* downUp@2x.png */,
+				ABCB4BC019B9DAC30052C3DF /* Ilike@2x.png */,
+				ABCB4BC119B9DAC30052C3DF /* IlikeUp@2x.png */,
+				ABCB4BC219B9DAC30052C3DF /* like@2x.png */,
+				ABCB4BC319B9DAC30052C3DF /* likeUp@2x.png */,
+				ABCB4BC419B9DAC30052C3DF /* phone@2x.png */,
+				ABCB4BC519B9DAC30052C3DF /* share@2x.png */,
+				ABCB4BC619B9DAC30052C3DF /* shareUp@2x.png */,
+				ABCB4BC719B9DAC30052C3DF /* test@2x.png */,
+				ABCB4BC819B9DAC30052C3DF /* testImg0@2x.png */,
+				ABCB4BC919B9DAC30052C3DF /* testImg1@2x.png */,
+				ABCB4BCA19B9DAC30052C3DF /* testImg2@2x.png */,
+				ABCB4BCB19B9DAC30052C3DF /* testUp@2x.png */,
+				ABCB4BCC19B9DAC30052C3DF /* up@2x.png */,
+				ABCB4BCD19B9DAC30052C3DF /* upUp@2x.png */,
+				ABCB4BCE19B9DAC30052C3DF /* write@2x.png */,
+				ABCB4BCF19B9DAC30052C3DF /* writeUp@2x.png */,
+			);
+			path = "素材";
+			sourceTree = "<group>";
+		};
 		B0B0AD1B197D525300B29458 /* ViewAddition */ = {
 			isa = PBXGroup;
 			children = (
@@ -1800,120 +1840,131 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B7180DA197905C900F1359C /* CCourse.xib in Resources */,
-				5B345A2019A1C1ED008FC104 /* comment.plist in Resources */,
 				5BFDD7C0198606870034CE0B /* cDownload@2x.png in Resources */,
 				5B345AFC19A2153F008FC104 /* ValueTableViewCell.xib in Resources */,
-				5B345A2119A1C1ED008FC104 /* commentUp@2x.png in Resources */,
 				5B71809B197905C900F1359C /* details_definition_bg@2x.png in Resources */,
 				5B832DA019924260003DFF8B /* Resource.bundle in Resources */,
 				5B717EAF1978FD9600F1359C /* Images.xcassets in Resources */,
+				ABCB4C1219B9DAC30052C3DF /* upUp@2x.png in Resources */,
+				ABCB4C0C19B9DAC30052C3DF /* test@2x.png in Resources */,
+				ABCB4C0519B9DAC30052C3DF /* Ilike@2x.png in Resources */,
 				5B772976199A67F8000BB61E /* 排行榜@2x.png in Resources */,
 				5B772971199A67F8000BB61E /* 更多.png in Resources */,
 				5B7180CA197905C900F1359C /* details_up_select.png in Resources */,
-				5B345A2F19A1C1ED008FC104 /* upUp@2x.png in Resources */,
 				5B7180C2197905C900F1359C /* details_start_select.png in Resources */,
 				5B7180C4197905C900F1359C /* details_stop.png in Resources */,
 				5B7180A4197905C900F1359C /* details_down_select.png in Resources */,
 				5B345AF519A2153F008FC104 /* ProgressCell.xib in Resources */,
 				5B772977199A67F8000BB61E /* 搜索.png in Resources */,
 				5B718081197905C900F1359C /* directionDefault.png in Resources */,
+				ABCB4BE319B9DAC30052C3DF /* JJBaseViewController.xib in Resources */,
 				5B7180A0197905C900F1359C /* details_definition_select.png in Resources */,
 				5B7180AF197905C900F1359C /* details_mute@2x.png in Resources */,
-				5B345A0819A1C1ED008FC104 /* JJFinishViewController.xib in Resources */,
 				5B7180A2197905C900F1359C /* details_down.png in Resources */,
 				5B7180C8197905C900F1359C /* details_up.png in Resources */,
 				5B7180BA197905C900F1359C /* details_progress_select.png in Resources */,
+				ABCB4BFC19B9DAC30052C3DF /* TrendTableViewCell.xib in Resources */,
 				5B7180CD197905C900F1359C /* promo_full.mp4 in Resources */,
 				5B71809F197905C900F1359C /* details_definition_bg_line@2x.png in Resources */,
-				5B345A2219A1C1ED008FC104 /* down@2x.png in Resources */,
 				5B7180AA197905C900F1359C /* details_hd_select.png in Resources */,
 				5B77297A199A67F8000BB61E /* 寻找工作@2x.png in Resources */,
-				5B345A2B19A1C1ED008FC104 /* testImg1@2x.png in Resources */,
 				5B7180A8197905C900F1359C /* details_hd.png in Resources */,
 				5B718095197905C900F1359C /* details_button_back@2x.png in Resources */,
-				5B345A2519A1C1ED008FC104 /* likeUp@2x.png in Resources */,
+				ABCB4BF219B9DAC30052C3DF /* ShakeViewController.xib in Resources */,
 				5BFDD7C2198606870034CE0B /* cNote@2x.png in Resources */,
 				5B717EA11978FD9600F1359C /* InfoPlist.strings in Resources */,
 				5B71809A197905C900F1359C /* details_definition_bg.png in Resources */,
-				5B345A2719A1C1ED008FC104 /* share@2x.png in Resources */,
 				5B77297B199A67F8000BB61E /* 摇一摇.png in Resources */,
 				5B77297E199A7242000BB61E /* TestList.plist in Resources */,
-				5B345A1B19A1C1ED008FC104 /* ScoreTableViewCell.xib in Resources */,
-				5B345A1D19A1C1ED008FC104 /* buy@2x.png in Resources */,
 				5B718091197905C900F1359C /* details_airplay@2x.png in Resources */,
-				5B345A2619A1C1ED008FC104 /* phone@2x.png in Resources */,
 				5B718083197905C900F1359C /* headAd2@2x.png in Resources */,
 				5B718070197905C900F1359C /* cellTag@2x.png in Resources */,
 				5B7180B5197905C900F1359C /* details_ordinary_select@2x.png in Resources */,
-				5B345A1219A1C1ED008FC104 /* RankingViewController.xib in Resources */,
 				5B7180C5197905C900F1359C /* details_stop@2x.png in Resources */,
 				5B772980199A7738000BB61E /* CtimeNum_full.png in Resources */,
+				ABCB4C0919B9DAC30052C3DF /* phone@2x.png in Resources */,
 				5B7180D7197905C900F1359C /* CChapterHead.xib in Resources */,
 				5B345AE419A2153F008FC104 /* ConsumateViewController.xib in Resources */,
+				ABCB4BFA19B9DAC30052C3DF /* ScoreTableViewCell.xib in Resources */,
 				5B345AE019A2153F008FC104 /* maleSelect.png in Resources */,
 				5B231E7D19934F52005A1BA4 /* ExtendViewController.xib in Resources */,
 				5B832DA319924260003DFF8B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
-				5B345A2C19A1C1ED008FC104 /* testImg2@2x.png in Resources */,
 				5B7180AD197905C900F1359C /* details_left@2x.png in Resources */,
+				ABCB4BED19B9DAC30052C3DF /* JJTestViewController.xib in Resources */,
 				5B832DBE19933681003DFF8B /* CMoreActionView.xib in Resources */,
 				5B7180A9197905C900F1359C /* details_hd@2x.png in Resources */,
-				5B345A1C19A1C1ED008FC104 /* back@2x.png in Resources */,
+				ABCB4BEF19B9DAC30052C3DF /* RankingViewController.xib in Resources */,
 				5B718084197905C900F1359C /* headAd3@2x.png in Resources */,
 				5B7180B2197905C900F1359C /* details_ordinary.png in Resources */,
 				5B345AF819A2153F008FC104 /* QATableViewCell.xib in Resources */,
+				ABCB4C1019B9DAC30052C3DF /* testUp@2x.png in Resources */,
 				5BB2534A199E35A2004F3BA7 /* SearchViewController.xib in Resources */,
+				ABCB4C0E19B9DAC30052C3DF /* testImg1@2x.png in Resources */,
 				5B7180DD197905C900F1359C /* CDetailHead.xib in Resources */,
 				5B7180B6197905C900F1359C /* details_Progress of the point.png in Resources */,
 				5B832DB819926EB4003DFF8B /* CdownlordCell.xib in Resources */,
 				5B7180BB197905C900F1359C /* details_progress_select@2x.png in Resources */,
 				5B71809C197905C900F1359C /* details_definition_bg_bg2.png in Resources */,
+				ABCB4BE919B9DAC30052C3DF /* JJTestDetailViewController.xib in Resources */,
+				ABCB4BF819B9DAC30052C3DF /* JJTestTableViewCell.xib in Resources */,
 				5BFDD7C4198606870034CE0B /* cStarFull@2x.png in Resources */,
 				5B772978199A67F8000BB61E /* 搜索@2x.png in Resources */,
 				5B718098197905C900F1359C /* details_definition.png in Resources */,
-				5B345A1E19A1C1ED008FC104 /* buyUp@2x.png in Resources */,
 				5B7180C3197905C900F1359C /* details_start_select@2x.png in Resources */,
 				5B7180C7197905C900F1359C /* details_stop_select@2x.png in Resources */,
 				5B77297C199A67F8000BB61E /* 摇一摇@2x.png in Resources */,
 				5B718097197905C900F1359C /* details_button_back_select@2x.png in Resources */,
 				5B772979199A67F8000BB61E /* 寻找工作.png in Resources */,
 				5B772975199A67F8000BB61E /* 排行榜.png in Resources */,
+				ABCB4C0019B9DAC30052C3DF /* cmt@2x.png in Resources */,
+				ABCB4BFE19B9DAC30052C3DF /* buy@2x.png in Resources */,
+				ABCB4C0219B9DAC30052C3DF /* commentUp@2x.png in Resources */,
+				ABCB4C0319B9DAC30052C3DF /* down@2x.png in Resources */,
 				5B7180D9197905C900F1359C /* CCommentCell.xib in Resources */,
+				ABCB4C1319B9DAC30052C3DF /* write@2x.png in Resources */,
+				ABCB4C1419B9DAC30052C3DF /* writeUp@2x.png in Resources */,
 				5B7180CB197905C900F1359C /* details_up_select@2x.png in Resources */,
 				5B7180A5197905C900F1359C /* details_down_select@2x.png in Resources */,
 				5B718099197905C900F1359C /* details_definition@2x.png in Resources */,
 				5B345AEC19A2153F008FC104 /* RegisterViewController.xib in Resources */,
 				5B7180B1197905C900F1359C /* details_mute_select@2x.png in Resources */,
-				5B345A0A19A1C1ED008FC104 /* JJMeasurementViewController.xib in Resources */,
+				ABCB4C0F19B9DAC30052C3DF /* testImg2@2x.png in Resources */,
+				ABCB4BFD19B9DAC30052C3DF /* back@2x.png in Resources */,
+				ABCB4BFF19B9DAC30052C3DF /* buyUp@2x.png in Resources */,
+				ABCB4C0819B9DAC30052C3DF /* likeUp@2x.png in Resources */,
 				5B718092197905C900F1359C /* details_airplay_select.png in Resources */,
-				5B345A2D19A1C1ED008FC104 /* testUp@2x.png in Resources */,
 				5B2376DD198B60CD00805500 /* CNoteCell.xib in Resources */,
 				5B7180C1197905C900F1359C /* details_start@2x.png in Resources */,
+				ABCB4C1119B9DAC30052C3DF /* up@2x.png in Resources */,
+				ABCB4BE719B9DAC30052C3DF /* JJMeasurementViewController.xib in Resources */,
 				5B718090197905C900F1359C /* details_airplay.png in Resources */,
+				ABCB4C0719B9DAC30052C3DF /* like@2x.png in Resources */,
 				5B7180A7197905C900F1359C /* details_full@2x.png in Resources */,
 				5B345ADF19A2153F008FC104 /* male.png in Resources */,
-				5B345A1519A1C1ED008FC104 /* ShakeViewController.xib in Resources */,
-				5B345A2E19A1C1ED008FC104 /* up@2x.png in Resources */,
 				5B71807D197905C900F1359C /* CpersonNum.png in Resources */,
-				5B345A2819A1C1ED008FC104 /* shareUp@2x.png in Resources */,
+				ABCB4C0B19B9DAC30052C3DF /* shareUp@2x.png in Resources */,
 				5B7180B0197905C900F1359C /* details_mute_select.png in Resources */,
 				5B7180AC197905C900F1359C /* details_left.png in Resources */,
 				5B71807F197905C900F1359C /* CuserPhoto.png in Resources */,
 				5B345ADD19A2153F008FC104 /* female.png in Resources */,
+				ABCB4BE519B9DAC30052C3DF /* JJFinishViewController.xib in Resources */,
 				5B832DC019933B0D003DFF8B /* friends-list.png in Resources */,
-				5B345A0C19A1C1ED008FC104 /* JJTestDetailViewController.xib in Resources */,
 				5B7180C9197905C900F1359C /* details_up@2x.png in Resources */,
 				5B71809E197905C900F1359C /* details_definition_bg_line.png in Resources */,
+				ABCB4BEB19B9DAC30052C3DF /* JJTestDivideViewController.xib in Resources */,
 				5B7180CC197905C900F1359C /* Thumbs.db in Resources */,
 				5B832D9F19924260003DFF8B /* ShareSDKLocalizable.strings in Resources */,
 				5B7180B4197905C900F1359C /* details_ordinary_select.png in Resources */,
 				5B345AF319A2153F008FC104 /* NumCell.xib in Resources */,
+				ABCB4C0A19B9DAC30052C3DF /* share@2x.png in Resources */,
 				5B718094197905C900F1359C /* details_button_back.png in Resources */,
 				5B7180BE197905C900F1359C /* details_sound_select.png in Resources */,
 				5B718093197905C900F1359C /* details_airplay_select@2x.png in Resources */,
 				5B832DA919924260003DFF8B /* ShareSDKFlatShareViewUI.bundle in Resources */,
+				ABCB4C0119B9DAC30052C3DF /* comment.plist in Resources */,
 				5B772A77199BB891000BB61E /* Cbuy@2x.png in Resources */,
 				5B7180C0197905C900F1359C /* details_start.png in Resources */,
-				5B345A2419A1C1ED008FC104 /* like@2x.png in Resources */,
+				ABCB4C0419B9DAC30052C3DF /* downUp@2x.png in Resources */,
 				5B7180B7197905C900F1359C /* details_Progress of the point@2x.png in Resources */,
 				5B71807E197905C900F1359C /* CtimeNum.png in Resources */,
 				5B772974199A67F8000BB61E /* 离线视频@2x.png in Resources */,
@@ -1921,25 +1972,20 @@
 				5B7180A1197905C900F1359C /* details_definition_select@2x.png in Resources */,
 				5B7180B9197905C900F1359C /* details_progress@2x.png in Resources */,
 				5B7180A3197905C900F1359C /* details_down@2x.png in Resources */,
-				5B345A2319A1C1ED008FC104 /* downUp@2x.png in Resources */,
 				5B7180A6197905C900F1359C /* details_full.png in Resources */,
 				5B772973199A67F8000BB61E /* 离线视频.png in Resources */,
 				5B345AF919A2153F008FC104 /* UserInfoCell.xib in Resources */,
-				5B345A1919A1C1ED008FC104 /* JJTestTableViewCell.xib in Resources */,
 				5B7180B8197905C900F1359C /* details_progress.png in Resources */,
 				5B772A74199B9014000BB61E /* PKImageBundle.bundle in Resources */,
-				5B345A0619A1C1ED008FC104 /* JJBaseViewController.xib in Resources */,
 				5B7180AE197905C900F1359C /* details_mute.png in Resources */,
-				5B345A2919A1C1ED008FC104 /* test@2x.png in Resources */,
+				ABCB4C0619B9DAC30052C3DF /* IlikeUp@2x.png in Resources */,
 				5B345ADE19A2153F008FC104 /* femaleSelect.png in Resources */,
 				5B71809D197905C900F1359C /* details_definition_bg_bg2@2x.png in Resources */,
 				5B7180BC197905C900F1359C /* details_sound.png in Resources */,
 				5BFDD7C1198606870034CE0B /* cMessage@2x.png in Resources */,
 				5B772972199A67F8000BB61E /* 更多@2x.png in Resources */,
 				5B345AE619A2153F008FC104 /* LoginViewController.xib in Resources */,
-				5B345A1F19A1C1ED008FC104 /* cmt@2x.png in Resources */,
 				5B345AE119A2153F008FC104 /* User.storyboard in Resources */,
-				5B345A2A19A1C1ED008FC104 /* testImg0@2x.png in Resources */,
 				5B7180BF197905C900F1359C /* details_sound_select@2x.png in Resources */,
 				5B7180B3197905C900F1359C /* details_ordinary@2x.png in Resources */,
 				5BB695D3198012FD00A4E6DE /* SendComNoteView.xib in Resources */,
@@ -1947,10 +1993,9 @@
 				5BFDD7C3198606870034CE0B /* cStar@2x.png in Resources */,
 				5B718096197905C900F1359C /* details_button_back_select.png in Resources */,
 				5B7180BD197905C900F1359C /* details_sound@2x.png in Resources */,
-				5B345A0E19A1C1ED008FC104 /* JJTestDivideViewController.xib in Resources */,
-				5B345A1019A1C1ED008FC104 /* JJTestViewController.xib in Resources */,
 				5B832DA519924260003DFF8B /* WeiboSDK.bundle in Resources */,
 				5B7180C6197905C900F1359C /* details_stop_select.png in Resources */,
+				ABCB4C0D19B9DAC30052C3DF /* testImg0@2x.png in Resources */,
 				5B832DBA1992744F003DFF8B /* flv@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1971,107 +2016,115 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B717F3C1978FE4E00F1359C /* JSONHTTPClient.m in Sources */,
-				5B345A0519A1C1ED008FC104 /* JJBaseViewController.m in Sources */,
 				5B7181261979069500F1359C /* QAViewController.m in Sources */,
+				ABCB4BE119B9DAC30052C3DF /* UserIntegralModel.m in Sources */,
+				ABCB4BE419B9DAC30052C3DF /* JJFinishViewController.m in Sources */,
 				5B718123197905FD00F1359C /* MainViewController.m in Sources */,
 				5B717F491978FE4E00F1359C /* UIButton+WebCache.m in Sources */,
 				5B717F471978FE4E00F1359C /* SDWebImageManager.m in Sources */,
-				5B345A0F19A1C1ED008FC104 /* JJTestViewController.m in Sources */,
 				5B717F2D1978FE4E00F1359C /* AFImageRequestOperation.m in Sources */,
 				5B345AEA19A2153F008FC104 /* UserInfo.m in Sources */,
-				5B3459FB19A1C1ED008FC104 /* TestDirectionManage.m in Sources */,
 				5B71806F197905C900F1359C /* CVideoPlayerController.m in Sources */,
 				5B345AEB19A2153F008FC104 /* RegisterViewController.m in Sources */,
+				ABCB4BEA19B9DAC30052C3DF /* JJTestDivideViewController.m in Sources */,
 				5B345AFE19A2153F008FC104 /* TestCollectionTableViewController.m in Sources */,
-				5B3459F919A1C1ED008FC104 /* RankingManage.m in Sources */,
 				5B717EA71978FD9600F1359C /* AppDelegate.m in Sources */,
 				5B717F3A1978FE4E00F1359C /* NSArray+JSONModel.m in Sources */,
 				5B345ADC19A2153F008FC104 /* EditTableViewController.m in Sources */,
-				5B3459F719A1C1ED008FC104 /* JJSubjectManage.m in Sources */,
-				5B3459FA19A1C1ED008FC104 /* SingleTestManage.m in Sources */,
 				5B717F451978FE4E00F1359C /* SDWebImageDownloader.m in Sources */,
 				5B717F3E1978FE4E00F1359C /* JSONKeyMapper.m in Sources */,
-				5B345A0719A1C1ED008FC104 /* JJFinishViewController.m in Sources */,
 				5B7180D5197905C900F1359C /* DanmakuModel.m in Sources */,
 				5B772960199912FD000BB61E /* GetAndPayModel.m in Sources */,
-				5B345A1A19A1C1ED008FC104 /* ScoreTableViewCell.m in Sources */,
+				ABCB4BE019B9DAC30052C3DF /* TrendModel.m in Sources */,
 				5B2376D81988C15500805500 /* CDownloadViewController.m in Sources */,
 				5B7180DE197905C900F1359C /* DanmakuView.m in Sources */,
+				ABCB4BD119B9DAC30052C3DF /* JJDirectionManage.m in Sources */,
 				5B345AFA19A2153F008FC104 /* UserInfoTableViewCell.m in Sources */,
 				5B717F431978FE4E00F1359C /* SDWebImageCompat.m in Sources */,
 				5B717F301978FE4E00F1359C /* AFPropertyListRequestOperation.m in Sources */,
+				ABCB4BDF19B9DAC30052C3DF /* testModelBaseClass.m in Sources */,
 				5B7180D3197905C900F1359C /* CourseDirection.m in Sources */,
 				5B717F4D1978FE4E00F1359C /* UIImageView+WebCache.m in Sources */,
 				5B345AF619A2153F008FC104 /* ProgressTableViewCell.m in Sources */,
+				ABCB4BD319B9DAC30052C3DF /* JJTestModelManage.m in Sources */,
 				5B345AFB19A2153F008FC104 /* ValueTableViewCell.m in Sources */,
-				5B345A0019A1C1ED008FC104 /* JJTestModel.m in Sources */,
+				ABCB4BE219B9DAC30052C3DF /* JJBaseViewController.m in Sources */,
+				ABCB4BDB19B9DAC30052C3DF /* JJSubjectModel.m in Sources */,
+				ABCB4BDE19B9DAC30052C3DF /* TestDirectionBaseClass.m in Sources */,
 				5B717F5C1979050900F1359C /* DataOC.mm in Sources */,
 				5B717F5E1979050900F1359C /* UIScrollView+SVPullToRefresh.m in Sources */,
-				5B345A1819A1C1ED008FC104 /* JJTestTableViewCell.m in Sources */,
 				5B7180D4197905C900F1359C /* CouseAllDirection.m in Sources */,
 				5B345AF019A2153F008FC104 /* DetailViewController.m in Sources */,
 				5B717EA31978FD9600F1359C /* main.m in Sources */,
 				5B47C64C1990B8AA00BEF436 /* CAlertLabel.m in Sources */,
 				5B717F311978FE4E00F1359C /* AFURLConnectionOperation.m in Sources */,
+				ABCB4BF619B9DAC30052C3DF /* WrongSubjectViewController.m in Sources */,
+				ABCB4BE819B9DAC30052C3DF /* JJTestDetailViewController.m in Sources */,
 				5B717F5D1979050900F1359C /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				5B7180DC197905C900F1359C /* CDetailHead.m in Sources */,
 				5B832DB719926EB4003DFF8B /* CdownlordCell.m in Sources */,
+				ABCB4BDC19B9DAC30052C3DF /* JJTestModel.m in Sources */,
 				5B71806C197905C900F1359C /* CChapterViewController.m in Sources */,
 				5B71806D197905C900F1359C /* CCourseViewController.m in Sources */,
 				5B717F371978FE4E00F1359C /* JSONModelArray.m in Sources */,
+				ABCB4BF919B9DAC30052C3DF /* ScoreTableViewCell.m in Sources */,
 				5B345ADB19A2153F008FC104 /* EditDescriptionViewController.m in Sources */,
 				5B717F411978FE4E00F1359C /* NSData+GIF.m in Sources */,
 				5B345AF719A2153F008FC104 /* QATableViewCell.m in Sources */,
+				ABCB4BD919B9DAC30052C3DF /* JJCommentModel.m in Sources */,
 				5B7180DB197905C900F1359C /* CCourseCell.m in Sources */,
 				5B717F4E1978FE4E00F1359C /* UILabel+dynamicSizeMe.m in Sources */,
+				ABCB4BD019B9DAC30052C3DF /* JJCommentManage.m in Sources */,
 				B0B0AD1E197D525300B29458 /* UIViewAdditions.m in Sources */,
+				ABCB4BEE19B9DAC30052C3DF /* RankingViewController.m in Sources */,
 				5B7180D8197905C900F1359C /* CCommentCell.m in Sources */,
 				5B345AF419A2153F008FC104 /* NumTableViewCell.m in Sources */,
-				5B3459FF19A1C1ED008FC104 /* JJSubjectModel.m in Sources */,
-				5B3459F619A1C1ED008FC104 /* JJDirectionManage.m in Sources */,
 				5B2376DC198B60CD00805500 /* CNoteCell.m in Sources */,
-				5B345A0119A1C1ED008FC104 /* RangkingModel.m in Sources */,
 				5B717F641979054D00F1359C /* UINavigationController+autoRotate.m in Sources */,
 				5B7180D6197905C900F1359C /* CChapterHead.m in Sources */,
 				5B717F4C1978FE4E00F1359C /* UIImage+WebP.m in Sources */,
-				5B345A1719A1C1ED008FC104 /* WrongSubjectViewController.m in Sources */,
 				5B345AE319A2153F008FC104 /* ConsumateViewController.m in Sources */,
 				5B717F421978FE4E00F1359C /* SDImageCache.m in Sources */,
 				5B231E7619933E7F005A1BA4 /* CMoreActionView.m in Sources */,
 				5B345AE219A2153F008FC104 /* VPImageCropperViewController.m in Sources */,
+				ABCB4BD219B9DAC30052C3DF /* JJSubjectManage.m in Sources */,
+				ABCB4BD419B9DAC30052C3DF /* RankingManage.m in Sources */,
 				5B717F351978FE4E00F1359C /* UIImageView+AFNetworking.m in Sources */,
+				ABCB4BEC19B9DAC30052C3DF /* JJTestViewController.m in Sources */,
 				5B345AEE19A2153F008FC104 /* ZDProgressView.m in Sources */,
 				5B345AED19A2153F008FC104 /* UserViewController.m in Sources */,
 				5B345AE919A2153F008FC104 /* ListInfo.m in Sources */,
 				5B231E7C19934F52005A1BA4 /* ExtendViewController.m in Sources */,
 				5BB25349199E35A2004F3BA7 /* SearchViewController.m in Sources */,
+				ABCB4BD619B9DAC30052C3DF /* TestDirectionManage.m in Sources */,
 				5B71806E197905C900F1359C /* CDetailCourseViewController.m in Sources */,
-				5B3459FE19A1C1ED008FC104 /* JJDirectionModel.m in Sources */,
-				5B345A0D19A1C1ED008FC104 /* JJTestDivideViewController.m in Sources */,
-				5B345A1119A1C1ED008FC104 /* RankingViewController.m in Sources */,
 				5B717F4B1978FE4E00F1359C /* UIImage+MultiFormat.m in Sources */,
-				5B345A1419A1C1ED008FC104 /* ShakeViewController.m in Sources */,
 				5B717F461978FE4E00F1359C /* SDWebImageDownloaderOperation.m in Sources */,
+				ABCB4BD819B9DAC30052C3DF /* FightModelBaseClass.m in Sources */,
 				5B717F3B1978FE4E00F1359C /* JSONAPI.m in Sources */,
-				5B345A0B19A1C1ED008FC104 /* JJTestDetailViewController.m in Sources */,
 				5B717F3F1978FE4E00F1359C /* JSONValueTransformer.m in Sources */,
 				5BB25342199E2C1A004F3BA7 /* FindJobViewController.m in Sources */,
+				ABCB4BE619B9DAC30052C3DF /* JJMeasurementViewController.m in Sources */,
+				ABCB4BD719B9DAC30052C3DF /* TrendManage.m in Sources */,
 				5B345AE519A2153F008FC104 /* LoginViewController.m in Sources */,
 				5B717F321978FE4E00F1359C /* AFXMLRequestOperation.m in Sources */,
+				ABCB4BF119B9DAC30052C3DF /* ShakeViewController.m in Sources */,
 				5B717F341978FE4E00F1359C /* NetManager.m in Sources */,
+				ABCB4BF419B9DAC30052C3DF /* TrendDetailViewController.m in Sources */,
 				5B717F5B1979050900F1359C /* DataCenterDeal.mm in Sources */,
 				5B345AF219A2153F008FC104 /* FocusTableViewController.m in Sources */,
 				5B717F381978FE4E00F1359C /* JSONModelClassProperty.m in Sources */,
 				5B717F2E1978FE4E00F1359C /* AFJSONRequestOperation.m in Sources */,
+				ABCB4BF719B9DAC30052C3DF /* JJTestTableViewCell.m in Sources */,
+				ABCB4BF319B9DAC30052C3DF /* SubjectController.m in Sources */,
+				ABCB4BDA19B9DAC30052C3DF /* JJDirectionModel.m in Sources */,
 				5B717F361978FE4E00F1359C /* JSONModel.m in Sources */,
 				5B772963199A38B8000BB61E /* RecommendViewController.m in Sources */,
 				5B717F4F1978FE4E00F1359C /* XLCycleScrollView.m in Sources */,
 				5B717F391978FE4E00F1359C /* JSONModelError.m in Sources */,
-				5B3459FD19A1C1ED008FC104 /* JJCommentModel.m in Sources */,
 				5BACA1CC197D6D7D00E4A387 /* CDSection.m in Sources */,
-				5B345A0419A1C1ED008FC104 /* UserIntegralModel.m in Sources */,
-				5B345A0219A1C1ED008FC104 /* TestDirectionBaseClass.m in Sources */,
 				5B717F2F1978FE4E00F1359C /* AFNetworkActivityIndicatorManager.m in Sources */,
+				ABCB4BF019B9DAC30052C3DF /* ReviewController.m in Sources */,
 				5B717F441978FE4E00F1359C /* SDWebImageDecoder.m in Sources */,
 				5B345AE819A2153F008FC104 /* User.m in Sources */,
 				5BB695D1198012D100A4E6DE /* SendComNoteView.m in Sources */,
@@ -2079,27 +2132,24 @@
 				5B717F3D1978FE4E00F1359C /* JSONModel+networking.m in Sources */,
 				5B717F2C1978FE4E00F1359C /* AFHTTPRequestOperation.m in Sources */,
 				5B345AFD19A2153F008FC104 /* QATableViewController.m in Sources */,
-				5B345A0919A1C1ED008FC104 /* JJMeasurementViewController.m in Sources */,
 				5B717ED31978FE2600F1359C /* JSONKit.m in Sources */,
-				5B3459F519A1C1ED008FC104 /* JJCommentManage.m in Sources */,
 				5B717F331978FE4E00F1359C /* MyHttpClient.m in Sources */,
 				5B717F481978FE4E00F1359C /* SDWebImagePrefetcher.m in Sources */,
 				5B717F401978FE4E00F1359C /* MKAnnotationView+WebCache.m in Sources */,
 				5B717F4A1978FE4E00F1359C /* UIImage+GIF.m in Sources */,
 				5BDA987C19977D3900E6DE4D /* CDownloadModel.m in Sources */,
 				5B345AE719A2153F008FC104 /* OLNetManager.m in Sources */,
+				ABCB4BD519B9DAC30052C3DF /* SingleTestManage.m in Sources */,
 				5B772A75199B9014000BB61E /* PKImagePickerViewController.m in Sources */,
-				5B3459FC19A1C1ED008FC104 /* FightModelBaseClass.m in Sources */,
+				ABCB4BF519B9DAC30052C3DF /* TrendsViewController.m in Sources */,
 				5B345AEF19A2153F008FC104 /* CourseTableViewController.m in Sources */,
 				5BACA1CF197D6F3F00E4A387 /* CDAllSection.m in Sources */,
 				5B717F2B1978FE4E00F1359C /* AFHTTPClient.m in Sources */,
 				5B345AFF19A2153F008FC104 /* UserCenterTableViewController.m in Sources */,
-				5B345A1619A1C1ED008FC104 /* SubjectController.m in Sources */,
-				5B345A0319A1C1ED008FC104 /* testModelBaseClass.m in Sources */,
+				ABCB4BFB19B9DAC30052C3DF /* TrendTableViewCell.m in Sources */,
 				5B772957199900FC000BB61E /* JCRBlurView.m in Sources */,
 				5B345AF119A2153F008FC104 /* FightValueTableViewController.m in Sources */,
-				5B3459F819A1C1ED008FC104 /* JJTestModelManage.m in Sources */,
-				5B345A1319A1C1ED008FC104 /* ReviewController.m in Sources */,
+				ABCB4BDD19B9DAC30052C3DF /* RangkingModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -282,6 +282,7 @@
     lableSwitchCell.timeLabel.text = [NSString stringWithFormat:@"%.f分钟前", model.hmtime];
     [lableSwitchCell.userHeadImage setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://121.197.10.159:8080/images/user/%@", model.userPortrait]]];
     lableSwitchCell.userHeadImage.layer.cornerRadius = 20;
+    [lableSwitchCell.headBtn addTarget:self action:@selector(touchHead) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *trendLabel = [[UILabel alloc] init];
     CGFloat temHeight = [self heightForLabelWithString:model.content];
@@ -307,6 +308,11 @@
 
     
     return lableSwitchCell;
+}
+
+- (void)touchHead
+{
+
 }
 
 - (CGFloat)heightForLabelWithString:(NSString *)text
