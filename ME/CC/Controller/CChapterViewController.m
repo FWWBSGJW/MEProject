@@ -223,6 +223,8 @@ enum MoreActionButton_Tag
     if (!self.tabBarController.tabBar.hidden) {
         self.tabBarController.tabBar.hidden = YES;
     }
+    if(self.navigationController.navigationBar.hidden == YES)
+        self.navigationController.navigationBarHidden = NO;
 }
 
 
@@ -265,16 +267,18 @@ enum MoreActionButton_Tag
 - (void)insertRowAtBottom
 {
     __weak CChapterViewController *weakSelf = self;
-    
+     weakSelf.segmentControl.enabled = NO;
     int64_t delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        
+       
         if (weakSelf.courseChapter.nextCommentPageUrl != nil && self.segmentControl.selectedSegmentIndex == SegementComment) {
+            
             [weakSelf.tableView beginUpdates];
+            
             if (self.segmentControl.selectedSegmentIndex == SegementComment) {
                 NSInteger dataCount = self.courseCommentArray.count;
-                NSLog(@"%@",self.courseCommentArray);
+                //NSLog(@"%@",self.courseCommentArray);
                 [self.courseChapter loadNextPageCourseComment];
                 NSMutableArray *indexPaths = [NSMutableArray arrayWithCapacity:self.courseCommentArray.count-dataCount];
                 for(NSInteger i = dataCount;i < self.courseCommentArray.count;i++){
@@ -288,7 +292,7 @@ enum MoreActionButton_Tag
             
         }
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
-        
+        weakSelf.segmentControl.enabled = YES;
     });
 }
 
@@ -1071,7 +1075,7 @@ enum MoreActionButton_Tag
     //评论
     if ([User sharedUser].info.isLogin) {
         if (self.sendComNoteView.tag == TextViewComment) {
-            NSLog(@"评论---%@",self.sendComNoteView.textView.text);
+            //NSLog(@"评论---%@",self.sendComNoteView.textView.text);
             User *user = [User sharedUser];
             if (user.info.isLogin) {
                 NSInteger userID = user.info.userId;
@@ -1079,7 +1083,7 @@ enum MoreActionButton_Tag
             }
             
         } else if (self.sendComNoteView.tag == TextViewNote){ //笔记
-            NSLog(@"笔记---%@",_sendComNoteView.textView.text);
+            //NSLog(@"笔记---%@",_sendComNoteView.textView.text);
             [self.courseChapter sendCourseNoteWithCourseID:1 andUserID:self.courseID andContent:self.sendComNoteView.textView.text];
         }
         
@@ -1227,10 +1231,10 @@ enum MoreActionButton_Tag
 #warning 待检验密码
                 NSInteger result = [self.courseChapter buyCourseUseCoinWithCourseID:self.courseID];
                 CAlertLabel *label;
-                
+/*
                 label = [CAlertLabel alertLabelWithAdjustFrameForText:@"购买成功"];
                 [label showAlertLabel];
-/*
+*/
                 
                 if (result == 1) {
                     label = [CAlertLabel alertLabelWithAdjustFrameForText:@"购买成功"];
@@ -1242,7 +1246,7 @@ enum MoreActionButton_Tag
                     label = [CAlertLabel alertLabelWithAdjustFrameForText:@"你已经购买过此课程"];
                     [label showAlertLabel];
                 }
-*/
+
             }
         default:
             break;
@@ -1272,10 +1276,10 @@ enum MoreActionButton_Tag
                 [webView loadRequest:[NSURLRequest requestWithURL:url]];
                 [self.navigationController pushViewController:vc animated:YES];
                 
-                NSLog(@"支付宝支付");
+                //NSLog(@"支付宝支付");
             }else if (buttonIndex == 1){
                 //积分支付
-                NSLog(@"积分支付");
+                //NSLog(@"积分支付");
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"积分购买" message:@"请输入您的密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
                 alertView.tag = AlertView_buy;
                 [alertView setAlertViewStyle:UIAlertViewStyleSecureTextInput];

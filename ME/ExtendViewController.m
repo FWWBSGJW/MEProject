@@ -77,8 +77,10 @@
             break;
         case 5:
             [self.navigationController pushViewController:[[SearchViewController alloc] init] animated:YES];
+            break;
         case 6:
             [self.navigationController pushViewController:[[TrendsViewController alloc] init] animated:YES];
+            break;
         default:
             break;
     }

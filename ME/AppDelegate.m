@@ -27,7 +27,7 @@
     [ShareSDK waitAppSettingComplete:^{
         
         //在这里面调用相关的ShareSDK功能接口代码
-        NSLog(@"回调");
+        //NSLog(@"回调");
         
     }];
 

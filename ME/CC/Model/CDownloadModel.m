@@ -79,7 +79,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CDownloadModel);
     
     [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"下载完成");
+        //NSLog(@"下载完成");
         [self.downloadArray[0] removeObject:dic];
         [dic removeObjectForKey:@"dcNow"];
         [dic removeObjectForKey:@"dcSpeed"];
@@ -96,7 +96,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CDownloadModel);
         [self.dOperationDic removeObjectForKey:videoID];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"下载失败");
+        //NSLog(@"下载失败");
         [self.downloadArray removeObject:dic];
         [self.myDelegate upDateUI];
         [self.dOperationDic removeObjectForKey:videoID];

@@ -141,7 +141,7 @@
     //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     NSString *bodyStr = [NSString stringWithFormat:@"cvContent=%@&userId=%d&vid=%d&cvType=%s&cvTime=%d",content,userID,videoID,cvType?"true":"false",cvTime];
-    NSLog(@"%@",bodyStr);
+    //NSLog(@"%@",bodyStr);
     
     NSData *body = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -153,7 +153,7 @@
 #pragma mark - 选择实现实现弹幕
 - (void)selectDanmukuWithCurrentTime:(NSTimeInterval)currentPlaybackTime
 {
-    NSLog(@"%@",self.danmakuArray);
+    //NSLog(@"%@",self.danmakuArray);
     for (NSInteger i = _lastArrayNum; i < self.danmakuArray.count; i++) {
         if ((int)(currentPlaybackTime) == [self.danmakuArray[i][@"Dtime"] integerValue]) {
             
@@ -162,7 +162,7 @@
                 case 0:  //动态弹幕 评论
                 {
                     NSInteger dmChaennel = self.seletDanmakuChannel;
-                    NSLog(@"----------------通道--------%d",dmChaennel);
+                    //NSLog(@"----------------通道--------%d",dmChaennel);
                     self.moveDanmukuY = self.moveDanmukuHeight * dmChaennel;
                     DanmakuView *danmakuView = [self dequeueReusableDanmakuWithDanmakuType:moveDanmaku];
                     if (danmakuView == nil) {
@@ -210,7 +210,7 @@
                     [danmakuView setFrame:CGRectMake((SCREEN_HEIGHT-dmSize.width)/2.0, _staticDanmakuY-dmSize.height, dmSize.width, dmSize.height)];
                     
                     
-                    NSLog(@"%f %f",danmakuView.frame.origin.x,danmakuView.frame.origin.y);
+                    //NSLog(@"%f %f",danmakuView.frame.origin.x,danmakuView.frame.origin.y);
                     _staticDanmakuY -= dmSize.height;
                     [self.danmakuView addSubview:danmakuView];
                     

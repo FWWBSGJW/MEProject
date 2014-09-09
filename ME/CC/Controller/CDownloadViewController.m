@@ -47,7 +47,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        NSLog(@"%@",self.downLoadArray);
+        //NSLog(@"%@",self.downLoadArray);
         self.title = @"离线视频";
         self.navigationController.navigationBarHidden = NO;
         if (self.navigationController.navigationBarHidden == YES) {
@@ -214,7 +214,7 @@
 - (void)upDateUI
 {
     [self.tableView reloadData];
-    NSLog(@"%@",self.downLoadArray);
+    //NSLog(@"%@",self.downLoadArray);
 }
 
 - (void)reloadDowloadUI
