@@ -16,6 +16,9 @@
 @property (strong, nonatomic) UIImageView *userHeadImage;
 @property(nonatomic, strong) UILabel *trendLabel;
 @property(nonatomic, strong) UIView *lineView;
+@property(nonatomic, strong) UIView *topView;
+
+@property(nonatomic, strong) UITableView *commentTableView;
 
 - (id)initWithTrendModel:(TrendModel *)model;
 @end

@@ -39,6 +39,16 @@
     return self;
 }
 
+- (UIView *)dimView
+{
+    if (!_dimView) {
+        _dimView = [[UIView alloc] initWithFrame:self.view.frame];
+        _dimView.backgroundColor = [UIColor blackColor];
+        _dimView.alpha = 0.4;
+    }
+    return _dimView;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = NO;
@@ -97,7 +107,7 @@
         [[UIApplication sharedApplication].keyWindow addSubview:self.sendComNoteView];
         [self.sendComNoteView.textView becomeFirstResponder];
         self.sendComNoteView.titleLabel.text = @"发动态";
-        self.sendComNoteView.textView.backgroundColor = [UIColor lightGrayColor];
+        self.sendComNoteView.textView.backgroundColor = [UIColor whiteColor];
         self.sendComNoteView.titleLabel.backgroundColor = [UIColor orangeColor];
         [UIView animateWithDuration:0.4f animations:^{
             [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, 20.0, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
@@ -222,6 +232,7 @@
             [weakself.trendsTableView.infiniteScrollingView stopAnimating];
             if (_page!=0)
             {
+//                NSString *str = [NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listMove?userId=%d&score=%d",[User sharedUser].info.userId, _page];
                 NSArray *temArray = [[[TrendManage alloc] init] getUrlTrends:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listMove?userId=%d&score=%d",[User sharedUser].info.userId, _page]];
                 if (temArray.count<10)
                 {
@@ -246,11 +257,11 @@
     CGFloat temHeight = [self heightForLabelWithString:model.content];
     if (temHeight>65)
     {
-        return 61+30+30;
+        return 61+30+20;
     }
     else
     {
-        return temHeight+30+30;
+        return temHeight+30+20;
     }
 }
 
@@ -327,15 +338,15 @@
     trendLabel.text = model.content;
     [lableSwitchCell addSubview:trendLabel];
 
-    UIButton *likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(200, trendLabel.frame.size.height+trendLabel.frame.origin.y+8, 60, 20)];
-    likeBtn.tag = indexPath.row;
-    [likeBtn setTitle:@"赞" forState:UIControlStateNormal];
-    [likeBtn setTitleColor:RGBCOLOR(20, 84, 254) forState:UIControlStateNormal];
-    likeBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [likeBtn setImage:[UIImage imageNamed:@"Ilike"] forState:UIControlStateNormal];
-    [likeBtn setImage:[UIImage imageNamed:@"IlikeUU"] forState:UIControlStateHighlighted];
-    [likeBtn addTarget:self action:@selector(Ilike:) forControlEvents:UIControlEventTouchUpInside];
-    [lableSwitchCell addSubview:likeBtn];
+//    UIButton *likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(200, trendLabel.frame.size.height+trendLabel.frame.origin.y+8, 60, 20)];
+//    likeBtn.tag = indexPath.row;
+//    [likeBtn setTitle:@"赞" forState:UIControlStateNormal];
+//    [likeBtn setTitleColor:RGBCOLOR(20, 84, 254) forState:UIControlStateNormal];
+//    likeBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+//    [likeBtn setImage:[UIImage imageNamed:@"Ilike"] forState:UIControlStateNormal];
+//    [likeBtn setImage:[UIImage imageNamed:@"IlikeUU"] forState:UIControlStateHighlighted];
+//    [likeBtn addTarget:self action:@selector(Ilike:) forControlEvents:UIControlEventTouchUpInside];
+//    [lableSwitchCell addSubview:likeBtn];
     
     return lableSwitchCell;
 }
