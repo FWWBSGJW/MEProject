@@ -246,11 +246,11 @@
     CGFloat temHeight = [self heightForLabelWithString:model.content];
     if (temHeight>65)
     {
-        return 61+30+20;
+        return 61+30+30;
     }
     else
     {
-        return temHeight+30+20;
+        return temHeight+30+30;
     }
 }
 
@@ -327,8 +327,33 @@
     trendLabel.text = model.content;
     [lableSwitchCell addSubview:trendLabel];
 
+    UIButton *likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(200, trendLabel.frame.size.height+trendLabel.frame.origin.y+8, 60, 20)];
+    likeBtn.tag = indexPath.row;
+    [likeBtn setTitle:@"赞" forState:UIControlStateNormal];
+    [likeBtn setTitleColor:RGBCOLOR(20, 84, 254) forState:UIControlStateNormal];
+    likeBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [likeBtn setImage:[UIImage imageNamed:@"Ilike"] forState:UIControlStateNormal];
+    [likeBtn setImage:[UIImage imageNamed:@"IlikeUU"] forState:UIControlStateHighlighted];
+    [likeBtn addTarget:self action:@selector(Ilike:) forControlEvents:UIControlEventTouchUpInside];
+    [lableSwitchCell addSubview:likeBtn];
     
     return lableSwitchCell;
+}
+
+- (void)Ilike:(UIButton *)paramBtn
+{
+    if (paramBtn.tag<1000)
+    {
+        [paramBtn setImage:[UIImage imageNamed:@"IlikeUU"] forState:UIControlStateNormal];
+        [paramBtn setTitle:@"已赞" forState:UIControlStateNormal];
+        paramBtn.tag += 1000;
+    }
+    else
+    {
+        [paramBtn setImage:[UIImage imageNamed:@"Ilike"] forState:UIControlStateNormal];
+        [paramBtn setTitle:@"赞" forState:UIControlStateNormal];
+        paramBtn.tag -= 1000;
+    }
 }
 
 - (void)touchHead

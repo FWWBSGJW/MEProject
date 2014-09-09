@@ -34,7 +34,28 @@
     [self initializeView];
     
     [self.userHeadImage setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://121.197.10.159:8080/images/user/%@", model.userPortrait]]];
-    self.timeLabel.text = [NSString stringWithFormat:@"%.f分钟前", model.hmtime];
+    if (model.hmtime<=60)
+    {
+        if (model.hmtime<1)
+        {
+            self.timeLabel.text = @"刚刚";
+        }
+        else
+        {
+            self.timeLabel.text = [NSString stringWithFormat:@"%.f分钟前", model.hmtime];
+        }
+    }
+    else if (model.hmtime<=60*24 && model.hmtime>60)
+    {
+        int hour = model.hmtime/60;
+        self.timeLabel.text = [NSString stringWithFormat:@"%.d小时前", hour];
+    }
+    else if(model.hmtime>60*24)
+    {
+        int day = model.hmtime/(60*24);
+        self.timeLabel.text = [NSString stringWithFormat:@"%.d天前", day];
+    }
+//    self.timeLabel.text = [NSString stringWithFormat:@"%.f分钟前", model.hmtime];
     self.userName.text = model.userName;
     self.trendLabel.text = model.content;
     [self.trendLabel resizeToFit];
@@ -71,7 +92,7 @@
     self.userName.textColor = System_BlueColor;
     [self.view addSubview:self.userName];
     
-    self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(250, 5+originY, 60, 20)];
+    self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 5+originY, 90, 20)];
     self.timeLabel.font = [UIFont systemFontOfSize:15.0];
     self.timeLabel.text = @"1分钟前";
     self.timeLabel.textAlignment = NSTextAlignmentRight;
