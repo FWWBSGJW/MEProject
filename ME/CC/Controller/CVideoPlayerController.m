@@ -296,7 +296,7 @@ enum SendType
     
     UIButton *sendCommentButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //[sendCommentButton setTitle:@"发送弹幕" forState:UIControlStateNormal];
-    sendCommentButton.frame = CGRectMake(50, 10, 30, 30);
+    sendCommentButton.frame = CGRectMake(40, 10, 30, 30);
     sendCommentButton.tag = Send_Comment;
     //sendCommentButton.backgroundColor = [UIColor whiteColor];
     [sendCommentButton setBackgroundImage:[UIImage imageNamed:@"cDMessage.png"] forState:UIControlStateNormal];
