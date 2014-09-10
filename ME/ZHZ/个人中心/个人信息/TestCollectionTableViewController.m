@@ -38,7 +38,7 @@
 		[_list refreshLinkContent];
 		_testData = _list.linkContent;
 	}
-	
+	self.navigationItem.title = @"收藏的测试";
 	[self setExtraCellLineHidden:self.tableView];
 }
 

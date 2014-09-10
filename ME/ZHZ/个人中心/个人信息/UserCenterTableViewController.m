@@ -443,6 +443,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		}
 		CourseTableViewController *ctb = [[CourseTableViewController alloc]initWithStyle:UITableViewStylePlain];
 //		ctb.courses = (indexPath.row==0)?[_user.info.bcourses linkContent]:[_user.info.ccourses linkContent];
+		ctb.navigationItem.title = (indexPath.row == 0)? @"已购买的课程":@"收藏的课程";
 		ctb.list = (indexPath.row == 0) ? _user.info.bcourses : _user.info.ccourses;
 		ctb.deletable = (indexPath.row == 0) ? NO:YES;
 		[self.navigationController pushViewController:ctb animated:YES];
@@ -485,6 +486,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 		if (indexPath.row == [_user.info.fightvalue.values count]) {
 			FightValueTableViewController *fv = [[FightValueTableViewController alloc] initWithStyle:UITableViewStylePlain];
 			fv.list = _user.info.fightvalue;
+			fv.navigationItem.title = @"战斗力";
 			[self.navigationController pushViewController:fv animated:YES];
 		}
 	}
