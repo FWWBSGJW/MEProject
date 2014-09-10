@@ -99,7 +99,7 @@
 		NSInteger interval = [zone secondsFromGMTForDate:[NSDate date]];//以秒为单位返回当前应用程序与世界标准时间（格林威尼时间）的时差
 //		NSDate *date = [dateFormatter dateFromString:@"2014-08-07 12:56:22"];
 		NSDate *date = [dateFormatter dateFromString:qa[@"qdate"]];
-		NSLog(@"%@",[NSDate dateWithTimeIntervalSinceNow:interval]);
+		//NSLog(@"%@",[NSDate dateWithTimeIntervalSinceNow:interval]);
 //		cell.date = [DataOC getTimeString:9997110000];
 //		NSLog(@"%lf",[[NSDate dateWithTimeIntervalSinceNow:interval] timeIntervalSinceDate:date]);
 //		NSLog(@"%lf",[[NSDate date] timeIntervalSince1970]);

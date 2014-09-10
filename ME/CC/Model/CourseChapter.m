@@ -290,7 +290,7 @@
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if (data) {
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            //NSLog(@"笔记结果返回dic：%@",dic);
+            NSLog(@"笔记结果返回dic：%@",dic);
         }
         
     }];

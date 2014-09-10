@@ -1013,11 +1013,14 @@ enum MoreActionButton_Tag
         }
             break;
         case ButtonTagBuy:{
-#warning 待实现购买
+#warning 待实现支付宝
             [self userCheck];
             if ([User sharedUser].info.isLogin) {
                 BOOL hadBuyed = NO;
                 NSArray *purchaseArray = [[User sharedUser].info.bcourses linkContent];
+                
+                NSLog(@"%@",purchaseArray);
+                
                 for (NSDictionary *dic in purchaseArray) {
                     if ([dic[@"cid"] integerValue] == self.courseID) {
                         hadBuyed = YES;
@@ -1126,6 +1129,7 @@ enum MoreActionButton_Tag
         case MoreButtonTagTest:
         {
             NSInteger testID = [self.courseInfoDic[@"tcId"] integerValue];
+            NSLog(@"textid--------- %d",testID);
             JJTestDetailViewController *testVC = [JJTestDetailViewController testDetailVCwithTestID:testID];
             [self.navigationController pushViewController:testVC animated:YES];
         }
@@ -1229,23 +1233,33 @@ enum MoreActionButton_Tag
         case AlertView_buy:
             if (buttonIndex == 1) {
 #warning 待检验密码
-                NSInteger result = [self.courseChapter buyCourseUseCoinWithCourseID:self.courseID];
                 CAlertLabel *label;
-/*
-                label = [CAlertLabel alertLabelWithAdjustFrameForText:@"购买成功"];
-                [label showAlertLabel];
-*/
-                
-                if (result == 1) {
-                    label = [CAlertLabel alertLabelWithAdjustFrameForText:@"购买成功"];
+                if ([[alertView textFieldAtIndex:0].text isEqualToString:@"123456"]) {
+              
+                    NSInteger result = [self.courseChapter buyCourseUseCoinWithCourseID:self.courseID];
+                    /*
+                     label = [CAlertLabel alertLabelWithAdjustFrameForText:@"购买成功"];
+                     [label showAlertLabel];
+                     */
+                    
+                    if (result == 1) {
+                        label = [CAlertLabel alertLabelWithAdjustFrameForText:@"购买成功"];
+                        [label showAlertLabel];
+                        [[User sharedUser].info refresh];
+                    } else if (result == 0) {
+                        label = [CAlertLabel alertLabelWithAdjustFrameForText:@"购买失败，请重新尝试"];
+                        [label showAlertLabel];
+                    } else if(result == -1){
+                        label = [CAlertLabel alertLabelWithAdjustFrameForText:@"你已经购买过此课程"];
+                        [label showAlertLabel];
+                    }
+                } else {
+                    label = [CAlertLabel alertLabelWithAdjustFrameForText:@"密码错误"];
                     [label showAlertLabel];
-                } else if (result == 0) {
-                    label = [CAlertLabel alertLabelWithAdjustFrameForText:@"购买失败，请重新尝试"];
-                    [label showAlertLabel];
-                } else if(result == -1){
-                    label = [CAlertLabel alertLabelWithAdjustFrameForText:@"你已经购买过此课程"];
-                    [label showAlertLabel];
+
                 }
+                
+                
 
             }
         default:
@@ -1275,6 +1289,8 @@ enum MoreActionButton_Tag
                 vc.title = @"支付宝支付";
                 [webView loadRequest:[NSURLRequest requestWithURL:url]];
                 [self.navigationController pushViewController:vc animated:YES];
+                //
+                [[User sharedUser].info refresh];
                 
                 //NSLog(@"支付宝支付");
             }else if (buttonIndex == 1){
