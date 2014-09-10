@@ -4,7 +4,7 @@
 //
 //  Created by yato_kami on 14-8-15.
 //  Copyright (c) 2014年 yatokami. All rights reserved.
-//
+//  同步3333
 
 #import "FindJobViewController.h"
 
