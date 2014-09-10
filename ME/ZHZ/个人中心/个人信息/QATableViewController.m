@@ -84,10 +84,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	static NSString *identifier = @"QACell";
+	static NSString *identifier = @"QATableViewCell";
 	QATableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 	if(!cell){
-		cell = [[QATableViewCell alloc] init];
+		cell = [[QATableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
 	}
 	NSDictionary *qa = [_data objectAtIndex:indexPath.row];
 	NSDateFormatter *dateFormatter =[[NSDateFormatter alloc] init];

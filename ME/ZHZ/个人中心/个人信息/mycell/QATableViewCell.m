@@ -30,13 +30,20 @@
 	return self;
 }
 
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+	if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"QATableViewCell" owner:self options:nil];
+		self = nib[0];
+	}
+	return self;
+}
 - (void)setUI{
 	_titleLabel.text = _title;
 	_dateLabel.text = _date;
 	[_dateLabel resizeToFit];
 	_contentLabel.text = _content;
 	_contentLabel.textColor = [UIColor lightGrayColor];
-	[_contentLabel resizeToFit];
+//	[_contentLabel resizeToFit];
 	
 }
 
