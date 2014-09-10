@@ -179,7 +179,7 @@
 {
     JJTestDetailViewController *vc = [[JJTestDetailViewController alloc] init];
     vc.myModel = [[[SingleTestManage alloc] init]
-                  analyseTestJson:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/getSTestModel?tcId=%d", testID]];
+                  analyseTestJson:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/getSTestModel?tdirection=%d", testID]];
     vc.commentArray = [[[JJCommentManage alloc] init] analyseCommentJsonForVC:vc withCommentUrl:vc.myModel.commentLink];
 //    [vc loadModel];
     return vc;

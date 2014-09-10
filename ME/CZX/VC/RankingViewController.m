@@ -184,17 +184,28 @@ typedef NS_ENUM(NSInteger, segmentControl) {
                 [self.testArray replaceObjectAtIndex:row withObject:array];
             }
             self.showTestArray = [self.testArray objectAtIndex:row];
-            testModelBaseClass *model = [self.showTestArray objectAtIndex:0];
-            [[[RankingManage alloc] init] getRankingForVC:self
-                                                  withUrl:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listScore?tcId=%d", (int)model.tcId]];
-            [self.pickerView selectRow:0 inComponent:1 animated:NO];
-            [self.pickerView reloadComponent:pickerViewComponentTest];
+            if (self.showTestArray.count >0)
+            {
+                testModelBaseClass *model = [self.showTestArray objectAtIndex:0];
+                [[[RankingManage alloc] init] getRankingForVC:self
+                                                      withUrl:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listScore?tcId=%d", (int)model.tcId]];
+                [self.pickerView selectRow:0 inComponent:1 animated:NO];
+                [self.pickerView reloadComponent:pickerViewComponentTest];
+            }
+            else
+            {
+                self.showTestArray = @[];
+                [self.rankTableView reloadData];
+                [self.pickerView reloadAllComponents];
+            }
         }
         else
         {
-            testModelBaseClass *model = [self.showTestArray objectAtIndex:row];
-            [[[RankingManage alloc] init] getRankingForVC:self
-                                                  withUrl:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listScore?tcId=%d", (int)model.tcId]];
+            if (self.showTestArray.count>0) {
+                testModelBaseClass *model = [self.showTestArray objectAtIndex:row];
+                [[[RankingManage alloc] init] getRankingForVC:self
+                                                      withUrl:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listScore?tcId=%d", (int)model.tcId]];
+            }
         }
     }
     [self.activityView startAnimating];
