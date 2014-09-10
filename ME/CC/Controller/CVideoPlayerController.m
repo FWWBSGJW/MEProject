@@ -293,19 +293,20 @@ enum SendType
     
     //发送弹幕按钮
     
+    
     UIButton *sendCommentButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //[sendCommentButton setTitle:@"发送弹幕" forState:UIControlStateNormal];
-    sendCommentButton.frame = CGRectMake(50, 10, 30, 30);
+    sendCommentButton.frame = CGRectMake(40, 10, 30, 30);
     sendCommentButton.tag = Send_Comment;
     //sendCommentButton.backgroundColor = [UIColor whiteColor];
-    [sendCommentButton setBackgroundImage:[UIImage imageNamed:@"cMessage.png"] forState:UIControlStateNormal];
+    [sendCommentButton setBackgroundImage:[UIImage imageNamed:@"cDMessage.png"] forState:UIControlStateNormal];
     [sendCommentButton addTarget:self action:@selector(sendDanmaku:) forControlEvents:UIControlEventTouchUpInside];
     [self.controlBar addSubview:sendCommentButton];
     
     UIButton *sendNoteButton = [UIButton buttonWithType:UIButtonTypeCustom];
     sendNoteButton.frame = CGRectMake(100, 10, 30, 30);
     sendNoteButton.tag = Send_Note;
-    [sendNoteButton setBackgroundImage:[UIImage imageNamed:@"cNote"] forState:UIControlStateNormal];
+    [sendNoteButton setBackgroundImage:[UIImage imageNamed:@"cDNote"] forState:UIControlStateNormal];
     [sendNoteButton addTarget:self action:@selector(sendDanmaku:) forControlEvents:UIControlEventTouchUpInside];
     [self.controlBar addSubview:sendNoteButton];
     

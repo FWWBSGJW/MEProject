@@ -62,6 +62,11 @@
 		[User sharedUser].havaChange = NO;
 		[User sharedUser].refreshMe = YES;
 	}
+	if (self.style == QAStyleAnswer) {
+		self.navigationItem.title = @"提问";
+	}else{
+		self.navigationItem.title = @"回答";
+	}
 }
 
 - (void)didReceiveMemoryWarning
