@@ -60,9 +60,12 @@
     
     if (self.wrongSubjectArray.count == 0)
     {
-        UILabel *la = [[UILabel alloc] initWithFrame:CGRectMake(130, 220, 60, 40)];
-        la.text = @"还没有错题哦~";
-        [self.view addSubview:la];
+//        UILabel *la = [[UILabel alloc] initWithFrame:CGRectMake(130, 220, 60, 40)];
+//        la.text = @"还没有错题哦~";
+		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(80, 150, 200, 30)];
+		label.textColor = [UIColor lightGrayColor];
+		label.text = @"这里还没有东西～～";
+        [self.view addSubview:label];
     }
     else
     {

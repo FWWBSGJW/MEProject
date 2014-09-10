@@ -39,7 +39,17 @@
 		[_list refreshLinkContent];
 		_data = _list.linkContent;
 	}
+	
+	[self setExtraCellLineHidden:self.tableView];
 }
+
+- (void)setExtraCellLineHidden: (UITableView *)tableView{
+    UIView *view =[ [UIView alloc]init];
+    view.backgroundColor = [UIColor clearColor];
+    [tableView setTableFooterView:view];
+    [tableView setTableHeaderView:view];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];

@@ -44,6 +44,7 @@
 		[_list refreshLinkContent];
 		_courses = _list.linkContent;
 	}
+	[self setExtraCellLineHidden:self.tableView];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -59,7 +60,12 @@
 	
 }
 
-
+- (void)setExtraCellLineHidden: (UITableView *)tableView{
+    UIView *view =[ [UIView alloc]init];
+    view.backgroundColor = [UIColor clearColor];
+    [tableView setTableFooterView:view];
+    [tableView setTableHeaderView:view];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -67,14 +73,24 @@
     // Dispose of any resources that can be recreated.
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-	return 90;
+	return 61;
 }
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [_courses count];
+	NSInteger count = [_courses count];
+	if (count == 0) {
+		self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(80, 150, 200, 30)];
+		label.textColor = [UIColor lightGrayColor];
+		label.text = @"这里还没有东西～～";
+		[self.tableView addSubview:label];
+	}else{
+		self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+	}
+    return count;
 }
 
 

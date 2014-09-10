@@ -211,7 +211,7 @@ typedef NS_ENUM(NSInteger, UserCenterSectionStyel) {
 
 - (void)defineUserStyle{
 	if (userstyle == UserStyleUndefined){
-		if ([_user isEqual:[User sharedUser]]) {
+		if (_user.info.userId == [User sharedUser].info.userId) {
 			userstyle = UserStyleLocal;
 		}else{
 			userstyle = UserStyleOther;
