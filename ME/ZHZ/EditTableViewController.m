@@ -140,7 +140,7 @@
 			NSString *fileName = [NSString stringWithFormat:@"xx.jpg"];
 			[formData appendPartWithFileData:imageData name:@"upload" fileName:fileName mimeType:@"image/jpeg"];
 		}];
-		NSLog(@"%@",_httpClient.baseURL);
+		//NSLog(@"%@",_httpClient.baseURL);
 		AFHTTPRequestOperation *op =[[AFHTTPRequestOperation alloc] initWithRequest:request];
 		[op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
 			NSData *data = responseObject;

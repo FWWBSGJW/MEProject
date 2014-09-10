@@ -36,9 +36,9 @@
     self = [super init];
     self.backgroundColor = [UIColor clearColor];
     self.textColor = [UIColor whiteColor];
-    [self setFont:[UIFont fontWithName:@"Arial" size:20]];
+    [self setFont:[UIFont fontWithName:@"Arial" size:17]];
     [self setShadowColor:[UIColor blackColor]];
-    [self setShadowOffset:CGSizeMake(2.0, 3.0)];
+    [self setShadowOffset:CGSizeMake(0.6, 0.6)];
     
     return self;
 }

@@ -39,6 +39,16 @@
     return self;
 }
 
+- (UIView *)dimView
+{
+    if (!_dimView) {
+        _dimView = [[UIView alloc] initWithFrame:self.view.frame];
+        _dimView.backgroundColor = [UIColor blackColor];
+        _dimView.alpha = 0.4;
+    }
+    return _dimView;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = NO;
@@ -97,7 +107,7 @@
         [[UIApplication sharedApplication].keyWindow addSubview:self.sendComNoteView];
         [self.sendComNoteView.textView becomeFirstResponder];
         self.sendComNoteView.titleLabel.text = @"发动态";
-        self.sendComNoteView.textView.backgroundColor = [UIColor lightGrayColor];
+        self.sendComNoteView.textView.backgroundColor = [UIColor whiteColor];
         self.sendComNoteView.titleLabel.backgroundColor = [UIColor orangeColor];
         [UIView animateWithDuration:0.4f animations:^{
             [self.sendComNoteView setFrame:CGRectMake((SCREEN_WIDTH-_sendComNoteView.frame.size.width)/2.0, 20.0, _sendComNoteView.frame.size.width, _sendComNoteView.frame.size.height)];
@@ -141,8 +151,8 @@
 {
 #pragma waring 此处待实现上传评论，笔记 ,刷新数据
     NSLog(@"动态---%@",self.sendComNoteView.textView.text);
-//    [self sendTrendWithUserID:[User sharedUser].info.userId andContent:self.sendComNoteView.textView.text];
-    [self sendTrendWithUserID:2 andContent:self.sendComNoteView.textView.text];
+    [self sendTrendWithUserID:[User sharedUser].info.userId andContent:self.sendComNoteView.textView.text];
+//    [self sendTrendWithUserID:2 andContent:self.sendComNoteView.textView.text];
     [self sendComNoteViewBack];
     //self.sendComNoteView.textView.text = nil;
 }
@@ -157,7 +167,7 @@
 {
 //    [self.activityView startAnimating];
     NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/uploadMove";
-    //    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?CId=%d&userid=%d&ccContent=#%@#",testID,userID,content]];
+//    urlAsString = [urlAsString stringByAppendingString:[NSString stringWithFormat:@"?CId=%d&userid=%d&ccContent=#%@#",testID,userID,content]];
     NSURL *url = [NSURL URLWithString:urlAsString];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     [urlRequest setTimeoutInterval:30.0f];
@@ -222,7 +232,8 @@
             [weakself.trendsTableView.infiniteScrollingView stopAnimating];
             if (_page!=0)
             {
-                NSArray *temArray = [[[TrendManage alloc] init] getUrlTrends:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listMove?userId=%d&score=%d", 1, _page]];//[User sharedUser].info.userId];
+//                NSString *str = [NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listMove?userId=%d&score=%d",[User sharedUser].info.userId, _page];
+                NSArray *temArray = [[[TrendManage alloc] init] getUrlTrends:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listMove?userId=%d&score=%d",[User sharedUser].info.userId, _page]];
                 if (temArray.count<10)
                 {
                     _page = 0;
@@ -246,11 +257,11 @@
     CGFloat temHeight = [self heightForLabelWithString:model.content];
     if (temHeight>65)
     {
-        return 61+30+20;
+        return 61+30+30;
     }
     else
     {
-        return temHeight+30+20;
+        return temHeight+30+30;
     }
 }
 
@@ -279,9 +290,31 @@
     TrendModel *model = [self.trendsArray objectAtIndex:[indexPath row]];
     
     lableSwitchCell.userName.text = model.userName;
-    lableSwitchCell.timeLabel.text = [NSString stringWithFormat:@"%.f分钟前", model.hmtime];
+    if (model.hmtime<=60)
+    {
+        if (model.hmtime<1)
+        {
+            lableSwitchCell.timeLabel.text = @"刚刚";
+        }
+        else
+        {
+            lableSwitchCell.timeLabel.text = [NSString stringWithFormat:@"%.f分钟前", model.hmtime];
+        }
+    }
+    else if (model.hmtime<=60*24 && model.hmtime>60)
+    {
+        int hour = model.hmtime/60;
+        lableSwitchCell.timeLabel.text = [NSString stringWithFormat:@"%.d小时前", hour];
+    }
+    else if(model.hmtime>60*24)
+    {
+        int day = model.hmtime/(60*24);
+        lableSwitchCell.timeLabel.text = [NSString stringWithFormat:@"%.d天前", day];
+    }
+    lableSwitchCell.timeLabel.textAlignment = NSTextAlignmentRight;
     [lableSwitchCell.userHeadImage setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://121.197.10.159:8080/images/user/%@", model.userPortrait]]];
     lableSwitchCell.userHeadImage.layer.cornerRadius = 20;
+    [lableSwitchCell.headBtn addTarget:self action:@selector(touchHead) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *trendLabel = [[UILabel alloc] init];
     CGFloat temHeight = [self heightForLabelWithString:model.content];
@@ -305,8 +338,38 @@
     trendLabel.text = model.content;
     [lableSwitchCell addSubview:trendLabel];
 
+    UIButton *likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(200, trendLabel.frame.size.height+trendLabel.frame.origin.y+8, 60, 20)];
+    likeBtn.tag = indexPath.row;
+    [likeBtn setTitle:@"赞" forState:UIControlStateNormal];
+    [likeBtn setTitleColor:RGBCOLOR(20, 84, 254) forState:UIControlStateNormal];
+    likeBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [likeBtn setImage:[UIImage imageNamed:@"Ilike"] forState:UIControlStateNormal];
+    [likeBtn setImage:[UIImage imageNamed:@"IlikeUU"] forState:UIControlStateHighlighted];
+    [likeBtn addTarget:self action:@selector(Ilike:) forControlEvents:UIControlEventTouchUpInside];
+    [lableSwitchCell addSubview:likeBtn];
     
     return lableSwitchCell;
+}
+
+- (void)Ilike:(UIButton *)paramBtn
+{
+    if (paramBtn.tag<1000)
+    {
+        [paramBtn setImage:[UIImage imageNamed:@"IlikeUU"] forState:UIControlStateNormal];
+        [paramBtn setTitle:@"已赞" forState:UIControlStateNormal];
+        paramBtn.tag += 1000;
+    }
+    else
+    {
+        [paramBtn setImage:[UIImage imageNamed:@"Ilike"] forState:UIControlStateNormal];
+        [paramBtn setTitle:@"赞" forState:UIControlStateNormal];
+        paramBtn.tag -= 1000;
+    }
+}
+
+- (void)touchHead
+{
+
 }
 
 - (CGFloat)heightForLabelWithString:(NSString *)text

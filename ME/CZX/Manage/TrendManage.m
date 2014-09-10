@@ -48,7 +48,7 @@ NSArray *serverRespObj;
 
 - (void)getData:(TrendsViewController *)vc
 {
-    NSString *temUrl = [NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listMove?userId=%d&score=1", 1];//[User sharedUser].info.userId];
+    NSString *temUrl = [NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listMove?userId=%d&score=1", [User sharedUser].info.userId];
     NSString * url = [temUrl stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         NSURLResponse * resp;

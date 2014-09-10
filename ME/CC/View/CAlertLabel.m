@@ -46,7 +46,7 @@
     labelWidth = labelWidth < 155 ? labelWidth:155;
     CGFloat labelHeight = labelsize.height*1.5 < 70 ? 70:labelsize.height*1.5;
     labelHeight = labelHeight < 155 ? labelHeight:155;
-    NSLog(@"%f--%f-",labelWidth,labelHeight);
+    //NSLog(@"%f--%f-",labelWidth,labelHeight);
     [alertLabel setFrame:CGRectMake((SCREEN_WIDTH-labelWidth)/2, (SCREEN_HEIGHT-labelHeight)/2 - 50.0, labelWidth, labelHeight)];
     return alertLabel;
 }

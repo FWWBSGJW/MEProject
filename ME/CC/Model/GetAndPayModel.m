@@ -38,7 +38,7 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@MobileEducation/uploadPoints?points=%d&userId=%d",kBaseURL,count,userID]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.0f];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        NSLog(@"获得积分");
+        //NSLog(@"获得积分");
         NSArray *doc = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *Path = [doc[0] stringByAppendingPathComponent:@"userCoinArray.plist"];
         [self.userCoinArray writeToFile:Path atomically:YES];

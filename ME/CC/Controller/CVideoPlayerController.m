@@ -204,8 +204,8 @@ enum SendType
     [self playVideoWithVideoID:videoID andVideoTitle:title andVideoUrlString:urlString];
     self.moviePlayer.initialPlaybackTime = time;
     
-    NSLog(@"%f",time);
-    NSLog(@"%@",self.danmakuModel.danmakuArray);
+    //NSLog(@"%f",time);
+    //NSLog(@"%@",self.danmakuModel.danmakuArray);
 }
 
 
@@ -569,7 +569,7 @@ enum SendType
     
     //[self.danmaku insertObject:dic atIndex:_lastArrayNum];
     [self.danmakuModel.danmakuArray insertObject:dic atIndex:_lastArrayNum];
-    NSLog(@"%@",danmaku);
+    //NSLog(@"%@",danmaku);
     [self hidSendDanmakuView];
     _sendDMNum++;
 }
@@ -656,7 +656,7 @@ enum SendType
 - (void)timerClicked
 {
     if (self.dmSwitch.isOn) {
-        NSLog(@"%d",self.dmSwitch.isOn);
+        //NSLog(@"%d",self.dmSwitch.isOn);
         [self.danmakuModel selectDanmukuWithCurrentTime:self.moviePlayer.currentPlaybackTime];
         /*
         NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
@@ -731,7 +731,7 @@ enum SendType
             //NSLog(@"%f",self.moviePlayer.currentPlaybackTime); //可获取当前时间
             [self.timer setFireDate:[NSDate distantFuture]]; //暂停定时器
         
-            NSLog(@"zanting---------");
+            //NSLog(@"zanting---------");
             break;
         case MPMoviePlaybackStatePlaying:
             [self movieStart];
@@ -778,7 +778,7 @@ enum SendType
         NSURL *url = [NSURL URLWithString:urlString];
         NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.0f];
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-            NSLog(@"观看记录上传");
+            //NSLog(@"观看记录上传");
         }];
         //异步加积分
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);

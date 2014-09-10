@@ -180,7 +180,7 @@
 
     NSString *bodyStr = [NSString stringWithFormat:@"CId=%d&userid=%d&ccContent=%@",courseID,userID,content];
     
-    NSLog(@"%@",bodyStr);
+    //NSLog(@"%@",bodyStr);
     
     NSData *body = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -190,7 +190,7 @@
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if (data) {
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            NSLog(@"评论结果返回dic：%@",dic);
+            //NSLog(@"评论结果返回dic：%@",dic);
         }
         
     }];
@@ -280,7 +280,7 @@
     
     NSString *bodyStr = [NSString stringWithFormat:@"userId=%D&cid=%d&cnContext=%@",userID,courseID,content];
     
-    NSLog(@"%@",bodyStr);
+    //NSLog(@"%@",bodyStr);
     
     NSData *body = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -290,7 +290,7 @@
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         if (data) {
             NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            NSLog(@"笔记结果返回dic：%@",dic);
+            //NSLog(@"笔记结果返回dic：%@",dic);
         }
         
     }];
