@@ -260,6 +260,8 @@
 		5BFDD7C2198606870034CE0B /* cNote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFDD7BD198606870034CE0B /* cNote@2x.png */; };
 		5BFDD7C3198606870034CE0B /* cStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFDD7BE198606870034CE0B /* cStar@2x.png */; };
 		5BFDD7C4198606870034CE0B /* cStarFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BFDD7BF198606870034CE0B /* cStarFull@2x.png */; };
+		AB13071C19BFCF2200B679B4 /* MoveCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AB13071B19BFCF2200B679B4 /* MoveCommentModel.m */; };
+		AB13071F19BFCF3500B679B4 /* MoveCommentManage.m in Sources */ = {isa = PBXBuildFile; fileRef = AB13071E19BFCF3500B679B4 /* MoveCommentManage.m */; };
 		AB1D00A419BE988B0022F718 /* JJCommentManage.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1D003819BE988B0022F718 /* JJCommentManage.m */; };
 		AB1D00A519BE988B0022F718 /* JJDirectionManage.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1D003A19BE988B0022F718 /* JJDirectionManage.m */; };
 		AB1D00A619BE988B0022F718 /* JJSubjectManage.m in Sources */ = {isa = PBXBuildFile; fileRef = AB1D003C19BE988B0022F718 /* JJSubjectManage.m */; };
@@ -331,6 +333,7 @@
 		AB1D00E819BE988B0022F718 /* upUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB1D00A119BE988B0022F718 /* upUp@2x.png */; };
 		AB1D00E919BE988B0022F718 /* write@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB1D00A219BE988B0022F718 /* write@2x.png */; };
 		AB1D00EA19BE988B0022F718 /* writeUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB1D00A319BE988B0022F718 /* writeUp@2x.png */; };
+		AB1D00EE19BF47A90022F718 /* choose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB1D00ED19BF47A90022F718 /* choose@2x.png */; };
 		B0B0AD1E197D525300B29458 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B0AD1D197D525300B29458 /* UIViewAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
@@ -711,6 +714,10 @@
 		5BFDD7BD198606870034CE0B /* cNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cNote@2x.png"; sourceTree = "<group>"; };
 		5BFDD7BE198606870034CE0B /* cStar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cStar@2x.png"; sourceTree = "<group>"; };
 		5BFDD7BF198606870034CE0B /* cStarFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cStarFull@2x.png"; sourceTree = "<group>"; };
+		AB13071A19BFCF2200B679B4 /* MoveCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveCommentModel.h; sourceTree = "<group>"; };
+		AB13071B19BFCF2200B679B4 /* MoveCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveCommentModel.m; sourceTree = "<group>"; };
+		AB13071D19BFCF3500B679B4 /* MoveCommentManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveCommentManage.h; sourceTree = "<group>"; };
+		AB13071E19BFCF3500B679B4 /* MoveCommentManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveCommentManage.m; sourceTree = "<group>"; };
 		AB1D003719BE988B0022F718 /* JJCommentManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJCommentManage.h; sourceTree = "<group>"; };
 		AB1D003819BE988B0022F718 /* JJCommentManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJCommentManage.m; sourceTree = "<group>"; };
 		AB1D003919BE988B0022F718 /* JJDirectionManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJDirectionManage.h; sourceTree = "<group>"; };
@@ -816,6 +823,7 @@
 		AB1D00A119BE988B0022F718 /* upUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upUp@2x.png"; sourceTree = "<group>"; };
 		AB1D00A219BE988B0022F718 /* write@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write@2x.png"; sourceTree = "<group>"; };
 		AB1D00A319BE988B0022F718 /* writeUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "writeUp@2x.png"; sourceTree = "<group>"; };
+		AB1D00ED19BF47A90022F718 /* choose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "choose@2x.png"; sourceTree = "<group>"; };
 		B0B0AD1C197D525300B29458 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
 		B0B0AD1D197D525300B29458 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1638,6 +1646,8 @@
 				AB1D004419BE988B0022F718 /* TestDirectionManage.m */,
 				AB1D004519BE988B0022F718 /* TrendManage.h */,
 				AB1D004619BE988B0022F718 /* TrendManage.m */,
+				AB13071D19BFCF3500B679B4 /* MoveCommentManage.h */,
+				AB13071E19BFCF3500B679B4 /* MoveCommentManage.m */,
 			);
 			path = Manage;
 			sourceTree = "<group>";
@@ -1645,6 +1655,8 @@
 		AB1D004719BE988B0022F718 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AB13071A19BFCF2200B679B4 /* MoveCommentModel.h */,
+				AB13071B19BFCF2200B679B4 /* MoveCommentModel.m */,
 				AB1D004819BE988B0022F718 /* FightModelBaseClass.h */,
 				AB1D004919BE988B0022F718 /* FightModelBaseClass.m */,
 				AB1D004A19BE988B0022F718 /* JJCommentModel.h */,
@@ -1729,6 +1741,7 @@
 		AB1D008919BE988B0022F718 /* 素材 */ = {
 			isa = PBXGroup;
 			children = (
+				AB1D00ED19BF47A90022F718 /* choose@2x.png */,
 				AB1D008A19BE988B0022F718 /* back@2x.png */,
 				AB1D008B19BE988B0022F718 /* buy@2x.png */,
 				AB1D008C19BE988B0022F718 /* buyUp@2x.png */,
@@ -1879,6 +1892,7 @@
 				AB1D00DA19BE988B0022F718 /* IlikeU@2x.png in Resources */,
 				AB1D00E619BE988B0022F718 /* testUp@2x.png in Resources */,
 				AB1D00C619BE988B0022F718 /* ShakeViewController.xib in Resources */,
+				AB1D00EE19BF47A90022F718 /* choose@2x.png in Resources */,
 				5BFDD7C2198606870034CE0B /* cNote@2x.png in Resources */,
 				5B717EA11978FD9600F1359C /* InfoPlist.strings in Resources */,
 				5B71809A197905C900F1359C /* details_definition_bg.png in Resources */,
@@ -2039,6 +2053,7 @@
 				5B717EA71978FD9600F1359C /* AppDelegate.m in Sources */,
 				5B717F3A1978FE4E00F1359C /* NSArray+JSONModel.m in Sources */,
 				5B345ADC19A2153F008FC104 /* EditTableViewController.m in Sources */,
+				AB13071C19BFCF2200B679B4 /* MoveCommentModel.m in Sources */,
 				5B717F451978FE4E00F1359C /* SDWebImageDownloader.m in Sources */,
 				5B717F3E1978FE4E00F1359C /* JSONKeyMapper.m in Sources */,
 				5B7180D5197905C900F1359C /* DanmakuModel.m in Sources */,
@@ -2151,6 +2166,7 @@
 				5B772A75199B9014000BB61E /* PKImagePickerViewController.m in Sources */,
 				AB1D00C919BE988B0022F718 /* TrendsViewController.m in Sources */,
 				5B345AEF19A2153F008FC104 /* CourseTableViewController.m in Sources */,
+				AB13071F19BFCF3500B679B4 /* MoveCommentManage.m in Sources */,
 				5BACA1CF197D6F3F00E4A387 /* CDAllSection.m in Sources */,
 				5B717F2B1978FE4E00F1359C /* AFHTTPClient.m in Sources */,
 				5B345AFF19A2153F008FC104 /* UserCenterTableViewController.m in Sources */,

@@ -11,11 +11,16 @@
 #import "UIImageView+WebCache.h"
 #import "SendComNoteView.h"
 #import "User.h"
+#import "TrendTableViewCell.h"
+#import "MoveCommentModel.h"
+#import "MoveCommentManage.h"
+#import "UILabel+dynamicSizeMe.h"
 
 #define originY 62
 @interface TrendDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     int mid;
+    NSString *Kurl;
 }
 @property (strong, nonatomic) UIView *dimView; //发送评论时背影
 @property (strong, nonatomic) SendComNoteView *sendComNoteView; //发送评论，笔记试图
@@ -87,6 +92,9 @@
     self.commentTableView.tableFooterView = [UIView new];
     [self.view addSubview:self.commentTableView];
 
+    Kurl = [NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/listSingleMov?mid=%d", (int)model.mid];
+    self.commentArray = [[[MoveCommentManage alloc] init] analyseCommentJsonForVC:self withCommentUrl:Kurl];
+
     
     return self;
 }
@@ -114,20 +122,60 @@
     
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 5;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(52, 30, 248, 10)];
+    MoveCommentModel *commentModel = [self.commentArray objectAtIndex:indexPath.row];
+    label.text = commentModel.comment;
+    [label resizeToFit];
+    CGFloat height = label.frame.size.height;
+    if (height+30+10<50)
+    {
+        return 60;
+    }
+    else
+    {
+        return 30+height+10;
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.commentArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[UITableViewCell alloc] init];
+    TrendTableViewCell * lableSwitchCell;
+    UINib *n;
+    static NSString *CellIdentifier = @"TrendTableViewCell";
+    lableSwitchCell  = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (lableSwitchCell == nil)
+    {
+        NSArray *_nib=[[NSBundle mainBundle] loadNibNamed:@"TrendTableViewCell"
+                                                    owner:self  options:nil];
+        lableSwitchCell  = [_nib objectAtIndex:0];
+        //通过这段代码，来完成LableSwitchXibCell的ReuseIdentifier的设置
+        //这里是比较容易忽视的，若没有此段，再次载入LableSwitchXibCell时，dequeueReusableCellWithIdentifier:的值依然为nil
+        n= [UINib nibWithNibName:@"PlayMCommentCell" bundle:[NSBundle mainBundle]];
+        [tableView registerNib:n forCellReuseIdentifier:@"PlayMCommentCell"];
+    }
+    MoveCommentModel *commentModel = [self.commentArray objectAtIndex:indexPath.row];
+    [lableSwitchCell.userHeadImage setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://121.197.10.159:8080/images/user/%@", commentModel.userPortrait]]];
+    lableSwitchCell.userName.text = commentModel.userName;
+//    lableSwitchCell.commentLabel.text = commentModel.comment;
+    lableSwitchCell.timeLabel.text = @"";
+    lableSwitchCell.headBtn.tag = indexPath.row;
+//    [lableSwitchCell.imageButton addTarget:self action:@selector(touchHeadImage:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *trendLabel = [[UILabel alloc] initWithFrame:CGRectMake(52, 30, 248, 10)];
+    trendLabel.text = commentModel.comment;
+    [trendLabel resizeToFit];
+    [lableSwitchCell addSubview:trendLabel];
+    
+    return lableSwitchCell;
 }
+
 
 - (void)initializeView
 {
@@ -138,18 +186,18 @@
     
     self.userName = [[UILabel alloc] initWithFrame:CGRectMake(52, 5, 100, 20)];
     self.userName.text = @"用户名";
-    self.userName.font = [UIFont systemFontOfSize:15.0];
+    self.userName.font = [UIFont systemFontOfSize:18.0];
     self.userName.textColor = System_BlueColor;
 //    [self.view addSubview:self.userName];
     
-    self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 5, 90, 20)];
-    self.timeLabel.font = [UIFont systemFontOfSize:15.0];
+    self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(52, 28, 90, 20)];
+    self.timeLabel.font = [UIFont systemFontOfSize:12.0];
     self.timeLabel.text = @"1分钟前";
-    self.timeLabel.textAlignment = NSTextAlignmentRight;
+    self.timeLabel.textAlignment = NSTextAlignmentLeft;
     self.timeLabel.textColor = [UIColor darkGrayColor];
 //    [self.view addSubview:self.timeLabel];
     
-    self.trendLabel = [[UILabel alloc] initWithFrame:CGRectMake(52, 30, 248, 10)];
+    self.trendLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 50, 310, 10)];
     self.trendLabel.text = @"他你我他你我他你我他你我他你我他你我他你我他你我你我他你我他你我他你我他你我他你我你我他你我他你我他你我他你我他你我你我他你我他你我他你我他你我他你我";
     [self.trendLabel resizeToFit];
 //    [self.view addSubview:self.trendLabel];
@@ -250,6 +298,7 @@
      queue:queue
      completionHandler:^(NSURLResponse *response, NSData *data,
                          NSError *error) {
+         self.commentArray = [[[MoveCommentManage alloc] init] analyseCommentJsonForVC:self withCommentUrl:Kurl];
          //         [[[TrendManage alloc] init] getData:self];
          if ([data length] >0 &&
              error == nil){

@@ -62,10 +62,11 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     [dismissBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [dismissBtn addTarget:self action:@selector(back)
          forControlEvents:UIControlEventTouchUpInside];
-    UIButton *touchBtn = [[UIButton alloc] initWithFrame:CGRectMake(235, 22, 80, 40)];
+    UIButton *touchBtn = [[UIButton alloc] initWithFrame:CGRectMake(270, 22, 40, 40)];
     touchBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
     [touchBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [touchBtn setTitle:@"选择排行榜" forState:UIControlStateNormal];
+//    [touchBtn setTitle:@"选择排行榜" forState:UIControlStateNormal];
+    [touchBtn setImage:[UIImage imageNamed:@"choose"] forState:UIControlStateNormal];
     [touchBtn addTarget:self action:@selector(touch)
         forControlEvents:UIControlEventTouchUpInside];
     [titleView addSubview:touchBtn];
@@ -91,7 +92,8 @@ typedef NS_ENUM(NSInteger, segmentControl) {
     
     self.pickerView = [[UIPickerView alloc]
                          initWithFrame:CGRectMake(0, SCREEN_HEIGHT-160, 320, 160)];
-    self.pickerView.backgroundColor = RGBCOLOR(38, 130, 213);
+    self.pickerView.backgroundColor = RGBCOLOR(204, 209, 217);
+//    self.pickerView.backgroundColor = [UIColor lightGrayColor];
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
     self.pickerView.showsSelectionIndicator = YES;
