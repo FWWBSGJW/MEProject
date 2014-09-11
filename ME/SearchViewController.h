@@ -13,5 +13,11 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
+- (IBAction)webBack:(id)sender;
+
+- (IBAction)webGo:(id)sender;
+- (IBAction)webHome:(id)sender;
+- (IBAction)webRefresh:(id)sender;
+
 
 @end

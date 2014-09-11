@@ -7,6 +7,7 @@
 //  同步3333
 
 #import "FindJobViewController.h"
+#import "CAlertLabel.h"
 
 @interface FindJobViewController ()
 
@@ -52,7 +53,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:nil action:nil];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchJob)];
     self.navigationItem.rightBarButtonItem = item;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -96,6 +97,25 @@
    return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"要申请这个岗位吗" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"申请" otherButtonTitles:nil, nil];
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex ==  0) {
+        CAlertLabel *label = [CAlertLabel alertLabelWithAdjustFrameForText:@"申请成功"];
+        [label showAlertLabel];
+    }
+}
+
+- (void)searchJob
+{
+    CAlertLabel *label = [CAlertLabel alertLabelWithAdjustFrameForText:@"搜索暂不可用"];
+    [label showAlertLabel];
+}
 
 /*
 // Override to support conditional editing of the table view.

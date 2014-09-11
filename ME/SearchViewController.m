@@ -80,11 +80,12 @@ enum{
                 //搜索课程
                 
             }
-                
+                break;
             case  SearchType_User:
             {
                 //搜索用户
             }
+                break;
             default:
                 break;
         }
@@ -93,4 +94,26 @@ enum{
     }
 }
 
+- (IBAction)webBack:(id)sender {
+    if (self.segementControl.selectedSegmentIndex == SearchType_Baidu) {
+        [self.webView goBack];
+    }
+}
+
+- (IBAction)webGo:(id)sender {
+    if (self.segementControl.selectedSegmentIndex == SearchType_Baidu) {
+        [self.webView goForward];
+    }
+}
+
+- (IBAction)webHome:(id)sender {
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
+    [self.webView loadRequest:request];
+}
+
+- (IBAction)webRefresh:(id)sender {
+    if (self.segementControl.selectedSegmentIndex == SearchType_Baidu) {
+        [self.webView reload];
+    }
+}
 @end

@@ -426,7 +426,7 @@ enum SendType
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setImage:[UIImage imageNamed:@"details_button_back.png"] forState:UIControlStateNormal];
     [backButton setImage:[UIImage imageNamed:@"details_button_back_select.png"] forState:UIControlStateSelected];
-    [backButton setFrame:CGRectMake( 3, 2, 30, 30)];
+    [backButton setFrame:CGRectMake( 3, 2, 40, 30)];
     [backButton.titleLabel setFont:[UIFont systemFontOfSize:10]];
     //backButton.backgroundColor = [UIColor whiteColor];
     [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
