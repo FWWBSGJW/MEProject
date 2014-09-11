@@ -148,6 +148,7 @@
 		5BB25342199E2C1A004F3BA7 /* FindJobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB25341199E2C1A004F3BA7 /* FindJobViewController.m */; };
 		5BB25349199E35A2004F3BA7 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB25347199E35A2004F3BA7 /* SearchViewController.m */; };
 		5BB2534A199E35A2004F3BA7 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BB25348199E35A2004F3BA7 /* SearchViewController.xib */; };
+		ABF2036F19C09EAD00AB3CD4 /* TrendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF2036E19C09EAD00AB3CD4 /* TrendModel.m */; };
 		B0650B6419BFF3E60040427F /* JJCommentManage.m in Sources */ = {isa = PBXBuildFile; fileRef = B0650AF319BFF3E50040427F /* JJCommentManage.m */; };
 		B0650B6519BFF3E60040427F /* JJDirectionManage.m in Sources */ = {isa = PBXBuildFile; fileRef = B0650AF519BFF3E50040427F /* JJDirectionManage.m */; };
 		B0650B6619BFF3E60040427F /* JJSubjectManage.m in Sources */ = {isa = PBXBuildFile; fileRef = B0650AF719BFF3E50040427F /* JJSubjectManage.m */; };
@@ -166,7 +167,6 @@
 		B0650B7319BFF3E60040427F /* RangkingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B0650B1219BFF3E60040427F /* RangkingModel.m */; };
 		B0650B7419BFF3E60040427F /* TestDirectionBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B0650B1419BFF3E60040427F /* TestDirectionBaseClass.m */; };
 		B0650B7519BFF3E60040427F /* testModelBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = B0650B1619BFF3E60040427F /* testModelBaseClass.m */; };
-		B0650B7619BFF3E60040427F /* TrendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B0650B1819BFF3E60040427F /* TrendModel.m */; };
 		B0650B7719BFF3E60040427F /* UserIntegralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B0650B1A19BFF3E60040427F /* UserIntegralModel.m */; };
 		B0650B7819BFF3E60040427F /* JJBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0650B1D19BFF3E60040427F /* JJBaseViewController.m */; };
 		B0650B7919BFF3E60040427F /* JJBaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0650B1E19BFF3E60040427F /* JJBaseViewController.xib */; };
@@ -578,6 +578,8 @@
 		5BB25346199E35A2004F3BA7 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		5BB25347199E35A2004F3BA7 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		5BB25348199E35A2004F3BA7 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		ABF2036D19C09EAD00AB3CD4 /* TrendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendModel.h; sourceTree = "<group>"; };
+		ABF2036E19C09EAD00AB3CD4 /* TrendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendModel.m; sourceTree = "<group>"; };
 		B0650AF219BFF3E50040427F /* JJCommentManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJCommentManage.h; sourceTree = "<group>"; };
 		B0650AF319BFF3E50040427F /* JJCommentManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JJCommentManage.m; sourceTree = "<group>"; };
 		B0650AF419BFF3E50040427F /* JJDirectionManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJDirectionManage.h; sourceTree = "<group>"; };
@@ -614,8 +616,6 @@
 		B0650B1419BFF3E60040427F /* TestDirectionBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDirectionBaseClass.m; sourceTree = "<group>"; };
 		B0650B1519BFF3E60040427F /* testModelBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testModelBaseClass.h; sourceTree = "<group>"; };
 		B0650B1619BFF3E60040427F /* testModelBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testModelBaseClass.m; sourceTree = "<group>"; };
-		B0650B1719BFF3E60040427F /* TrendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendModel.h; sourceTree = "<group>"; };
-		B0650B1819BFF3E60040427F /* TrendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendModel.m; sourceTree = "<group>"; };
 		B0650B1919BFF3E60040427F /* UserIntegralModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserIntegralModel.h; sourceTree = "<group>"; };
 		B0650B1A19BFF3E60040427F /* UserIntegralModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserIntegralModel.m; sourceTree = "<group>"; };
 		B0650B1C19BFF3E60040427F /* JJBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JJBaseViewController.h; sourceTree = "<group>"; };
@@ -1472,6 +1472,8 @@
 		B0650B0419BFF3E50040427F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ABF2036D19C09EAD00AB3CD4 /* TrendModel.h */,
+				ABF2036E19C09EAD00AB3CD4 /* TrendModel.m */,
 				B0650B0519BFF3E60040427F /* FightModelBaseClass.h */,
 				B0650B0619BFF3E60040427F /* FightModelBaseClass.m */,
 				B0650B0719BFF3E60040427F /* JJCommentModel.h */,
@@ -1490,8 +1492,6 @@
 				B0650B1419BFF3E60040427F /* TestDirectionBaseClass.m */,
 				B0650B1519BFF3E60040427F /* testModelBaseClass.h */,
 				B0650B1619BFF3E60040427F /* testModelBaseClass.m */,
-				B0650B1719BFF3E60040427F /* TrendModel.h */,
-				B0650B1819BFF3E60040427F /* TrendModel.m */,
 				B0650B1919BFF3E60040427F /* UserIntegralModel.h */,
 				B0650B1A19BFF3E60040427F /* UserIntegralModel.m */,
 			);
@@ -2075,7 +2075,6 @@
 				B0650B7819BFF3E60040427F /* JJBaseViewController.m in Sources */,
 				5B717F4D1978FE4E00F1359C /* UIImageView+WebCache.m in Sources */,
 				B0650CA319BFF3F10040427F /* CdownlordCell.m in Sources */,
-				B0650B7619BFF3E60040427F /* TrendModel.m in Sources */,
 				B0650B7E19BFF3E60040427F /* JJTestDetailViewController.m in Sources */,
 				B0650C9919BFF3F10040427F /* GetAndPayModel.m in Sources */,
 				5B345AF619A2153F008FC104 /* ProgressTableViewCell.m in Sources */,
@@ -2169,6 +2168,7 @@
 				5B345AEF19A2153F008FC104 /* CourseTableViewController.m in Sources */,
 				5B717F2B1978FE4E00F1359C /* AFHTTPClient.m in Sources */,
 				B0650B7719BFF3E60040427F /* UserIntegralModel.m in Sources */,
+				ABF2036F19C09EAD00AB3CD4 /* TrendModel.m in Sources */,
 				B0650B7219BFF3E60040427F /* MoveCommentModel.m in Sources */,
 				5B345AFF19A2153F008FC104 /* UserCenterTableViewController.m in Sources */,
 				B0650C4119BFF3F10040427F /* RecommendViewController.m in Sources */,
@@ -2304,8 +2304,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: wu chen (7K2NVL8N69)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: wu chen (7K2NVL8N69)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/chenpingguo/Downloads/ShareSDK-iOS-v2.9.2/ShareSDK/Connection",
@@ -2342,8 +2342,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: wu chen (7K2NVL8N69)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: wu chen (7K2NVL8N69)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/chenpingguo/Downloads/ShareSDK-iOS-v2.9.2/ShareSDK/Connection",

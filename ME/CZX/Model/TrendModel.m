@@ -1,7 +1,7 @@
 //
 //  TrendModel.m
 //
-//  Created by  C陈政旭 on 14-9-5
+//  Created by  C陈政旭 on 14-9-10
 //  Copyright (c) 2014 __MyCompanyName__. All rights reserved.
 //
 
@@ -10,10 +10,11 @@
 
 NSString *const kTrendModelHmtime = @"hmtime";
 NSString *const kTrendModelContent = @"content";
+NSString *const kTrendModelUserId = @"userId";
 NSString *const kTrendModelMid = @"mid";
-NSString *const kTrendModelUrl = @"url";
-NSString *const kTrendModelUserPortrait = @"userPortrait";
 NSString *const kTrendModelUserName = @"userName";
+NSString *const kTrendModelUserPortrait = @"userPortrait";
+NSString *const kTrendModelUrl = @"url";
 
 
 @interface TrendModel ()
@@ -26,10 +27,11 @@ NSString *const kTrendModelUserName = @"userName";
 
 @synthesize hmtime = _hmtime;
 @synthesize content = _content;
+@synthesize userId = _userId;
 @synthesize mid = _mid;
-@synthesize url = _url;
-@synthesize userPortrait = _userPortrait;
 @synthesize userName = _userName;
+@synthesize userPortrait = _userPortrait;
+@synthesize url = _url;
 
 
 + (instancetype)modelObjectWithDictionary:(NSDictionary *)dict
@@ -46,10 +48,11 @@ NSString *const kTrendModelUserName = @"userName";
     if(self && [dict isKindOfClass:[NSDictionary class]]) {
             self.hmtime = [[self objectOrNilForKey:kTrendModelHmtime fromDictionary:dict] doubleValue];
             self.content = [self objectOrNilForKey:kTrendModelContent fromDictionary:dict];
+            self.userId = [[self objectOrNilForKey:kTrendModelUserId fromDictionary:dict] doubleValue];
             self.mid = [[self objectOrNilForKey:kTrendModelMid fromDictionary:dict] doubleValue];
-            self.url = [self objectOrNilForKey:kTrendModelUrl fromDictionary:dict];
-            self.userPortrait = [self objectOrNilForKey:kTrendModelUserPortrait fromDictionary:dict];
             self.userName = [self objectOrNilForKey:kTrendModelUserName fromDictionary:dict];
+            self.userPortrait = [self objectOrNilForKey:kTrendModelUserPortrait fromDictionary:dict];
+            self.url = [self objectOrNilForKey:kTrendModelUrl fromDictionary:dict];
 
     }
     
@@ -62,10 +65,11 @@ NSString *const kTrendModelUserName = @"userName";
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
     [mutableDict setValue:[NSNumber numberWithDouble:self.hmtime] forKey:kTrendModelHmtime];
     [mutableDict setValue:self.content forKey:kTrendModelContent];
+    [mutableDict setValue:[NSNumber numberWithDouble:self.userId] forKey:kTrendModelUserId];
     [mutableDict setValue:[NSNumber numberWithDouble:self.mid] forKey:kTrendModelMid];
-    [mutableDict setValue:self.url forKey:kTrendModelUrl];
-    [mutableDict setValue:self.userPortrait forKey:kTrendModelUserPortrait];
     [mutableDict setValue:self.userName forKey:kTrendModelUserName];
+    [mutableDict setValue:self.userPortrait forKey:kTrendModelUserPortrait];
+    [mutableDict setValue:self.url forKey:kTrendModelUrl];
 
     return [NSDictionary dictionaryWithDictionary:mutableDict];
 }
@@ -91,10 +95,11 @@ NSString *const kTrendModelUserName = @"userName";
 
     self.hmtime = [aDecoder decodeDoubleForKey:kTrendModelHmtime];
     self.content = [aDecoder decodeObjectForKey:kTrendModelContent];
+    self.userId = [aDecoder decodeDoubleForKey:kTrendModelUserId];
     self.mid = [aDecoder decodeDoubleForKey:kTrendModelMid];
-    self.url = [aDecoder decodeObjectForKey:kTrendModelUrl];
-    self.userPortrait = [aDecoder decodeObjectForKey:kTrendModelUserPortrait];
     self.userName = [aDecoder decodeObjectForKey:kTrendModelUserName];
+    self.userPortrait = [aDecoder decodeObjectForKey:kTrendModelUserPortrait];
+    self.url = [aDecoder decodeObjectForKey:kTrendModelUrl];
     return self;
 }
 
@@ -103,10 +108,11 @@ NSString *const kTrendModelUserName = @"userName";
 
     [aCoder encodeDouble:_hmtime forKey:kTrendModelHmtime];
     [aCoder encodeObject:_content forKey:kTrendModelContent];
+    [aCoder encodeDouble:_userId forKey:kTrendModelUserId];
     [aCoder encodeDouble:_mid forKey:kTrendModelMid];
-    [aCoder encodeObject:_url forKey:kTrendModelUrl];
-    [aCoder encodeObject:_userPortrait forKey:kTrendModelUserPortrait];
     [aCoder encodeObject:_userName forKey:kTrendModelUserName];
+    [aCoder encodeObject:_userPortrait forKey:kTrendModelUserPortrait];
+    [aCoder encodeObject:_url forKey:kTrendModelUrl];
 }
 
 - (id)copyWithZone:(NSZone *)zone
@@ -117,10 +123,11 @@ NSString *const kTrendModelUserName = @"userName";
 
         copy.hmtime = self.hmtime;
         copy.content = [self.content copyWithZone:zone];
+        copy.userId = self.userId;
         copy.mid = self.mid;
-        copy.url = [self.url copyWithZone:zone];
-        copy.userPortrait = [self.userPortrait copyWithZone:zone];
         copy.userName = [self.userName copyWithZone:zone];
+        copy.userPortrait = [self.userPortrait copyWithZone:zone];
+        copy.url = [self.url copyWithZone:zone];
     }
     
     return copy;
