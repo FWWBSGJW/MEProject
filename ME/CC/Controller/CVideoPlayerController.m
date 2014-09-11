@@ -13,6 +13,7 @@
 #import "User.h"
 #import "GetAndPayModel.h"
 #import "JCRBlurView.h"
+#import "CDownloadModel.h"
 
 enum SendType
 {
@@ -27,6 +28,7 @@ enum SendType
     UIButton *_playButton;//播放按钮
     UITextField *_dmTextField; //发送弹幕文本框
     NSInteger _sendDMNum; //用户发送弹幕数量 用以积分增加
+    NSInteger _time ;
 }
 @property (strong, nonatomic) NSOperationQueue *dmQueue;
 
@@ -91,11 +93,32 @@ enum SendType
 @property (strong, nonatomic) UIAlertView *alertView;
 
 @property (strong, nonatomic) JCRBlurView *loadingView; // 视频加载界面
+
+@property (strong, nonatomic) NSMutableArray *downLoadArray;
+@property (strong, nonatomic) CDownloadModel *downloadModel;
 @end
 
 @implementation CVideoPlayerController
 
 #pragma getter and setter
+
+- (CDownloadModel *)downloadModel
+{
+    if (!_downloadModel) {
+        _downloadModel = [CDownloadModel sharedCDownloadModel];
+    }
+    return _downloadModel;
+}
+
+- (NSMutableArray *)downLoadArray
+{
+    if (!_downLoadArray) {
+        //NSString *filePath = [[NSBundle mainBundle] pathForResource:@"DownloadData.plist" ofType:nil];
+        //_downLoadArray = [NSMutableArray arrayWithContentsOfFile:filePath];
+        _downLoadArray = self.downloadModel.downloadArray;
+    }
+    return _downLoadArray;
+}
 
 - (JCRBlurView *)loadingView
 {
@@ -193,18 +216,32 @@ enum SendType
 
     _danmakuModel = [[DanmakuModel alloc] initWithVideoID:videoID andUserID:self.userID ];    //[self.danmakuModel loadDanmakuArray];
     
-    self.url = [NSURL URLWithString:urlString];
+    BOOL isLocal = NO;
+    for (NSDictionary *dic in self.downLoadArray[1]) {
+        if ([dic[@"videoID"] intValue] == videoID ) {
+            NSLog(@"%d",[dic[@"videoID"] integerValue]);
+            isLocal = YES;
+            self.url = [NSURL fileURLWithPath:dic[@"dcUrl"]];
+            break;
+        }
+    }
+    if (!isLocal) {
+        self.url = [NSURL URLWithString:urlString];
+    }
+    
     self.moviePlayer.contentURL = self.url;
     self.title = videoTitle;
     self.videoID = videoID;
+    _time = -1;
 }
 
 - (void)playVideoWithVideoID:(NSInteger)videoID andStartTime:(NSTimeInterval)time andVideoUrlString:(NSString *)urlString andVideoTitle:(NSString *)title
 {
-    [self playVideoWithVideoID:videoID andVideoTitle:title andVideoUrlString:urlString];
     self.moviePlayer.initialPlaybackTime = time;
+    [self playVideoWithVideoID:videoID andVideoTitle:title andVideoUrlString:urlString];
+    _time = time;
+    NSLog(@"%f",time);
     
-    //NSLog(@"%f",time);
     //NSLog(@"%@",self.danmakuModel.danmakuArray);
 }
 
@@ -214,7 +251,7 @@ enum SendType
     [super viewDidLoad];
     
     
-    [self.moviePlayer prepareToPlay];
+    //[self.moviePlayer prepareToPlay];
     _lastArrayNum = 0;
     
     self.gestureStatus = -1;
@@ -739,6 +776,11 @@ enum SendType
             if (_loadingView) {
                 [self.loadingView removeFromSuperview];
                 _loadingView = nil;
+                NSLog(@"---------%lf-----%d",self.moviePlayer.currentPlaybackTime,_time);
+                if (_time > 0) {
+                    self.moviePlayer.currentPlaybackTime = _time;
+                }
+                
             }
             [self.timer setFireDate:[NSDate date]];
         default:
