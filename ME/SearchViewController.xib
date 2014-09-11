@@ -23,7 +23,6 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <segments>
                         <segment title="百度"/>
-                        <segment title="谷歌"/>
                         <segment title="课程"/>
                         <segment title="用户"/>
                     </segments>

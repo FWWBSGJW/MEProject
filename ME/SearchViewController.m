@@ -11,7 +11,6 @@
 
 enum{
     SearchType_Baidu = 0,
-    SearchType_Google,
     SearchType_Course,
     SearchType_User
 };
@@ -67,6 +66,7 @@ enum{
     [self.searchTextField resignFirstResponder];
     if (self.searchTextField.text.length>0) {
         switch (self.segementControl.selectedSegmentIndex) {
+//在这边扩展
             case SearchType_Baidu:
             {
                 NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.baidu.com/s?wd=%@",self.searchTextField.text]]];
@@ -74,7 +74,17 @@ enum{
                 [self.view addSubview:self.webView];
             }
                 break;
+             
+            case SearchType_Course:
+            {
+                //搜索课程
                 
+            }
+                
+            case  SearchType_User:
+            {
+                //搜索用户
+            }
             default:
                 break;
         }

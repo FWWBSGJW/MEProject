@@ -563,7 +563,6 @@ enum MoreActionButton_Tag
             _segmentControl = _headView.segmentControl;
             [self.segmentControl addTarget:self action:@selector(selectSegemnt) forControlEvents:UIControlEventValueChanged];
         }else{
-#warning 待补全积分价格
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kBaseURL,self.courseInfoDic[@"cPic"]]];
             [_headView.CCImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"directionDefault"]];
             _headView.CCtypeLabel.text = self.courseInfoDic[@"type"];
