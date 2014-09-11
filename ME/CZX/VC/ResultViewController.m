@@ -38,10 +38,48 @@
     self = [super init];
     if (self)
     {
-        self.resultArray = [[[ResultManage alloc] init] analyseJson:url];
+        NSString *dataGBK = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSLog(@"%@  %@", url, dataGBK);
+        self.resultArray = [[[ResultManage alloc] init] analyseJson:dataGBK];
         NSLog(@"%@", self.resultArray);
     }
 
+    return self;
+}
+
+- (id)initWithName:(NSString *)name
+{
+    self = [super init];
+    if (self) {
+//        NSString *urlAsString = @"http://121.197.10.159:8080/MobileEducation/searchUser?";
+//        NSURL *url = [NSURL URLWithString:urlAsString];
+//        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+//        [urlRequest setTimeoutInterval:30.0f];
+//        [urlRequest setHTTPMethod:@"POST"];
+//        NSString *body = [NSString stringWithFormat:@"userName=a%@", name];
+//        [urlRequest setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
+//        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+//        [NSURLConnection
+//         sendAsynchronousRequest:urlRequest
+//         queue:queue
+//         completionHandler:^(NSURLResponse *response, NSData *data,
+//                             NSError *error) {
+//             //         [[[TrendManage alloc] init] getData:self];
+//             if ([data length] >0 &&
+//                 error == nil){
+//                 NSString *html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//                 NSLog(@"HTML = %@", html);
+//             }
+//             else if ([data length] == 0 &&
+//                      error == nil){
+//                 NSLog(@"Nothing was downloaded.");
+//             }
+//             else if (error != nil){
+//                 NSLog(@"Error happened = %@", error);
+//             }
+//         }];
+    }
+    
     return self;
 }
 

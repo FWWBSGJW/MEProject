@@ -87,6 +87,7 @@ enum{
             case  SearchType_User:
             {
                 //搜索用户
+//                ResultViewController *vc = [[ResultViewController alloc] initWithName:self.searchTextField.text];
                 ResultViewController *vc = [[ResultViewController alloc] initWithUrl:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/searchUser?userName=%@", self.searchTextField.text]];
                 [self.navigationController pushViewController:vc animated:YES];
             }

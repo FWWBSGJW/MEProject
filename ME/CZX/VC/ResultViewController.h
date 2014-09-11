@@ -11,4 +11,5 @@
 @interface ResultViewController : UIViewController
 
 - (id)initWithUrl:(NSString *)url;
+- (id)initWithName:(NSString *)name;
 @end

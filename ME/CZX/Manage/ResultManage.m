@@ -36,8 +36,8 @@ NSArray *testDirectionServerRespObj;
 
 - (void)getDataUrl:(NSString *)paramurl
 {
-    NSString * url = [paramurl stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
+    NSString *url = paramurl;
+//    NSString * url = [paramurl stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURLResponse * resp;
     NSError * error = nil;
     NSData * data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]] returningResponse:&resp error:&error];
