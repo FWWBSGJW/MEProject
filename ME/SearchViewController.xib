@@ -23,7 +23,6 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <segments>
                         <segment title="百度"/>
-                        <segment title="谷歌"/>
                         <segment title="课程"/>
                         <segment title="用户"/>
                     </segments>
@@ -52,13 +51,29 @@
                     <rect key="frame" x="-8" y="436" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                     <items>
-                        <barButtonItem title="返回" id="Eiz-9Q-4RG"/>
+                        <barButtonItem title="返回" id="Eiz-9Q-4RG">
+                            <connections>
+                                <action selector="webBack:" destination="-1" id="fcL-ZO-3VR"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="GT5-Ws-3y3"/>
-                        <barButtonItem title="前进" id="2q0-Mu-byx"/>
+                        <barButtonItem title="前进" id="2q0-Mu-byx">
+                            <connections>
+                                <action selector="webGo:" destination="-1" id="zUZ-vA-TnO"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="EBa-Dw-Eib"/>
-                        <barButtonItem title="主页" id="JNW-UA-LXP"/>
+                        <barButtonItem title="主页" id="JNW-UA-LXP">
+                            <connections>
+                                <action selector="webHome:" destination="-1" id="ZFT-ug-3EL"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="xqb-fg-Z9y"/>
-                        <barButtonItem title="刷新" id="1O0-87-zsL"/>
+                        <barButtonItem title="刷新" id="1O0-87-zsL">
+                            <connections>
+                                <action selector="webRefresh:" destination="-1" id="4zS-AX-LVH"/>
+                            </connections>
+                        </barButtonItem>
                     </items>
                 </toolbar>
             </subviews>

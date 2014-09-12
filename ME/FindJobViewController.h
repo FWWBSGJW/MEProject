@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FindJobViewController : UITableViewController
+@interface FindJobViewController : UITableViewController <UIActionSheetDelegate>
 
 @end

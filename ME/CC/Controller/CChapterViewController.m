@@ -563,7 +563,6 @@ enum MoreActionButton_Tag
             _segmentControl = _headView.segmentControl;
             [self.segmentControl addTarget:self action:@selector(selectSegemnt) forControlEvents:UIControlEventValueChanged];
         }else{
-#warning 待补全积分价格
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kBaseURL,self.courseInfoDic[@"cPic"]]];
             [_headView.CCImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"directionDefault"]];
             _headView.CCtypeLabel.text = self.courseInfoDic[@"type"];
@@ -806,7 +805,7 @@ enum MoreActionButton_Tag
                     NSDictionary *noteDic = noteArray[indexPath.row];
                     NSString *vUrl = noteDic[@"videoUrl"];
                     NSString *title = [NSString stringWithFormat:@"%@ %@",noteDic[@"vSectionsNo"],noteDic[@"vSectionsName"]];
-                    NSTimeInterval noteTime = [noteDic[@"Dtime"] doubleValue];
+                    NSTimeInterval noteTime = [noteDic[@"Dtime"] integerValue];
                     CVideoPlayerController *player = [[CVideoPlayerController alloc] init];
                     [player playVideoWithVideoID:[noteDic[@"videoID"] integerValue] andStartTime:noteTime andVideoUrlString:vUrl andVideoTitle:title];
                     [self presentMoviePlayerViewControllerAnimated:player];
@@ -1050,12 +1049,16 @@ enum MoreActionButton_Tag
     NSArray *array = [self.tableView indexPathsForSelectedRows];
     if (sender.tag == DownloadConfirm && array.count > 0) {
 
+  
         //NSMutableArray *downChapterArray = [NSMutableArray arrayWithCapacity:array.count];
         for (NSIndexPath *indexPath in array) {
             NSDictionary *dic = self.courseChapterArray[indexPath.section-1];
+            NSLog(@"%@",dic);
+            
             NSDictionary *videoDic = dic[@"CCvideo"][indexPath.row];
-           
-            [self.downloadModel downLoadVideoWithUrlString:[NSString stringWithFormat:@"%@%@",kBaseURL,videoDic[@"vUrl"] ] andName:videoDic[@"vSectionsName"] andCNum:videoDic[@"vSectionsNo"] andVideoID:[NSString stringWithFormat:@"%d",[dic[@"vId"] integerValue]]];
+            
+            NSString *videoID = [NSString stringWithFormat:@"%d",[videoDic[@"vId"] intValue]];
+            [self.downloadModel downLoadVideoWithUrlString:[NSString stringWithFormat:@"%@%@",kBaseURL,videoDic[@"vUrl"] ] andName:videoDic[@"vSectionsName"] andCNum:videoDic[@"vSectionsNo"] andVideoID:videoID];
         }
 
         

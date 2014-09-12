@@ -137,7 +137,7 @@
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@MobileEducation/uploadVComment",kBaseURL]];
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:3.0];
     //NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     NSString *bodyStr = [NSString stringWithFormat:@"cvContent=%@&userId=%d&vid=%d&cvType=%s&cvTime=%d",content,userID,videoID,cvType?"true":"false",cvTime];
@@ -146,8 +146,14 @@
     NSData *body = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
     
     [request setHTTPBody:body];
+
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    /*
     NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
     [connection start];
+     */
 }
 
 #pragma mark - 选择实现实现弹幕

@@ -186,7 +186,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.testArray.count;
+    JJTestModel *model = [self.testArray lastObject];
+    if (model.tcId > 0) {
+        return self.testArray.count;
+    }
+    return self.testArray.count-1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

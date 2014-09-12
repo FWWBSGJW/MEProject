@@ -8,10 +8,10 @@
 
 
 #import "SearchViewController.h"
+#import "ResultViewController.h"
 
 enum{
     SearchType_Baidu = 0,
-    SearchType_Google,
     SearchType_Course,
     SearchType_User
 };
@@ -67,6 +67,7 @@ enum{
     [self.searchTextField resignFirstResponder];
     if (self.searchTextField.text.length>0) {
         switch (self.segementControl.selectedSegmentIndex) {
+//在这边扩展
             case SearchType_Baidu:
             {
                 NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.baidu.com/s?wd=%@",self.searchTextField.text]]];
@@ -74,7 +75,23 @@ enum{
                 [self.view addSubview:self.webView];
             }
                 break;
+             
+            case SearchType_Course:
+            {
+                //搜索课程
+                ResultViewController *vc = [[ResultViewController alloc] initWithUrl:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/searchCourse?CName=%@", self.searchTextField.text]];
+                [self.navigationController pushViewController:vc animated:YES];
                 
+            }
+                break;
+            case  SearchType_User:
+            {
+                //搜索用户
+//                ResultViewController *vc = [[ResultViewController alloc] initWithName:self.searchTextField.text];
+                ResultViewController *vc = [[ResultViewController alloc] initWithUrl:[NSString stringWithFormat:@"http://121.197.10.159:8080/MobileEducation/searchUser?userName=%@", self.searchTextField.text]];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
             default:
                 break;
         }
@@ -83,4 +100,26 @@ enum{
     }
 }
 
+- (IBAction)webBack:(id)sender {
+    if (self.segementControl.selectedSegmentIndex == SearchType_Baidu) {
+        [self.webView goBack];
+    }
+}
+
+- (IBAction)webGo:(id)sender {
+    if (self.segementControl.selectedSegmentIndex == SearchType_Baidu) {
+        [self.webView goForward];
+    }
+}
+
+- (IBAction)webHome:(id)sender {
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
+    [self.webView loadRequest:request];
+}
+
+- (IBAction)webRefresh:(id)sender {
+    if (self.segementControl.selectedSegmentIndex == SearchType_Baidu) {
+        [self.webView reload];
+    }
+}
 @end

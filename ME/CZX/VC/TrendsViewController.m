@@ -16,6 +16,7 @@
 #import "TrendManage.h"
 #import "TrendModel.h"
 #import "UIImageView+WebCache.h"
+#import "UserCenterTableViewController.h"
 
 #define testString @"你我他你我你我他你我他你我他你我你我他你我他你我他你我你我他你我他你我他你我你我他你我他"
 
@@ -369,7 +370,9 @@
 
 - (void)touchHead
 {
-
+//    TrendModel *model = [self.trendsArray objectAtIndex:tag];
+//    UserCenterTableViewController *detailVC = [[UserCenterTableViewController alloc] initWithUserId:(int)model.userId];
+//    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (CGFloat)heightForLabelWithString:(NSString *)text
